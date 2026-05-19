@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>CEPM Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:400px;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
+    animation:fade .5s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo h1{
+    color:#0f172a;
+    font-size:40px;
+}
+
+.logo p{
+    color:gray;
+    margin-top:5px;
+}
+
+.input{
+    margin-bottom:18px;
+}
+
+.input label{
+    display:block;
+    margin-bottom:7px;
+    color:#111827;
+    font-weight:bold;
+}
+
+.input input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#f1f5f9;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.input input:focus{
+    background:#e2e8f0;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.extra{
+    text-align:center;
+    margin-top:20px;
+}
+
+.extra a{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.extra a:hover{
+    text-decoration:underline;
+}
+
+#mensaje{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-content{
+    width:100%;
+    max-width:400px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+    color:#0f172a;
+}
+
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:22px;
+    font-weight:bold;
+}
+
+@media(max-width:500px){
+
+    .card{
+        padding:25px;
+    }
+
+    .logo h1{
+        font-size:32px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        <h1>CEPM</h1>
+        <p>Plataforma Escolar</p>
+    </div>
+
+    <div class="input">
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Ingresa usuario">
+    </div>
+
+    <div class="input">
+        <label>Contraseña</label>
+        <input type="password" id="password" placeholder="Ingresa contraseña">
+    </div>
+
+    <button onclick="login()">
+        Iniciar Sesión
+    </button>
+
+    <div id="mensaje"></div>
+
+    <div class="extra">
+        <a onclick="abrirModal()">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="cerrarModal()">
+            ×
+        </span>
+
+        <h2>Recuperar contraseña</h2>
+
+        <div class="input">
+            <label>Correo</label>
+            <input type="email" id="correoReset">
+        </div>
+
+        <button onclick="enviarCodigo()">
+            Enviar código
+        </button>
+
+        <br><br>
+
+        <div class="input">
+            <label>Código</label>
+            <input type="text" id="codigo">
+        </div>
+
+        <div class="input">
+            <label>Nueva contraseña</label>
+            <input type="password" id="nuevaPassword">
+        </div>
+
+        <button onclick="resetPassword()">
+            Cambiar contraseña
+        </button>
+
+        <div id="mensajeReset"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API = 'https://cepm-v2.onrender.com'
+
+async function login(){
+
+    const usuario =
+        document.getElementById('usuario').value
+
+    const password =
+        document.getElementById('password').value
+
+    const res = await fetch(`${API}/login`,{
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+            usuario,
+            password
+        })
+    })
+
+    const data = await res.json()
+
+    if(data.token){
+
+        localStorage.setItem(
+            'token',
+            data.token
+        )
+
+        document.getElementById('mensaje')
+        .innerHTML = 'Login correcto 🔥'
+
+        setTimeout(()=>{
+
+            location.href = 'dashboard.html'
+
+        },1000)
+
+    }else{
+
+        document.getElementById('mensaje')
+        .innerHTML = data.mensaje || 'Error'
+
+    }
+}
+
+function abrirModal(){
+
+    document.getElementById('modal')
+    .style.display='flex'
+}
+
+function cerrarModal(){
+
+    document.getElementById('modal')
+    .style.display='none'
+}
+
+async function enviarCodigo(){
+
+    const email =
+        document.getElementById('correoReset').value
+
+    const res = await fetch(`${API}/olvide-password`,{
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+            email
+        })
+    })
+
+    const data = await res.json()
+
+    document.getElementById('mensajeReset')
+    .innerHTML = data.mensaje
+}
+
+async function resetPassword(){
+
+    const email =
+        document.getElementById('correoReset').value
+
+    const codigo =
+        document.getElementById('codigo').value
+
+    const nuevaPassword =
+        document.getElementById('nuevaPassword').value
+
+    const res = await fetch(`${API}/reset-password`,{
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+            email,
+            codigo,
+            nuevaPassword
+        })
+    })
+
+    const data = await res.json()
+
+    document.getElementById('mensajeReset')
+    .innerHTML = data.mensaje
+}
+
+</script>
+
+</body>
+</html>
