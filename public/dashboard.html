@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard CEPM</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:250px;
+    background:#111827;
+    padding:20px;
+    position:fixed;
+    height:100vh;
+}
+
+.sidebar h2{
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.sidebar button{
+    width:100%;
+    margin-bottom:15px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.sidebar button:hover{
+    background:#1d4ed8;
+}
+
+.main{
+    margin-left:250px;
+    padding:30px;
+    width:100%;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+input,select{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    margin-top:10px;
+    margin-bottom:15px;
+    background:#334155;
+    color:white;
+}
+
+input::placeholder{
+    color:#cbd5e1;
+}
+
+button.action{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button.action:hover{
+    background:#16a34a;
+}
+
+.usuario{
+    background:#334155;
+    padding:15px;
+    border-radius:15px;
+    margin-top:10px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.logout{
+    background:#ef4444;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>🎓 CEPM</h2>
+
+    <button onclick="mostrar('inicio')">
+        🏠 Inicio
+    </button>
+
+    <button onclick="mostrar('alumnos')">
+        👨‍🎓 Alumnos
+    </button>
+
+    <button onclick="mostrar('maestros')">
+        👨‍🏫 Maestros
+    </button>
+
+</div>
+
+<div class="main">
+
+    <div class="top">
+
+        <h1>Dashboard</h1>
+
+        <button class="logout" onclick="logout()">
+            Cerrar sesión
+        </button>
+
+    </div>
+
+    <!-- INICIO -->
+
+    <div id="inicio" class="card">
+
+        <h2>
+            Bienvenido 😎🔥
+        </h2>
+
+        <p style="margin-top:15px;">
+            Plataforma Escolar CEPM v2
+        </p>
+
+    </div>
+
+    <!-- ALUMNOS -->
+
+    <div id="alumnos" class="card" style="display:none;">
+
+        <h2>
+            👨‍🎓 Agregar Alumno
+        </h2>
+
+        <input
+            type="text"
+            id="nombreAlumno"
+            placeholder="Nombre alumno"
+        >
+
+        <input
+            type="text"
+            id="usuarioAlumno"
+            placeholder="Usuario"
+        >
+
+        <input
+            type="password"
+            id="passwordAlumno"
+            placeholder="Contraseña"
+        >
+
+        <button
+            class="action"
+            onclick="crearAlumno()"
+        >
+            Crear Alumno
+        </button>
+
+        <div id="listaAlumnos"></div>
+
+    </div>
+
+    <!-- MAESTROS -->
+
+    <div id="maestros" class="card" style="display:none;">
+
+        <h2>
+            👨‍🏫 Agregar Maestro
+        </h2>
+
+        <input
+            type="text"
+            id="nombreMaestro"
+            placeholder="Nombre maestro"
+        >
+
+        <input
+            type="text"
+            id="usuarioMaestro"
+            placeholder="Usuario"
+        >
+
+        <input
+            type="password"
+            id="passwordMaestro"
+            placeholder="Contraseña"
+        >
+
+        <button
+            class="action"
+            onclick="crearMaestro()"
+        >
+            Crear Maestro
+        </button>
+
+        <div id="listaMaestros"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API =
+'https://cepm-v2.onrender.com'
+
+const token =
+localStorage.getItem('token')
+
+if(!token){
+
+    location.href='/'
+}
+
+// 🔥 CAMBIAR VISTAS
+
+function mostrar(id){
+
+    document
+    .querySelectorAll('.card')
+
+    .forEach(c=>{
+
+        c.style.display='none'
+    })
+
+    document
+    .getElementById(id)
+
+    .style.display='block'
+}
+
+// 🔥 LOGOUT
+
+function logout(){
+
+    localStorage.removeItem('token')
+
+    location.href='/'
+}
+
+// =====================
+// 👨‍🎓 CREAR ALUMNO
+// =====================
+
+async function crearAlumno(){
+
+    const nombre =
+    document.getElementById(
+        'nombreAlumno'
+    ).value
+
+    const usuario =
+    document.getElementById(
+        'usuarioAlumno'
+    ).value
+
+    const password =
+    document.getElementById(
+        'passwordAlumno'
+    ).value
+
+    const res = await fetch(
+
+        `${API}/registro`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                nombre,
+
+                usuario,
+
+                password,
+
+                rol:'alumno'
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarUsuarios()
+}
+
+// =====================
+// 👨‍🏫 CREAR MAESTRO
+// =====================
+
+async function crearMaestro(){
+
+    const nombre =
+    document.getElementById(
+        'nombreMaestro'
+    ).value
+
+    const usuario =
+    document.getElementById(
+        'usuarioMaestro'
+    ).value
+
+    const password =
+    document.getElementById(
+        'passwordMaestro'
+    ).value
+
+    const res = await fetch(
+
+        `${API}/registro`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                nombre,
+
+                usuario,
+
+                password,
+
+                rol:'maestro'
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarUsuarios()
+}
+
+// =====================
+// 📦 CARGAR USUARIOS
+// =====================
+
+async function cargarUsuarios(){
+
+    const res =
+    await fetch(
+
+        `${API}/usuarios`,
+
+        {
+
+            headers:{
+                Authorization:
+                token
+            }
+        }
+    )
+
+    const usuarios =
+    await res.json()
+
+    const alumnos =
+    usuarios.filter(u=>
+
+        u.rol==='alumno'
+    )
+
+    const maestros =
+    usuarios.filter(u=>
+
+        u.rol==='maestro'
+    )
+
+    // 👨‍🎓
+
+    document
+    .getElementById(
+        'listaAlumnos'
+    )
+
+    .innerHTML = alumnos.map(u=>`
+
+        <div class="usuario">
+
+            👨‍🎓 ${u.nombre}
+            <br>
+            Usuario:
+            ${u.usuario}
+
+        </div>
+
+    `).join('')
+
+    // 👨‍🏫
+
+    document
+    .getElementById(
+        'listaMaestros'
+    )
+
+    .innerHTML = maestros.map(u=>`
+
+        <div class="usuario">
+
+            👨‍🏫 ${u.nombre}
+            <br>
+            Usuario:
+            ${u.usuario}
+
+        </div>
+
+    `).join('')
+}
+
+cargarUsuarios()
+
+</script>
+
+</body>
+</html>
