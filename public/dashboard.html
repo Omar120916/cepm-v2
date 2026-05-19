@@ -203,6 +203,12 @@ button.action:hover{
         >
 
         <input
+            type="email"
+            id="emailAlumno"
+            placeholder="Correo electrónico"
+        >
+
+        <input
             type="password"
             id="passwordAlumno"
             placeholder="Contraseña"
@@ -237,6 +243,12 @@ button.action:hover{
             type="text"
             id="usuarioMaestro"
             placeholder="Usuario"
+        >
+
+        <input
+            type="email"
+            id="emailMaestro"
+            placeholder="Correo electrónico"
         >
 
         <input
@@ -314,6 +326,11 @@ async function crearAlumno(){
         'usuarioAlumno'
     ).value
 
+    const email =
+    document.getElementById(
+        'emailAlumno'
+    ).value
+
     const password =
     document.getElementById(
         'passwordAlumno'
@@ -339,6 +356,8 @@ async function crearAlumno(){
             body:JSON.stringify({
 
                 nombre,
+
+                email,
 
                 usuario,
 
@@ -373,6 +392,11 @@ async function crearMaestro(){
         'usuarioMaestro'
     ).value
 
+    const email =
+    document.getElementById(
+        'emailMaestro'
+    ).value
+
     const password =
     document.getElementById(
         'passwordMaestro'
@@ -400,6 +424,8 @@ async function crearMaestro(){
                 nombre,
 
                 usuario,
+
+                email,
 
                 password,
 
