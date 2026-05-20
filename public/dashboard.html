@@ -154,6 +154,14 @@ button.action:hover{
         👨‍🏫 Maestros
     </button>
 
+    <button onclick="mostrar('materias')">
+    📚 Materias
+    </button>
+
+    <button onclick="mostrar('clases')">
+        🏫 Clases
+    </button>
+
 </div>
 
 <div class="main">
@@ -267,6 +275,78 @@ button.action:hover{
         <div id="listaMaestros"></div>
 
     </div>
+
+    <!-- MATERIAS -->
+
+<div id="materias"
+class="card"
+style="display:none;">
+
+    <h2>
+        📚 Crear Materia
+    </h2>
+
+    <input
+        type="text"
+        id="nombreMateria"
+        placeholder="Nombre materia"
+    >
+
+    <button
+        class="action"
+        onclick="crearMateria()"
+    >
+        Crear Materia
+    </button>
+
+    <div id="listaMaterias"></div>
+
+</div>
+
+<!-- CLASES -->
+
+<div id="clases"
+class="card"
+style="display:none;">
+
+    <h2>
+        🏫 Crear Clase
+    </h2>
+
+    <select id="materiaClase"></select>
+
+    <select id="maestroClase"></select>
+
+    <input
+        type="text"
+        id="grupoClase"
+        placeholder="Grupo"
+    >
+
+    <input
+        type="text"
+        id="horarioClase"
+        placeholder="Horario"
+    >
+
+    <input
+        type="text"
+        id="aulaClase"
+        placeholder="Aula"
+    >
+
+    <button
+        class="action"
+        onclick="crearClase()"
+    >
+        Crear Clase
+    </button>
+
+    <div id="listaClases"></div>
+
+</div>
+
+    
 
 </div>
 
@@ -443,6 +523,220 @@ async function crearMaestro(){
 }
 
 // =====================
+// 📚 CREAR MATERIA
+// =====================
+
+async function crearMateria(){
+
+    const nombre =
+    document.getElementById(
+        'nombreMateria'
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/materias`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                nombre
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarMaterias()
+}
+
+// =====================
+// 📚 CARGAR MATERIAS
+// =====================
+
+async function cargarMaterias(){
+
+    const res =
+    await fetch(
+
+        `${API}/materias`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const materias =
+    await res.json()
+
+    document
+    .getElementById(
+        'listaMaterias'
+    )
+
+    .innerHTML = materias.map(m=>`
+
+        <div class="usuario">
+
+            📚 ${m.nombre}
+
+        </div>
+
+    `).join('')
+
+    document
+    .getElementById(
+        'materiaClase'
+    )
+
+    .innerHTML = materias.map(m=>`
+
+        <option value="${m._id}">
+            ${m.nombre}
+        </option>
+
+    `).join('')
+}
+
+// =====================
+// 🏫 CREAR CLASE
+// =====================
+
+async function crearClase(){
+
+    const materiaId =
+    document.getElementById(
+        'materiaClase'
+    ).value
+
+    const maestroId =
+    document.getElementById(
+        'maestroClase'
+    ).value
+
+    const grupo =
+    document.getElementById(
+        'grupoClase'
+    ).value
+
+    const horario =
+    document.getElementById(
+        'horarioClase'
+    ).value
+
+    const aula =
+    document.getElementById(
+        'aulaClase'
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                materiaId,
+
+                maestroId,
+
+                grupo,
+
+                horario,
+
+                aula
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarClases()
+}
+
+// =====================
+// 🏫 CARGAR CLASES
+// =====================
+
+async function cargarClases(){
+
+    const res =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const clases =
+    await res.json()
+
+    document
+    .getElementById(
+        'listaClases'
+    )
+
+    .innerHTML = clases.map(c=>`
+
+        <div class="usuario">
+
+            🏫 ${c.grupo}
+            <br>
+            ⏰ ${c.horario}
+            <br>
+            🚪 ${c.aula}
+
+        </div>
+
+    `).join('')
+}
+
+cargarMaterias()
+cargarClases()
+
+
+
+// =====================
 // 📦 CARGAR USUARIOS
 // =====================
 
@@ -476,6 +770,19 @@ async function cargarUsuarios(){
 
         u.rol==='maestro'
     )
+
+    document
+    .getElementById(
+    'maestroClase'
+    )
+
+    .innerHTML = maestros.map(u=>`
+
+    <option value="${u._id}">
+        ${u.nombre}
+    </option>
+
+    `).join('')
 
     // 👨‍🎓
 
