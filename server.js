@@ -48,6 +48,37 @@ const Usuario = mongoose.model('Usuario', {
     rol: String
 })
 
+const Materia = mongoose.model('Materia', {
+
+    nombre:String
+})
+
+const Alumno = mongoose.model('Alumno', {
+
+    nombre:String,
+
+    edad:String
+})
+
+const Clase = mongoose.model('Clase', {
+
+    materiaId:
+        mongoose.Schema.Types.ObjectId,
+
+    maestroId:
+        mongoose.Schema.Types.ObjectId,
+
+    grupo:String,
+
+    horario:String,
+
+    aula:String,
+
+    alumnos:[
+        mongoose.Schema.Types.ObjectId
+    ]
+})
+
 // =====================
 // 🔐 JWT
 // =====================
@@ -197,6 +228,149 @@ app.get('/crear-admin', async(req,res)=>{
 
         mensaje:'Admin creado 🔥'
     })
+})
+
+// =====================
+// 📚 CREAR MATERIA
+// =====================
+
+app.post('/materias',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const nueva =
+    new Materia({
+
+        nombre:req.body.nombre
+    })
+
+    await nueva.save()
+
+    res.json({
+
+        mensaje:'Materia creada 🔥'
+    })
+})
+
+// =====================
+// 📚 VER MATERIAS
+// =====================
+
+app.get('/materias',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const materias =
+    await Materia.find()
+
+    res.json(materias)
+})
+
+// =====================
+// 👨‍🎓 CREAR ALUMNO
+// =====================
+
+app.post('/alumnos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const nuevo =
+    new Alumno({
+
+        nombre:req.body.nombre,
+
+        edad:req.body.edad
+    })
+
+    await nuevo.save()
+
+    res.json(nuevo)
+})
+
+// =====================
+// 👨‍🎓 VER ALUMNOS
+// =====================
+
+app.get('/alumnos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const alumnos =
+    await Alumno.find()
+
+    res.json(alumnos)
+})
+
+// =====================
+// 🏫 CREAR CLASE
+// =====================
+
+app.post('/clases',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const {
+
+        materiaId,
+
+        maestroId,
+
+        grupo,
+
+        horario,
+
+        aula
+
+    } = req.body
+
+    const nueva =
+    new Clase({
+
+        materiaId,
+
+        maestroId,
+
+        grupo,
+
+        horario,
+
+        aula,
+
+        alumnos:[]
+    })
+
+    await nueva.save()
+
+    res.json({
+
+        mensaje:'Clase creada 🔥'
+    })
+})
+
+// =====================
+// 🏫 VER CLASES
+// =====================
+
+app.get('/clases',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const clases =
+    await Clase.find()
+
+    res.json(clases)
 })
 
 // =====================
