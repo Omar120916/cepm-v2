@@ -231,6 +231,87 @@ app.get('/crear-admin', async(req,res)=>{
 })
 
 // =====================
+// 👥 VER USUARIOS
+// =====================
+
+app.get('/usuarios',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const usuarios =
+    await Usuario.find()
+
+    res.json(usuarios)
+})
+
+// =====================
+// 👨‍🏫 CREAR MAESTRO
+// 👨‍🎓 CREAR ALUMNO USER
+// =====================
+
+app.post('/registro',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const {
+
+        nombre,
+
+        usuario,
+
+        password,
+
+        rol
+
+    } = req.body
+
+    const existe =
+    await Usuario.findOne({
+
+        usuario
+    })
+
+    if(existe){
+
+        return res.status(400).json({
+
+            mensaje:'Usuario ya existe'
+        })
+    }
+
+    const hash =
+    await bcrypt.hash(
+
+        password,
+
+        10
+    )
+
+    const nuevo =
+    new Usuario({
+
+        nombre,
+
+        usuario,
+
+        password:hash,
+
+        rol
+    })
+
+    await nuevo.save()
+
+    res.json({
+
+        mensaje:'Usuario creado 🔥'
+    })
+})
+
+// =====================
 // 📚 CREAR MATERIA
 // =====================
 
