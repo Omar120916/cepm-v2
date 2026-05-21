@@ -335,6 +335,22 @@ style="display:none;">
         placeholder="Aula"
     >
 
+    <input
+    type="date"
+    id="fechaInicioClase"
+>
+
+<input
+    type="number"
+    id="duracionClase"
+    placeholder="Duración en semanas"
+>
+
+<input
+    type="date"
+    id="fechaFinClase"
+>
+
     <button
         class="action"
         onclick="crearClase()"
@@ -648,6 +664,21 @@ async function crearClase(){
         'aulaClase'
     ).value
 
+    const fechaInicio =
+document.getElementById(
+'fechaInicioClase'
+).value
+
+const duracion =
+document.getElementById(
+'duracionClase'
+).value
+
+const fechaFin =
+document.getElementById(
+'fechaFinClase'
+).value
+
     const res =
     await fetch(
 
@@ -676,7 +707,13 @@ async function crearClase(){
 
                 horario,
 
-                aula
+                aula,
+
+                fechaInicio,
+
+                duracion,
+
+                fechaFin
             })
         }
     )

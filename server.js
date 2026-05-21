@@ -74,6 +74,12 @@ const Clase = mongoose.model('Clase', {
 
     aula:String,
 
+    fechaInicio:String,
+
+    duracion:Number,
+
+    fechaFin:String,
+
     alumnos:[
         mongoose.Schema.Types.ObjectId
     ]
