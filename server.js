@@ -45,7 +45,11 @@ const Usuario = mongoose.model('Usuario', {
 
     password: String,
 
-    rol: String
+    rol: String,
+
+    email: String,
+
+    alumnoId:mongoose.Schema.Types.ObjectId
 })
 
 const Materia = mongoose.model('Materia', {

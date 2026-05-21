@@ -417,14 +417,11 @@ async function crearAlumno(){
         'nombreAlumno'
     ).value
 
+    const edad = 18
+
     const usuario =
     document.getElementById(
         'usuarioAlumno'
-    ).value
-
-    const email =
-    document.getElementById(
-        'emailAlumno'
     ).value
 
     const password =
@@ -432,7 +429,47 @@ async function crearAlumno(){
         'passwordAlumno'
     ).value
 
-    const res = await fetch(
+    const email =
+    document.getElementById(
+        'emailAlumno'
+    ).value
+
+    // 🔥 CREAR ALUMNO
+
+    const alumnoRes =
+    await fetch(
+
+        `${API}/alumnos`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                nombre,
+
+                edad
+            })
+        }
+    )
+
+    const alumno =
+    await alumnoRes.json()
+
+    // 🔥 CREAR USUARIO
+
+    const userRes =
+    await fetch(
 
         `${API}/registro`,
 
@@ -453,25 +490,27 @@ async function crearAlumno(){
 
                 nombre,
 
-                email,
-
                 usuario,
 
                 password,
 
-                rol:'alumno'
+                email,
+
+                rol:'alumno',
+
+                alumnoId:
+                alumno._id
             })
         }
     )
 
     const data =
-    await res.json()
+    await userRes.json()
 
     alert(data.mensaje)
 
     cargarUsuarios()
 }
-
 // =====================
 // 👨‍🏫 CREAR MAESTRO
 // =====================
