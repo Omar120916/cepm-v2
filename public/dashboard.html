@@ -755,22 +755,168 @@ async function cargarClases(){
 
     .innerHTML = clases.map(c=>`
 
-        <div class="usuario">
+<div class="usuario">
 
-            🏫 ${c.grupo}
-            <br>
-            ⏰ ${c.horario}
-            <br>
-            🚪 ${c.aula}
+    🏫 ${c.grupo}
 
-        </div>
+    <br>
 
-    `).join('')
+    ⏰ ${c.horario}
+
+    <br>
+
+    🚪 ${c.aula}
+
+    <br><br>
+
+    <button
+    onclick="abrirClase('${c._id}')"
+    >
+
+        Ver Clase
+
+    </button>
+
+</div>
+
+`).join('')
 }
 
 cargarMaterias()
 cargarClases()
 
+// =====================
+// 👨‍🎓 VER CLASE
+// =====================
+
+async function abrirClase(id){
+
+    const resClases =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const clases =
+    await resClases.json()
+
+    const clase =
+    clases.find(c=>c._id===id)
+
+    const resAlumnos =
+    await fetch(
+
+        `${API}/alumnos`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const alumnos =
+    await resAlumnos.json()
+
+    const disponibles =
+    alumnos.filter(a=>
+
+        !clase.alumnos.includes(a._id)
+    )
+
+    const html = `
+
+    <div class="card">
+
+        <h2>
+            👨‍🎓 Agregar alumnos
+        </h2>
+
+        <select id="alumnoClase">
+
+            ${disponibles.map(a=>`
+
+                <option value="${a._id}">
+                    ${a.nombre}
+                </option>
+
+            `).join('')}
+
+        </select>
+
+        <button
+        class="action"
+
+        onclick="agregarAlumnoClase('${id}')"
+        >
+
+            Agregar Alumno
+
+        </button>
+
+    </div>
+
+    `
+
+    document
+    .getElementById(
+        'listaClases'
+    )
+
+    .innerHTML += html
+}
+
+// =====================
+// 👨‍🎓 AGREGAR ALUMNO
+// =====================
+
+async function agregarAlumnoClase(id){
+
+    const alumnoId =
+    document.getElementById(
+        'alumnoClase'
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/clases/${id}/alumnos`,
+
+        {
+
+            method:'PUT',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:
+                token
+            },
+
+            body:JSON.stringify({
+
+                alumnos:[alumnoId]
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarClases()
+}
 
 
 // =====================

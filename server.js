@@ -461,6 +461,43 @@ async(req,res)=>{
 })
 
 // =====================
+// 👨‍🎓 AGREGAR ALUMNOS A CLASE
+// =====================
+
+app.put('/clases/:id/alumnos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const claseId =
+    req.params.id
+
+    const alumnos =
+    req.body.alumnos
+
+    await Clase.findByIdAndUpdate(
+
+        claseId,
+
+        {
+
+            $addToSet:{
+
+                alumnos:{
+                    $each: alumnos
+                }
+            }
+        }
+    )
+
+    res.json({
+
+        mensaje:'Alumnos agregados 🔥'
+    })
+})
+
+// =====================
 // 🚀 SERVER
 // =====================
 
