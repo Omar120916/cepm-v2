@@ -275,7 +275,11 @@ async(req,res)=>{
 
         password,
 
-        rol
+        rol,
+
+        email,
+
+        alumnoId
 
     } = req.body
 
@@ -309,6 +313,10 @@ async(req,res)=>{
         usuario,
 
         password:hash,
+
+        email,
+
+        alumnoId,
 
         rol
     })
