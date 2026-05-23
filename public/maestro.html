@@ -367,6 +367,10 @@ async function guardarCalificacion(
     await res.json()
 
     alert(data.mensaje)
+
+    // 🔥 RECARGAR CLASES AUTOMÁTICAMENTE
+
+    cargarClases()
 }
 
 function logout(){
