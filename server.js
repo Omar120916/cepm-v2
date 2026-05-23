@@ -1,5 +1,4 @@
 require('dotenv').config()
-console.log(process.env.MONGO_URI)
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -23,14 +22,16 @@ app.use(express.static('public'))
 
 mongoose.connect(process.env.MONGO_URI)
 
-.then(() => {
+.then(()=>{
 
     console.log('Mongo conectado 🔥')
+
 })
 
-.catch(err => {
+.catch(err=>{
 
     console.log(err)
+
 })
 
 // =====================
@@ -39,17 +40,17 @@ mongoose.connect(process.env.MONGO_URI)
 
 const Usuario = mongoose.model('Usuario', {
 
-    nombre: String,
+    nombre:String,
 
-    usuario: String,
+    usuario:String,
 
-    password: String,
+    password:String,
 
-    rol: String,
+    rol:String,
 
-    email: String,
+    email:String,
 
-    alumnoId:mongoose.Schema.Types.ObjectId,
+    edad:String,
 
     hijos:[
         mongoose.Schema.Types.ObjectId
@@ -59,13 +60,6 @@ const Usuario = mongoose.model('Usuario', {
 const Materia = mongoose.model('Materia', {
 
     nombre:String
-})
-
-const Alumno = mongoose.model('Alumno', {
-
-    nombre:String,
-
-    edad:String
 })
 
 const Clase = mongoose.model('Clase', {
@@ -97,10 +91,10 @@ const Clase = mongoose.model('Clase', {
 // 🔐 JWT
 // =====================
 
-function verificarToken(req, res, next){
+function verificarToken(req,res,next){
 
     const token =
-        req.headers.authorization
+    req.headers.authorization
 
     if(!token){
 
@@ -112,7 +106,8 @@ function verificarToken(req, res, next){
 
     try{
 
-        const decoded = jwt.verify(
+        const decoded =
+        jwt.verify(
 
             token,
 
@@ -136,7 +131,9 @@ function verificarToken(req, res, next){
 // 🔐 LOGIN
 // =====================
 
-app.post('/login', async(req,res)=>{
+app.post('/login',
+
+async(req,res)=>{
 
     const {
 
@@ -147,10 +144,10 @@ app.post('/login', async(req,res)=>{
     } = req.body
 
     const user =
-        await Usuario.findOne({
+    await Usuario.findOne({
 
-            usuario
-        })
+        usuario
+    })
 
     if(!user){
 
@@ -161,12 +158,12 @@ app.post('/login', async(req,res)=>{
     }
 
     const valido =
-        await bcrypt.compare(
+    await bcrypt.compare(
 
-            password,
+        password,
 
-            user.password
-        )
+        user.password
+    )
 
     if(!valido){
 
@@ -176,7 +173,8 @@ app.post('/login', async(req,res)=>{
         })
     }
 
-    const token = jwt.sign({
+    const token =
+    jwt.sign({
 
         id:user._id,
 
@@ -200,13 +198,15 @@ app.post('/login', async(req,res)=>{
 // 👑 CREAR ADMIN
 // =====================
 
-app.get('/crear-admin', async(req,res)=>{
+app.get('/crear-admin',
+
+async(req,res)=>{
 
     const existe =
-        await Usuario.findOne({
+    await Usuario.findOne({
 
-            usuario:'admin'
-        })
+        usuario:'admin'
+    })
 
     if(existe){
 
@@ -217,24 +217,24 @@ app.get('/crear-admin', async(req,res)=>{
     }
 
     const hash =
-        await bcrypt.hash(
+    await bcrypt.hash(
 
-            'admin123',
+        'admin123',
 
-            10
-        )
+        10
+    )
 
     const admin =
-        new Usuario({
+    new Usuario({
 
-            nombre:'Administrador',
+        nombre:'Administrador',
 
-            usuario:'admin',
+        usuario:'admin',
 
-            password:hash,
+        password:hash,
 
-            rol:'admin'
-        })
+        rol:'admin'
+    })
 
     await admin.save()
 
@@ -261,8 +261,64 @@ async(req,res)=>{
 })
 
 // =====================
-// 👨‍🏫 CREAR MAESTRO
-// 👨‍🎓 CREAR ALUMNO USER
+// 👨‍🎓 VER ALUMNOS
+// =====================
+
+app.get('/alumnos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const alumnos =
+    await Usuario.find({
+
+        rol:'alumno'
+    })
+
+    res.json(alumnos)
+})
+
+// =====================
+// 👨‍🏫 VER MAESTROS
+// =====================
+
+app.get('/maestros',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const maestros =
+    await Usuario.find({
+
+        rol:'maestro'
+    })
+
+    res.json(maestros)
+})
+
+// =====================
+// 👨‍👩‍👧 VER PADRES
+// =====================
+
+app.get('/padres',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const padres =
+    await Usuario.find({
+
+        rol:'padre'
+    })
+
+    res.json(padres)
+})
+
+// =====================
+// 👨‍🏫👨‍🎓👨‍👩‍👧 REGISTRO
 // =====================
 
 app.post('/registro',
@@ -283,7 +339,9 @@ async(req,res)=>{
 
         email,
 
-        alumnoId
+        edad,
+
+        hijos
 
     } = req.body
 
@@ -318,11 +376,13 @@ async(req,res)=>{
 
         password:hash,
 
+        rol,
+
         email,
 
-        alumnoId,
+        edad,
 
-        rol
+        hijos
     })
 
     await nuevo.save()
@@ -374,45 +434,6 @@ async(req,res)=>{
 })
 
 // =====================
-// 👨‍🎓 CREAR ALUMNO
-// =====================
-
-app.post('/alumnos',
-
-verificarToken,
-
-async(req,res)=>{
-
-    const nuevo =
-    new Alumno({
-
-        nombre:req.body.nombre,
-
-        edad:req.body.edad
-    })
-
-    await nuevo.save()
-
-    res.json(nuevo)
-})
-
-// =====================
-// 👨‍🎓 VER ALUMNOS
-// =====================
-
-app.get('/alumnos',
-
-verificarToken,
-
-async(req,res)=>{
-
-    const alumnos =
-    await Alumno.find()
-
-    res.json(alumnos)
-})
-
-// =====================
 // 🏫 CREAR CLASE
 // =====================
 
@@ -432,7 +453,13 @@ async(req,res)=>{
 
         horario,
 
-        aula
+        aula,
+
+        fechaInicio,
+
+        duracion,
+
+        fechaFin
 
     } = req.body
 
@@ -448,6 +475,12 @@ async(req,res)=>{
         horario,
 
         aula,
+
+        fechaInicio,
+
+        duracion,
+
+        fechaFin,
 
         alumnos:[]
     })
