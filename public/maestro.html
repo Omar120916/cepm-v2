@@ -94,6 +94,11 @@ button.action{
     margin-top:10px;
 }
 
+.panelClase{
+
+    margin-top:20px;
+}
+
 </style>
 
 </head>
@@ -106,7 +111,7 @@ button.action{
         👨‍🏫 Maestro
     </h1>
 
-    <button onclick="mostrar('clases')">
+    <button>
         📚 Mis clases
     </button>
 
@@ -118,9 +123,7 @@ button.action{
 
 <div class="main">
 
-    <!-- CLASES -->
-
-    <div id="clases" class="card">
+    <div class="card">
 
         <h2>
             📚 Mis clases
@@ -144,7 +147,7 @@ async function cargarClases(){
 
     // 🔥 CLASES
 
-    const res =
+    const clases =
     await fetch(
 
         `${API}/clases`,
@@ -155,10 +158,8 @@ async function cargarClases(){
                 Authorization:token
             }
         }
-    )
 
-    const clases =
-    await res.json()
+    ).then(r=>r.json())
 
     // 🔥 ALUMNOS
 
@@ -176,20 +177,21 @@ async function cargarClases(){
 
     ).then(r=>r.json())
 
+    // 🔥 CALIFICACIONES
 
     const calificaciones =
-await fetch(
+    await fetch(
 
-    `${API}/calificaciones`,
+        `${API}/calificaciones`,
 
-    {
+        {
 
-        headers:{
-            Authorization:token
+            headers:{
+                Authorization:token
+            }
         }
-    }
 
-).then(r=>r.json())
+    ).then(r=>r.json())
 
     // 🔥 TOKEN
 
@@ -202,7 +204,7 @@ await fetch(
         )
     )
 
-    // 🔥 SOLO CLASES DEL MAESTRO
+    // 🔥 FILTRAR CLASES
 
     const misClases =
     clases.filter(c=>
@@ -221,8 +223,6 @@ await fetch(
 
     for(const clase of misClases){
 
-        // 🔥 ALUMNOS DE ESA CLASE
-
         const alumnosClase =
         alumnos.filter(a=>
 
@@ -239,192 +239,275 @@ await fetch(
                 📘 ${clase.grupo}
             </h3>
 
-            <p>
+            <p style="margin-top:10px;">
                 👨‍🎓 ${alumnosClase.length} alumnos
             </p>
 
-            <div style="margin-top:20px;">
+            <!-- BOTONES -->
 
-    <input
-        type="text"
-        id="titulo-${clase._id}"
-        placeholder="Título tarea"
-    >
+            <div
+            style="
+            display:flex;
+            gap:10px;
+            margin-top:20px;
+            flex-wrap:wrap;
+            "
+            >
 
-    <input
-        type="text"
-        id="desc-${clase._id}"
-        placeholder="Descripción"
-    >
+                <button
+                class="action"
 
-    <input
-        type="date"
-        id="fecha-${clase._id}"
-    >
+                onclick="
+                mostrarPanel(
+                    'calificaciones-${clase._id}'
+                )
+                "
+                >
+                    📝 Calificaciones
+                </button>
 
-    <button
-        class="action"
+                <button
+                class="action"
 
-        onclick="
-        crearTarea(
-            '${clase._id}'
-        )
-        "
-    >
+                onclick="
+                mostrarPanel(
+                    'asistencia-${clase._id}'
+                )
+                "
+                >
+                    ✅ Asistencia
+                </button>
 
-        Crear tarea
+                <button
+                class="action"
 
-    </button>
+                onclick="
+                mostrarPanel(
+                    'tareas-${clase._id}'
+                )
+                "
+                >
+                    📚 Tareas
+                </button>
 
-</div>
+            </div>
 
- ${alumnosClase.map(a=>{
+            <!-- CALIFICACIONES -->
 
-    const yaCalificado =
-    calificaciones.find(c=>
+            <div
+            id="calificaciones-${clase._id}"
+            class="panelClase"
+            style="display:none;"
+            >
 
-        c.claseId===clase._id &&
+                <h3>
+                    📝 Calificaciones
+                </h3>
 
-        c.alumnoId===a._id
-    )
+                ${alumnosClase.map(a=>{
 
-    if(yaCalificado){
+                    const yaCalificado =
+                    calificaciones.find(c=>
 
-        return `
+                        c.claseId===clase._id &&
 
-        <div class="alumno">
+                        c.alumnoId===a._id
+                    )
 
-            <b>
-                ${a.nombre}
-            </b>
+                    if(yaCalificado){
 
-            <p style="margin-top:10px;">
+                        return `
 
-                ✅ Calificación:
-                <b>
-                    ${yaCalificado.calificacion}
-                </b>
+                        <div class="alumno">
 
-            </p>
+                            <b>
+                                ${a.nombre}
+                            </b>
 
-            <select
-id="asistencia-${a._id}"
->
+                            <p style="margin-top:10px;">
 
-    <option value="Presente">
-        ✅ Presente
-    </option>
+                                ✅ Calificación:
+                                <b>
+                                    ${yaCalificado.calificacion}
+                                </b>
 
-    <option value="Retardo">
-        ⏰ Retardo
-    </option>
+                            </p>
 
-    <option value="Falta">
-        ❌ Falta
-    </option>
+                        </div>
 
-</select>
+                        `
+                    }
 
-<button
-class="action"
+                    return `
 
-style="margin-top:10px;"
+                    <div class="alumno">
 
-onclick="
-guardarAsistencia(
-    '${clase._id}',
-    '${a._id}'
-)
-"
->
+                        <b>
+                            ${a.nombre}
+                        </b>
 
-    Guardar asistencia
+                        <input
+                            type="number"
+                            id="cal-${clase._id}-${a._id}"
+                            placeholder="Calificación"
+                        >
 
-</button>
+                        <button
+                            class="action"
+
+                            onclick="
+                            guardarCalificacion(
+                                '${clase._id}',
+                                '${a._id}',
+                                '${a._id}'
+                            )
+                            "
+                        >
+
+                            Guardar calificación
+
+                        </button>
+
+                    </div>
+
+                    `
+                }).join('')}
+
+            </div>
+
+            <!-- ASISTENCIA -->
+
+            <div
+            id="asistencia-${clase._id}"
+            class="panelClase"
+            style="display:none;"
+            >
+
+                <h3>
+                    ✅ Asistencia
+                </h3>
+
+                ${alumnosClase.map(a=>`
+
+                <div class="alumno">
+
+                    <b>
+                        ${a.nombre}
+                    </b>
+
+                    <select
+                    id="asistencia-${clase._id}-${a._id}"
+
+                    style="
+                    width:100%;
+                    padding:12px;
+                    border:none;
+                    border-radius:10px;
+                    margin-top:10px;
+                    "
+                    >
+
+                        <option value="Presente">
+                            ✅ Presente
+                        </option>
+
+                        <option value="Retardo">
+                            ⏰ Retardo
+                        </option>
+
+                        <option value="Falta">
+                            ❌ Falta
+                        </option>
+
+                    </select>
+
+                    <button
+                    class="action"
+                    style="margin-top:10px;"
+
+                    onclick="
+                    guardarAsistencia(
+                        '${clase._id}',
+                        '${a._id}'
+                    )
+                    "
+                    >
+
+                        Guardar asistencia
+
+                    </button>
+
+                </div>
+
+                `).join('')}
+
+            </div>
+
+            <!-- TAREAS -->
+
+            <div
+            id="tareas-${clase._id}"
+            class="panelClase"
+            style="display:none;"
+            >
+
+                <h3>
+                    📚 Tareas
+                </h3>
+
+                <input
+                    type="text"
+                    id="titulo-${clase._id}"
+                    placeholder="Título tarea"
+                >
+
+                <input
+                    type="text"
+                    id="desc-${clase._id}"
+                    placeholder="Descripción"
+                >
+
+                <input
+                    type="date"
+                    id="fecha-${clase._id}"
+                >
+
+                <button
+                    class="action"
+
+                    onclick="
+                    crearTarea(
+                        '${clase._id}'
+                    )
+                    "
+                >
+
+                    Crear tarea
+
+                </button>
+
+            </div>
 
         </div>
-        `
-    }
-
-    return `
-
-    <div class="alumno">
-
-        <b>
-            ${a.nombre}
-        </b>
-
-        <input
-            type="number"
-            id="cal-${clase._id}-${a._id}"
-            placeholder="Calificación"
-        >
-
-        <button
-            class="action"
-
-            onclick="guardarCalificacion(
-
-                '${clase._id}',
-
-                '${a._id}',
-
-                '${a._id}'
-            )"
-        >
-
-            Guardar calificación
-
-        </button>
-
-        <select
-id="asistencia-${a._id}"
-style="
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-margin-top:10px;
-"
->
-
-<option value="Presente">
-✅ Presente
-</option>
-
-<option value="Retardo">
-⏰ Retardo
-</option>
-
-<option value="Falta">
-❌ Falta
-</option>
-
-</select>
-
-<button
-class="action"
-style="margin-top:10px;"
-onclick="
-guardarAsistencia(
-'${clase._id}',
-'${a._id}'
-)
-"
->
-
-Guardar asistencia
-
-</button>
-
-    </div>
-    `
-}).join('')}
-
-        </div>
 
         `
     }
+}
+
+function mostrarPanel(id){
+
+    document
+    .querySelectorAll('.panelClase')
+
+    .forEach(p=>{
+
+        p.style.display='none'
+    })
+
+    document
+    .getElementById(id)
+
+    .style.display='block'
 }
 
 async function guardarCalificacion(
@@ -478,19 +561,8 @@ async function guardarCalificacion(
 
     alert(data.mensaje)
 
-    // 🔥 RECARGAR CLASES AUTOMÁTICAMENTE
-
     cargarClases()
 }
-
-function logout(){
-
-    localStorage.clear()
-
-    location.href='index.html'
-}
-
-cargarClases()
 
 async function guardarAsistencia(
 
@@ -503,7 +575,7 @@ async function guardarAsistencia(
     const estado =
     document.getElementById(
 
-        `asistencia-${alumnoId}`
+        `asistencia-${claseId}-${alumnoId}`
 
     ).value
 
@@ -612,6 +684,15 @@ async function crearTarea(
 
     alert(data.mensaje)
 }
+
+function logout(){
+
+    localStorage.clear()
+
+    location.href='index.html'
+}
+
+cargarClases()
 
 </script>
 
