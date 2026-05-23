@@ -142,6 +142,8 @@ localStorage.getItem('token')
 
 async function cargarClases(){
 
+    // 🔥 CLASES
+
     const res =
     await fetch(
 
@@ -158,10 +160,12 @@ async function cargarClases(){
     const clases =
     await res.json()
 
-    const usuarios =
+    // 🔥 ALUMNOS
+
+    const alumnos =
     await fetch(
 
-        `${API}/usuarios`,
+        `${API}/alumnos`,
 
         {
 
@@ -169,9 +173,10 @@ async function cargarClases(){
                 Authorization:token
             }
         }
-    )
 
-    .then(r=>r.json())
+    ).then(r=>r.json())
+
+    // 🔥 TOKEN
 
     const maestro =
     JSON.parse(
@@ -181,6 +186,8 @@ async function cargarClases(){
             token.split('.')[1]
         )
     )
+
+    // 🔥 SOLO CLASES DEL MAESTRO
 
     const misClases =
     clases.filter(c=>
@@ -195,15 +202,17 @@ async function cargarClases(){
 
     contenedor.innerHTML=''
 
+    // 🔥 RECORRER CLASES
+
     for(const clase of misClases){
 
-        const alumnos =
-        usuarios.filter(u=>
+        // 🔥 ALUMNOS DE ESA CLASE
 
-            u.rol==='alumno' &&
+        const alumnosClase =
+        alumnos.filter(a=>
 
             clase.alumnos.includes(
-                u.alumnoId
+                a._id
             )
         )
 
@@ -216,10 +225,10 @@ async function cargarClases(){
             </h3>
 
             <p>
-                👨‍🎓 ${alumnos.length} alumnos
+                👨‍🎓 ${alumnosClase.length} alumnos
             </p>
 
-            ${alumnos.map(a=>`
+            ${alumnosClase.map(a=>`
 
                 <div class="alumno">
 
@@ -240,7 +249,7 @@ async function cargarClases(){
 
                             '${clase._id}',
 
-                            '${a.alumnoId}',
+                            '${a._id}',
 
                             '${a._id}'
                         )"
@@ -255,6 +264,7 @@ async function cargarClases(){
             `).join('')}
 
         </div>
+
         `
     }
 }
