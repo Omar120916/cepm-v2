@@ -87,6 +87,21 @@ const Clase = mongoose.model('Clase', {
     ]
 })
 
+const Calificacion = mongoose.model('Calificacion',{
+
+    claseId:
+        mongoose.Schema.Types.ObjectId,
+
+    alumnoId:
+        mongoose.Schema.Types.ObjectId,
+
+    parcial:Number,
+
+    calificacion:Number,
+
+    bloqueada:Boolean
+})
+
 // =====================
 // 🔐 JWT
 // =====================
@@ -543,6 +558,68 @@ async(req,res)=>{
     res.json({
 
         mensaje:'Alumnos agregados 🔥'
+    })
+})
+
+// =====================
+// 📝 GUARDAR CALIFICACION
+// =====================
+
+app.post('/calificaciones',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const {
+
+        claseId,
+
+        alumnoId,
+
+        parcial,
+
+        calificacion
+
+    } = req.body
+
+    const existe =
+    await Calificacion.findOne({
+
+        claseId,
+
+        alumnoId,
+
+        parcial
+    })
+
+    if(existe){
+
+        return res.status(400).json({
+
+            mensaje:'Ya calificado 🔥'
+        })
+    }
+
+    const nueva =
+    new Calificacion({
+
+        claseId,
+
+        alumnoId,
+
+        parcial,
+
+        calificacion,
+
+        bloqueada:true
+    })
+
+    await nueva.save()
+
+    res.json({
+
+        mensaje:'Calificación guardada 🔥'
     })
 })
 
