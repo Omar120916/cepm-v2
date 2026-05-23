@@ -184,134 +184,152 @@ button.action:hover{
 
     <div id="inicio" class="card">
 
-        <h2>
-            Bienvenido 😎🔥
-        </h2>
-
-        <p style="margin-top:15px;">
-            Plataforma Escolar CEPM v2
-        </p>
-
-    </div>
-
-    <!-- ALUMNOS -->
-
-    <div id="alumnos" class="card" style="display:none;">
-
-        <h2>
-            👨‍🎓 Agregar Alumno
-        </h2>
-
-        <input
-            type="text"
-            id="nombreAlumno"
-            placeholder="Nombre alumno"
-        >
-
-        <input
-            type="text"
-            id="usuarioAlumno"
-            placeholder="Usuario"
-        >
-
-        <input
-            type="email"
-            id="emailAlumno"
-            placeholder="Correo electrónico"
-        >
-
-        <input
-            type="password"
-            id="passwordAlumno"
-            placeholder="Contraseña"
-        >
-
-        <button
-            class="action"
-            onclick="crearAlumno()"
-        >
-            Crear Alumno
-        </button>
-
-        <div id="listaAlumnos"></div>
-
-    </div>
-
-    <!-- MAESTROS -->
-
-    <div id="maestros" class="card" style="display:none;">
-
-        <h2>
-            👨‍🏫 Agregar Maestro
-        </h2>
-
-        <input
-            type="text"
-            id="nombreMaestro"
-            placeholder="Nombre maestro"
-        >
-
-        <input
-            type="text"
-            id="usuarioMaestro"
-            placeholder="Usuario"
-        >
-
-        <input
-            type="email"
-            id="emailMaestro"
-            placeholder="Correo electrónico"
-        >
-
-        <input
-            type="password"
-            id="passwordMaestro"
-            placeholder="Contraseña"
-        >
-
-        <button
-            class="action"
-            onclick="crearMaestro()"
-        >
-            Crear Maestro
-        </button>
-
-        <div id="listaMaestros"></div>
-
-    </div>
-<div id="padres" style="display: none;"
     <h2>
-👨‍👩‍👧 Crear Padre
-</h2>
+        Bienvenido 😎🔥
+    </h2>
 
-<input
-id="nombrePadre"
-placeholder="Nombre">
+    <p style="margin-top:15px;">
+        Plataforma Escolar CEPM v2
+    </p>
 
-<input
-id="emailPadre"
-placeholder="Correo">
+</div>
 
-<input
-id="usuarioPadre"
-placeholder="Usuario">
+<!-- ALUMNOS -->
 
-<input
-id="passwordPadre"
-placeholder="Contraseña">
+<div id="alumnos"
+class="card"
+style="display:none;">
 
-<select id="hijosPadre" multiple>
+    <h2>
+        👨‍🎓 Agregar Alumno
+    </h2>
 
-</select>
+    <input
+        type="text"
+        id="nombreAlumno"
+        placeholder="Nombre alumno"
+    >
 
-<button onclick="crearPadre()">
-Crear Padre
-</button>
+    <input
+        type="text"
+        id="usuarioAlumno"
+        placeholder="Usuario"
+    >
 
+    <input
+        type="email"
+        id="emailAlumno"
+        placeholder="Correo electrónico"
+    >
 
+    <input
+        type="password"
+        id="passwordAlumno"
+        placeholder="Contraseña"
+    >
 
+    <button
+        class="action"
+        onclick="crearAlumno()"
+    >
+        Crear Alumno
+    </button>
 
-    <!-- MATERIAS -->
+    <div id="listaAlumnos"></div>
+
+</div>
+
+<!-- MAESTROS -->
+
+<div id="maestros"
+class="card"
+style="display:none;">
+
+    <h2>
+        👨‍🏫 Agregar Maestro
+    </h2>
+
+    <input
+        type="text"
+        id="nombreMaestro"
+        placeholder="Nombre maestro"
+    >
+
+    <input
+        type="text"
+        id="usuarioMaestro"
+        placeholder="Usuario"
+    >
+
+    <input
+        type="email"
+        id="emailMaestro"
+        placeholder="Correo electrónico"
+    >
+
+    <input
+        type="password"
+        id="passwordMaestro"
+        placeholder="Contraseña"
+    >
+
+    <button
+        class="action"
+        onclick="crearMaestro()"
+    >
+        Crear Maestro
+    </button>
+
+    <div id="listaMaestros"></div>
+
+</div>
+
+<!-- PADRES -->
+
+<div id="padres"
+class="card"
+style="display:none;">
+
+    <h2>
+        👨‍👩‍👧 Crear Padre
+    </h2>
+
+    <input
+        id="nombrePadre"
+        placeholder="Nombre"
+    >
+
+    <input
+        id="emailPadre"
+        placeholder="Correo"
+    >
+
+    <input
+        id="usuarioPadre"
+        placeholder="Usuario"
+    >
+
+    <input
+        id="passwordPadre"
+        placeholder="Contraseña"
+    >
+
+    <select
+        id="hijosPadre"
+        multiple
+    >
+    </select>
+
+    <button
+        class="action"
+        onclick="crearPadre()"
+    >
+        Crear Padre
+    </button>
+
+</div>
+
+<!-- MATERIAS -->
 
 <div id="materias"
 class="card"
@@ -371,20 +389,20 @@ style="display:none;">
     >
 
     <input
-    type="date"
-    id="fechaInicioClase"
->
+        type="date"
+        id="fechaInicioClase"
+    >
 
-<input
-    type="number"
-    id="duracionClase"
-    placeholder="Duración en semanas"
->
+    <input
+        type="number"
+        id="duracionClase"
+        placeholder="Duración en semanas"
+    >
 
-<input
-    type="date"
-    id="fechaFinClase"
->
+    <input
+        type="date"
+        id="fechaFinClase"
+    >
 
     <button
         class="action"
@@ -394,10 +412,6 @@ style="display:none;">
     </button>
 
     <div id="listaClases"></div>
-
-</div>
-
-    
 
 </div>
 
@@ -416,8 +430,11 @@ if(!token){
 
 // 🔥 CAMBIAR VISTAS
 
+// 🔥 CAMBIAR VISTAS
+
 function mostrar(id){
 
+    // 🔥 TODAS LAS SECCIONES
     const secciones = [
 
         'inicio',
@@ -433,6 +450,7 @@ function mostrar(id){
         'padres'
     ]
 
+    // 🔥 OCULTAR TODAS
     secciones.forEach(seccion=>{
 
         const div =
@@ -444,10 +462,18 @@ function mostrar(id){
         }
     })
 
-    document
-    .getElementById(id)
-    .style.display='block'
+    // 🔥 MOSTRAR LA SELECCIONADA
+    const activa =
+    document.getElementById(id)
+
+    if(activa){
+
+        activa.style.display='block'
+    }
 }
+
+// 🔥 ABRIR INICIO AUTOMÁTICAMENTE
+mostrar('inicio')
 
 // 🔥 LOGOUT
 
