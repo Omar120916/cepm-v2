@@ -623,6 +623,22 @@ async(req,res)=>{
     })
 })
 
+
+// =====================
+// 📖 VER CALIFICACIONES
+// =====================
+
+app.get('/calificaciones',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const calificaciones =
+    await Calificacion.find()
+
+    res.json(calificaciones)
+})
 // =====================
 // 🚀 SERVER
 // =====================

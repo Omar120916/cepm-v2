@@ -176,6 +176,21 @@ async function cargarClases(){
 
     ).then(r=>r.json())
 
+
+    const calificaciones =
+await fetch(
+
+    `${API}/calificaciones`,
+
+    {
+
+        headers:{
+            Authorization:token
+        }
+    }
+
+).then(r=>r.json())
+
     // 🔥 TOKEN
 
     const maestro =
@@ -228,40 +243,73 @@ async function cargarClases(){
                 👨‍🎓 ${alumnosClase.length} alumnos
             </p>
 
-            ${alumnosClase.map(a=>`
+ ${alumnosClase.map(a=>{
 
-                <div class="alumno">
+    const yaCalificado =
+    calificaciones.find(c=>
 
-                    <b>
-                        ${a.nombre}
-                    </b>
+        c.claseId===clase._id &&
 
-                    <input
-                        type="number"
-                        id="cal-${clase._id}-${a._id}"
-                        placeholder="Calificación"
-                    >
+        c.alumnoId===a._id
+    )
 
-                    <button
-                        class="action"
+    if(yaCalificado){
 
-                        onclick="guardarCalificacion(
+        return `
 
-                            '${clase._id}',
+        <div class="alumno">
 
-                            '${a._id}',
+            <b>
+                ${a.nombre}
+            </b>
 
-                            '${a._id}'
-                        )"
-                    >
+            <p style="margin-top:10px;">
 
-                        Guardar calificación
+                ✅ Calificación:
+                <b>
+                    ${yaCalificado.calificacion}
+                </b>
 
-                    </button>
+            </p>
 
-                </div>
+        </div>
+        `
+    }
 
-            `).join('')}
+    return `
+
+    <div class="alumno">
+
+        <b>
+            ${a.nombre}
+        </b>
+
+        <input
+            type="number"
+            id="cal-${clase._id}-${a._id}"
+            placeholder="Calificación"
+        >
+
+        <button
+            class="action"
+
+            onclick="guardarCalificacion(
+
+                '${clase._id}',
+
+                '${a._id}',
+
+                '${a._id}'
+            )"
+        >
+
+            Guardar calificación
+
+        </button>
+
+    </div>
+    `
+}).join('')}
 
         </div>
 
