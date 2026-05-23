@@ -1070,21 +1070,26 @@ async function agregarAlumnoClase(id){
 
 async function cargarUsuarios(){
 
+    // 🔥 USUARIOS
+
     const res =
     await fetch(
 
         `${API}/usuarios`,
 
         {
-
             headers:{
-                Authorization:
-                token
+                Authorization:token
             }
         }
     )
 
-    const alumnos =
+    const usuarios =
+    await res.json()
+
+    // 🔥 ALUMNOS PARA PADRES
+
+    const resAlumnos =
     await fetch(
 
         `${API}/alumnos`,
@@ -1096,54 +1101,57 @@ async function cargarUsuarios(){
         }
     )
 
-    .then(r=>r.json())
-
-document
-.getElementById('hijosPadre')
-
-.innerHTML = alumnos.map(a=>`
-
-<option value="${a._id}">
-    ${a.nombre}
-</option>
-
-`).join('')
-
-    // 👨‍🎓
+    const alumnos =
+    await resAlumnos.json()
 
     document
-    .getElementById(
-        'listaAlumnos'
-    )
+    .getElementById('hijosPadre')
 
-    .innerHTML = alumnos.map(u=>`
+    .innerHTML = alumnos.map(a=>`
 
-        <div class="usuario">
+        <option value="${a._id}">
+            ${a.nombre}
+        </option>
+
+    `).join('')
+
+    // 🔥 LISTA ALUMNOS
+
+    document
+    .getElementById('listaAlumnos')
+
+    .innerHTML = usuarios
+
+    .filter(u=>u.rol==='alumno')
+
+    .map(u=>`
+
+        <div class="usuario-card">
 
             👨‍🎓 ${u.nombre}
             <br>
-            Usuario:
-            ${u.usuario}
+            Usuario: ${u.usuario}
 
         </div>
 
     `).join('')
 
-    // 👨‍🏫
+    // 🔥 LISTA MAESTROS
 
     document
-    .getElementById(
-        'listaMaestros'
-    )
+    .getElementById('listaMaestros')
 
-    .innerHTML = maestros.map(u=>`
+    .innerHTML = usuarios
 
-        <div class="usuario">
+    .filter(u=>u.rol==='maestro')
+
+    .map(u=>`
+
+        <div class="usuario-card">
 
             👨‍🏫 ${u.nombre}
             <br>
-            Usuario:
-            ${u.usuario}
+            Usuario: ${u.usuario}
 
         </div>
 
