@@ -272,6 +272,41 @@ await fetch(
 
             </p>
 
+            <select
+id="asistencia-${a._id}"
+>
+
+    <option value="Presente">
+        ✅ Presente
+    </option>
+
+    <option value="Retardo">
+        ⏰ Retardo
+    </option>
+
+    <option value="Falta">
+        ❌ Falta
+    </option>
+
+</select>
+
+<button
+class="action"
+
+style="margin-top:10px;"
+
+onclick="
+guardarAsistencia(
+    '${clase._id}',
+    '${a._id}'
+)
+"
+>
+
+    Guardar asistencia
+
+</button>
+
         </div>
         `
     }
