@@ -307,6 +307,46 @@ await fetch(
 
         </button>
 
+        <select
+id="asistencia-${alumno._id}"
+style="
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+"
+>
+
+<option value="Presente">
+✅ Presente
+</option>
+
+<option value="Retardo">
+⏰ Retardo
+</option>
+
+<option value="Falta">
+❌ Falta
+</option>
+
+</select>
+
+<button
+class="action"
+style="margin-top:10px;"
+onclick="
+guardarAsistencia(
+'${clase._id}',
+'${alumno._id}'
+)
+"
+>
+
+Guardar asistencia
+
+</button>
+
     </div>
     `
 }).join('')}
@@ -381,6 +421,64 @@ function logout(){
 }
 
 cargarClases()
+
+async function guardarAsistencia(
+
+    claseId,
+
+    alumnoId
+
+){
+
+    const estado =
+    document.getElementById(
+
+        `asistencia-${alumnoId}`
+
+    ).value
+
+    const fecha =
+    new Date()
+
+    .toISOString()
+
+    .split('T')[0]
+
+    const res =
+    await fetch(
+
+        `${API}/asistencia`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
+
+                claseId,
+
+                alumnoId,
+
+                fecha,
+
+                estado
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+}
 
 </script>
 

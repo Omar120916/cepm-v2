@@ -87,6 +87,19 @@ const Clase = mongoose.model('Clase', {
     ]
 })
 
+const Asistencia = mongoose.model('Asistencia',{
+
+    claseId:
+        mongoose.Schema.Types.ObjectId,
+
+    alumnoId:
+        mongoose.Schema.Types.ObjectId,
+
+    fecha:String,
+
+    estado:String
+})
+
 const Calificacion = mongoose.model('Calificacion',{
 
     claseId:
@@ -649,4 +662,83 @@ app.listen(process.env.PORT, ()=>{
 
         'Servidor corriendo 🔥'
     )
+})
+
+// =====================
+// 📅 GUARDAR ASISTENCIA
+// =====================
+
+app.post('/asistencia',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const {
+
+        claseId,
+
+        alumnoId,
+
+        fecha,
+
+        estado
+
+    } = req.body
+
+    const existe =
+    await Asistencia.findOne({
+
+        claseId,
+
+        alumnoId,
+
+        fecha
+    })
+
+    if(existe){
+
+        return res.json({
+
+            mensaje:'Ya tiene asistencia'
+        })
+    }
+
+    const nueva =
+    new Asistencia({
+
+        claseId,
+
+        alumnoId,
+
+        fecha,
+
+        estado
+    })
+
+    await nueva.save()
+
+    res.json({
+
+        mensaje:'Asistencia guardada 🔥'
+    })
+})
+
+// =====================
+// 📅 VER ASISTENCIAS
+// =====================
+
+app.get('/asistencia/:claseId',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const asistencias =
+    await Asistencia.find({
+
+        claseId:req.params.claseId
+    })
+
+    res.json(asistencias)
 })
