@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Panel Maestro</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+}
+
+.sidebar{
+
+    width:250px;
+    min-height:100vh;
+    background:#111827;
+    padding:20px;
+}
+
+.sidebar h1{
+
+    margin-bottom:30px;
+}
+
+.sidebar button{
+
+    width:100%;
+    margin-bottom:15px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.main{
+
+    flex:1;
+    padding:30px;
+}
+
+.card{
+
+    background:#1e293b;
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+input{
+
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+button.action{
+
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:12px;
+    width:100%;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.alumno{
+
+    background:#334155;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h1>
+        👨‍🏫 Maestro
+    </h1>
+
+    <button onclick="mostrar('clases')">
+        📚 Mis clases
+    </button>
+
+    <button onclick="logout()">
+        🚪 Salir
+    </button>
+
+</div>
+
+<div class="main">
+
+    <!-- CLASES -->
+
+    <div id="clases" class="card">
+
+        <h2>
+            📚 Mis clases
+        </h2>
+
+        <div id="listaClases"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API =
+'https://cepm-v2.onrender.com'
+
+const token =
+localStorage.getItem('token')
+
+async function cargarClases(){
+
+    const res =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const clases =
+    await res.json()
+
+    const usuarios =
+    await fetch(
+
+        `${API}/usuarios`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    .then(r=>r.json())
+
+    const maestro =
+    JSON.parse(
+
+        atob(
+
+            token.split('.')[1]
+        )
+    )
+
+    const misClases =
+    clases.filter(c=>
+
+        c.maestroId===maestro.id
+    )
+
+    const contenedor =
+    document.getElementById(
+        'listaClases'
+    )
+
+    contenedor.innerHTML=''
+
+    for(const clase of misClases){
+
+        const alumnos =
+        usuarios.filter(u=>
+
+            u.rol==='alumno' &&
+
+            clase.alumnos.includes(
+                u.alumnoId
+            )
+        )
+
+        contenedor.innerHTML += `
+
+        <div class="card">
+
+            <h3>
+                📘 ${clase.grupo}
+            </h3>
+
+            <p>
+                👨‍🎓 ${alumnos.length} alumnos
+            </p>
+
+            ${alumnos.map(a=>`
+
+                <div class="alumno">
+
+                    <b>
+                        ${a.nombre}
+                    </b>
+
+                    <input
+                        type="number"
+                        id="cal-${clase._id}-${a._id}"
+                        placeholder="Calificación"
+                    >
+
+                    <button
+                        class="action"
+
+                        onclick="guardarCalificacion(
+
+                            '${clase._id}',
+
+                            '${a.alumnoId}',
+
+                            '${a._id}'
+                        )"
+                    >
+
+                        Guardar calificación
+
+                    </button>
+
+                </div>
+
+            `).join('')}
+
+        </div>
+        `
+    }
+}
+
+async function guardarCalificacion(
+
+    claseId,
+
+    alumnoId,
+
+    usuarioId
+
+){
+
+    const calificacion =
+    document.getElementById(
+
+        `cal-${claseId}-${usuarioId}`
+
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/calificaciones`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
+
+                claseId,
+
+                alumnoId,
+
+                parcial:1,
+
+                calificacion
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+}
+
+function logout(){
+
+    localStorage.clear()
+
+    location.href='index.html'
+}
+
+cargarClases()
+
+</script>
+
+</body>
+</html>
