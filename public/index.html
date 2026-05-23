@@ -277,23 +277,50 @@ async function login(){
 
     const data = await res.json()
 
-    if(data.token){
+if(data.token){
 
-        localStorage.setItem(
-            'token',
-            data.token
-        )
+    localStorage.setItem(
 
-        document.getElementById('mensaje')
-        .innerHTML = 'Login correcto 🔥'
+        'token',
 
-        setTimeout(()=>{
+        data.token
+    )
 
-            location.href = 'dashboard.html'
+    localStorage.setItem(
 
-        },1000)
+        'rol',
 
-    }else{
+        data.rol
+    )
+
+    document.getElementById('mensaje')
+    .innerHTML = 'Login correcto 🔥'
+
+    setTimeout(()=>{
+
+        if(data.rol==='admin'){
+
+            location.href='dashboard.html'
+        }
+
+        else if(data.rol==='maestro'){
+
+            location.href='maestro.html'
+        }
+
+        else if(data.rol==='padre'){
+
+            location.href='padre.html'
+        }
+
+        else if(data.rol==='alumno'){
+
+            location.href='alumno.html'
+        }
+
+    },1000)
+
+}else{
 
         document.getElementById('mensaje')
         .innerHTML = data.mensaje || 'Error'
