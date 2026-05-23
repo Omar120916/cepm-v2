@@ -1071,6 +1071,7 @@ async function agregarAlumnoClase(id){
 // =====================
 
 async function cargarUsuarios(){
+    
 
     // 🔥 USUARIOS
 
@@ -1105,6 +1106,23 @@ async function cargarUsuarios(){
 
     const alumnos =
     await resAlumnos.json()
+
+    const maestros =
+usuarios.filter(u=>
+
+    u.rol==='maestro'
+)
+
+document
+.getElementById('maestroClase')
+
+.innerHTML = maestros.map(m=>`
+
+<option value="${m._id}">
+    ${m.nombre}
+</option>
+
+`).join('')
 
     document
     .getElementById('hijosPadre')
@@ -1158,6 +1176,7 @@ async function cargarUsuarios(){
         </div>
 
     `).join('')
+
 }
 
 async function crearPadre(){
