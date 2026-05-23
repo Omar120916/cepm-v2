@@ -87,6 +87,18 @@ const Clase = mongoose.model('Clase', {
     ]
 })
 
+const Tarea = mongoose.model('Tarea', {
+
+    claseId:
+        mongoose.Schema.Types.ObjectId,
+
+    titulo:String,
+
+    descripcion:String,
+
+    fechaEntrega:String
+})
+
 const Asistencia = mongoose.model('Asistencia',{
 
     claseId:
@@ -636,6 +648,51 @@ async(req,res)=>{
     })
 })
 
+// =====================
+// 📝 CREAR TAREA
+// =====================
+
+app.post('/tareas',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const nueva =
+    new Tarea({
+
+        claseId:req.body.claseId,
+
+        titulo:req.body.titulo,
+
+        descripcion:req.body.descripcion,
+
+        fechaEntrega:req.body.fechaEntrega
+    })
+
+    await nueva.save()
+
+    res.json({
+
+        mensaje:'Tarea creada 🔥'
+    })
+})
+
+// =====================
+// 📝 VER TAREAS
+// =====================
+
+app.get('/tareas',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const tareas =
+    await Tarea.find()
+
+    res.json(tareas)
+})
 
 // =====================
 // 📖 VER CALIFICACIONES

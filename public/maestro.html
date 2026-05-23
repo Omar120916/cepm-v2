@@ -243,6 +243,41 @@ await fetch(
                 👨‍🎓 ${alumnosClase.length} alumnos
             </p>
 
+            <div style="margin-top:20px;">
+
+    <input
+        type="text"
+        id="titulo-${clase._id}"
+        placeholder="Título tarea"
+    >
+
+    <input
+        type="text"
+        id="desc-${clase._id}"
+        placeholder="Descripción"
+    >
+
+    <input
+        type="date"
+        id="fecha-${clase._id}"
+    >
+
+    <button
+        class="action"
+
+        onclick="
+        crearTarea(
+            '${clase._id}'
+        )
+        "
+    >
+
+        Crear tarea
+
+    </button>
+
+</div>
+
  ${alumnosClase.map(a=>{
 
     const yaCalificado =
@@ -505,6 +540,69 @@ async function guardarAsistencia(
                 fecha,
 
                 estado
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+}
+
+async function crearTarea(
+
+    claseId
+
+){
+
+    const titulo =
+    document.getElementById(
+
+        `titulo-${claseId}`
+
+    ).value
+
+    const descripcion =
+    document.getElementById(
+
+        `desc-${claseId}`
+
+    ).value
+
+    const fechaEntrega =
+    document.getElementById(
+
+        `fecha-${claseId}`
+
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/tareas`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
+
+                claseId,
+
+                titulo,
+
+                descripcion,
+
+                fechaEntrega
             })
         }
     )
