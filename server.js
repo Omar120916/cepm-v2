@@ -49,7 +49,11 @@ const Usuario = mongoose.model('Usuario', {
 
     email: String,
 
-    alumnoId:mongoose.Schema.Types.ObjectId
+    alumnoId:mongoose.Schema.Types.ObjectId,
+
+    hijos:[
+        mongoose.Schema.Types.ObjectId
+    ]
 })
 
 const Materia = mongoose.model('Materia', {

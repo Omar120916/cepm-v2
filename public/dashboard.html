@@ -276,6 +276,37 @@ button.action:hover{
 
     </div>
 
+    <h2>
+👨‍👩‍👧 Crear Padre
+</h2>
+
+<input
+id="nombrePadre"
+placeholder="Nombre">
+
+<input
+id="emailPadre"
+placeholder="Correo">
+
+<input
+id="usuarioPadre"
+placeholder="Usuario">
+
+<input
+id="passwordPadre"
+placeholder="Contraseña">
+
+<select id="hijosPadre" multiple>
+
+</select>
+
+<button onclick="crearPadre()">
+Crear Padre
+</button>
+
+
+
+
     <!-- MATERIAS -->
 
 <div id="materias"
@@ -1006,33 +1037,30 @@ async function cargarUsuarios(){
         }
     )
 
-    const usuarios =
-    await res.json()
-
     const alumnos =
-    usuarios.filter(u=>
+    await fetch(
 
-        u.rol==='alumno'
+        `${API}/alumnos`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
     )
 
-    const maestros =
-    usuarios.filter(u=>
+    .then(r=>r.json())
 
-        u.rol==='maestro'
-    )
+document
+.getElementById('hijosPadre')
 
-    document
-    .getElementById(
-    'maestroClase'
-    )
+.innerHTML = alumnos.map(a=>`
 
-    .innerHTML = maestros.map(u=>`
+<option value="${a._id}">
+    ${a.nombre}
+</option>
 
-    <option value="${u._id}">
-        ${u.nombre}
-    </option>
-
-    `).join('')
+`).join('')
 
     // 👨‍🎓
 
