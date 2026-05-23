@@ -871,39 +871,67 @@ async function abrirClase(id){
         !clase.alumnos.includes(a._id)
     )
 
-    const html = `
+const inscritos =
+alumnos.filter(a=>
 
-    <div class="card">
+    clase.alumnos.includes(a._id)
+)
 
-        <h2>
-            👨‍🎓 Agregar alumnos
-        </h2>
+const html = `
 
-        <select id="alumnoClase">
+<div class="card">
 
-            ${disponibles.map(a=>`
+    <h2>
+        👨‍🎓 Clase
+    </h2>
 
-                <option value="${a._id}">
-                    ${a.nombre}
-                </option>
+    <p>
+        👥 Inscritos:
+        ${inscritos.length}
+    </p>
 
-            `).join('')}
+    <br>
 
-        </select>
+    ${inscritos.map(a=>`
 
-        <button
-        class="action"
+        <div class="usuario">
 
-        onclick="agregarAlumnoClase('${id}')"
-        >
+            👨‍🎓 ${a.nombre}
 
-            Agregar Alumno
+        </div>
 
-        </button>
+    `).join('')}
 
-    </div>
+    <br>
 
-    `
+    <h2>
+        ➕ Agregar alumno
+    </h2>
+
+    <select id="alumnoClase">
+
+        ${disponibles.map(a=>`
+
+            <option value="${a._id}">
+                ${a.nombre}
+            </option>
+
+        `).join('')}
+
+    </select>
+
+    <button
+    class="action"
+
+    onclick="agregarAlumnoClase('${id}')"
+    >
+
+        Agregar Alumno
+
+    </button>
+
+</div>
+`
 
     document
     .getElementById(
