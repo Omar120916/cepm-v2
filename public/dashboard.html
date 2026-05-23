@@ -295,6 +295,7 @@ style="display:none;">
     </h2>
 
     <input
+        type="password"
         id="nombrePadre"
         placeholder="Nombre"
     >
@@ -1156,6 +1157,78 @@ async function cargarUsuarios(){
         </div>
 
     `).join('')
+}
+
+async function crearPadre(){
+
+    const nombre =
+    document
+    .getElementById('nombrePadre')
+    .value
+
+    const email =
+    document
+    .getElementById('emailPadre')
+    .value
+
+    const usuario =
+    document
+    .getElementById('usuarioPadre')
+    .value
+
+    const password =
+    document
+    .getElementById('passwordPadre')
+    .value
+
+    const hijos =
+    Array.from(
+
+        document
+        .getElementById('hijosPadre')
+        .selectedOptions
+
+    ).map(o=>o.value)
+
+    const res =
+    await fetch(
+
+        `${API}/registro`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
+
+                nombre,
+
+                email,
+
+                usuario,
+
+                password,
+
+                hijos,
+
+                rol:'padre'
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarUsuarios()
 }
 
 cargarUsuarios()
