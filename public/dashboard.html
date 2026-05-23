@@ -418,17 +418,34 @@ if(!token){
 
 function mostrar(id){
 
-    document
-    .querySelectorAll('.card')
+    const secciones = [
 
-    .forEach(c=>{
+        'inicio',
 
-        c.style.display='none'
+        'alumnos',
+
+        'maestros',
+
+        'materias',
+
+        'clases',
+
+        'padres'
+    ]
+
+    secciones.forEach(seccion=>{
+
+        const div =
+        document.getElementById(seccion)
+
+        if(div){
+
+            div.style.display='none'
+        }
     })
 
     document
     .getElementById(id)
-
     .style.display='block'
 }
 
