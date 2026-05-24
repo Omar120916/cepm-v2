@@ -52,6 +52,9 @@ const Usuario = mongoose.model('Usuario', {
 
     edad:String,
 
+    alumnoId:
+        mongoose.Schema.Types.ObjectId,
+
     hijos:[
         mongoose.Schema.Types.ObjectId
     ]
@@ -358,7 +361,94 @@ async(req,res)=>{
 })
 
 // =====================
-// 👨‍🏫👨‍🎓👨‍👩‍👧 REGISTRO
+// 👨‍🎓 CREAR ALUMNO
+// =====================
+
+app.post('/alumnos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    try{
+
+        const {
+
+            nombre,
+
+            usuario,
+
+            password,
+
+            email,
+
+            edad
+
+        } = req.body
+
+        const existe =
+        await Usuario.findOne({
+
+            usuario
+        })
+
+        if(existe){
+
+            return res.status(400).json({
+
+                mensaje:'Usuario ya existe'
+            })
+        }
+
+        const hash =
+        await bcrypt.hash(
+
+            password,
+
+            10
+        )
+
+        const nuevo =
+        new Usuario({
+
+            nombre,
+
+            usuario,
+
+            password:hash,
+
+            rol:'alumno',
+
+            email,
+
+            edad
+        })
+
+        await nuevo.save()
+
+        nuevo.alumnoId =
+        nuevo._id
+
+        await nuevo.save()
+
+        res.json({
+
+            mensaje:'Alumno creado 🔥'
+        })
+
+    }catch(err){
+
+        console.log(err)
+
+        res.status(500).json({
+
+            mensaje:'Error servidor'
+        })
+    }
+})
+
+// =====================
+// 👨‍🏫👨‍👩‍👧 REGISTRO
 // =====================
 
 app.post('/registro',
@@ -649,6 +739,22 @@ async(req,res)=>{
 })
 
 // =====================
+// 📖 VER CALIFICACIONES
+// =====================
+
+app.get('/calificaciones',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const calificaciones =
+    await Calificacion.find()
+
+    res.json(calificaciones)
+})
+
+// =====================
 // 📝 CREAR TAREA
 // =====================
 
@@ -692,33 +798,6 @@ async(req,res)=>{
     await Tarea.find()
 
     res.json(tareas)
-})
-
-// =====================
-// 📖 VER CALIFICACIONES
-// =====================
-
-app.get('/calificaciones',
-
-verificarToken,
-
-async(req,res)=>{
-
-    const calificaciones =
-    await Calificacion.find()
-
-    res.json(calificaciones)
-})
-// =====================
-// 🚀 SERVER
-// =====================
-
-app.listen(process.env.PORT, ()=>{
-
-    console.log(
-
-        'Servidor corriendo 🔥'
-    )
 })
 
 // =====================
@@ -798,4 +877,16 @@ async(req,res)=>{
     })
 
     res.json(asistencias)
+})
+
+// =====================
+// 🚀 SERVER
+// =====================
+
+app.listen(process.env.PORT, ()=>{
+
+    console.log(
+
+        'Servidor corriendo 🔥'
+    )
 })
