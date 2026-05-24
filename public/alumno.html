@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Panel Alumno</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+}
+
+.sidebar{
+
+    width:250px;
+    min-height:100vh;
+    background:#111827;
+    padding:20px;
+}
+
+.sidebar h1{
+
+    margin-bottom:30px;
+}
+
+.sidebar button{
+
+    width:100%;
+    margin-bottom:15px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.main{
+
+    flex:1;
+    padding:30px;
+}
+
+.card{
+
+    background:#1e293b;
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+.item{
+
+    background:#334155;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h1>
+        👨‍🎓 Alumno
+    </h1>
+
+    <button onclick="mostrar('clases')">
+        📚 Mis clases
+    </button>
+
+    <button onclick="mostrar('calificaciones')">
+        📝 Calificaciones
+    </button>
+
+    <button onclick="mostrar('tareas')">
+        📚 Tareas
+    </button>
+
+    <button onclick="logout()">
+        🚪 Salir
+    </button>
+
+</div>
+
+<div class="main">
+
+    <!-- CLASES -->
+
+    <div id="clases" class="card">
+
+        <h2>
+            📚 Mis clases
+        </h2>
+
+        <div id="listaClases"></div>
+
+    </div>
+
+    <!-- CALIFICACIONES -->
+
+    <div
+    id="calificaciones"
+    class="card"
+    style="display:none;"
+    >
+
+        <h2>
+            📝 Calificaciones
+        </h2>
+
+        <div id="listaCalificaciones"></div>
+
+    </div>
+
+    <!-- TAREAS -->
+
+    <div
+    id="tareas"
+    class="card"
+    style="display:none;"
+    >
+
+        <h2>
+            📚 Tareas
+        </h2>
+
+        <div id="listaTareas"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API =
+'https://cepm-v2.onrender.com'
+
+const token =
+localStorage.getItem('token')
+
+const payload =
+JSON.parse(
+
+    atob(
+
+        token.split('.')[1]
+    )
+)
+
+const alumnoId =
+payload.id
+
+async function cargarDatos(){
+
+    // 🔥 CLASES
+
+    const clases =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    // 🔥 CALIFICACIONES
+
+    const calificaciones =
+    await fetch(
+
+        `${API}/calificaciones`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    // 🔥 TAREAS
+
+    const tareas =
+    await fetch(
+
+        `${API}/tareas`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    // 🔥 MIS CLASES
+
+    const misClases =
+    clases.filter(c=>
+
+        c.alumnos.includes(
+            alumnoId
+        )
+    )
+
+    // 🔥 CLASES
+
+    document
+    .getElementById('listaClases')
+
+    .innerHTML = misClases.map(c=>`
+
+        <div class="item">
+
+            📘 ${c.grupo}
+
+        </div>
+
+    `).join('')
+
+    // 🔥 CALIFICACIONES
+
+    const misCalificaciones =
+    calificaciones.filter(c=>
+
+        c.alumnoId===alumnoId
+    )
+
+    document
+    .getElementById('listaCalificaciones')
+
+    .innerHTML = misCalificaciones.map(c=>`
+
+        <div class="item">
+
+            📝 Calificación:
+            <b>
+                ${c.calificacion}
+            </b>
+
+        </div>
+
+    `).join('')
+
+    // 🔥 TAREAS
+
+    const misTareas =
+    tareas.filter(t=>
+
+        misClases.some(c=>
+
+            c._id===t.claseId
+        )
+    )
+
+    document
+    .getElementById('listaTareas')
+
+    .innerHTML = misTareas.map(t=>`
+
+        <div class="item">
+
+            <b>
+                ${t.titulo}
+            </b>
+
+            <p style="margin-top:10px;">
+
+                ${t.descripcion}
+
+            </p>
+
+            <p style="margin-top:10px;">
+
+                📅 ${t.fechaEntrega}
+
+            </p>
+
+        </div>
+
+    `).join('')
+}
+
+function mostrar(id){
+
+    document
+    .getElementById('clases')
+    .style.display='none'
+
+    document
+    .getElementById('calificaciones')
+    .style.display='none'
+
+    document
+    .getElementById('tareas')
+    .style.display='none'
+
+    document
+    .getElementById(id)
+    .style.display='block'
+}
+
+function logout(){
+
+    localStorage.clear()
+
+    location.href='index.html'
+}
+
+cargarDatos()
+
+</script>
+
+</body>
+
+</html>
