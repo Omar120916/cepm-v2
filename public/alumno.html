@@ -306,7 +306,7 @@ async function cargarAlumno(){
     const alumno =
     alumnos.find(a=>
 
-        a._id == alumnoUser.alumnoId
+        a._id === usuario.id
     )
 
     document
