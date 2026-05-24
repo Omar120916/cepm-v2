@@ -306,7 +306,7 @@ async function cargarAlumno(){
     const alumno =
     alumnos.find(a=>
 
-        a._id===alumnoUser.alumnoId
+        a._id == alumnoUser.alumnoId
     )
 
     document
@@ -503,7 +503,9 @@ async function cargarAlumno(){
         `
     })
 
-    // 🔥 ASISTENCIAS
+    /*
+
+   // 🔥 ASISTENCIAS
 
     const asistencias =
     await fetch(
@@ -551,7 +553,8 @@ async function cargarAlumno(){
         </div>
         `
     })
-}
+        */
+}  
 
 function logout(){
 
