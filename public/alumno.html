@@ -49,6 +49,12 @@ body{
     color:white;
     font-size:16px;
     cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar button:hover{
+
+    background:#1d4ed8;
 }
 
 .main{
@@ -65,7 +71,45 @@ body{
     margin-bottom:20px;
 }
 
-.item{
+.materia{
+
+    background:#334155;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.promedio{
+
+    font-size:50px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.verde{
+
+    color:#22c55e;
+}
+
+.amarillo{
+
+    color:#eab308;
+}
+
+.rojo{
+
+    color:#ef4444;
+}
+
+.tarea{
+
+    background:#334155;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+.asistencia{
 
     background:#334155;
     padding:15px;
@@ -85,16 +129,20 @@ body{
         👨‍🎓 Alumno
     </h1>
 
-    <button onclick="mostrar('clases')">
-        📚 Mis clases
+    <button onclick="mostrar('inicio')">
+        🏠 Inicio
     </button>
 
-    <button onclick="mostrar('calificaciones')">
-        📝 Calificaciones
+    <button onclick="mostrar('materias')">
+        📚 Materias
     </button>
 
     <button onclick="mostrar('tareas')">
-        📚 Tareas
+        📝 Tareas
+    </button>
+
+    <button onclick="mostrar('asistencias')">
+        📅 Asistencias
     </button>
 
     <button onclick="logout()">
@@ -105,47 +153,68 @@ body{
 
 <div class="main">
 
-    <!-- CLASES -->
+    <!-- INICIO -->
 
-    <div id="clases" class="card">
+    <div id="inicio" class="card">
 
-        <h2>
-            📚 Mis clases
+        <h2 id="bienvenida">
+            Bienvenido
         </h2>
 
-        <div id="listaClases"></div>
+        <div
+            id="promedio"
+            class="promedio"
+        >
+            0
+        </div>
 
     </div>
 
-    <!-- CALIFICACIONES -->
+    <!-- MATERIAS -->
 
     <div
-    id="calificaciones"
-    class="card"
-    style="display:none;"
+        id="materias"
+        class="card"
+        style="display:none;"
     >
 
         <h2>
-            📝 Calificaciones
+            📚 Mis materias
         </h2>
 
-        <div id="listaCalificaciones"></div>
+        <div id="listaMaterias"></div>
 
     </div>
 
     <!-- TAREAS -->
 
     <div
-    id="tareas"
-    class="card"
-    style="display:none;"
+        id="tareas"
+        class="card"
+        style="display:none;"
     >
 
         <h2>
-            📚 Tareas
+            📝 Mis tareas
         </h2>
 
         <div id="listaTareas"></div>
+
+    </div>
+
+    <!-- ASISTENCIAS -->
+
+    <div
+        id="asistencias"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            📅 Mis asistencias
+        </h2>
+
+        <div id="listaAsistencias"></div>
 
     </div>
 
@@ -159,19 +228,96 @@ const API =
 const token =
 localStorage.getItem('token')
 
-const payload =
-JSON.parse(
+function mostrar(id){
 
-    atob(
+    const secciones = [
 
-        token.split('.')[1]
+        'inicio',
+
+        'materias',
+
+        'tareas',
+
+        'asistencias'
+    ]
+
+    secciones.forEach(sec=>{
+
+        document
+        .getElementById(sec)
+        .style.display='none'
+    })
+
+    document
+    .getElementById(id)
+    .style.display='block'
+}
+
+async function cargarAlumno(){
+
+    const usuario =
+    JSON.parse(
+
+        atob(
+
+            token.split('.')[1]
+        )
     )
-)
 
-const alumnoId =
-payload.id
+    // 🔥 USUARIOS
 
-async function cargarDatos(){
+    const usuarios =
+    await fetch(
+
+        `${API}/usuarios`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const alumnoUser =
+    usuarios.find(u=>
+
+        u.id===usuario.id ||
+
+        u._id===usuario.id
+    )
+
+    // 🔥 ALUMNOS
+
+    const alumnos =
+    await fetch(
+
+        `${API}/alumnos`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const alumno =
+    alumnos.find(a=>
+
+        a._id===alumnoUser.alumnoId
+    )
+
+    document
+    .getElementById('bienvenida')
+    .innerHTML = `
+
+    Bienvenido,
+    ${alumno.nombre}
+    😎🔥
+    `
 
     // 🔥 CLASES
 
@@ -189,6 +335,14 @@ async function cargarDatos(){
 
     ).then(r=>r.json())
 
+    const misClases =
+    clases.filter(c=>
+
+        c.alumnos.includes(
+            alumno._id
+        )
+    )
+
     // 🔥 CALIFICACIONES
 
     const calificaciones =
@@ -204,6 +358,97 @@ async function cargarDatos(){
         }
 
     ).then(r=>r.json())
+
+    const materiasDiv =
+    document.getElementById(
+        'listaMaterias'
+    )
+
+    materiasDiv.innerHTML=''
+
+    let suma = 0
+    let total = 0
+
+    for(const clase of misClases){
+
+        const calificacion =
+        calificaciones.find(c=>
+
+            c.claseId===clase._id &&
+
+            c.alumnoId===alumno._id
+        )
+
+        let textoCalificacion =
+        '⏳ Pendiente'
+
+        if(calificacion){
+
+            textoCalificacion =
+            `✅ ${calificacion.calificacion}`
+
+            suma += Number(
+                calificacion.calificacion
+            )
+
+            total++
+        }
+
+        materiasDiv.innerHTML += `
+
+        <div class="materia">
+
+            <h3>
+                📘 ${clase.grupo}
+            </h3>
+
+            <p style="margin-top:10px;">
+
+                ${textoCalificacion}
+
+            </p>
+
+        </div>
+        `
+    }
+
+    // 🔥 PROMEDIO
+
+    let promedio = 0
+
+    if(total>0){
+
+        promedio = (
+            suma / total
+        ).toFixed(1)
+    }
+
+    const promedioDiv =
+    document.getElementById(
+        'promedio'
+    )
+
+    promedioDiv.innerHTML =
+    promedio
+
+    if(promedio>=9){
+
+        promedioDiv.classList.add(
+            'verde'
+        )
+
+    }else if(promedio>=7){
+
+        promedioDiv.classList.add(
+            'amarillo'
+        )
+
+    }else{
+
+        promedioDiv.classList.add(
+            'rojo'
+        )
+    }
 
     // 🔥 TAREAS
 
@@ -221,56 +466,12 @@ async function cargarDatos(){
 
     ).then(r=>r.json())
 
-    // 🔥 MIS CLASES
-
-    const misClases =
-    clases.filter(c=>
-
-        c.alumnos.includes(
-            alumnoId
-        )
+    const tareasDiv =
+    document.getElementById(
+        'listaTareas'
     )
 
-    // 🔥 CLASES
-
-    document
-    .getElementById('listaClases')
-
-    .innerHTML = misClases.map(c=>`
-
-        <div class="item">
-
-            📘 ${c.grupo}
-
-        </div>
-
-    `).join('')
-
-    // 🔥 CALIFICACIONES
-
-    const misCalificaciones =
-    calificaciones.filter(c=>
-
-        c.alumnoId===alumnoId
-    )
-
-    document
-    .getElementById('listaCalificaciones')
-
-    .innerHTML = misCalificaciones.map(c=>`
-
-        <div class="item">
-
-            📝 Calificación:
-            <b>
-                ${c.calificacion}
-            </b>
-
-        </div>
-
-    `).join('')
-
-    // 🔥 TAREAS
+    tareasDiv.innerHTML=''
 
     const misTareas =
     tareas.filter(t=>
@@ -281,51 +482,76 @@ async function cargarDatos(){
         )
     )
 
-    document
-    .getElementById('listaTareas')
+    misTareas.forEach(t=>{
 
-    .innerHTML = misTareas.map(t=>`
+        tareasDiv.innerHTML += `
 
-        <div class="item">
+        <div class="tarea">
 
-            <b>
-                ${t.titulo}
-            </b>
+            <h3>
+                📝 ${t.titulo}
+            </h3>
 
             <p style="margin-top:10px;">
-
                 ${t.descripcion}
+            </p>
 
+            <p style="margin-top:10px;">
+                📅 ${t.fechaEntrega}
+            </p>
+
+        </div>
+        `
+    })
+
+    // 🔥 ASISTENCIAS
+
+    const asistencias =
+    await fetch(
+
+        `${API}/asistencia`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const misAsistencias =
+    asistencias.filter(a=>
+
+        a.alumnoId===alumno._id
+    )
+
+    const asistenciaDiv =
+    document.getElementById(
+        'listaAsistencias'
+    )
+
+    asistenciaDiv.innerHTML=''
+
+    misAsistencias.forEach(a=>{
+
+        asistenciaDiv.innerHTML += `
+
+        <div class="asistencia">
+
+            <p>
+                📅 ${a.fecha}
             </p>
 
             <p style="margin-top:10px;">
 
-                📅 ${t.fechaEntrega}
+                ${a.estado}
 
             </p>
 
         </div>
-
-    `).join('')
-}
-
-function mostrar(id){
-
-    document
-    .getElementById('clases')
-    .style.display='none'
-
-    document
-    .getElementById('calificaciones')
-    .style.display='none'
-
-    document
-    .getElementById('tareas')
-    .style.display='none'
-
-    document
-    .getElementById(id)
-    .style.display='block'
+        `
+    })
 }
 
 function logout(){
@@ -335,10 +561,9 @@ function logout(){
     location.href='index.html'
 }
 
-cargarDatos()
+cargarAlumno()
 
 </script>
 
 </body>
-
 </html>
