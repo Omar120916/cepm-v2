@@ -53,9 +53,10 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('public'))
 
+const path = require('path')
 app.use(
     '/uploads',
-    express.static('uploads')
+    express.static(__dirname + '/uploads')
 )
 
 // =====================
