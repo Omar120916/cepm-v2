@@ -9,6 +9,13 @@ const jwt = require('jsonwebtoken')
 
 const multer = require('multer')
 
+const fs = require('fs')
+
+if(!fs.existsSync('uploads')){
+
+    fs.mkdirSync('uploads')
+}
+
 const storage =
 multer.diskStorage({
 
