@@ -5,15 +5,24 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
-
 const multer = require('multer')
 const fs = require('fs')
+const path = require('path')
+
+const app = express()
+
+// =====================
+// 📁 CREAR CARPETA UPLOADS
+// =====================
 
 if(!fs.existsSync('uploads')){
 
     fs.mkdirSync('uploads')
 }
+
+// =====================
+// 📤 MULTER
+// =====================
 
 const storage =
 multer.diskStorage({
@@ -30,10 +39,8 @@ multer.diskStorage({
             null,
 
             Date.now() +
-
-            path.extname(
-                file.originalname
-            )
+            '-' +
+            file.originalname
         )
     }
 })
@@ -44,45 +51,48 @@ multer({
     storage
 })
 
-const app = express()
-
 // =====================
 // 🔥 MIDDLEWARES
 // =====================
 
 app.use(cors())
+
 app.use(express.json())
+
 app.use(express.static('public'))
 
-const path = require('path')
 app.use(
+
     '/uploads',
-    express.static(__dirname + '/uploads')
+
+    express.static(
+
+        path.join(__dirname,'uploads')
+    )
 )
 
 // =====================
 // 🔥 MONGODB
 // =====================
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(
 
-.then(()=>{
+    process.env.MONGO_URI
+
+).then(()=>{
 
     console.log('Mongo conectado 🔥')
 
-})
-
-.catch(err=>{
+}).catch(err=>{
 
     console.log(err)
-
 })
 
 // =====================
 // 📦 MODELOS
 // =====================
 
-const Usuario = mongoose.model('Usuario', {
+const Usuario = mongoose.model('Usuario',{
 
     nombre:String,
 
@@ -97,25 +107,25 @@ const Usuario = mongoose.model('Usuario', {
     edad:String,
 
     alumnoId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     hijos:[
         mongoose.Schema.Types.ObjectId
     ]
 })
 
-const Materia = mongoose.model('Materia', {
+const Materia = mongoose.model('Materia',{
 
     nombre:String
 })
 
-const Clase = mongoose.model('Clase', {
+const Clase = mongoose.model('Clase',{
 
     materiaId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     maestroId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     grupo:String,
 
@@ -134,10 +144,10 @@ const Clase = mongoose.model('Clase', {
     ]
 })
 
-const Tarea = mongoose.model('Tarea', {
+const Tarea = mongoose.model('Tarea',{
 
     claseId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     titulo:String,
 
@@ -149,10 +159,10 @@ const Tarea = mongoose.model('Tarea', {
 const Asistencia = mongoose.model('Asistencia',{
 
     claseId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     alumnoId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     fecha:String,
 
@@ -162,10 +172,10 @@ const Asistencia = mongoose.model('Asistencia',{
 const Calificacion = mongoose.model('Calificacion',{
 
     claseId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     alumnoId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     parcial:Number,
 
@@ -177,10 +187,10 @@ const Calificacion = mongoose.model('Calificacion',{
 const Entrega = mongoose.model('Entrega',{
 
     tareaId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     alumnoId:
-        mongoose.Schema.Types.ObjectId,
+    mongoose.Schema.Types.ObjectId,
 
     archivo:String,
 
@@ -190,7 +200,7 @@ const Entrega = mongoose.model('Entrega',{
 })
 
 // =====================
-// 🔐 JWT
+// 🔐 TOKEN
 // =====================
 
 function verificarToken(req,res,next){
@@ -507,82 +517,6 @@ async(req,res)=>{
 })
 
 // =====================
-// 👨‍🏫👨‍👩‍👧 REGISTRO
-// =====================
-
-app.post('/registro',
-
-verificarToken,
-
-async(req,res)=>{
-
-    const {
-
-        nombre,
-
-        usuario,
-
-        password,
-
-        rol,
-
-        email,
-
-        edad,
-
-        hijos
-
-    } = req.body
-
-    const existe =
-    await Usuario.findOne({
-
-        usuario
-    })
-
-    if(existe){
-
-        return res.status(400).json({
-
-            mensaje:'Usuario ya existe'
-        })
-    }
-
-    const hash =
-    await bcrypt.hash(
-
-        password,
-
-        10
-    )
-
-    const nuevo =
-    new Usuario({
-
-        nombre,
-
-        usuario,
-
-        password:hash,
-
-        rol,
-
-        email,
-
-        edad,
-
-        hijos
-    })
-
-    await nuevo.save()
-
-    res.json({
-
-        mensaje:'Usuario creado 🔥'
-    })
-})
-
-// =====================
 // 📚 CREAR MATERIA
 // =====================
 
@@ -632,44 +566,24 @@ verificarToken,
 
 async(req,res)=>{
 
-    const {
-
-        materiaId,
-
-        maestroId,
-
-        grupo,
-
-        horario,
-
-        aula,
-
-        fechaInicio,
-
-        duracion,
-
-        fechaFin
-
-    } = req.body
-
     const nueva =
     new Clase({
 
-        materiaId,
+        materiaId:req.body.materiaId,
 
-        maestroId,
+        maestroId:req.body.maestroId,
 
-        grupo,
+        grupo:req.body.grupo,
 
-        horario,
+        horario:req.body.horario,
 
-        aula,
+        aula:req.body.aula,
 
-        fechaInicio,
+        fechaInicio:req.body.fechaInicio,
 
-        duracion,
+        duracion:req.body.duracion,
 
-        fechaFin,
+        fechaFin:req.body.fechaFin,
 
         alumnos:[]
     })
@@ -699,7 +613,7 @@ async(req,res)=>{
 })
 
 // =====================
-// 👨‍🎓 AGREGAR ALUMNOS A CLASE
+// 👨‍🎓 AGREGAR ALUMNOS
 // =====================
 
 app.put('/clases/:id/alumnos',
@@ -708,22 +622,17 @@ verificarToken,
 
 async(req,res)=>{
 
-    const claseId =
-    req.params.id
-
-    const alumnos =
-    req.body.alumnos
-
     await Clase.findByIdAndUpdate(
 
-        claseId,
+        req.params.id,
 
         {
 
             $addToSet:{
 
                 alumnos:{
-                    $each: alumnos
+
+                    $each:req.body.alumnos
                 }
             }
         }
@@ -736,7 +645,7 @@ async(req,res)=>{
 })
 
 // =====================
-// 📝 GUARDAR CALIFICACION
+// 📝 CALIFICACIONES
 // =====================
 
 app.post('/calificaciones',
@@ -745,26 +654,14 @@ verificarToken,
 
 async(req,res)=>{
 
-    const {
-
-        claseId,
-
-        alumnoId,
-
-        parcial,
-
-        calificacion
-
-    } = req.body
-
     const existe =
     await Calificacion.findOne({
 
-        claseId,
+        claseId:req.body.claseId,
 
-        alumnoId,
+        alumnoId:req.body.alumnoId,
 
-        parcial
+        parcial:req.body.parcial
     })
 
     if(existe){
@@ -778,13 +675,13 @@ async(req,res)=>{
     const nueva =
     new Calificacion({
 
-        claseId,
+        claseId:req.body.claseId,
 
-        alumnoId,
+        alumnoId:req.body.alumnoId,
 
-        parcial,
+        parcial:req.body.parcial,
 
-        calificacion,
+        calificacion:req.body.calificacion,
 
         bloqueada:true
     })
@@ -796,10 +693,6 @@ async(req,res)=>{
         mensaje:'Calificación guardada 🔥'
     })
 })
-
-// =====================
-// 📖 VER CALIFICACIONES
-// =====================
 
 app.get('/calificaciones',
 
@@ -814,7 +707,7 @@ async(req,res)=>{
 })
 
 // =====================
-// 📝 CREAR TAREA
+// 📚 TAREAS
 // =====================
 
 app.post('/tareas',
@@ -843,10 +736,6 @@ async(req,res)=>{
     })
 })
 
-// =====================
-// 📝 VER TAREAS
-// =====================
-
 app.get('/tareas',
 
 verificarToken,
@@ -859,6 +748,10 @@ async(req,res)=>{
     res.json(tareas)
 })
 
+// =====================
+// 📤 ENTREGAR TAREA
+// =====================
+
 app.post(
 
     '/entregas',
@@ -869,62 +762,88 @@ app.post(
 
     async(req,res)=>{
 
-        const {
+        try{
 
-            tareaId,
+            const {
 
-            alumnoId
+                tareaId,
 
-        } = req.body
+                alumnoId
 
-        const tarea =
-        await Tarea.findById(
-            tareaId
-        )
+            } = req.body
 
-        const fechaActual =
-        new Date()
+            const tarea =
+            await Tarea.findById(
+                tareaId
+            )
 
-        const fechaLimite =
-        new Date(
-            tarea.fechaEntrega
-        )
+            if(!tarea){
 
-        // 🔥 BLOQUEAR TARDE
+                return res.status(404).json({
 
-        if(fechaActual > fechaLimite){
+                    mensaje:'Tarea no encontrada'
+                })
+            }
 
-            return res.status(400).json({
+            const fechaActual =
+            new Date()
+
+            const fechaLimite =
+            new Date(
+                tarea.fechaEntrega
+            )
+
+            if(fechaActual > fechaLimite){
+
+                return res.status(400).json({
+
+                    mensaje:
+                    'Se te pasó la fecha 😭'
+                })
+            }
+
+            if(!req.file){
+
+                return res.status(400).json({
+
+                    mensaje:
+                    'Archivo requerido'
+                })
+            }
+
+            const nueva =
+            new Entrega({
+
+                tareaId,
+
+                alumnoId,
+
+                archivo:req.file.filename,
+
+                fechaEntrega:
+                fechaActual,
+
+                tarde:false
+            })
+
+            await nueva.save()
+
+            res.json({
 
                 mensaje:
-                'Se te pasó la fecha 😭'
+                'Tarea entregada 🔥'
+            })
+
+        }catch(err){
+
+            console.log(err)
+
+            res.status(500).json({
+
+                mensaje:'Error servidor'
             })
         }
-
-        const nueva =
-        new Entrega({
-
-            tareaId,
-
-            alumnoId,
-
-            archivo:req.file.filename,
-
-            fechaEntrega:
-            fechaActual,
-
-            tarde:false
-        })
-
-        await nueva.save()
-
-        res.json({
-
-            mensaje:
-            'Tarea entregada 🔥'
-        })
 })
-
 
 // =====================
 // 📥 VER ENTREGAS
@@ -948,7 +867,7 @@ app.get(
 })
 
 // =====================
-// 📅 GUARDAR ASISTENCIA
+// 📅 ASISTENCIAS
 // =====================
 
 app.post('/asistencia',
@@ -957,26 +876,14 @@ verificarToken,
 
 async(req,res)=>{
 
-    const {
-
-        claseId,
-
-        alumnoId,
-
-        fecha,
-
-        estado
-
-    } = req.body
-
     const existe =
     await Asistencia.findOne({
 
-        claseId,
+        claseId:req.body.claseId,
 
-        alumnoId,
+        alumnoId:req.body.alumnoId,
 
-        fecha
+        fecha:req.body.fecha
     })
 
     if(existe){
@@ -990,13 +897,13 @@ async(req,res)=>{
     const nueva =
     new Asistencia({
 
-        claseId,
+        claseId:req.body.claseId,
 
-        alumnoId,
+        alumnoId:req.body.alumnoId,
 
-        fecha,
+        fecha:req.body.fecha,
 
-        estado
+        estado:req.body.estado
     })
 
     await nueva.save()
@@ -1006,10 +913,6 @@ async(req,res)=>{
         mensaje:'Asistencia guardada 🔥'
     })
 })
-
-// =====================
-// 📅 VER ASISTENCIAS
-// =====================
 
 app.get('/asistencia/:claseId',
 
