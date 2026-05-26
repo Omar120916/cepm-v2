@@ -342,6 +342,22 @@ async function cargarAlumno(){
         )
     )
 
+    // 🔥 MATERIAS
+
+const materias =
+await fetch(
+
+    `${API}/materias`,
+
+    {
+
+        headers:{
+            Authorization:token
+        }
+    }
+
+).then(r=>r.json())
+
     // 🔥 CALIFICACIONES
 
     const calificaciones =
@@ -397,17 +413,31 @@ async function cargarAlumno(){
 
         <div class="materia">
 
-            <h3>
-                📘 ${clase.grupo}
-            </h3>
+    <h3>
 
-            <p style="margin-top:10px;">
+        📘 ${
+            materias.find(m=>
 
-                ${textoCalificacion}
+                m._id===clase.materiaId
+            )?.nombre || 'Materia'
+        }
 
-            </p>
+    </h3>
 
-        </div>
+    <p style="margin-top:10px;">
+
+        👥 Grupo:
+        ${clase.grupo}
+
+    </p>
+
+    <p style="margin-top:10px;">
+
+        ${textoCalificacion}
+
+    </p>
+
+</div>
         `
     }
 
