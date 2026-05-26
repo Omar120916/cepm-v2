@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken')
 
 
 const multer = require('multer')
-
 const fs = require('fs')
+const path = require('path')
 
 if(!fs.existsSync('uploads')){
 
@@ -31,8 +31,10 @@ multer.diskStorage({
             null,
 
             Date.now() +
-            '-' +
-            file.originalname
+
+            path.extname(
+                file.originalname
+            )
         )
     }
 })
