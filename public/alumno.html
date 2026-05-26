@@ -358,12 +358,12 @@ await fetch(
 
 ).then(r=>r.json())
 
-    // 🔥 CALIFICACIONES
+    // 🔥 CACIONES
 
-    const calificaciones =
+    const caciones =
     await fetch(
 
-        `${API}/calificaciones`,
+        `${API}/caciones`,
 
         {
 
@@ -386,24 +386,24 @@ await fetch(
 
     for(const clase of misClases){
 
-        const calificacion =
-        calificaciones.find(c=>
+        const cacion =
+        caciones.find(c=>
 
             c.claseId===clase._id &&
 
             c.alumnoId===alumno._id
         )
 
-        let textoCalificacion =
+        let textocacion =
         '⏳ Pendiente'
 
-        if(calificacion){
+        if(cacion){
 
-            textoCalificacion =
-            `✅ ${calificacion.calificacion}`
+            textocacion =
+            `✅ ${cacion.cacion}`
 
             suma += Number(
-                calificacion.calificacion
+                cacion.cacion
             )
 
             total++
@@ -433,7 +433,7 @@ await fetch(
 
     <p style="margin-top:10px;">
 
-        ${textoCalificacion}
+        ${textocacion}
 
     </p>
 

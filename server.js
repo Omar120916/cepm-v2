@@ -923,6 +923,28 @@ app.post(
         })
 })
 
+
+// =====================
+// 📥 VER ENTREGAS
+// =====================
+
+app.get(
+
+    '/entregas/:tareaId',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        const entregas =
+        await Entrega.find({
+
+            tareaId:req.params.tareaId
+        })
+
+        res.json(entregas)
+})
+
 // =====================
 // 📅 GUARDAR ASISTENCIA
 // =====================
