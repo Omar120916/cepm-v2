@@ -6,6 +6,36 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
+const multer = require('multer')
+
+const storage =
+multer.diskStorage({
+
+    destination:(req,file,cb)=>{
+
+        cb(null,'uploads/')
+    },
+
+    filename:(req,file,cb)=>{
+
+        cb(
+
+            null,
+
+            Date.now() +
+            '-' +
+            file.originalname
+        )
+    }
+})
+
+const upload =
+multer({
+
+    storage
+})
+
 const app = express()
 
 // =====================
@@ -15,6 +45,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.static('public'))
+
+app.use(
+    '/uploads',
+    express.static('uploads')
+)
 
 // =====================
 // 🔥 MONGODB
@@ -128,6 +163,21 @@ const Calificacion = mongoose.model('Calificacion',{
     calificacion:Number,
 
     bloqueada:Boolean
+})
+
+const Entrega = mongoose.model('Entrega',{
+
+    tareaId:
+        mongoose.Schema.Types.ObjectId,
+
+    alumnoId:
+        mongoose.Schema.Types.ObjectId,
+
+    archivo:String,
+
+    fechaEntrega:String,
+
+    tarde:Boolean
 })
 
 // =====================
@@ -798,6 +848,72 @@ async(req,res)=>{
     await Tarea.find()
 
     res.json(tareas)
+})
+
+app.post(
+
+    '/entregas',
+
+    verificarToken,
+
+    upload.single('archivo'),
+
+    async(req,res)=>{
+
+        const {
+
+            tareaId,
+
+            alumnoId
+
+        } = req.body
+
+        const tarea =
+        await Tarea.findById(
+            tareaId
+        )
+
+        const fechaActual =
+        new Date()
+
+        const fechaLimite =
+        new Date(
+            tarea.fechaEntrega
+        )
+
+        // 🔥 BLOQUEAR TARDE
+
+        if(fechaActual > fechaLimite){
+
+            return res.status(400).json({
+
+                mensaje:
+                'Se te pasó la fecha 😭'
+            })
+        }
+
+        const nueva =
+        new Entrega({
+
+            tareaId,
+
+            alumnoId,
+
+            archivo:req.file.filename,
+
+            fechaEntrega:
+            fechaActual,
+
+            tarde:false
+        })
+
+        await nueva.save()
+
+        res.json({
+
+            mensaje:
+            'Tarea entregada 🔥'
+        })
 })
 
 // =====================

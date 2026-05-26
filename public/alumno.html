@@ -513,25 +513,52 @@ await fetch(
 
     misTareas.forEach(t=>{
 
-        tareasDiv.innerHTML += `
+    tareasDiv.innerHTML += `
 
-        <div class="tarea">
+    <div class="tarea">
 
-            <h3>
-                📝 ${t.titulo}
-            </h3>
+        <h3>
+            📝 ${t.titulo}
+        </h3>
 
-            <p style="margin-top:10px;">
-                ${t.descripcion}
-            </p>
+        <p style="margin-top:10px;">
+            ${t.descripcion}
+        </p>
 
-            <p style="margin-top:10px;">
-                📅 ${t.fechaEntrega}
-            </p>
+        <p style="margin-top:10px;">
+            📅 ${t.fechaEntrega}
+        </p>
 
-        </div>
-        `
-    })
+        <input
+            type="file"
+            id="archivo-${t._id}"
+            style="
+                margin-top:15px;
+            "
+        >
+
+        <button
+
+            class="action"
+
+            style="
+                margin-top:10px;
+            "
+
+            onclick="
+            subirTarea(
+                '${t._id}'
+            )
+            "
+        >
+
+            📤 Subir tarea
+
+        </button>
+
+    </div>
+    `
+})
 
     /*
 
@@ -585,6 +612,78 @@ await fetch(
     })
         */
 }  
+
+async function subirTarea(
+
+    tareaId
+
+){
+
+    const usuario =
+    JSON.parse(
+
+        atob(
+
+            token.split('.')[1]
+        )
+    )
+
+    const archivo =
+    document.getElementById(
+
+        `archivo-${tareaId}`
+
+    ).files[0]
+
+    if(!archivo){
+
+        alert(
+            'Selecciona un archivo 😭'
+        )
+
+        return
+    }
+
+    const formData =
+    new FormData()
+
+    formData.append(
+        'archivo',
+        archivo
+    )
+
+    formData.append(
+        'tareaId',
+        tareaId
+    )
+
+    formData.append(
+        'alumnoId',
+        usuario.id
+    )
+
+    const res =
+    await fetch(
+
+        `${API}/entregas`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+                Authorization:token
+            },
+
+            body:formData
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+}
 
 function logout(){
 
