@@ -117,6 +117,16 @@ body{
     margin-top:10px;
 }
 
+.action{
+
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
 </style>
 
 </head>
@@ -358,9 +368,9 @@ await fetch(
 
 ).then(r=>r.json())
 
-    // 🔥 CACIONES
+    // 🔥 CALIFICACIONES
 
-    const caciones =
+    const calificaciones =
     await fetch(
 
         `${API}/calificaciones`,
@@ -386,24 +396,24 @@ await fetch(
 
     for(const clase of misClases){
 
-        const cacion =
-        caciones.find(c=>
+        const calificacion =
+        calificaciones.find(c=>
 
             c.claseId===clase._id &&
 
             c.alumnoId===alumno._id
         )
 
-        let textocacion =
+        let textoCalificacion =
         '⏳ Pendiente'
 
-        if(cacion){
+        if(calificacion){
 
-            textocacion =
-            `✅ ${cacion.cacion}`
+            textoCalificacion =
+            `✅ ${calificacion.calificacion}`
 
             suma += Number(
-                cacion.cacion
+                calificacion.calificacion
             )
 
             total++
@@ -413,31 +423,31 @@ await fetch(
 
         <div class="materia">
 
-    <h3>
+            <h3>
 
-        📘 ${
-            materias.find(m=>
+                📘 ${
+                    materias.find(m=>
 
-                m._id===clase.materiaId
-            )?.nombre || 'Materia'
-        }
+                        m._id===clase.materiaId
+                    )?.nombre || 'Materia'
+                }
 
-    </h3>
+            </h3>
 
-    <p style="margin-top:10px;">
+            <p style="margin-top:10px;">
 
-        👥 Grupo:
-        ${clase.grupo}
+                👥 Grupo:
+                ${clase.grupo}
 
-    </p>
+            </p>
 
-    <p style="margin-top:10px;">
+            <p style="margin-top:10px;">
 
-        ${textocacion}
+                ${textoCalificacion}
 
-    </p>
+            </p>
 
-</div>
+        </div>
         `
     }
 
