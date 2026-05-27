@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
+const { type } = require('os')
 
 const app = express()
 
@@ -196,7 +197,18 @@ const Entrega = mongoose.model('Entrega',{
 
     fechaEntrega:String,
 
-    tarde:Boolean
+    tarde:Boolean,
+
+    calificacion:{
+        type: Number,
+        default:null
+
+    },
+
+    revisada:{
+        type:Boolean,
+        default:false
+    }
 })
 
 // =====================
@@ -864,6 +876,39 @@ app.get(
         })
 
         res.json(entregas)
+})
+
+app.put(
+
+    '/entregas/:id/calificar',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        const {
+
+            calificacion
+
+        } = req.body
+
+        await Entrega.findByIdAndUpdate(
+
+            req.params.id,
+
+            {
+
+                calificacion,
+
+                revisada:true
+            }
+        )
+
+        res.json({
+
+            mensaje:
+            'Tarea calificada 🔥'
+        })
 })
 
 // =====================

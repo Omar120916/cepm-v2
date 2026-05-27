@@ -527,7 +527,27 @@ console.log(tareas)
         )
     )
 
-    misTareas.forEach(t=>{
+misTareas.forEach(async t=>{
+
+    const entregas =
+    await fetch(
+
+        `${API}/entregas/${t._id}`,
+
+        {
+
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const miEntrega =
+    entregas.find(e=>
+
+        e.alumnoId===usuario.id
+    )
 
     tareasDiv.innerHTML += `
 
@@ -545,32 +565,85 @@ console.log(tareas)
             📅 ${t.fechaEntrega}
         </p>
 
-        <input
-            type="file"
-            id="archivo-${t._id}"
-            style="
-                margin-top:15px;
-            "
-        >
+        ${
+miEntrega
 
-        <button
+?
 
-            class="action"
+`
 
-            style="
-                margin-top:10px;
-            "
+<p style="margin-top:15px;color:#22c55e;">
 
-            onclick="
-            subirTarea(
-                '${t._id}'
-            )
-            "
-        >
+    ✅ Tu tarea ya fue entregada
 
-            📤 Subir tarea
+</p>
 
-        </button>
+${
+miEntrega.revisada
+
+?
+
+`
+
+<p style="margin-top:10px;">
+
+    📝 Calificación:
+    <b>
+        ${miEntrega.calificacion}
+    </b>
+
+</p>
+
+`
+
+:
+
+`
+
+<p style="margin-top:10px;color:#facc15;">
+
+    ⏳ Pendiente de revisar
+
+</p>
+
+`
+}
+
+`
+
+:
+
+`
+
+<input
+    type="file"
+    id="archivo-${t._id}"
+    style="
+        margin-top:15px;
+    "
+>
+
+<button
+
+    class="action"
+
+    style="
+        margin-top:10px;
+    "
+
+    onclick="
+    subirTarea(
+        '${t._id}'
+    )
+    "
+>
+
+    📤 Subir tarea
+
+</button>
+
+`
+}
 
     </div>
     `

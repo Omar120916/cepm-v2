@@ -812,34 +812,111 @@ async function verEntregas(
         return
     }
 
-    entregas.forEach(e=>{
+        entregas.forEach(e=>{
 
-        div.innerHTML += `
+            div.innerHTML += `
 
-        <div class="alumno">
+            <div class="alumno">
 
-            <p>
-                📄 ${e.archivo}
-            </p>
+                <p>
+                    📄 ${e.archivo}
+                </p>
 
-            <a
+                <a
 
-                href="${API}/uploads/${e.archivo}"
+                    href="${API}/uploads/${e.archivo}"
 
-                target="_blank"
+                    target="_blank"
 
-                style="
-                    color:#38bdf8;
-                "
-            >
+                    style="
+                        color:#38bdf8;
+                    "
+                >
 
-                📂 Abrir archivo
+                    Abrir archivo
 
-            </a>
+                </a>
 
-        </div>
-        `
-    })
+                <input
+
+                    type="number"
+
+                    id="cal-${e._id}"
+
+                    placeholder="Calificación"
+
+                    style="
+                        margin-top:10px;
+                        width:100%;
+                        padding:10px;
+                    "
+                >
+
+                <button
+
+                    class="action"
+
+                    style="
+                        margin-top:10px;
+                    "
+
+                    onclick="
+                    calificarEntrega(
+                        '${e._id}'
+                    )
+                    "
+                >
+
+                    ✅ Calificar
+
+                </button>
+
+            </div>
+            `
+        })
+}
+
+async function calificarEntrega(
+
+    entregaId
+
+){
+
+    const calificacion =
+    document.getElementById(
+
+        `cal-${entregaId}`
+
+    ).value
+
+    const res =
+    await fetch(
+
+        `${API}/entregas/${entregaId}/calificar`,
+
+        {
+
+            method:'PUT',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
+
+                calificacion
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
 }
 
 function logout(){
