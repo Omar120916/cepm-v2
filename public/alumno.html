@@ -481,19 +481,25 @@ await fetch(
 
     // 🔥 TAREAS
 
-    const tareas =
-    await fetch(
+    const resTareas =
+await fetch(
 
-        `${API}/tareas`,
+    `${API}/tareas`,
 
-        {
+    {
 
-            headers:{
-                Authorization:token
-            }
+        headers:{
+            Authorization:token
         }
+    }
+)
 
-    ).then(r=>r.json())
+console.log(resTareas)
+
+const tareas =
+await resTareas.json()
+
+console.log(tareas)
 
     const tareasDiv =
     document.getElementById(
