@@ -84,6 +84,10 @@ mongoose.connect(
 
     console.log('Mongo conectado 🔥')
 
+    console.log(
+        process.env.MONGO_URI
+    )
+
 }).catch(err=>{
 
     console.log(err)
