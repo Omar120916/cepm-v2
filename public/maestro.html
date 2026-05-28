@@ -812,68 +812,97 @@ async function verEntregas(
         return
     }
 
-        entregas.forEach(e=>{
+entregas.forEach(e=>{
 
-            div.innerHTML += `
+    div.innerHTML += `
 
-            <div class="alumno">
+    <div class="alumno">
 
-                <p>
-                    📄 ${e.archivo}
-                </p>
+        <p>
+            📄 ${e.archivo}
+        </p>
 
-                <a
+        <a
+            href="${API}/uploads/${e.archivo}"
+            target="_blank"
+            style="color:#38bdf8;"
+        >
+            Abrir archivo
+        </a>
 
-                    href="${API}/uploads/${e.archivo}"
+        ${
+            e.revisada
 
-                    target="_blank"
+            ?
 
-                    style="
-                        color:#38bdf8;
-                    "
-                >
-
-                    Abrir archivo
-
-                </a>
-
-                <input
-
-                    type="number"
-
-                    id="cal-${e._id}"
-
-                    placeholder="Calificación"
-
-                    style="
-                        margin-top:10px;
-                        width:100%;
-                        padding:10px;
-                    "
-                >
-
-                <button
-
-                    class="action"
-
-                    style="
-                        margin-top:10px;
-                    "
-
-                    onclick="
-                    calificarEntrega(
-                        '${e._id}'
-                    )
-                    "
-                >
-
-                    ✅ Calificar
-
-                </button>
-
-            </div>
             `
-        })
+
+            <p style="
+                margin-top:15px;
+                color:#22c55e;
+                font-weight:bold;
+            ">
+
+                ✅ Tarea calificada
+
+            </p>
+
+            <p style="
+                margin-top:10px;
+                font-size:18px;
+            ">
+
+                📝 Calificación:
+                <b>${e.calificacion}</b>
+
+            </p>
+
+            `
+
+            :
+
+            `
+
+            <input
+
+                type="number"
+
+                id="cal-${e._id}"
+
+                placeholder="Calificación"
+
+                style="
+                    margin-top:10px;
+                    width:100%;
+                    padding:10px;
+                "
+            >
+
+            <button
+
+                class="action"
+
+                style="
+                    margin-top:10px;
+                "
+
+                onclick="
+                calificarEntrega(
+                    '${e._id}'
+                )
+                "
+            >
+
+                ✅ Calificar
+
+            </button>
+
+            `
+        }
+
+    </div>
+    `
+})
 }
 
 async function calificarEntrega(
