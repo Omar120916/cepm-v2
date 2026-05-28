@@ -219,6 +219,24 @@ async function cargarClases(){
 
     ).then(r=>r.json())
 
+
+    // MATERIAS
+
+
+    const materias =
+await fetch(
+
+    `${API}/materias`,
+
+    {
+
+        headers:{
+            Authorization:token
+        }
+    }
+
+).then(r=>r.json())
+
     // 🔥 TOKEN
 
     const maestro =
@@ -267,13 +285,21 @@ async function cargarClases(){
 
         <div class="card">
 
-            <h3>
-                📘 ${clase.grupo}
-            </h3>
+          <h3>
+    📘 ${
+        materias.find(
+            m => m._id === clase.materiaId
+        )?.nombre || 'Materia'
+    }
+</h3>
 
-            <p style="margin-top:10px;">
-                👨‍🎓 ${alumnosClase.length} alumnos
-            </p>
+<p style="margin-top:10px;">
+    👥 Grupo: ${clase.grupo}
+</p>
+
+<p style="margin-top:10px;">
+    🏆 ${alumnosClase.length} alumnos
+</p>
 
             <!-- BOTONES -->
 
