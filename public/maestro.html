@@ -581,6 +581,49 @@ await fetch(
 
                     </button>
 
+                    <button
+
+                        class="action"
+
+                        style="
+                            margin-top:10px;
+                            background:#ef4444;
+                        "
+
+                        onclick="
+                        eliminarTarea(
+                            '${t._id}'
+                        )
+                        "
+                    >
+
+                        🗑️ Eliminar tarea
+
+                    </button>
+
+                    <button
+
+                    class="action"
+
+                    style="
+                        margin-top:10px;
+                        background:#3b82f6;
+                    "
+
+                    onclick="
+                    editarTarea(
+                        '${t._id}',
+                        '${t.titulo}',
+                        '${t.descripcion}',
+                        '${t.fechaEntrega}'
+                    )
+                    "
+                >
+
+                    ✏️ Editar tarea
+
+                </button>
+
                 </div>
 
                 `).join('')}
@@ -770,6 +813,121 @@ async function crearTarea(
             body:JSON.stringify({
 
                 claseId,
+
+                titulo,
+
+                descripcion,
+
+                fechaEntrega
+            })
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarClases()
+}
+
+async function eliminarTarea(
+
+    tareaId
+
+){
+
+    if(
+
+        !confirm(
+            '¿Eliminar tarea?'
+        )
+
+    ) return
+
+    const res =
+    await fetch(
+
+        `${API}/tareas/${tareaId}`,
+
+        {
+
+            method:'DELETE',
+
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const data =
+    await res.json()
+
+    alert(data.mensaje)
+
+    cargarClases()
+}
+
+    async function editarTarea(
+
+    tareaId,
+
+    tituloActual,
+
+    descripcionActual,
+
+    fechaActual
+
+){
+
+    const titulo =
+    prompt(
+
+        'Título',
+
+        tituloActual
+    )
+
+    if(!titulo) return
+
+    const descripcion =
+    prompt(
+
+        'Descripción',
+
+        descripcionActual
+    )
+
+    if(!descripcion) return
+
+    const fechaEntrega =
+    prompt(
+
+        'Fecha',
+
+        fechaActual
+    )
+
+    if(!fechaEntrega) return
+
+    const res =
+    await fetch(
+
+        `${API}/tareas/${tareaId}`,
+
+        {
+
+            method:'PUT',
+
+            headers:{
+
+                'Content-Type':
+                'application/json',
+
+                Authorization:token
+            },
+
+            body:JSON.stringify({
 
                 titulo,
 

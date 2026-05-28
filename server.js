@@ -764,6 +764,65 @@ async(req,res)=>{
     res.json(tareas)
 })
 
+app.delete(
+
+    '/tareas/:id',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        await Tarea.findByIdAndDelete(
+
+            req.params.id
+        )
+
+        res.json({
+
+            mensaje:
+            'Tarea eliminada 🔥'
+        })
+})
+
+app.put(
+
+    '/tareas/:id',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        const {
+
+            titulo,
+
+            descripcion,
+
+            fechaEntrega
+
+        } = req.body
+
+        await Tarea.findByIdAndUpdate(
+
+            req.params.id,
+
+            {
+
+                titulo,
+
+                descripcion,
+
+                fechaEntrega
+            }
+        )
+
+        res.json({
+
+            mensaje:
+            'Tarea actualizada 🔥'
+        })
+})
+
 // =====================
 // 📤 ENTREGAR TAREA
 // =====================
