@@ -134,6 +134,18 @@ a{
             📚 Mis clases
         </h2>
 
+            <div
+    id="pendientes"
+    class="card"
+    style="
+        margin-bottom:20px;
+        background:#f59e0b;
+        color:white;
+    "
+>
+    🔔 Tareas pendientes por revisar: 0
+</div>
+
         <div id="listaClases"></div>
 
         <div
@@ -237,6 +249,29 @@ await fetch(
 
 ).then(r=>r.json())
 
+
+// 🔥 ENTREGAS
+
+const entregas =
+await fetch(
+
+    `${API}/entregas`,
+
+    {
+
+        headers:{
+            Authorization:token
+        }
+    }
+
+).then(r=>r.json())
+
+const pendientes =
+entregas.filter(e=>
+
+    !e.revisada
+).length
+
     // 🔥 TOKEN
 
     const maestro =
@@ -260,6 +295,12 @@ await fetch(
     document.getElementById(
         'listaClases'
     )
+
+        document.getElementById(
+        'pendientes'
+    ).innerHTML =
+
+    `🔔 Tareas pendientes por revisar: ${pendientes}`
 
     contenedor.innerHTML=''
 

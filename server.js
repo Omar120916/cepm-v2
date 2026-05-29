@@ -921,6 +921,25 @@ app.post(
 })
 
 // =====================
+// 📥 VER TODAS LAS ENTREGAS
+// =====================
+
+app.get(
+
+    '/entregas',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        const entregas =
+        await Entrega.find()
+
+        res.json(entregas)
+    }
+)
+
+// =====================
 // 📥 VER ENTREGAS
 // =====================
 
