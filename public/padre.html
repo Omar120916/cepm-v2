@@ -125,12 +125,17 @@ ${hijos.map(h=>`
 
 <div class="hijo">
 
-<b>${h.nombre}</b>
+    <b>${h.nombre}</b>
 
-<br>
+    <br>
 
-Usuario:
-${h.usuario}
+    Usuario: ${h.usuario}
+
+    <div
+    id="calificaciones-${h._id}"
+    style="margin-top:15px;"
+    >
+    </div>
 
 </div>
 
@@ -139,6 +144,67 @@ ${h.usuario}
 </div>
 
 `
+
+const calificaciones =
+await fetch(
+
+`${API}/calificaciones`,
+
+{
+headers:{
+Authorization:token
+}
+}
+
+).then(r=>r.json())
+
+hijos.forEach(h=>{
+
+    const calHijo =
+    calificaciones.filter(c=>
+
+        c.alumnoId===h._id
+    )
+
+    document.getElementById(
+
+        `calificaciones-${h._id}`
+
+    ).innerHTML =
+
+    `
+    <h4>
+        📝 Calificaciones
+    </h4>
+
+    ${calHijo.length===0 ?
+
+    'Sin calificaciones'
+
+    :
+
+    calHijo.map(c=>`
+
+        <div
+        style="
+        background:#475569;
+        padding:10px;
+        border-radius:10px;
+        margin-top:8px;
+        "
+        >
+
+            Parcial ${c.parcial}
+
+            ⭐ ${c.calificacion}
+
+        </div>
+
+    `).join('')}
+
+    `
+})
+
 }
 
 function logout(){
