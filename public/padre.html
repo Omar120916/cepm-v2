@@ -62,6 +62,8 @@ Cerrar sesión
 
 <div id="contenido"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
 
 const API =
@@ -132,10 +134,27 @@ ${hijos.map(h=>`
     Usuario: ${h.usuario}
 
     <div
-    id="calificaciones-${h._id}"
-    style="margin-top:15px;"
-    >
-    </div>
+id="calificaciones-${h._id}"
+style="margin-top:15px;"
+>
+</div>
+
+<button
+onclick="generarBoleta('${h._id}')"
+style="
+margin-top:15px;
+background:#22c55e;
+color:white;
+border:none;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+"
+>
+
+📄 Descargar Boleta
+
+</button>
 
 </div>
 
@@ -249,6 +268,164 @@ calHijo.map(c=>{
     `
 })
 
+}
+
+async function generarBoleta(alumnoId){
+
+    const { jsPDF } = window.jspdf
+
+    const doc = new jsPDF()
+
+    const usuarios =
+    await fetch(
+
+        `${API}/usuarios`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const alumno =
+    usuarios.find(u=>
+
+        u._id===alumnoId
+    )
+
+    const clases =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const materias =
+    await fetch(
+
+        `${API}/materias`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const calificaciones =
+    await fetch(
+
+        `${API}/calificaciones`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    doc.setFontSize(22)
+
+    doc.text(
+        'BOLETA CEPM',
+        20,
+        20
+    )
+
+    doc.setFontSize(14)
+
+    doc.text(
+        `Alumno: ${alumno.nombre}`,
+        20,
+        40
+    )
+
+    let y = 60
+
+    let suma = 0
+    let total = 0
+
+    calificaciones
+    .filter(c=>c.alumnoId===alumnoId)
+    .forEach(c=>{
+
+        const clase =
+        clases.find(cl=>
+
+            cl._id===c.claseId
+        )
+
+        const materia =
+        materias.find(m=>
+
+            m._id===clase?.materiaId
+        )
+
+        doc.text(
+
+            `${materia?.nombre || 'Materia'} : ${c.calificacion}`,
+
+            20,
+
+            y
+        )
+
+        suma += Number(
+            c.calificacion
+        )
+
+        total++
+
+        y += 10
+    })
+
+    const promedio =
+    total>0
+
+    ?
+
+    (suma/total).toFixed(1)
+
+    :
+
+    '0'
+
+    y += 15
+
+    doc.text(
+
+        `Promedio General: ${promedio}`,
+
+        20,
+
+        y
+    )
+
+    y += 15
+
+    doc.text(
+
+        `Fecha: ${new Date().toLocaleDateString()}`,
+
+        20,
+
+        y
+    )
+
+    doc.save(
+
+        `Boleta_${alumno.nombre}.pdf`
+    )
 }
 
 function logout(){
