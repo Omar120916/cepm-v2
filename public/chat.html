@@ -21,10 +21,24 @@ height:100vh;
 }
 
 #usuarios{
-width:300px;
+width:280px;
 background:#111827;
 overflow:auto;
 padding:20px;
+border-right:1px solid #1e293b;
+}
+
+.usuario{
+background:#1e293b;
+padding:15px;
+border-radius:15px;
+cursor:pointer;
+margin-bottom:10px;
+transition:.2s;
+}
+
+.usuario:hover{
+background:#334155;
 }
 
 #chat{
@@ -33,38 +47,36 @@ display:flex;
 flex-direction:column;
 }
 
-#mensajes{
-flex:1;
-overflow:auto;
-padding:20px;
+#encabezado{
+background:#111827;
+padding:15px;
+font-weight:bold;
+font-size:18px;
+border-bottom:1px solid #1e293b;
 }
 
-.usuario{
+#mensajes{
+flex:1;
+overflow-y:auto;
 padding:15px;
-background:#1e293b;
-margin-bottom:10px;
-border-radius:10px;
-cursor:pointer;
 }
 
 .mio{
-
 background:#22c55e;
-padding:10px;
-border-radius:10px;
-margin:10px;
-max-width:80%;
+max-width:75%;
 margin-left:auto;
+margin-bottom:10px;
+padding:12px;
+border-radius:18px;
 word-wrap:break-word;
 }
 
 .otro{
-
 background:#334155;
-padding:10px;
-border-radius:10px;
-margin:10px;
-max-width:80%;
+max-width:75%;
+margin-bottom:10px;
+padding:12px;
+border-radius:18px;
 word-wrap:break-word;
 }
 
@@ -72,10 +84,10 @@ word-wrap:break-word;
 display:flex;
 padding:15px;
 background:#111827;
+gap:10px;
 }
 
 #texto{
-
 flex:1;
 padding:14px;
 font-size:16px;
@@ -83,41 +95,48 @@ border:none;
 border-radius:10px;
 }
 
-button{
-margin-left:10px;
-padding:12px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
 @media(max-width:768px){
 
 body{
-
     flex-direction:column;
+    height:100vh;
 }
 
 #usuarios{
-
     width:100%;
-    height:220px;
+    height:110px;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    padding:10px;
+    border-right:none;
+    border-bottom:1px solid #1e293b;
+}
+
+.usuario{
+    min-width:180px;
+    margin:0;
+    flex-shrink:0;
 }
 
 #chat{
-
-    height:calc(100vh - 220px);
-}
-
-#mensajes{
-
+    width:100%;
     flex:1;
 }
 
-#barra{
+#mensajes{
+    flex:1;
+    padding:15px;
+}
 
-    position:sticky;
-    bottom:0;
+#barra{
+    padding:10px;
+}
+
+#texto{
+    flex:1;
 }
 
 }
@@ -132,6 +151,12 @@ body{
 
 <div id="chat">
 
+<div id="encabezado">
+
+Selecciona un usuario 💬
+
+</div>
+
 <div id="mensajes"></div>
 
 <div id="barra">
@@ -144,9 +169,7 @@ placeholder="Escribe..."
 <button
 onclick="enviarMensaje()"
 >
-
 Enviar
-
 </button>
 
 </div>
@@ -234,6 +257,27 @@ async function abrirChat(id){
 
 receptorId = id
 
+const usuarios =
+await fetch(
+
+`${API}/usuarios`,
+
+{
+headers:{
+Authorization:token
+}
+}
+
+).then(r=>r.json())
+
+const contacto =
+usuarios.find(u=>u._id===id)
+
+document.getElementById(
+'encabezado'
+).innerHTML =
+`💬 ${contacto.nombre}`
+
 const mensajes =
 await fetch(
 
@@ -282,9 +326,14 @@ document.getElementById(
 'mensajes'
 )
 
+setTimeout(()=>{
+
 div.scrollTop =
 div.scrollHeight
+
+},100)
 }
+
 
 async function enviarMensaje(){
 
