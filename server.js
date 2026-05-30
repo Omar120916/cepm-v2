@@ -372,6 +372,75 @@ async(req,res)=>{
     })
 })
 
+app.post('/registro',
+
+async(req,res)=>{
+
+    try{
+
+        const {
+
+            nombre,
+            usuario,
+            password,
+            email,
+            rol,
+            hijos
+
+        } = req.body
+
+        const existe =
+        await Usuario.findOne({
+
+            usuario
+        })
+
+        if(existe){
+
+            return res.status(400).json({
+
+                mensaje:'Usuario ya existe'
+            })
+        }
+
+        const hash =
+        await bcrypt.hash(
+
+            password,
+
+            10
+        )
+
+        const nuevo =
+        new Usuario({
+
+            nombre,
+            usuario,
+            password:hash,
+            email,
+            rol,
+            hijos:hijos || []
+
+        })
+
+        await nuevo.save()
+
+        res.json({
+
+            mensaje:'Usuario creado 🔥'
+        })
+
+    }catch(err){
+
+        console.log(err)
+
+        res.status(500).json({
+
+            mensaje:'Error servidor'
+        })
+    }
+})
+
 // =====================
 // 👥 VER USUARIOS
 // =====================
