@@ -855,13 +855,12 @@ document.getElementById(
 
 async function cargarClases(){
 
-    const res =
+    const resClases =
     await fetch(
 
         `${API}/clases`,
 
         {
-
             headers:{
                 Authorization:token
             }
@@ -869,45 +868,69 @@ async function cargarClases(){
     )
 
     const clases =
-    await res.json()
+    await resClases.json()
+
+    const resMaterias =
+    await fetch(
+
+        `${API}/materias`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+    )
+
+    const materias =
+    await resMaterias.json()
 
     document
     .getElementById(
         'listaClases'
     )
 
-    .innerHTML = clases.map(c=>`
+    .innerHTML = clases.map(c=>{
 
-<div class="usuario">
+        const materia =
+        materias.find(m=>
 
-    🏫 ${c.grupo}
+            m._id===c.materiaId
+        )
 
-    <br>
+        return `
 
-    ⏰ ${c.horario}
+        <div class="usuario">
 
-    <br>
+            📚 ${materia ?
+            materia.nombre :
+            'Materia'}
 
-    🚪 ${c.aula}
+            <br>
 
-    <br><br>
+            👥 Grupo: ${c.grupo}
 
-    <button
-    onclick="abrirClase('${c._id}')"
-    >
+            <br>
 
-        Ver Clase
+            ⏰ ${c.horario}
 
-    </button>
+            <br>
 
-</div>
+            🚪 ${c.aula}
 
-`).join('')
+            <br><br>
+
+            <button
+            onclick="abrirClase('${c._id}')"
+            >
+                Ver Clase
+            </button>
+
+        </div>
+
+        `
+    }).join('')
 }
-
-cargarMaterias()
-cargarClases()
-
 // =====================
 // 👨‍🎓 VER CLASE
 // =====================
