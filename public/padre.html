@@ -158,6 +158,32 @@ Authorization:token
 
 ).then(r=>r.json())
 
+const clases =
+await fetch(
+
+`${API}/clases`,
+
+{
+headers:{
+Authorization:token
+}
+}
+
+).then(r=>r.json())
+
+const materias =
+await fetch(
+
+`${API}/materias`,
+
+{
+headers:{
+Authorization:token
+}
+}
+
+).then(r=>r.json())
+
 hijos.forEach(h=>{
 
     const calHijo =
@@ -183,24 +209,42 @@ hijos.forEach(h=>{
 
     :
 
-    calHijo.map(c=>`
+calHijo.map(c=>{
 
-        <div
-        style="
-        background:#475569;
-        padding:10px;
-        border-radius:10px;
-        margin-top:8px;
-        "
-        >
+    const clase =
+    clases.find(cl=>
 
-            Parcial ${c.parcial}
+        cl._id===c.claseId
+    )
 
-            ⭐ ${c.calificacion}
+    const materia =
+    materias.find(m=>
 
-        </div>
+        m._id===clase?.materiaId
+    )
 
-    `).join('')}
+    return `
+
+    <div
+    style="
+    background:#475569;
+    padding:10px;
+    border-radius:10px;
+    margin-top:8px;
+    "
+    >
+
+        📚 ${materia?.nombre || 'Materia'}
+
+        <br>
+
+        ⭐ ${c.calificacion}
+
+    </div>
+
+    `
+
+}).join('')}
 
     `
 })
