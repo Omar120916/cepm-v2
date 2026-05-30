@@ -52,13 +52,33 @@ cursor:pointer;
 
 <h1>👨‍👩‍👧 Panel Padre</h1>
 
-<br>
+<div
+style="
+display:flex;
+gap:10px;
+margin-top:20px;
+margin-bottom:20px;
+"
+>
 
-<button onclick="logout()">
-Cerrar sesión
+<button
+onclick="
+location.href='chat.html'
+"
+style="
+background:#2563eb;
+"
+>
+💬 Chat
 </button>
 
-<br><br>
+<button
+onclick="logout()"
+>
+🚪 Cerrar sesión
+</button>
+
+</div>
 
 <div id="contenido"></div>
 
