@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panel Padre</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:30px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+.hijo{
+background:#334155;
+padding:15px;
+border-radius:15px;
+margin-top:10px;
+}
+
+button{
+background:#ef4444;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>👨‍👩‍👧 Panel Padre</h1>
+
+<br>
+
+<button onclick="logout()">
+Cerrar sesión
+</button>
+
+<br><br>
+
+<div id="contenido"></div>
+
+<script>
+
+const API =
+'https://cepm-v2.onrender.com'
+
+const token =
+localStorage.getItem('token')
+
+async function cargar(){
+
+const usuarios =
+await fetch(
+
+`${API}/usuarios`,
+
+{
+headers:{
+Authorization:token
+}
+}
+
+).then(r=>r.json())
+
+const padre =
+JSON.parse(
+
+atob(
+token.split('.')[1]
+)
+
+)
+
+const datosPadre =
+usuarios.find(u=>
+
+u._id===padre.id
+)
+
+const hijos =
+usuarios.filter(u=>
+
+datosPadre.hijos.includes(
+u._id
+)
+
+)
+
+document.getElementById(
+'contenido'
+).innerHTML =
+
+`
+
+<div class="card">
+
+<h2>
+👨‍🎓 Mis hijos
+</h2>
+
+${hijos.map(h=>`
+
+<div class="hijo">
+
+<b>${h.nombre}</b>
+
+<br>
+
+Usuario:
+${h.usuario}
+
+</div>
+
+`).join('')}
+
+</div>
+
+`
+}
+
+function logout(){
+
+localStorage.clear()
+
+location.href='index.html'
+}
+
+cargar()
+
+</script>
+
+</body>
+</html>
