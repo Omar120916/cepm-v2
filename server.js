@@ -9,8 +9,24 @@ const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 const { type } = require('os')
+const http = require('http')
+
+const { Server } =
+require('socket.io')
+
 
 const app = express()
+
+const server =
+http.createServer(app)
+
+const io =
+new Server(server,{
+
+    cors:{
+        origin:'*'
+    }
+})
 
 // =====================
 // 📁 CREAR CARPETA UPLOADS
@@ -210,6 +226,29 @@ const Entrega = mongoose.model('Entrega',{
     },
 
     revisada:{
+        type:Boolean,
+        default:false
+    }
+
+    
+})
+
+const Mensaje = mongoose.model('Mensaje',{
+
+    emisorId:
+    mongoose.Schema.Types.ObjectId,
+
+    receptorId:
+    mongoose.Schema.Types.ObjectId,
+
+    texto:String,
+
+    fecha:{
+        type:Date,
+        default:Date.now
+    },
+
+    leido:{
         type:Boolean,
         default:false
     }
@@ -1124,15 +1163,134 @@ async(req,res)=>{
 
     res.json(asistencias)
 })
+// =====================
+// 💬 CHAT
+// =====================
 
+app.get(
+
+'/mensajes/:usuario1/:usuario2',
+
+verificarToken,
+
+async(req,res)=>{
+
+const mensajes =
+await Mensaje.find({
+
+$or:[
+
+{
+emisorId:req.params.usuario1,
+receptorId:req.params.usuario2
+},
+
+{
+emisorId:req.params.usuario2,
+receptorId:req.params.usuario1
+}
+
+]
+
+})
+
+.sort({
+
+fecha:1
+
+})
+
+res.json(mensajes)
+
+})
+
+
+app.post(
+
+'/mensajes',
+
+verificarToken,
+
+async(req,res)=>{
+
+const mensaje =
+new Mensaje({
+
+emisorId:req.body.emisorId,
+
+receptorId:req.body.receptorId,
+
+texto:req.body.texto
+
+})
+
+await mensaje.save()
+
+io.to(
+
+req.body.receptorId
+
+).emit(
+
+'nuevoMensaje',
+
+mensaje
+
+)
+
+res.json({
+
+mensaje:'Enviado 🔥'
+
+})
+
+})
+
+io.on(
+
+'connection',
+
+(socket)=>{
+
+console.log(
+'Usuario conectado 🔥'
+)
+
+socket.on(
+
+'registrar',
+
+(usuarioId)=>{
+
+socket.join(usuarioId)
+
+})
+
+socket.on(
+
+'disconnect',
+
+()=>{
+
+console.log(
+'Usuario salió 😭'
+)
+
+})
+
+})
 // =====================
 // 🚀 SERVER
 // =====================
 
-app.listen(process.env.PORT, ()=>{
+server.listen(
 
-    console.log(
+process.env.PORT,
 
-        'Servidor corriendo 🔥'
-    )
+()=>{
+
+console.log(
+'Servidor corriendo 🔥'
+)
+
 })
