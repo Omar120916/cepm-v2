@@ -895,7 +895,7 @@ async function cargarClases(){
         const materia =
         materias.find(m=>
 
-            m._id===c.materiaId
+            String (m._id) === String(c.materiaId)
         )
 
         return `
@@ -904,7 +904,7 @@ async function cargarClases(){
 
             📚 ${materia ?
             materia.nombre :
-            'Materia'}
+            'Materia eliminada'}
 
             <br>
 
