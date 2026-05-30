@@ -178,6 +178,16 @@ body{
             0
         </div>
 
+        <br>
+
+        <button
+        class="action"
+        onclick="generarBoleta()"
+        >
+        Descargar boleta
+    
+        </button>
+
     </div>
 
     <!-- MATERIAS -->
@@ -229,6 +239,8 @@ body{
     </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 
@@ -772,6 +784,188 @@ async function subirTarea(
     await res.json()
 
     alert(data.mensaje)
+}
+
+
+async function generarBoleta(){
+
+    const usuario =
+    JSON.parse(
+
+        atob(
+            token.split('.')[1]
+        )
+    )
+
+    const alumnos =
+    await fetch(
+
+        `${API}/alumnos`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const alumno =
+    alumnos.find(a=>
+
+        a._id===usuario.id
+    )
+
+    const clases =
+    await fetch(
+
+        `${API}/clases`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const materias =
+    await fetch(
+
+        `${API}/materias`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const calificaciones =
+    await fetch(
+
+        `${API}/calificaciones`,
+
+        {
+            headers:{
+                Authorization:token
+            }
+        }
+
+    ).then(r=>r.json())
+
+    const misClases =
+    clases.filter(c=>
+
+        c.alumnos.includes(
+            alumno._id
+        )
+    )
+
+    const { jsPDF } =
+    window.jspdf
+
+    const pdf =
+    new jsPDF()
+
+    pdf.setFontSize(18)
+
+    pdf.text(
+        'BOLETA CEPM',
+        20,
+        20
+    )
+
+    pdf.setFontSize(12)
+
+    pdf.text(
+        `Alumno: ${alumno.nombre}`,
+        20,
+        35
+    )
+
+    let y = 55
+
+    let suma = 0
+    let total = 0
+
+    misClases.forEach(clase=>{
+
+        const materia =
+        materias.find(m=>
+
+            m._id===clase.materiaId
+        )
+
+        const calificacion =
+        calificaciones.find(c=>
+
+            c.claseId===clase._id &&
+
+            c.alumnoId===alumno._id
+        )
+
+        const calif =
+        calificacion
+        ?
+        calificacion.calificacion
+        :
+        'Pendiente'
+
+        if(calificacion){
+
+            suma += Number(calif)
+            total++
+        }
+
+        pdf.text(
+
+            `${materia?.nombre || 'Materia'} : ${calif}`,
+
+            20,
+
+            y
+        )
+
+        y += 10
+    })
+
+    const promedio =
+    total>0
+    ?
+    (suma/total).toFixed(1)
+    :
+    0
+
+    y += 10
+
+    pdf.text(
+
+        `Promedio General: ${promedio}`,
+
+        20,
+
+        y
+    )
+
+    y += 10
+
+    pdf.text(
+
+        `Fecha: ${
+            new Date()
+            .toLocaleDateString()
+        }`,
+
+        20,
+
+        y
+    )
+
+    pdf.save(
+        'Boleta_CEPM.pdf'
+    )
 }
 
 function logout(){
