@@ -28,6 +28,8 @@ new Server(server,{
     }
 })
 
+const usuariosOnline = {}
+
 // =====================
 // 📁 CREAR CARPETA UPLOADS
 // =====================

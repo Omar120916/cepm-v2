@@ -204,6 +204,8 @@ usuario.id
 
 let receptorId = null
 
+let online = []
+
 async function cargarUsuarios(){
 
 const usuarios =
@@ -243,11 +245,27 @@ abrirChat(
 "
 >
 
-${u.nombre}
+<b>${u.nombre}</b>
 
 <br>
 
 ${u.rol}
+
+<br><br>
+
+${
+online.includes(
+u._id
+)
+
+?
+
+'🟢 En línea'
+
+:
+
+'⚫ Desconectado'
+}
 
 </div>
 
@@ -399,6 +417,18 @@ receptorId
 )
 
 }
+
+})
+
+socket.on(
+
+'usuariosOnline',
+
+(lista)=>{
+
+online = lista
+
+cargarUsuarios()
 
 })
 
