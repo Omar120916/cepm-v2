@@ -1264,7 +1264,26 @@ socket.on(
 
 (usuarioId)=>{
 
-socket.join(usuarioId)
+usuariosOnline[
+usuarioId
+] = true
+
+socket.usuarioId =
+usuarioId
+
+socket.join(
+usuarioId
+)
+
+io.emit(
+
+'usuariosOnline',
+
+Object.keys(
+usuariosOnline
+)
+
+)
 
 })
 
@@ -1277,6 +1296,26 @@ socket.on(
 console.log(
 'Usuario salió 😭'
 )
+
+if(
+socket.usuarioId
+){
+
+delete usuariosOnline[
+socket.usuarioId
+]
+
+io.emit(
+
+'usuariosOnline',
+
+Object.keys(
+usuariosOnline
+)
+
+)
+
+}
 
 })
 
