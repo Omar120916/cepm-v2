@@ -11,9 +11,10 @@ const path = require('path')
 const { type } = require('os')
 const http = require('http')
 
+
 const { Server } =
 require('socket.io')
-
+const webpush = require('web-push')
 
 const app = express()
 
@@ -28,6 +29,17 @@ new Server(server,{
     }
 })
 
+webpush.setVapidDetails(
+
+    'mailto:admin@cepm.com',
+
+    process.env.VAPID_PUBLIC_KEY,
+
+    process.env.VAPID_PRIVATE_KEY
+
+)
+
+const suscripciones = []
 const usuariosOnline = {}
 
 // =====================
@@ -1240,6 +1252,32 @@ mensaje
 
 )
 
+for(const sub of suscripciones){
+
+try{
+
+await webpush.sendNotification(
+
+sub,
+
+JSON.stringify({
+
+title:'CEPM',
+
+body:'Tienes un mensaje nuevo 💬'
+
+})
+
+)
+
+}catch(err){
+
+console.log(err)
+
+}
+
+}
+
 res.json({
 
 mensaje:'Enviado 🔥'
@@ -1320,6 +1358,27 @@ usuariosOnline
 })
 
 })
+
+app.post(
+
+'/suscribirse',
+
+async(req,res)=>{
+
+suscripciones.push(
+
+req.body
+
+)
+
+res.json({
+
+mensaje:'Suscripción guardada 🔥'
+
+})
+
+})
+
 // =====================
 // 🚀 SERVER
 // =====================

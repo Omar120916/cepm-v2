@@ -446,13 +446,69 @@ window.addEventListener(
 
 <script>
 
-if('serviceWorker' in navigator){
+async function activarNotificaciones(){
 
-navigator.serviceWorker.register(
-'/service-worker.js'
-)
+    if(
+
+        !('serviceWorker' in navigator)
+
+    ) return
+
+    const registro =
+    await navigator
+    .serviceWorker
+    .register(
+
+        '/service-worker.js'
+
+    )
+
+    const permiso =
+    await Notification
+    .requestPermission()
+
+    if(
+        permiso !== 'granted'
+    ) return
+
+    const suscripcion =
+    await registro.pushManager.subscribe({
+
+        userVisibleOnly:true,
+
+        applicationServerKey:
+        'BKuffqlyqJdIpTBtV5Z0LbgmbvymBDi4gCaukUtRQj2WoEr51J3NIo-7tI-CIIUgvt4Umi3D9cAO6an7DEJtLpM'
+
+    })
+
+    await fetch(
+
+        'https://cepm-v2.onrender.com/suscribirse',
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                'application/json'
+
+            },
+
+            body:JSON.stringify(
+
+                suscripcion
+
+            )
+
+        }
+
+    )
 
 }
+
+activarNotificaciones()
 
 </script>
 
