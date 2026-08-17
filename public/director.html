@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>CEPM | Director</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#f1f5f9;
+
+    min-height:100vh;
+
+    color:#0f172a;
+
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:250px;
+    height:100vh;
+
+    background:#0f172a;
+
+    color:white;
+
+    padding:25px 18px;
+
+    z-index:1000;
+
+}
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.logo h1{
+
+    font-size:32px;
+
+    letter-spacing:2px;
+
+}
+
+.logo p{
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    margin-top:5px;
+
+}
+
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+.menu button{
+
+    border:none;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.menu button:hover{
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+
+.menu button.active{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+.logout{
+
+    position:absolute;
+
+    bottom:25px;
+
+    left:18px;
+
+    right:18px;
+
+}
+
+.logout button{
+
+    width:100%;
+
+    border:none;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    background:#dc2626;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.logout button:hover{
+
+    background:#b91c1c;
+
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.main{
+
+    margin-left:250px;
+
+    padding:30px;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+
+.header h2{
+
+    font-size:28px;
+
+}
+
+
+.header p{
+
+    color:#64748b;
+
+    margin-top:5px;
+
+}
+
+
+.user{
+
+    background:white;
+
+    padding:12px 18px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   TARJETAS
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.06);
+
+}
+
+
+.card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.card-icon{
+
+    width:48px;
+    height:48px;
+
+    border-radius:14px;
+
+    background:#eff6ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:23px;
+
+}
+
+
+.card h3{
+
+    margin-top:18px;
+
+    font-size:30px;
+
+}
+
+
+.card p{
+
+    color:#64748b;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.panels{
+
+    display:grid;
+
+    grid-template-columns:
+    2fr 1fr;
+
+    gap:20px;
+
+}
+
+
+.panel{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.06);
+
+}
+
+
+.panel h3{
+
+    margin-bottom:20px;
+
+    font-size:20px;
+
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+
+.stat{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+}
+
+
+.stat span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+
+.stat strong{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:28px;
+
+}
+
+
+/* =========================
+   BARRA
+========================= */
+
+.progress{
+
+    margin-top:20px;
+
+}
+
+
+.progress-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:8px;
+
+}
+
+
+.progress-bar{
+
+    width:100%;
+
+    height:12px;
+
+    background:#e2e8f0;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+.progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+    transition:1s;
+
+}
+
+
+/* =========================
+   ALERTA
+========================= */
+
+.warning{
+
+    background:#fff7ed;
+
+    border:1px solid #fed7aa;
+
+    border-radius:15px;
+
+    padding:20px;
+
+}
+
+
+.warning strong{
+
+    display:block;
+
+    font-size:30px;
+
+    color:#ea580c;
+
+}
+
+
+.warning p{
+
+    color:#9a3412;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
+
+.loading{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#64748b;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .cards{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .sidebar{
+
+        width:75px;
+
+        padding:20px 10px;
+
+    }
+
+    .logo h1{
+
+        font-size:20px;
+
+    }
+
+    .logo p{
+
+        display:none;
+
+    }
+
+    .menu button{
+
+        font-size:0;
+
+        text-align:center;
+
+    }
+
+    .menu button::first-letter{
+
+        font-size:22px;
+
+    }
+
+    .logout button{
+
+        font-size:0;
+
+    }
+
+    .logout button::first-letter{
+
+        font-size:20px;
+
+    }
+
+    .main{
+
+        margin-left:75px;
+
+    }
+
+    .panels{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:550px){
+
+    .main{
+
+        padding:18px;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header{
+
+        align-items:flex-start;
+
+        gap:15px;
+
+        flex-direction:column;
+
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>CEPM</h1>
+
+        <p>Plataforma Escolar</p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <button class="active">
+            🏠 Inicio
+        </button>
+
+        <button>
+            👨‍🎓 Alumnos
+        </button>
+
+        <button>
+            👨‍🏫 Maestros
+        </button>
+
+        <button>
+            📚 Grupos
+        </button>
+
+        <button>
+            📊 Calificaciones
+        </button>
+
+        <button>
+            📅 Asistencia
+        </button>
+
+        <button>
+            📄 Reportes
+        </button>
+
+        <button>
+            📢 Avisos
+        </button>
+
+    </div>
+
+
+    <div class="logout">
+
+        <button onclick="cerrarSesion()">
+            🚪 Cerrar sesión
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<main class="main">
+
+
+    <header class="header">
+
+        <div>
+
+            <h2>
+                Buenos días, Director 👋
+            </h2>
+
+            <p>
+                Resumen general de la institución
+            </p>
+
+        </div>
+
+
+        <div class="user">
+
+            🏫 Dirección
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         TARJETAS
+    ========================= -->
+
+    <section class="cards">
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <p>Alumnos</p>
+
+                </div>
+
+                <div class="card-icon">
+
+                    👨‍🎓
+
+                </div>
+
+            </div>
+
+            <h3 id="totalAlumnos">
+
+                --
+
+            </h3>
+
+            <p>
+                Alumnos registrados
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <p>Maestros</p>
+
+                </div>
+
+                <div class="card-icon">
+
+                    👨‍🏫
+
+                </div>
+
+            </div>
+
+            <h3 id="totalMaestros">
+
+                --
+
+            </h3>
+
+            <p>
+                Personal docente
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <p>Grupos</p>
+
+                </div>
+
+                <div class="card-icon">
+
+                    🏫
+
+                </div>
+
+            </div>
+
+            <h3 id="totalGrupos">
+
+                --
+
+            </h3>
+
+            <p>
+                Grupos registrados
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <p>Materias</p>
+
+                </div>
+
+                <div class="card-icon">
+
+                    📚
+
+                </div>
+
+            </div>
+
+            <h3 id="totalMaterias">
+
+                --
+
+            </h3>
+
+            <p>
+                Materias disponibles
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         PANELES
+    ========================= -->
+
+    <section class="panels">
+
+
+        <!-- RENDIMIENTO -->
+
+        <div class="panel">
+
+            <h3>
+                📊 Rendimiento académico
+            </h3>
+
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <span>
+                        Promedio general
+                    </span>
+
+                    <strong id="promedio">
+
+                        --
+
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>
+                        Asistencia general
+                    </span>
+
+                    <strong id="asistencia">
+
+                        --
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="progress">
+
+                <div class="progress-info">
+
+                    <span>
+                        Asistencia escolar
+                    </span>
+
+                    <strong id="porcentaje">
+
+                        0%
+
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="barraAsistencia">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ALERTA -->
+
+        <div class="panel">
+
+            <h3>
+                ⚠️ Atención
+            </h3>
+
+
+            <div class="warning">
+
+                <strong id="alumnosBajos">
+
+                    --
+
+                </strong>
+
+                <p>
+                    alumnos con promedio
+                    menor a 6
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         PADRES
+    ========================= -->
+
+    <section
+        class="panel"
+        style="margin-top:20px;">
+
+        <h3>
+            👨‍👩‍👧 Información adicional
+        </h3>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span>
+                    Padres registrados
+                </span>
+
+                <strong id="totalPadres">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Estado del sistema
+                </span>
+
+                <strong
+                    style="font-size:20px;">
+                    🟢 Activo
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+// =========================
+// 🔐 API
+// =========================
+
+const API =
+    'https://cepm-v2.onrender.com'
+
+
+// =========================
+// 🔐 PROTEGER DIRECTOR
+// =========================
+
+const token =
+    localStorage.getItem('token')
+
+const rol =
+    localStorage.getItem('rol')
+
+
+if(!token || rol !== 'director'){
+
+    alert(
+        'No tienes autorización para acceder a esta sección.'
+    )
+
+    window.location.href =
+        'login.html'
+
+}
+
+
+// =========================
+// 📊 CARGAR RESUMEN
+// =========================
+
+async function cargarResumen(){
+
+    try{
+
+        const res =
+        await fetch(
+
+            `${API}/director/resumen`,
+
+            {
+
+                method:'GET',
+
+                headers:{
+
+                    'Authorization':token
+
+                }
+
+            }
+
+        )
+
+
+        if(res.status === 401){
+
+            localStorage.clear()
+
+            window.location.href =
+                'login.html'
+
+            return
+
+        }
+
+
+        if(res.status === 403){
+
+            alert(
+                'No tienes permisos de director.'
+            )
+
+            window.location.href =
+                'login.html'
+
+            return
+
+        }
+
+
+        const data =
+            await res.json()
+
+
+        if(!res.ok){
+
+            throw new Error(
+                data.mensaje ||
+                'Error cargando información'
+            )
+
+        }
+
+
+        // 👨‍🎓 ALUMNOS
+
+        document
+        .getElementById(
+            'totalAlumnos'
+        )
+        .textContent =
+            data.alumnos
+
+
+        // 👨‍🏫 MAESTROS
+
+        document
+        .getElementById(
+            'totalMaestros'
+        )
+        .textContent =
+            data.maestros
+
+
+        // 🏫 GRUPOS
+
+        document
+        .getElementById(
+            'totalGrupos'
+        )
+        .textContent =
+            data.grupos
+
+
+        // 📚 MATERIAS
+
+        document
+        .getElementById(
+            'totalMaterias'
+        )
+        .textContent =
+            data.materias
+
+
+        // 👨‍👩‍👧 PADRES
+
+        document
+        .getElementById(
+            'totalPadres'
+        )
+        .textContent =
+            data.padres
+
+
+        // 📊 PROMEDIO
+
+        document
+        .getElementById(
+            'promedio'
+        )
+        .textContent =
+            data.promedioGeneral
+
+
+        // 📅 ASISTENCIA
+
+        document
+        .getElementById(
+            'asistencia'
+        )
+        .textContent =
+            data.porcentajeAsistencia +
+            '%'
+
+
+        // 📊 BARRA
+
+        document
+        .getElementById(
+            'porcentaje'
+        )
+        .textContent =
+            data.porcentajeAsistencia +
+            '%'
+
+
+        document
+        .getElementById(
+            'barraAsistencia'
+        )
+        .style.width =
+            data.porcentajeAsistencia +
+            '%'
+
+
+        // ⚠️ ALUMNOS BAJOS
+
+        document
+        .getElementById(
+            'alumnosBajos'
+        )
+        .textContent =
+            data.alumnosBajos
+
+
+    }catch(error){
+
+        console.error(error)
+
+        alert(
+            'No se pudo cargar la información del director.'
+        )
+
+    }
+
+}
+
+
+// =========================
+// 🚪 CERRAR SESIÓN
+// =========================
+
+function cerrarSesion(){
+
+    localStorage.removeItem('token')
+
+    localStorage.removeItem('rol')
+
+    window.location.href =
+        'login.html'
+
+}
+
+
+// =========================
+// 🚀 INICIAR
+// =========================
+
+cargarResumen()
+
+
+</script>
+
+
+</body>
+
+</html>
