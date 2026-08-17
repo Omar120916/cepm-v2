@@ -938,9 +938,9 @@ body{
 
         <div>
 
-            <h2>
-                Buenos días, Director 👋
-            </h2>
+            <h2 id="saludoDirector">
+    Buenos días, Director 👋
+</h2>
 
             <p>
                 Resumen general de la institución
@@ -1492,6 +1492,39 @@ localStorage.getItem('token');
 
 const rol =
 localStorage.getItem('rol');
+
+// =====================================================
+// SALUDO AUTOMÁTICO SEGÚN LA HORA
+// =====================================================
+
+function actualizarSaludo(){
+
+    const hora = new Date().getHours();
+
+    let saludo;
+
+    if(hora >= 5 && hora < 12){
+
+        saludo = 'Buenos días';
+
+    }
+    else if(hora >= 12 && hora < 19){
+
+        saludo = 'Buenas tardes';
+
+    }
+    else{
+
+        saludo = 'Buenas noches';
+
+    }
+
+    document
+    .getElementById('saludoDirector')
+    .textContent =
+    `${saludo}, Director 👋`;
+
+}
 
 
 // =====================================================
@@ -2169,6 +2202,8 @@ async function cargarAvisos(){
 // =====================================================
 // INICIAR DASHBOARD
 // =====================================================
+
+actualizarSaludo();
 
 cargarResumen();
 
