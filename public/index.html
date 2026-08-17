@@ -8,7 +8,7 @@
 
 <meta name="theme-color" content="#0f172a">
 
-<title>CEPM Login</title>
+<title>CEPM index</title>
 
 <style>
 
@@ -221,7 +221,7 @@ button:hover{
         <input type="password" id="password" placeholder="Ingresa contraseña">
     </div>
 
-    <button onclick="login()">
+    <button onclick="index()">
         Iniciar Sesión
     </button>
 
@@ -282,7 +282,7 @@ button:hover{
 
 const API = 'https://cepm-v2.onrender.com'
 
-async function login(){
+async function index(){
 
     const usuario =
         document.getElementById('usuario').value
@@ -290,7 +290,7 @@ async function login(){
     const password =
         document.getElementById('password').value
 
-    const res = await fetch(`${API}/login`,{
+    const res = await fetch(`${API}/index`,{
 
         method:'POST',
 
@@ -323,7 +323,7 @@ if(data.token){
     )
 
     document.getElementById('mensaje')
-    .innerHTML = 'Login correcto 🔥'
+    .innerHTML = 'index correcto 🔥'
 
     setTimeout(()=>{
 

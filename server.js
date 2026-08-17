@@ -362,10 +362,10 @@ function verificarAdmin(req,res,next){
 }
 
 // =====================
-// 🔐 LOGIN
+// 🔐 index
 // =====================
 
-app.post('/login',
+app.post('/index',
 
 async(req,res)=>{
 
