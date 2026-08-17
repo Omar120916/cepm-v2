@@ -644,13 +644,17 @@ body{
 
     <div class="menu">
 
-        <button class="active">
-            🏠 Inicio
-        </button>
+        <button
+    class="active"
+    onclick="mostrarInicio()">
 
-        <button>
-            👨‍🎓 Alumnos
-        </button>
+    🏠 Inicio
+
+</button>
+
+        <button onclick="mostrarAlumnos()">
+    👨‍🎓 Alumnos
+</button>
 
         <button>
             👨‍🏫 Maestros
@@ -696,6 +700,161 @@ body{
 ========================= -->
 
 <main class="main">
+
+    <section id="seccionInicio">
+
+<!-- =========================
+     SECCIÓN ALUMNOS
+========================= -->
+
+<section
+    id="seccionAlumnos"
+    style="display:none;">
+
+    <div class="header">
+
+        <div>
+
+            <h2>
+                👨‍🎓 Alumnos
+            </h2>
+
+            <p>
+                Consulta de alumnos registrados
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUSCADOR -->
+
+    <div
+        class="panel"
+        style="margin-bottom:20px;">
+
+        <input
+            type="text"
+            id="buscarAlumno"
+            placeholder="🔎 Buscar por nombre o usuario..."
+            oninput="filtrarAlumnos()"
+            style="
+                width:100%;
+                padding:15px;
+                border:1px solid #e2e8f0;
+                border-radius:12px;
+                font-size:15px;
+                outline:none;
+            "
+        >
+
+    </div>
+
+
+    <!-- TABLA -->
+
+    <div class="panel">
+
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            ">
+
+            <h3>
+                Lista de alumnos
+            </h3>
+
+            <strong
+                id="contadorAlumnos">
+                0 alumnos
+            </strong>
+
+        </div>
+
+
+        <div
+            style="
+                overflow-x:auto;
+            ">
+
+            <table
+                style="
+                    width:100%;
+                    border-collapse:collapse;
+                ">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="
+                            text-align:left;
+                            padding:12px;
+                            border-bottom:1px solid #e2e8f0;
+                        ">
+                            Nombre
+                        </th>
+
+                        <th style="
+                            text-align:left;
+                            padding:12px;
+                            border-bottom:1px solid #e2e8f0;
+                        ">
+                            Usuario
+                        </th>
+
+                        <th style="
+                            text-align:left;
+                            padding:12px;
+                            border-bottom:1px solid #e2e8f0;
+                        ">
+                            Correo
+                        </th>
+
+                        <th style="
+                            text-align:left;
+                            padding:12px;
+                            border-bottom:1px solid #e2e8f0;
+                        ">
+                            Edad
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaAlumnos">
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            style="
+                                text-align:center;
+                                padding:30px;
+                                color:#64748b;
+                            ">
+
+                            Cargando alumnos...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
 
 
     <header class="header">
@@ -1020,6 +1179,8 @@ body{
 
     </section>
 
+</section>
+
 
 </main>
 
@@ -1263,6 +1424,292 @@ function cerrarSesion(){
 
 cargarResumen()
 
+// =========================
+// 👨‍🎓 ALUMNOS
+// =========================
+
+let listaAlumnos = []
+
+
+async function cargarAlumnos(){
+
+    try{
+
+        const res =
+        await fetch(
+
+            `${API}/alumnos`,
+
+            {
+
+                headers:{
+
+                    'Authorization':token
+
+                }
+
+            }
+
+        )
+
+
+        if(res.status === 401){
+
+            localStorage.clear()
+
+            window.location.href =
+                'login.html'
+
+            return
+
+        }
+
+
+        const data =
+            await res.json()
+
+
+        if(!res.ok){
+
+            throw new Error(
+                data.mensaje ||
+                'Error cargando alumnos'
+            )
+
+        }
+
+
+        listaAlumnos = data
+
+        mostrarListaAlumnos(
+            listaAlumnos
+        )
+
+
+    }catch(error){
+
+        console.error(error)
+
+        document
+        .getElementById(
+            'tablaAlumnos'
+        )
+        .innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                        color:#dc2626;
+                    ">
+
+                    No se pudieron cargar
+                    los alumnos.
+
+                </td>
+
+            </tr>
+
+        `
+
+    }
+
+}
+
+
+// =========================
+// 📋 MOSTRAR ALUMNOS
+// =========================
+
+function mostrarListaAlumnos(
+    alumnos
+){
+
+    const tabla =
+        document.getElementById(
+            'tablaAlumnos'
+        )
+
+
+    document
+    .getElementById(
+        'contadorAlumnos'
+    )
+    .textContent =
+        `${alumnos.length} alumnos`
+
+
+    if(alumnos.length === 0){
+
+        tabla.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                        color:#64748b;
+                    ">
+
+                    No se encontraron alumnos.
+
+                </td>
+
+            </tr>
+
+        `
+
+        return
+
+    }
+
+
+    tabla.innerHTML =
+
+        alumnos.map(alumno => `
+
+            <tr>
+
+                <td style="
+                    padding:14px 12px;
+                    border-bottom:
+                    1px solid #f1f5f9;
+                    font-weight:bold;
+                ">
+
+                    ${alumno.nombre || 'Sin nombre'}
+
+                </td>
+
+
+                <td style="
+                    padding:14px 12px;
+                    border-bottom:
+                    1px solid #f1f5f9;
+                ">
+
+                    ${alumno.usuario || '—'}
+
+                </td>
+
+
+                <td style="
+                    padding:14px 12px;
+                    border-bottom:
+                    1px solid #f1f5f9;
+                ">
+
+                    ${alumno.email || 'Sin correo'}
+
+                </td>
+
+
+                <td style="
+                    padding:14px 12px;
+                    border-bottom:
+                    1px solid #f1f5f9;
+                ">
+
+                    ${alumno.edad || '—'}
+
+                </td>
+
+            </tr>
+
+        `).join('')
+
+}
+
+
+// =========================
+// 🔎 BUSCAR ALUMNO
+// =========================
+
+function filtrarAlumnos(){
+
+    const texto =
+        document
+        .getElementById(
+            'buscarAlumno'
+        )
+        .value
+        .toLowerCase()
+
+
+    const filtrados =
+
+        listaAlumnos.filter(alumno =>
+
+            (alumno.nombre || '')
+            .toLowerCase()
+            .includes(texto)
+
+            ||
+
+            (alumno.usuario || '')
+            .toLowerCase()
+            .includes(texto)
+
+        )
+
+
+    mostrarListaAlumnos(
+        filtrados
+    )
+
+}
+
+
+// =========================
+// 🏠 MOSTRAR INICIO
+// =========================
+
+function mostrarInicio(){
+
+    document
+    .getElementById(
+        'seccionInicio'
+    )
+    .style.display = 'block'
+
+
+    document
+    .getElementById(
+        'seccionAlumnos'
+    )
+    .style.display = 'none'
+
+}
+
+
+// =========================
+// 👨‍🎓 MOSTRAR ALUMNOS
+// =========================
+
+function mostrarAlumnos(){
+
+    document
+    .getElementById(
+        'seccionInicio'
+    )
+    .style.display = 'none'
+
+
+    document
+    .getElementById(
+        'seccionAlumnos'
+    )
+    .style.display = 'block'
+
+
+    cargarAlumnos()
+
+}
 
 </script>
 
