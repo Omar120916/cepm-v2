@@ -343,6 +343,25 @@ function verificarDirector(req,res,next){
 }
 
 // =====================
+// 👑 VERIFICAR ADMIN
+// =====================
+
+function verificarAdmin(req,res,next){
+
+    if(req.usuario.rol !== 'admin'){
+
+        return res.status(403).json({
+
+            mensaje:'Acceso exclusivo para administradores'
+
+        })
+
+    }
+
+    next()
+}
+
+// =====================
 // 🔐 LOGIN
 // =====================
 
@@ -458,6 +477,106 @@ async(req,res)=>{
         mensaje:'Admin creado 🔥'
     })
 })
+
+// =====================
+// 🏫 CREAR DIRECTOR
+// =====================
+
+app.post(
+
+    '/crear-director',
+
+    verificarToken,
+
+    verificarAdmin,
+
+    async(req,res)=>{
+
+        try{
+
+            const {
+
+                nombre,
+                usuario,
+                password,
+                email
+
+            } = req.body
+
+
+            const existe =
+            await Usuario.findOne({
+
+                usuario
+
+            })
+
+
+            if(existe){
+
+                return res.status(400).json({
+
+                    mensaje:
+                    'El usuario ya existe'
+
+                })
+
+            }
+
+
+            const hash =
+            await bcrypt.hash(
+
+                password,
+
+                10
+
+            )
+
+
+            const director =
+            new Usuario({
+
+                nombre,
+
+                usuario,
+
+                password:hash,
+
+                email,
+
+                rol:'director'
+
+            })
+
+
+            await director.save()
+
+
+            res.json({
+
+                mensaje:
+                'Director creado 🔥'
+
+            })
+
+
+        }catch(err){
+
+            console.log(err)
+
+            res.status(500).json({
+
+                mensaje:
+                'Error creando director'
+
+            })
+
+        }
+
+    }
+
+)
 
 app.post('/registro',
 
