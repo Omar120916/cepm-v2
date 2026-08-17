@@ -2478,6 +2478,159 @@ async function seleccionarAlumnoConstancia(id){
 
 }
 
+// =====================================================
+// CARGAR CALIFICACIONES DEL ALUMNO PARA CONSTANCIA
+// =====================================================
+
+async function cargarCalificacionesAlumnoConstancia(alumnoId){
+
+    const tabla =
+        document.getElementById(
+            'tablaConstancia'
+        );
+
+    tabla.innerHTML = `
+        <tr>
+            <td colspan="3" class="empty-state">
+                🔄 Cargando calificaciones...
+            </td>
+        </tr>
+    `;
+
+    try{
+
+        const calificaciones =
+            await apiGet('/calificaciones');
+
+
+        console.log(
+            'CALIFICACIONES DEL ALUMNO:',
+            calificaciones
+        );
+
+
+        const delAlumno =
+            calificaciones.filter(
+                c =>
+                    String(c.alumnoId) ===
+                    String(alumnoId)
+            );
+
+
+        if(!delAlumno.length){
+
+            tabla.innerHTML = `
+                <tr>
+                    <td
+                        colspan="3"
+                        class="empty-state"
+                    >
+                        📚 Este alumno todavía no tiene
+                        calificaciones registradas.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        // Buscar materias y clases
+
+        const materias =
+            await apiGet('/materias');
+
+        const clases =
+            await apiGet('/clases');
+
+
+        tabla.innerHTML =
+            delAlumno
+            .map(c => {
+
+                const clase =
+                    clases.find(
+                        x =>
+                            String(x._id) ===
+                            String(c.claseId)
+                    );
+
+
+                const materia =
+                    materias.find(
+                        x =>
+                            String(x._id) ===
+                            String(clase?.materiaId)
+                    );
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                ${esc(
+                                    materia?.nombre,
+                                    'Materia no encontrada'
+                                )}
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            Parcial
+                            ${esc(c.parcial)}
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge">
+
+                                ${esc(
+                                    c.calificacion,
+                                    '—'
+                                )}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            })
+            .join('');
+
+
+    }
+    catch(error){
+
+        console.error(
+            'Error cargando calificaciones:',
+            error
+        );
+
+
+        tabla.innerHTML = `
+            <tr>
+                <td
+                    colspan="3"
+                    class="empty-state"
+                >
+                    ❌ No se pudieron cargar
+                    las calificaciones.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
 async function apiGet(ruta){
     const res = await fetch(`${API}${ruta}`, { headers:{'Authorization':token} });
     if(res.status === 401){ localStorage.clear(); window.location.href='index.html'; throw new Error('Sesión expirada'); }
