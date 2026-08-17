@@ -10,14 +10,26 @@ content="width=device-width, initial-scale=1.0">
 
 <title>CEPM | Director</title>
 
+
 <style>
 
+/* =========================
+   GENERAL
+========================= */
+
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
 }
+
 
 body{
 
@@ -42,6 +54,7 @@ body{
     top:0;
 
     width:250px;
+
     height:100vh;
 
     background:#0f172a;
@@ -54,6 +67,7 @@ body{
 
 }
 
+
 .logo{
 
     text-align:center;
@@ -62,6 +76,7 @@ body{
 
 }
 
+
 .logo h1{
 
     font-size:32px;
@@ -69,6 +84,7 @@ body{
     letter-spacing:2px;
 
 }
+
 
 .logo p{
 
@@ -145,6 +161,7 @@ body{
 
 }
 
+
 .logout button{
 
     width:100%;
@@ -165,6 +182,7 @@ body{
 
 }
 
+
 .logout button:hover{
 
     background:#b91c1c;
@@ -173,7 +191,7 @@ body{
 
 
 /* =========================
-   CONTENIDO
+   MAIN
 ========================= */
 
 .main{
@@ -226,7 +244,9 @@ body{
 
     border-radius:15px;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.06);
 
     font-weight:bold;
 
@@ -234,7 +254,7 @@ body{
 
 
 /* =========================
-   TARJETAS
+   CARDS
 ========================= */
 
 .cards{
@@ -280,6 +300,7 @@ body{
 .card-icon{
 
     width:48px;
+
     height:48px;
 
     border-radius:14px;
@@ -316,7 +337,7 @@ body{
 
 
 /* =========================
-   PANEL
+   PANELS
 ========================= */
 
 .panels{
@@ -356,7 +377,7 @@ body{
 
 
 /* =========================
-   ESTADÍSTICAS
+   STATS
 ========================= */
 
 .stats{
@@ -405,7 +426,7 @@ body{
 
 
 /* =========================
-   BARRA
+   PROGRESS
 ========================= */
 
 .progress{
@@ -457,7 +478,7 @@ body{
 
 
 /* =========================
-   ALERTA
+   WARNING
 ========================= */
 
 .warning{
@@ -494,14 +515,99 @@ body{
 
 
 /* =========================
-   CARGANDO
+   ALUMNOS
 ========================= */
 
-.loading{
+#seccionAlumnos{
 
-    text-align:center;
+    width:100%;
 
-    padding:30px;
+}
+
+
+.alumnos-search{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+
+.alumnos-search:focus{
+
+    border-color:#2563eb;
+
+}
+
+
+.tabla-container{
+
+    overflow-x:auto;
+
+}
+
+
+.tabla-alumnos{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+.tabla-alumnos th{
+
+    text-align:left;
+
+    padding:14px 12px;
+
+    border-bottom:
+    1px solid #e2e8f0;
+
+    font-size:14px;
+
+    color:#475569;
+
+}
+
+
+.tabla-alumnos td{
+
+    padding:14px 12px;
+
+    border-bottom:
+    1px solid #f1f5f9;
+
+}
+
+
+.tabla-alumnos tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+.nombre-alumno{
+
+    font-weight:bold;
+
+}
+
+
+.contador{
+
+    font-size:14px;
 
     color:#64748b;
 
@@ -534,17 +640,20 @@ body{
 
     }
 
+
     .logo h1{
 
         font-size:20px;
 
     }
 
+
     .logo p{
 
         display:none;
 
     }
+
 
     .menu button{
 
@@ -554,11 +663,13 @@ body{
 
     }
 
+
     .menu button::first-letter{
 
         font-size:22px;
 
     }
+
 
     .logout button{
 
@@ -566,17 +677,20 @@ body{
 
     }
 
+
     .logout button::first-letter{
 
         font-size:20px;
 
     }
 
+
     .main{
 
         margin-left:75px;
 
     }
+
 
     .panels{
 
@@ -595,11 +709,13 @@ body{
 
     }
 
+
     .cards{
 
         grid-template-columns:1fr;
 
     }
+
 
     .header{
 
@@ -610,6 +726,7 @@ body{
         flex-direction:column;
 
     }
+
 
     .stats{
 
@@ -627,340 +744,124 @@ body{
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      SIDEBAR
-========================= -->
+===================================================== -->
 
 <aside class="sidebar">
+
 
     <div class="logo">
 
         <h1>CEPM</h1>
 
-        <p>Plataforma Escolar</p>
+        <p>
+            Plataforma Escolar
+        </p>
 
     </div>
 
 
     <div class="menu">
 
+
         <button
-    class="active"
-    onclick="mostrarInicio()">
+            id="btnInicio"
+            class="active"
+            onclick="mostrarInicio()">
 
-    🏠 Inicio
+            🏠 Inicio
 
-</button>
+        </button>
 
-        <button onclick="mostrarAlumnos()">
-    👨‍🎓 Alumnos
-</button>
+
+        <button
+            id="btnAlumnos"
+            onclick="mostrarAlumnos()">
+
+            👨‍🎓 Alumnos
+
+        </button>
+
 
         <button>
+
             👨‍🏫 Maestros
+
         </button>
 
+
         <button>
+
             📚 Grupos
+
         </button>
 
+
         <button>
+
             📊 Calificaciones
+
         </button>
 
+
         <button>
+
             📅 Asistencia
+
         </button>
 
+
         <button>
+
             📄 Reportes
+
         </button>
 
+
         <button>
+
             📢 Avisos
+
         </button>
+
 
     </div>
 
 
     <div class="logout">
 
-        <button onclick="cerrarSesion()">
+        <button
+            onclick="cerrarSesion()">
+
             🚪 Cerrar sesión
+
         </button>
 
     </div>
+
 
 </aside>
 
 
 
-<!-- =========================
-     CONTENIDO
-========================= -->
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
 
 <main class="main">
 
-    <section id="seccionInicio">
 
-<!-- =========================
-     SECCIÓN ALUMNOS
-========================= -->
 
-<section id="seccionAlumnos" style="display:none;">
+<!-- =====================================================
+     SECCIÓN INICIO
+===================================================== -->
 
-    <div class="header">
-
-        <div>
-            <h2>👨‍🎓 Alumnos</h2>
-
-            <p>
-                Consulta de alumnos registrados
-            </p>
-        </div>
-
-    </div>
-
-    <div class="panel" style="margin-bottom:20px;">
-
-        <input
-            type="text"
-            id="buscarAlumno"
-            placeholder="🔎 Buscar por nombre o usuario..."
-            oninput="filtrarAlumnos()"
-            style="
-                width:100%;
-                padding:15px;
-                border:1px solid #e2e8f0;
-                border-radius:12px;
-                font-size:15px;
-                outline:none;
-            "
-        >
-
-    </div>
-
-    <div class="panel">
-
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:20px;
-        ">
-
-            <h3>Lista de alumnos</h3>
-
-            <strong id="contadorAlumnos">
-                0 alumnos
-            </strong>
-
-        </div>
-
-        <div style="overflow-x:auto;">
-
-            <table style="
-                width:100%;
-                border-collapse:collapse;
-            ">
-
-                <thead>
-
-                    <tr>
-
-                        <th style="text-align:left;padding:12px;">
-                            Nombre
-                        </th>
-
-                        <th style="text-align:left;padding:12px;">
-                            Usuario
-                        </th>
-
-                        <th style="text-align:left;padding:12px;">
-                            Correo
-                        </th>
-
-                        <th style="text-align:left;padding:12px;">
-                            Edad
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tablaAlumnos">
-
-                    <tr>
-
-                        <td colspan="4"
-                            style="
-                                text-align:center;
-                                padding:30px;
-                            ">
-
-                            Cargando alumnos...
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-    <div class="header">
-
-        <div>
-
-            <h2>
-                👨‍🎓 Alumnos
-            </h2>
-
-            <p>
-                Consulta de alumnos registrados
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- BUSCADOR -->
-
-    <div
-        class="panel"
-        style="margin-bottom:20px;">
-
-        <input
-            type="text"
-            id="buscarAlumno"
-            placeholder="🔎 Buscar por nombre o usuario..."
-            oninput="filtrarAlumnos()"
-            style="
-                width:100%;
-                padding:15px;
-                border:1px solid #e2e8f0;
-                border-radius:12px;
-                font-size:15px;
-                outline:none;
-            "
-        >
-
-    </div>
-
-
-    <!-- TABLA -->
-
-    <div class="panel">
-
-        <div
-            style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                margin-bottom:20px;
-            ">
-
-            <h3>
-                Lista de alumnos
-            </h3>
-
-            <strong
-                id="contadorAlumnos">
-                0 alumnos
-            </strong>
-
-        </div>
-
-
-        <div
-            style="
-                overflow-x:auto;
-            ">
-
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                ">
-
-                <thead>
-
-                    <tr>
-
-                        <th style="
-                            text-align:left;
-                            padding:12px;
-                            border-bottom:1px solid #e2e8f0;
-                        ">
-                            Nombre
-                        </th>
-
-                        <th style="
-                            text-align:left;
-                            padding:12px;
-                            border-bottom:1px solid #e2e8f0;
-                        ">
-                            Usuario
-                        </th>
-
-                        <th style="
-                            text-align:left;
-                            padding:12px;
-                            border-bottom:1px solid #e2e8f0;
-                        ">
-                            Correo
-                        </th>
-
-                        <th style="
-                            text-align:left;
-                            padding:12px;
-                            border-bottom:1px solid #e2e8f0;
-                        ">
-                            Edad
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="tablaAlumnos">
-
-                    <tr>
-
-                        <td
-                            colspan="4"
-                            style="
-                                text-align:center;
-                                padding:30px;
-                                color:#64748b;
-                            ">
-
-                            Cargando alumnos...
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
+<section id="seccionInicio">
 
 
     <header class="header">
+
 
         <div>
 
@@ -981,13 +882,12 @@ body{
 
         </div>
 
+
     </header>
 
 
 
-    <!-- =========================
-         TARJETAS
-    ========================= -->
+    <!-- TARJETAS -->
 
     <section class="cards">
 
@@ -998,7 +898,9 @@ body{
 
                 <div>
 
-                    <p>Alumnos</p>
+                    <p>
+                        Alumnos
+                    </p>
 
                 </div>
 
@@ -1010,11 +912,11 @@ body{
 
             </div>
 
+
             <h3 id="totalAlumnos">
-
                 --
-
             </h3>
+
 
             <p>
                 Alumnos registrados
@@ -1030,7 +932,9 @@ body{
 
                 <div>
 
-                    <p>Maestros</p>
+                    <p>
+                        Maestros
+                    </p>
 
                 </div>
 
@@ -1042,11 +946,11 @@ body{
 
             </div>
 
+
             <h3 id="totalMaestros">
-
                 --
-
             </h3>
+
 
             <p>
                 Personal docente
@@ -1062,7 +966,9 @@ body{
 
                 <div>
 
-                    <p>Grupos</p>
+                    <p>
+                        Grupos
+                    </p>
 
                 </div>
 
@@ -1074,11 +980,11 @@ body{
 
             </div>
 
+
             <h3 id="totalGrupos">
-
                 --
-
             </h3>
+
 
             <p>
                 Grupos registrados
@@ -1094,7 +1000,9 @@ body{
 
                 <div>
 
-                    <p>Materias</p>
+                    <p>
+                        Materias
+                    </p>
 
                 </div>
 
@@ -1106,11 +1014,11 @@ body{
 
             </div>
 
+
             <h3 id="totalMaterias">
-
                 --
-
             </h3>
+
 
             <p>
                 Materias disponibles
@@ -1123,14 +1031,10 @@ body{
 
 
 
-    <!-- =========================
-         PANELES
-    ========================= -->
+    <!-- PANELES -->
 
     <section class="panels">
 
-
-        <!-- RENDIMIENTO -->
 
         <div class="panel">
 
@@ -1149,9 +1053,7 @@ body{
                     </span>
 
                     <strong id="promedio">
-
                         --
-
                     </strong>
 
                 </div>
@@ -1164,9 +1066,7 @@ body{
                     </span>
 
                     <strong id="asistencia">
-
                         --
-
                     </strong>
 
                 </div>
@@ -1178,6 +1078,7 @@ body{
 
             <div class="progress">
 
+
                 <div class="progress-info">
 
                     <span>
@@ -1185,9 +1086,7 @@ body{
                     </span>
 
                     <strong id="porcentaje">
-
                         0%
-
                     </strong>
 
                 </div>
@@ -1202,13 +1101,13 @@ body{
 
                 </div>
 
+
             </div>
+
 
         </div>
 
 
-
-        <!-- ALERTA -->
 
         <div class="panel">
 
@@ -1220,9 +1119,7 @@ body{
             <div class="warning">
 
                 <strong id="alumnosBajos">
-
                     --
-
                 </strong>
 
                 <p>
@@ -1232,6 +1129,7 @@ body{
 
             </div>
 
+
         </div>
 
 
@@ -1239,19 +1137,20 @@ body{
 
 
 
-    <!-- =========================
-         PADRES
-    ========================= -->
+    <!-- INFORMACIÓN ADICIONAL -->
 
     <section
         class="panel"
         style="margin-top:20px;">
 
+
         <h3>
             👨‍👩‍👧 Información adicional
         </h3>
 
+
         <div class="stats">
+
 
             <div class="stat">
 
@@ -1265,6 +1164,7 @@ body{
 
             </div>
 
+
             <div class="stat">
 
                 <span>
@@ -1273,16 +1173,185 @@ body{
 
                 <strong
                     style="font-size:20px;">
+
                     🟢 Activo
+
                 </strong>
 
             </div>
 
+
         </div>
+
 
     </section>
 
+
 </section>
+
+
+
+<!-- =====================================================
+     SECCIÓN ALUMNOS
+===================================================== -->
+
+<section
+    id="seccionAlumnos"
+    style="display:none;">
+
+
+    <header class="header">
+
+
+        <div>
+
+            <h2>
+                👨‍🎓 Alumnos
+            </h2>
+
+
+            <p>
+                Consulta de alumnos registrados
+            </p>
+
+
+        </div>
+
+
+        <div class="user">
+
+            👨‍🎓 Alumnos
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- BUSCADOR -->
+
+    <div
+        class="panel"
+        style="margin-bottom:20px;">
+
+
+        <input
+            type="text"
+            id="buscarAlumno"
+            class="alumnos-search"
+            placeholder="🔎 Buscar por nombre, usuario o correo..."
+            oninput="filtrarAlumnos()">
+
+
+    </div>
+
+
+
+    <!-- TABLA -->
+
+    <div class="panel">
+
+
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            ">
+
+
+            <h3>
+                Lista de alumnos
+            </h3>
+
+
+            <strong
+                id="contadorAlumnos"
+                class="contador">
+
+                0 alumnos
+
+            </strong>
+
+
+        </div>
+
+
+
+        <div class="tabla-container">
+
+
+            <table
+                class="tabla-alumnos">
+
+
+                <thead>
+
+
+                    <tr>
+
+                        <th>
+                            Nombre
+                        </th>
+
+                        <th>
+                            Usuario
+                        </th>
+
+                        <th>
+                            Correo
+                        </th>
+
+                        <th>
+                            Edad
+                        </th>
+
+                    </tr>
+
+
+                </thead>
+
+
+
+                <tbody
+                    id="tablaAlumnos">
+
+
+                    <tr>
+
+
+                        <td
+                            colspan="4"
+                            style="
+                                text-align:center;
+                                padding:30px;
+                                color:#64748b;
+                            ">
+
+                            Cargando alumnos...
+
+                        </td>
+
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
 
 
 </main>
@@ -1292,185 +1361,176 @@ body{
 <script>
 
 
-// =========================
-// 🔐 API
-// =========================
+// =====================================================
+// API
+// =====================================================
 
 const API =
-    'https://cepm-v2.onrender.com'
+'https://cepm-v2.onrender.com';
 
 
-// =========================
-// 🔐 PROTEGER DIRECTOR
-// =========================
+// =====================================================
+// TOKEN
+// =====================================================
 
 const token =
-    localStorage.getItem('token')
+localStorage.getItem('token');
 
 const rol =
-    localStorage.getItem('rol')
+localStorage.getItem('rol');
 
 
-if(!token || rol !== 'director'){
+// =====================================================
+// PROTECCIÓN
+// =====================================================
+
+if(
+    !token ||
+    rol !== 'director'
+){
 
     alert(
-        'No tienes autorización para acceder a esta sección.'
-    )
+        'No tienes autorización para acceder.'
+    );
 
     window.location.href =
-        'index.html'
+        'index.html';
 
 }
 
 
-// =========================
-// 📊 CARGAR RESUMEN
-// =========================
+// =====================================================
+// RESUMEN
+// =====================================================
 
 async function cargarResumen(){
 
     try{
 
+
         const res =
         await fetch(
-
             `${API}/director/resumen`,
-
             {
 
                 method:'GET',
 
                 headers:{
 
-                    'Authorization':token
+                    'Authorization':
+                    token
 
                 }
 
             }
+        );
 
-        )
 
+        if(
+            res.status === 401
+        ){
 
-        if(res.status === 401){
-
-            localStorage.clear()
+            localStorage.clear();
 
             window.location.href =
-                'index.html'
+                'index.html';
 
-            return
+            return;
 
         }
 
 
-        if(res.status === 403){
+        if(
+            res.status === 403
+        ){
 
             alert(
                 'No tienes permisos de director.'
-            )
+            );
 
-            window.location.href =
-                'index.html'
-
-            return
+            return;
 
         }
 
 
         const data =
-            await res.json()
+        await res.json();
 
 
         if(!res.ok){
 
             throw new Error(
                 data.mensaje ||
-                'Error cargando información'
-            )
+                'Error cargando resumen'
+            );
 
         }
 
-
-        // 👨‍🎓 ALUMNOS
 
         document
         .getElementById(
             'totalAlumnos'
         )
         .textContent =
-            data.alumnos
+        data.alumnos;
 
-
-        // 👨‍🏫 MAESTROS
 
         document
         .getElementById(
             'totalMaestros'
         )
         .textContent =
-            data.maestros
+        data.maestros;
 
-
-        // 🏫 GRUPOS
 
         document
         .getElementById(
             'totalGrupos'
         )
         .textContent =
-            data.grupos
+        data.grupos;
 
-
-        // 📚 MATERIAS
 
         document
         .getElementById(
             'totalMaterias'
         )
         .textContent =
-            data.materias
+        data.materias;
 
-
-        // 👨‍👩‍👧 PADRES
 
         document
         .getElementById(
             'totalPadres'
         )
         .textContent =
-            data.padres
+        data.padres;
 
-
-        // 📊 PROMEDIO
 
         document
         .getElementById(
             'promedio'
         )
         .textContent =
-            data.promedioGeneral
+        data.promedioGeneral;
 
-
-        // 📅 ASISTENCIA
 
         document
         .getElementById(
             'asistencia'
         )
         .textContent =
-            data.porcentajeAsistencia +
-            '%'
+        data.porcentajeAsistencia +
+        '%';
 
-
-        // 📊 BARRA
 
         document
         .getElementById(
             'porcentaje'
         )
         .textContent =
-            data.porcentajeAsistencia +
-            '%'
+        data.porcentajeAsistencia +
+        '%';
 
 
         document
@@ -1478,98 +1538,105 @@ async function cargarResumen(){
             'barraAsistencia'
         )
         .style.width =
-            data.porcentajeAsistencia +
-            '%'
+        data.porcentajeAsistencia +
+        '%';
 
-
-        // ⚠️ ALUMNOS BAJOS
 
         document
         .getElementById(
             'alumnosBajos'
         )
         .textContent =
-            data.alumnosBajos
+        data.alumnosBajos;
 
 
-    }catch(error){
+    }
 
-        console.error(error)
+    catch(error){
 
-        alert(
-            'No se pudo cargar la información del director.'
-        )
+        console.error(
+            error
+        );
+
+        console.log(
+            'No se pudo cargar el resumen.'
+        );
 
     }
 
 }
 
 
-// =========================
-// 🚪 CERRAR SESIÓN
-// =========================
 
-function cerrarSesion(){
+// =====================================================
+// ALUMNOS
+// =====================================================
 
-    localStorage.removeItem('token')
-
-    localStorage.removeItem('rol')
-
-    window.location.href =
-        'index.html'
-
-}
+let listaAlumnos = [];
 
 
-// =========================
-// 🚀 INICIAR
-// =========================
-
-cargarResumen()
-
-// =========================
-// 👨‍🎓 ALUMNOS
-// =========================
-
-let listaAlumnos = []
-
+// =====================================================
+// CARGAR ALUMNOS
+// =====================================================
 
 async function cargarAlumnos(){
 
     try{
 
+
         const res =
         await fetch(
-
             `${API}/alumnos`,
-
             {
+
+                method:'GET',
 
                 headers:{
 
-                    'Authorization':token
+                    'Authorization':
+                    token
 
                 }
 
             }
+        );
 
-        )
 
+        if(
+            res.status === 401
+        ){
 
-        if(res.status === 401){
-
-            localStorage.clear()
+            localStorage.clear();
 
             window.location.href =
-                'index.html'
+                'index.html';
 
-            return
+            return;
+
+        }
+
+
+        if(
+            res.status === 403
+        ){
+
+            alert(
+                'No tienes permisos para consultar alumnos.'
+            );
+
+            return;
 
         }
 
 
         const data =
-            await res.json()
+        await res.json();
+
+
+        console.log(
+            'ALUMNOS:',
+            data
+        );
 
 
         if(!res.ok){
@@ -1577,26 +1644,28 @@ async function cargarAlumnos(){
             throw new Error(
                 data.mensaje ||
                 'Error cargando alumnos'
-            )
+            );
 
         }
 
 
-        listaAlumnos = data
-
-console.log(
-    'Alumnos recibidos:',
-    listaAlumnos
-)
-
-mostrarListaAlumnos(
-    listaAlumnos
-)
+        listaAlumnos =
+        data;
 
 
-    }catch(error){
+        mostrarListaAlumnos(
+            listaAlumnos
+        );
 
-        console.error(error)
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
 
         document
         .getElementById(
@@ -1614,43 +1683,47 @@ mostrarListaAlumnos(
                         color:#dc2626;
                     ">
 
-                    No se pudieron cargar
-                    los alumnos.
+                    Error al cargar los alumnos.
 
                 </td>
 
             </tr>
 
-        `
+        `;
 
     }
 
 }
 
 
-// =========================
-// 📋 MOSTRAR ALUMNOS
-// =========================
+
+// =====================================================
+// MOSTRAR ALUMNOS
+// =====================================================
 
 function mostrarListaAlumnos(
     alumnos
 ){
 
     const tabla =
-        document.getElementById(
-            'tablaAlumnos'
-        )
+    document.getElementById(
+        'tablaAlumnos'
+    );
 
 
-    document
-    .getElementById(
+    const contador =
+    document.getElementById(
         'contadorAlumnos'
-    )
-    .textContent =
-        `${alumnos.length} alumnos`
+    );
 
 
-    if(alumnos.length === 0){
+    contador.textContent =
+    `${alumnos.length} alumnos`;
+
+
+    if(
+        alumnos.length === 0
+    ){
 
         tabla.innerHTML = `
 
@@ -1670,112 +1743,141 @@ function mostrarListaAlumnos(
 
             </tr>
 
-        `
+        `;
 
-        return
+        return;
 
     }
 
 
     tabla.innerHTML =
+    alumnos.map(
+        alumno => `
 
-        alumnos.map(alumno => `
+        <tr>
 
-            <tr>
+            <td class="nombre-alumno">
 
-                <td style="
-                    padding:14px 12px;
-                    border-bottom:
-                    1px solid #f1f5f9;
-                    font-weight:bold;
-                ">
+                ${
+                    alumno.nombre ||
+                    'Sin nombre'
+                }
 
-                    ${alumno.nombre || 'Sin nombre'}
-
-                </td>
+            </td>
 
 
-                <td style="
-                    padding:14px 12px;
-                    border-bottom:
-                    1px solid #f1f5f9;
-                ">
+            <td>
 
-                    ${alumno.usuario || '—'}
+                ${
+                    alumno.usuario ||
+                    '—'
+                }
 
-                </td>
-
-
-                <td style="
-                    padding:14px 12px;
-                    border-bottom:
-                    1px solid #f1f5f9;
-                ">
-
-                    ${alumno.email || 'Sin correo'}
-
-                </td>
+            </td>
 
 
-                <td style="
-                    padding:14px 12px;
-                    border-bottom:
-                    1px solid #f1f5f9;
-                ">
+            <td>
 
-                    ${alumno.edad || '—'}
+                ${
+                    alumno.email ||
+                    'Sin correo'
+                }
 
-                </td>
+            </td>
 
-            </tr>
 
-        `).join('')
+            <td>
+
+                ${
+                    alumno.edad ||
+                    '—'
+                }
+
+            </td>
+
+        </tr>
+
+    `
+    ).join('');
 
 }
 
 
-// =========================
-// 🔎 BUSCAR ALUMNO
-// =========================
+
+// =====================================================
+// BUSCAR ALUMNO
+// =====================================================
 
 function filtrarAlumnos(){
 
     const texto =
-        document
-        .getElementById(
-            'buscarAlumno'
-        )
-        .value
-        .toLowerCase()
+    document
+    .getElementById(
+        'buscarAlumno'
+    )
+    .value
+    .toLowerCase()
+    .trim();
 
 
     const filtrados =
+    listaAlumnos.filter(
+        alumno => {
 
-        listaAlumnos.filter(alumno =>
 
-            (alumno.nombre || '')
-            .toLowerCase()
-            .includes(texto)
+            const nombre =
+            (
+                alumno.nombre ||
+                ''
+            )
+            .toLowerCase();
 
-            ||
 
-            (alumno.usuario || '')
-            .toLowerCase()
-            .includes(texto)
+            const usuario =
+            (
+                alumno.usuario ||
+                ''
+            )
+            .toLowerCase();
 
-        )
+
+            const email =
+            (
+                alumno.email ||
+                ''
+            )
+            .toLowerCase();
+
+
+            return (
+
+                nombre.includes(texto)
+
+                ||
+
+                usuario.includes(texto)
+
+                ||
+
+                email.includes(texto)
+
+            );
+
+        }
+    );
 
 
     mostrarListaAlumnos(
         filtrados
-    )
+    );
 
 }
 
 
-// =========================
-// 🏠 MOSTRAR INICIO
-// =========================
+
+// =====================================================
+// INICIO
+// =====================================================
 
 function mostrarInicio(){
 
@@ -1783,54 +1885,117 @@ function mostrarInicio(){
     .getElementById(
         'seccionInicio'
     )
-    .style.display = 'block'
+    .style.display =
+    'block';
 
 
     document
     .getElementById(
         'seccionAlumnos'
     )
-    .style.display = 'none'
+    .style.display =
+    'none';
+
+
+    document
+    .getElementById(
+        'btnInicio'
+    )
+    .classList
+    .add(
+        'active'
+    );
+
+
+    document
+    .getElementById(
+        'btnAlumnos'
+    )
+    .classList
+    .remove(
+        'active'
+    );
 
 }
 
 
-// =========================
-// 👨‍🎓 MOSTRAR ALUMNOS
-// =========================
+
+// =====================================================
+// ALUMNOS
+// =====================================================
 
 function mostrarAlumnos(){
 
-    const inicio =
-        document.getElementById(
-            'seccionInicio'
-        )
-
-    const alumnos =
-        document.getElementById(
-            'seccionAlumnos'
-        )
+    document
+    .getElementById(
+        'seccionInicio'
+    )
+    .style.display =
+    'none';
 
 
-    if(!inicio || !alumnos){
-
-        console.error(
-            'No se encontraron las secciones'
-        )
-
-        return
-
-    }
+    document
+    .getElementById(
+        'seccionAlumnos'
+    )
+    .style.display =
+    'block';
 
 
-    inicio.style.display = 'none'
+    document
+    .getElementById(
+        'btnInicio'
+    )
+    .classList
+    .remove(
+        'active'
+    );
 
-    alumnos.style.display = 'block'
+
+    document
+    .getElementById(
+        'btnAlumnos'
+    )
+    .classList
+    .add(
+        'active'
+    );
 
 
-    cargarAlumnos()
+    cargarAlumnos();
 
 }
+
+
+
+// =====================================================
+// CERRAR SESIÓN
+// =====================================================
+
+function cerrarSesion(){
+
+    localStorage.removeItem(
+        'token'
+    );
+
+    localStorage.removeItem(
+        'rol'
+    );
+
+
+    window.location.href =
+        'index.html';
+
+}
+
+
+
+// =====================================================
+// INICIAR DASHBOARD
+// =====================================================
+
+cargarResumen();
+
 
 </script>
 
