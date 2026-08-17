@@ -170,6 +170,10 @@ button.action:hover{
 👨‍👩‍👧 Padres
 </button>
 
+<button onclick="mostrar('directores')">
+    👔 Directores
+</button>
+
 </div>
 
 <div class="main">
@@ -333,6 +337,51 @@ style="display:none;">
         Crear Padre
     </button>
 
+</div>
+
+<!-- DIRECTORES --> 
+ 
+<div id="directores" 
+class="card" 
+style="display:none;"> 
+ 
+    <h2> 
+        👔 Crear Director 
+    </h2> 
+ 
+    <input 
+        type="text" 
+        id="nombreDirector" 
+        placeholder="Nombre completo" 
+    > 
+ 
+    <input 
+        type="text" 
+        id="usuarioDirector" 
+        placeholder="Usuario" 
+    > 
+ 
+    <input 
+        type="email" 
+        id="emailDirector" 
+        placeholder="Correo electrónico" 
+    > 
+ 
+    <input 
+        type="password" 
+        id="passwordDirector" 
+        placeholder="Contraseña" 
+    > 
+ 
+    <button 
+        class="action" 
+        onclick="crearDirector()" 
+    > 
+        Crear Director 
+    </button> 
+ 
+    <div id="listaDirectores"></div> 
+ 
 </div>
 
 <!-- MATERIAS -->
@@ -1281,6 +1330,8 @@ async function crearPadre(){
 
     cargarUsuarios()
 }
+
+
 
 cargarUsuarios()
 cargarMaterias()
