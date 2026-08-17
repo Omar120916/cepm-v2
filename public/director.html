@@ -10,7 +10,6 @@ content="width=device-width, initial-scale=1.0">
 
 <title>CEPM | Director</title>
 
-
 <style>
 
 /* =========================
@@ -18,607 +17,347 @@ content="width=device-width, initial-scale=1.0">
 ========================= */
 
 *{
-
     margin:0;
     padding:0;
     box-sizing:border-box;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
 }
-
 
 body{
-
     background:#f1f5f9;
-
     min-height:100vh;
-
     color:#0f172a;
-
 }
-
 
 /* =========================
    SIDEBAR
 ========================= */
 
 .sidebar{
-
     position:fixed;
-
     left:0;
     top:0;
-
     width:250px;
-
     height:100vh;
-
     background:#0f172a;
-
     color:white;
-
     padding:25px 18px;
-
     z-index:1000;
-
 }
-
 
 .logo{
-
     text-align:center;
-
     margin-bottom:35px;
-
 }
-
 
 .logo h1{
-
     font-size:32px;
-
     letter-spacing:2px;
-
 }
-
 
 .logo p{
-
     color:#94a3b8;
-
     font-size:13px;
-
     margin-top:5px;
-
 }
-
 
 .menu{
-
     display:flex;
-
     flex-direction:column;
-
     gap:8px;
-
 }
-
 
 .menu button{
-
     border:none;
-
     background:transparent;
-
     color:#cbd5e1;
-
     padding:14px 16px;
-
     border-radius:12px;
-
     text-align:left;
-
     font-size:15px;
-
     cursor:pointer;
-
     transition:.2s;
-
 }
-
 
 .menu button:hover{
-
     background:#1e293b;
-
     color:white;
-
 }
-
 
 .menu button.active{
-
     background:#2563eb;
-
     color:white;
-
 }
-
 
 .logout{
-
     position:absolute;
-
     bottom:25px;
-
     left:18px;
-
     right:18px;
-
 }
-
 
 .logout button{
-
     width:100%;
-
     border:none;
-
     padding:13px;
-
     border-radius:12px;
-
     background:#dc2626;
-
     color:white;
-
     font-weight:bold;
-
     cursor:pointer;
-
 }
-
 
 .logout button:hover{
-
     background:#b91c1c;
-
 }
-
 
 /* =========================
    MAIN
 ========================= */
 
 .main{
-
     margin-left:250px;
-
     padding:30px;
-
 }
-
 
 /* =========================
    HEADER
 ========================= */
 
 .header{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:30px;
-
 }
-
 
 .header h2{
-
     font-size:28px;
-
 }
-
 
 .header p{
-
     color:#64748b;
-
     margin-top:5px;
-
 }
-
 
 .user{
-
     background:white;
-
     padding:12px 18px;
-
     border-radius:15px;
-
-    box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.06);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
     font-weight:bold;
-
 }
-
 
 /* =========================
    CARDS
 ========================= */
 
 .cards{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:20px;
-
     margin-bottom:25px;
-
 }
-
 
 .card{
-
     background:white;
-
     border-radius:18px;
-
     padding:22px;
-
-    box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.06);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
-
 
 .card-top{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
 }
-
 
 .card-icon{
-
     width:48px;
-
     height:48px;
-
     border-radius:14px;
-
     background:#eff6ff;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     font-size:23px;
-
 }
-
 
 .card h3{
-
     margin-top:18px;
-
     font-size:30px;
-
 }
-
 
 .card p{
-
     color:#64748b;
-
     margin-top:5px;
-
 }
-
 
 /* =========================
    PANELS
 ========================= */
 
 .panels{
-
     display:grid;
-
-    grid-template-columns:
-    2fr 1fr;
-
+    grid-template-columns:2fr 1fr;
     gap:20px;
-
 }
-
 
 .panel{
-
     background:white;
-
     border-radius:18px;
-
     padding:25px;
-
-    box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.06);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
-
 
 .panel h3{
-
     margin-bottom:20px;
-
     font-size:20px;
-
 }
-
 
 /* =========================
    STATS
 ========================= */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:15px;
-
 }
-
 
 .stat{
-
     background:#f8fafc;
-
     border-radius:15px;
-
     padding:20px;
-
 }
-
 
 .stat span{
-
     display:block;
-
     color:#64748b;
-
     font-size:14px;
-
 }
-
 
 .stat strong{
-
     display:block;
-
     margin-top:8px;
-
     font-size:28px;
-
 }
-
 
 /* =========================
    PROGRESS
 ========================= */
 
 .progress{
-
     margin-top:20px;
-
 }
-
 
 .progress-info{
-
     display:flex;
-
     justify-content:space-between;
-
     margin-bottom:8px;
-
 }
-
 
 .progress-bar{
-
     width:100%;
-
     height:12px;
-
     background:#e2e8f0;
-
     border-radius:20px;
-
     overflow:hidden;
-
 }
-
 
 .progress-fill{
-
     height:100%;
-
     width:0%;
-
     background:#2563eb;
-
     border-radius:20px;
-
     transition:1s;
-
 }
-
 
 /* =========================
    WARNING
 ========================= */
 
 .warning{
-
     background:#fff7ed;
-
     border:1px solid #fed7aa;
-
     border-radius:15px;
-
     padding:20px;
-
 }
-
 
 .warning strong{
-
     display:block;
-
     font-size:30px;
-
     color:#ea580c;
-
 }
-
 
 .warning p{
-
     color:#9a3412;
-
     margin-top:5px;
-
 }
-
 
 /* =========================
    ALUMNOS
 ========================= */
 
 #seccionAlumnos{
-
     width:100%;
-
 }
-
 
 .alumnos-search{
-
     width:100%;
-
     padding:15px;
-
     border:1px solid #e2e8f0;
-
     border-radius:12px;
-
     font-size:15px;
-
     outline:none;
-
 }
-
 
 .alumnos-search:focus{
-
     border-color:#2563eb;
-
 }
-
 
 .tabla-container{
-
     overflow-x:auto;
-
 }
-
 
 .tabla-alumnos{
-
     width:100%;
-
     border-collapse:collapse;
-
 }
-
 
 .tabla-alumnos th{
-
     text-align:left;
-
     padding:14px 12px;
-
-    border-bottom:
-    1px solid #e2e8f0;
-
+    border-bottom:1px solid #e2e8f0;
     font-size:14px;
-
     color:#475569;
-
 }
-
 
 .tabla-alumnos td{
-
     padding:14px 12px;
-
-    border-bottom:
-    1px solid #f1f5f9;
-
+    border-bottom:1px solid #f1f5f9;
 }
-
 
 .tabla-alumnos tbody tr:hover{
-
     background:#f8fafc;
-
 }
-
 
 .nombre-alumno{
-
     font-weight:bold;
-
 }
-
 
 .contador{
-
     font-size:14px;
-
     color:#64748b;
-
 }
 
-
 /* =========================
-   SECCIONES DEL DIRECTOR
+   SECCIONES DIRECTOR
 ========================= */
 
-.seccion-director{display:none;}
+.seccion-director{
+    display:none;
+}
 
 .director-toolbar{
     display:flex;
@@ -637,7 +376,9 @@ body{
     font-size:15px;
 }
 
-.director-search:focus{border-color:#2563eb;}
+.director-search:focus{
+    border-color:#2563eb;
+}
 
 .tabla-director{
     width:100%;
@@ -657,7 +398,9 @@ body{
     border-bottom:1px solid #f1f5f9;
 }
 
-.tabla-director tbody tr:hover{background:#f8fafc;}
+.tabla-director tbody tr:hover{
+    background:#f8fafc;
+}
 
 .badge{
     display:inline-block;
@@ -683,9 +426,122 @@ body{
     background:#fff;
 }
 
-.aviso-item h4{margin-bottom:7px;}
-.aviso-item p{color:#475569;line-height:1.5;}
-.aviso-meta{font-size:12px;color:#94a3b8;margin-top:10px;}
+.aviso-item h4{
+    margin-bottom:7px;
+}
+
+.aviso-item p{
+    color:#475569;
+    line-height:1.5;
+}
+
+.aviso-meta{
+    font-size:12px;
+    color:#94a3b8;
+    margin-top:10px;
+}
+
+/* =========================
+   BOTÓN CONSTANCIA
+========================= */
+
+.btn-constancia{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:13px 20px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn-constancia:hover{
+    background:#1d4ed8;
+}
+
+.btn-constancia:disabled{
+    background:#94a3b8;
+    cursor:not-allowed;
+}
+
+.constancia-acciones{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+/* =========================
+   HOJA DE CONSTANCIA
+========================= */
+
+.constancia-documento{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:15px;
+    padding:40px;
+}
+
+.constancia-encabezado{
+    text-align:center;
+    border-bottom:2px solid #0f172a;
+    padding-bottom:20px;
+    margin-bottom:25px;
+}
+
+.constancia-encabezado h1{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.constancia-encabezado h2{
+    font-size:20px;
+    color:#475569;
+}
+
+.constancia-texto{
+    font-size:17px;
+    line-height:1.8;
+    text-align:justify;
+    margin:25px 0;
+}
+
+.constancia-tabla{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.constancia-tabla th,
+.constancia-tabla td{
+    border:1px solid #cbd5e1;
+    padding:10px;
+    text-align:left;
+}
+
+.constancia-tabla th{
+    background:#f1f5f9;
+}
+
+.firma-constancia{
+    margin-top:70px;
+    text-align:center;
+}
+
+.firma-linea{
+    width:260px;
+    border-top:1px solid #0f172a;
+    margin:0 auto 8px;
+}
+
+.constancia-pie{
+    margin-top:50px;
+    text-align:center;
+    font-size:12px;
+    color:#64748b;
+}
 
 /* =========================
    RESPONSIVE
@@ -694,117 +550,109 @@ body{
 @media(max-width:1100px){
 
     .cards{
-
-        grid-template-columns:
-        repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
-
 
 @media(max-width:800px){
 
     .sidebar{
-
         width:75px;
-
         padding:20px 10px;
-
     }
-
 
     .logo h1{
-
         font-size:20px;
-
     }
-
 
     .logo p{
-
         display:none;
-
     }
-
 
     .menu button{
-
         font-size:0;
-
         text-align:center;
-
     }
-
 
     .menu button::first-letter{
-
         font-size:22px;
-
     }
-
 
     .logout button{
-
         font-size:0;
-
     }
-
 
     .logout button::first-letter{
-
         font-size:20px;
-
     }
-
 
     .main{
-
         margin-left:75px;
-
     }
 
-
     .panels{
-
         grid-template-columns:1fr;
-
     }
 
 }
 
-
 @media(max-width:550px){
 
     .main{
-
         padding:18px;
-
     }
-
 
     .cards{
-
         grid-template-columns:1fr;
-
     }
-
 
     .header{
-
         align-items:flex-start;
-
         gap:15px;
-
         flex-direction:column;
-
     }
 
-
     .stats{
-
         grid-template-columns:1fr;
+    }
 
+    .constancia-documento{
+        padding:20px;
+    }
+
+}
+
+/* =========================
+   IMPRESIÓN
+========================= */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    body *{
+        visibility:hidden;
+    }
+
+    #documentoConstancia,
+    #documentoConstancia *{
+        visibility:visible;
+    }
+
+    #documentoConstancia{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        border:none;
+        box-shadow:none;
+    }
+
+    .constancia-acciones{
+        display:none !important;
     }
 
 }
@@ -812,7 +660,6 @@ body{
 </style>
 
 </head>
-
 
 <body>
 
@@ -822,7 +669,6 @@ body{
 ===================================================== -->
 
 <aside class="sidebar">
-
 
     <div class="logo">
 
@@ -834,119 +680,87 @@ body{
 
     </div>
 
-
     <div class="menu">
 
-
-        <button
-            id="btnInicio"
-            class="active"
-            onclick="mostrarInicio()">
-
+        <button id="btnInicio"
+                class="active"
+                onclick="mostrarInicio()">
             🏠 Inicio
-
         </button>
 
-
-        <button
-            id="btnAlumnos"
-            onclick="mostrarAlumnos()">
-
+        <button id="btnAlumnos"
+                onclick="mostrarAlumnos()">
             👨‍🎓 Alumnos
-
         </button>
 
-
-        <button id="btnMaestros" onclick="mostrarSeccion('maestros')">
-
+        <button id="btnMaestros"
+                onclick="mostrarSeccion('maestros')">
             👨‍🏫 Maestros
-
         </button>
 
-
-        <button id="btnGrupos" onclick="mostrarSeccion('grupos')">
-
+        <button id="btnGrupos"
+                onclick="mostrarSeccion('grupos')">
             📚 Grupos
-
         </button>
 
-
-        <button id="btnCalificaciones" onclick="mostrarSeccion('calificaciones')">
-
+        <button id="btnCalificaciones"
+                onclick="mostrarSeccion('calificaciones')">
             📊 Calificaciones
-
         </button>
 
-
-        <button id="btnAsistencia" onclick="mostrarSeccion('asistencia')">
-
+        <button id="btnAsistencia"
+                onclick="mostrarSeccion('asistencia')">
             📅 Asistencia
-
         </button>
 
-
-        <button id="btnReportes" onclick="mostrarSeccion('reportes')">
-
+        <button id="btnReportes"
+                onclick="mostrarSeccion('reportes')">
             📄 Reportes
-
         </button>
 
-
-        <button id="btnAvisos" onclick="mostrarSeccion('avisos')">
-
+        <button id="btnAvisos"
+                onclick="mostrarSeccion('avisos')">
             📢 Avisos
-
         </button>
 
-        <button id="btnConstancias" onclick="mostrarSeccion('constancias')">
-
-    📄 Constancias
-
-</button>
-
+        <button id="btnConstancias"
+                onclick="mostrarSeccion('constancias')">
+            📄 Constancias
+        </button>
 
     </div>
-
 
     <div class="logout">
 
-        <button
-            onclick="cerrarSesion()">
-
+        <button onclick="cerrarSesion()">
             🚪 Cerrar sesión
-
         </button>
 
     </div>
-
 
 </aside>
 
 
-
 <!-- =====================================================
-     CONTENIDO PRINCIPAL
+     CONTENIDO
 ===================================================== -->
 
 <main class="main">
 
 
-
 <!-- =====================================================
-     SECCIÓN INICIO
+     INICIO
 ===================================================== -->
 
 <section id="seccionInicio">
 
-
     <header class="header">
-
 
         <div>
 
             <h2 id="saludoDirector">
-    Buenos días, Director 👋
-</h2>
+                Cargando saludo... 👋
+            </h2>
 
             <p>
                 Resumen general de la institución
@@ -954,166 +768,94 @@ body{
 
         </div>
 
-
         <div class="user">
-
             🏫 Dirección
-
         </div>
-
 
     </header>
 
 
-
-    <!-- TARJETAS -->
-
     <section class="cards">
 
-
         <div class="card">
 
             <div class="card-top">
 
-                <div>
-
-                    <p>
-                        Alumnos
-                    </p>
-
-                </div>
+                <p>Alumnos</p>
 
                 <div class="card-icon">
-
                     👨‍🎓
-
                 </div>
 
             </div>
 
+            <h3 id="totalAlumnos">--</h3>
 
-            <h3 id="totalAlumnos">
-                --
-            </h3>
-
-
-            <p>
-                Alumnos registrados
-            </p>
+            <p>Alumnos registrados</p>
 
         </div>
-
 
 
         <div class="card">
 
             <div class="card-top">
 
-                <div>
-
-                    <p>
-                        Maestros
-                    </p>
-
-                </div>
+                <p>Maestros</p>
 
                 <div class="card-icon">
-
                     👨‍🏫
-
                 </div>
 
             </div>
 
+            <h3 id="totalMaestros">--</h3>
 
-            <h3 id="totalMaestros">
-                --
-            </h3>
-
-
-            <p>
-                Personal docente
-            </p>
+            <p>Personal docente</p>
 
         </div>
-
 
 
         <div class="card">
 
             <div class="card-top">
 
-                <div>
-
-                    <p>
-                        Grupos
-                    </p>
-
-                </div>
+                <p>Grupos</p>
 
                 <div class="card-icon">
-
                     🏫
-
                 </div>
 
             </div>
 
+            <h3 id="totalGrupos">--</h3>
 
-            <h3 id="totalGrupos">
-                --
-            </h3>
-
-
-            <p>
-                Grupos registrados
-            </p>
+            <p>Grupos registrados</p>
 
         </div>
-
 
 
         <div class="card">
 
             <div class="card-top">
 
-                <div>
-
-                    <p>
-                        Materias
-                    </p>
-
-                </div>
+                <p>Materias</p>
 
                 <div class="card-icon">
-
                     📚
-
                 </div>
 
             </div>
 
+            <h3 id="totalMaterias">--</h3>
 
-            <h3 id="totalMaterias">
-                --
-            </h3>
-
-
-            <p>
-                Materias disponibles
-            </p>
+            <p>Materias disponibles</p>
 
         </div>
-
 
     </section>
 
 
-
-    <!-- PANELES -->
-
     <section class="panels">
-
 
         <div class="panel">
 
@@ -1121,9 +863,7 @@ body{
                 📊 Rendimiento académico
             </h3>
 
-
             <div class="stats">
-
 
                 <div class="stat">
 
@@ -1137,7 +877,6 @@ body{
 
                 </div>
 
-
                 <div class="stat">
 
                     <span>
@@ -1150,13 +889,10 @@ body{
 
                 </div>
 
-
             </div>
 
 
-
             <div class="progress">
-
 
                 <div class="progress-info">
 
@@ -1170,7 +906,6 @@ body{
 
                 </div>
 
-
                 <div class="progress-bar">
 
                     <div
@@ -1180,12 +915,9 @@ body{
 
                 </div>
 
-
             </div>
 
-
         </div>
-
 
 
         <div class="panel">
@@ -1194,7 +926,6 @@ body{
                 ⚠️ Atención
             </h3>
 
-
             <div class="warning">
 
                 <strong id="alumnosBajos">
@@ -1202,34 +933,23 @@ body{
                 </strong>
 
                 <p>
-                    alumnos con promedio
-                    menor a 6
+                    alumnos con promedio menor a 6
                 </p>
 
             </div>
 
-
         </div>
-
 
     </section>
 
 
-
-    <!-- INFORMACIÓN ADICIONAL -->
-
-    <section
-        class="panel"
-        style="margin-top:20px;">
-
+    <section class="panel" style="margin-top:20px;">
 
         <h3>
             👨‍👩‍👧 Información adicional
         </h3>
 
-
         <div class="stats">
-
 
             <div class="stat">
 
@@ -1243,44 +963,33 @@ body{
 
             </div>
 
-
             <div class="stat">
 
                 <span>
                     Estado del sistema
                 </span>
 
-                <strong
-                    style="font-size:20px;">
-
+                <strong style="font-size:20px;">
                     🟢 Activo
-
                 </strong>
 
             </div>
 
-
         </div>
 
-
     </section>
-
 
 </section>
 
 
-
 <!-- =====================================================
-     SECCIÓN ALUMNOS
+     ALUMNOS
 ===================================================== -->
 
-<section
-    id="seccionAlumnos"
-    style="display:none;">
-
+<section id="seccionAlumnos"
+         style="display:none;">
 
     <header class="header">
-
 
         <div>
 
@@ -1288,32 +997,21 @@ body{
                 👨‍🎓 Alumnos
             </h2>
 
-
             <p>
                 Consulta de alumnos registrados
             </p>
 
-
         </div>
-
 
         <div class="user">
-
             👨‍🎓 Alumnos
-
         </div>
-
 
     </header>
 
 
-
-    <!-- BUSCADOR -->
-
-    <div
-        class="panel"
-        style="margin-bottom:20px;">
-
+    <div class="panel"
+         style="margin-bottom:20px;">
 
         <input
             type="text"
@@ -1322,160 +1020,560 @@ body{
             placeholder="🔎 Buscar por nombre, usuario o correo..."
             oninput="filtrarAlumnos()">
 
-
     </div>
 
 
-
-    <!-- TABLA -->
-
     <div class="panel">
 
-
-        <div
-            style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                margin-bottom:20px;
-            ">
-
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        ">
 
             <h3>
                 Lista de alumnos
             </h3>
 
-
             <strong
                 id="contadorAlumnos"
                 class="contador">
-
                 0 alumnos
-
             </strong>
-
 
         </div>
 
 
-
         <div class="tabla-container">
 
-
-            <table
-                class="tabla-alumnos">
-
+            <table class="tabla-alumnos">
 
                 <thead>
 
-
                     <tr>
 
-                        <th>
-                            Nombre
-                        </th>
-
-                        <th>
-                            Usuario
-                        </th>
-
-                        <th>
-                            Correo
-                        </th>
-
-                        <th>
-                            Edad
-                        </th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Edad</th>
 
                     </tr>
 
-
                 </thead>
 
-
-
-                <tbody
-                    id="tablaAlumnos">
-
+                <tbody id="tablaAlumnos">
 
                     <tr>
 
-
                         <td
                             colspan="4"
-                            style="
-                                text-align:center;
-                                padding:30px;
-                                color:#64748b;
-                            ">
+                            class="empty-state">
 
                             Cargando alumnos...
 
                         </td>
 
-
                     </tr>
-
 
                 </tbody>
 
-
             </table>
 
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAESTROS
+===================================================== -->
+
+<section id="seccionMaestros"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>👨‍🏫 Maestros</h2>
+
+            <p>
+                Consulta del personal docente
+            </p>
+
+        </div>
+
+        <div class="user">
+            👨‍🏫 Maestros
+        </div>
+
+    </header>
+
+
+    <div class="panel">
+
+        <div class="director-toolbar">
+
+            <input
+                id="buscarMaestro"
+                class="director-search"
+                placeholder="🔎 Buscar maestro..."
+                oninput="filtrarMaestros()">
 
         </div>
 
 
+        <div class="tabla-container">
+
+            <table class="tabla-director">
+
+                <thead>
+
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaMaestros">
+
+                    <tr>
+                        <td colspan="3"
+                            class="empty-state">
+                            Cargando maestros...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
 
+</section>
+
+
+<!-- =====================================================
+     GRUPOS
+===================================================== -->
+
+<section id="seccionGrupos"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>📚 Grupos</h2>
+
+            <p>
+                Grupos, materias y maestros asignados
+            </p>
+
+        </div>
+
+        <div class="user">
+            📚 Grupos
+        </div>
+
+    </header>
+
+
+    <div class="panel">
+
+        <div class="tabla-container">
+
+            <table class="tabla-director">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Grupo</th>
+                        <th>Materia</th>
+                        <th>Maestro</th>
+                        <th>Horario</th>
+                        <th>Aula</th>
+                        <th>Alumnos</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaGrupos">
+
+                    <tr>
+                        <td colspan="6"
+                            class="empty-state">
+                            Cargando grupos...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </section>
 
 
+<!-- =====================================================
+     CALIFICACIONES
+===================================================== -->
+
+<section id="seccionCalificaciones"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>📊 Calificaciones</h2>
+
+            <p>
+                Consulta general de rendimiento académico
+            </p>
+
+        </div>
+
+        <div class="user">
+            📊 Calificaciones
+        </div>
+
+    </header>
 
 
-<!-- MAESTROS -->
-<section id="seccionMaestros" class="seccion-director">
-    <header class="header"><div><h2>👨‍🏫 Maestros</h2><p>Consulta del personal docente</p></div><div class="user">👨‍🏫 Maestros</div></header>
-    <div class="panel"><div class="director-toolbar"><input id="buscarMaestro" class="director-search" placeholder="🔎 Buscar maestro..." oninput="filtrarMaestros()"></div>
-    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Nombre</th><th>Usuario</th><th>Correo</th></tr></thead><tbody id="tablaMaestros"><tr><td colspan="3" class="empty-state">Cargando maestros...</td></tr></tbody></table></div></div>
+    <div class="panel">
+
+        <div class="director-toolbar">
+
+            <input
+                id="buscarCalificacion"
+                class="director-search"
+                placeholder="🔎 Buscar alumno, grupo o materia..."
+                oninput="filtrarCalificaciones()">
+
+        </div>
+
+
+        <div class="tabla-container">
+
+            <table class="tabla-director">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Alumno</th>
+                        <th>Grupo</th>
+                        <th>Materia</th>
+                        <th>Parcial</th>
+                        <th>Calificación</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaCalificaciones">
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="empty-state">
+
+                            Cargando calificaciones...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- GRUPOS -->
-<section id="seccionGrupos" class="seccion-director">
-    <header class="header"><div><h2>📚 Grupos</h2><p>Grupos, materias y maestros asignados</p></div><div class="user">📚 Grupos</div></header>
-    <div class="panel"><div class="tabla-container"><table class="tabla-director"><thead><tr><th>Grupo</th><th>Materia</th><th>Maestro</th><th>Horario</th><th>Aula</th><th>Alumnos</th></tr></thead><tbody id="tablaGrupos"><tr><td colspan="6" class="empty-state">Cargando grupos...</td></tr></tbody></table></div></div>
+
+<!-- =====================================================
+     ASISTENCIA
+===================================================== -->
+
+<section id="seccionAsistencia"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>📅 Asistencia</h2>
+
+            <p>
+                Consulta de asistencia por grupo y alumno
+            </p>
+
+        </div>
+
+        <div class="user">
+            📅 Asistencia
+        </div>
+
+    </header>
+
+
+    <div class="panel">
+
+        <div class="director-toolbar">
+
+            <input
+                id="buscarAsistencia"
+                class="director-search"
+                placeholder="🔎 Buscar alumno, grupo o estado..."
+                oninput="filtrarAsistencias()">
+
+        </div>
+
+
+        <div class="tabla-container">
+
+            <table class="tabla-director">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+                        <th>Alumno</th>
+                        <th>Grupo</th>
+                        <th>Materia</th>
+                        <th>Estado</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaAsistencia">
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="empty-state">
+
+                            Cargando asistencia...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- CALIFICACIONES -->
-<section id="seccionCalificaciones" class="seccion-director">
-    <header class="header"><div><h2>📊 Calificaciones</h2><p>Consulta general de rendimiento académico</p></div><div class="user">📊 Calificaciones</div></header>
-    <div class="panel"><div class="director-toolbar"><input id="buscarCalificacion" class="director-search" placeholder="🔎 Buscar alumno, grupo o materia..." oninput="filtrarCalificaciones()"></div>
-    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Alumno</th><th>Grupo</th><th>Materia</th><th>Parcial</th><th>Calificación</th></tr></thead><tbody id="tablaCalificaciones"><tr><td colspan="5" class="empty-state">Cargando calificaciones...</td></tr></tbody></table></div></div>
+
+<!-- =====================================================
+     REPORTES
+===================================================== -->
+
+<section id="seccionReportes"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>📄 Reportes</h2>
+
+            <p>
+                Resumen administrativo de la institución
+            </p>
+
+        </div>
+
+        <div class="user">
+            📄 Reportes
+        </div>
+
+    </header>
+
+
+    <section class="cards"
+             style="margin-bottom:20px;">
+
+        <div class="card">
+
+            <p>Alumnos</p>
+
+            <h3 id="reporteAlumnos">
+                --
+            </h3>
+
+        </div>
+
+
+        <div class="card">
+
+            <p>Maestros</p>
+
+            <h3 id="reporteMaestros">
+                --
+            </h3>
+
+        </div>
+
+
+        <div class="card">
+
+            <p>Grupos</p>
+
+            <h3 id="reporteGrupos">
+                --
+            </h3>
+
+        </div>
+
+
+        <div class="card">
+
+            <p>Promedio</p>
+
+            <h3 id="reportePromedio">
+                --
+            </h3>
+
+        </div>
+
+    </section>
+
+
+    <div class="panel">
+
+        <h3>
+            📌 Indicadores
+        </h3>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span>
+                    Asistencia general
+                </span>
+
+                <strong id="reporteAsistencia">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Alumnos con promedio menor a 6
+                </span>
+
+                <strong id="reporteBajos">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Materias
+                </span>
+
+                <strong id="reporteMaterias">
+                    --
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Padres registrados
+                </span>
+
+                <strong id="reportePadres">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- ASISTENCIA -->
-<section id="seccionAsistencia" class="seccion-director">
-    <header class="header"><div><h2>📅 Asistencia</h2><p>Consulta de asistencia por grupo y alumno</p></div><div class="user">📅 Asistencia</div></header>
-    <div class="panel"><div class="director-toolbar"><input id="buscarAsistencia" class="director-search" placeholder="🔎 Buscar alumno, grupo o estado..." oninput="filtrarAsistencias()"></div>
-    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Fecha</th><th>Alumno</th><th>Grupo</th><th>Materia</th><th>Estado</th></tr></thead><tbody id="tablaAsistencia"><tr><td colspan="5" class="empty-state">Cargando asistencia...</td></tr></tbody></table></div></div>
+
+<!-- =====================================================
+     AVISOS
+===================================================== -->
+
+<section id="seccionAvisos"
+         class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>📢 Avisos</h2>
+
+            <p>
+                Comunicados publicados en la plataforma
+            </p>
+
+        </div>
+
+        <div class="user">
+            📢 Avisos
+        </div>
+
+    </header>
+
+
+    <div class="panel">
+
+        <div id="listaAvisos">
+
+            <div class="empty-state">
+                Cargando avisos...
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- REPORTES -->
-<section id="seccionReportes" class="seccion-director">
-    <header class="header"><div><h2>📄 Reportes</h2><p>Resumen administrativo de la institución</p></div><div class="user">📄 Reportes</div></header>
-    <section class="cards" style="margin-bottom:20px"><div class="card"><p>Alumnos</p><h3 id="reporteAlumnos">--</h3></div><div class="card"><p>Maestros</p><h3 id="reporteMaestros">--</h3></div><div class="card"><p>Grupos</p><h3 id="reporteGrupos">--</h3></div><div class="card"><p>Promedio</p><h3 id="reportePromedio">--</h3></div></section>
-    <div class="panel"><h3>📌 Indicadores</h3><div class="stats"><div class="stat"><span>Asistencia general</span><strong id="reporteAsistencia">--</strong></div><div class="stat"><span>Alumnos con promedio menor a 6</span><strong id="reporteBajos">--</strong></div><div class="stat"><span>Materias</span><strong id="reporteMaterias">--</strong></div><div class="stat"><span>Padres registrados</span><strong id="reportePadres">--</strong></div></div></div>
-</section>
 
-<!-- AVISOS -->
-<section id="seccionAvisos" class="seccion-director">
-    <header class="header"><div><h2>📢 Avisos</h2><p>Comunicados publicados en la plataforma</p></div><div class="user">📢 Avisos</div></header>
-    <div class="panel"><div id="listaAvisos"><div class="empty-state">Cargando avisos...</div></div></div>
-</section>
+<!-- =====================================================
+     CONSTANCIAS
+===================================================== -->
 
-<!-- CONSTANCIAS -->
-<section id="seccionConstancias" class="seccion-director">
+<section id="seccionConstancias"
+         class="seccion-director">
 
     <header class="header">
 
@@ -1492,13 +1590,13 @@ body{
         </div>
 
         <div class="user">
-
             📄 Constancias
-
         </div>
 
     </header>
 
+
+    <!-- BUSCAR -->
 
     <div class="panel">
 
@@ -1511,25 +1609,22 @@ body{
             id="buscarConstancia"
             class="director-search"
             placeholder="Buscar alumno por nombre, usuario o correo..."
-            oninput="buscarAlumnoConstancia()"
-        >
+            oninput="buscarAlumnoConstancia()">
 
     </div>
 
 
-    <div
-        class="panel"
-        style="margin-top:20px;"
-    >
+    <!-- RESULTADOS -->
+
+    <div class="panel"
+         style="margin-top:20px;">
 
         <h3>
             👨‍🎓 Seleccionar alumno
         </h3>
 
-        <div
-            id="resultadosConstancia"
-            class="empty-state"
-        >
+        <div id="resultadosConstancia"
+             class="empty-state">
 
             Escribe el nombre del alumno para comenzar.
 
@@ -1538,10 +1633,11 @@ body{
     </div>
 
 
-    <div
-        id="vistaConstancia"
-        style="display:none; margin-top:20px;"
-    >
+    <!-- VISTA -->
+
+    <div id="vistaConstancia"
+         style="display:none;margin-top:20px;">
+
 
         <div class="panel">
 
@@ -1549,68 +1645,232 @@ body{
                 📋 Datos del alumno
             </h3>
 
-            <div
-                id="datosAlumnoConstancia"
-                class="stats"
-            >
+
+            <div id="datosAlumnoConstancia"
+                 class="stats">
             </div>
 
         </div>
 
 
-        <div
-            class="panel"
-            style="margin-top:20px;"
-        >
+        <div class="panel"
+             style="margin-top:20px;">
 
-            <h3>
-                📊 Calificaciones
-            </h3>
+            <div class="constancia-acciones">
 
-            <div class="tabla-container">
+                <button
+                    class="btn-constancia"
+                    onclick="imprimirConstancia()">
 
-                <table class="tabla-director">
+                    🖨️ Generar / Imprimir constancia
 
-                    <thead>
+                </button>
 
-                        <tr>
+            </div>
 
-                            <th>
-                                Materia
-                            </th>
 
-                            <th>
-                                Parcial
-                            </th>
+            <!-- DOCUMENTO -->
 
-                            <th>
-                                Calificación
-                            </th>
+            <div id="documentoConstancia"
+                 class="constancia-documento">
 
-                        </tr>
 
-                    </thead>
+                <div class="constancia-encabezado">
 
-                    <tbody
-                        id="tablaConstancia"
-                    >
+                    <h1>
+                        CEPM
+                    </h1>
 
-                        <tr>
+                    <h2>
+                        CONSTANCIA DE ESTUDIOS
+                    </h2>
 
-                            <td
-                                colspan="3"
-                                class="empty-state"
-                            >
+                </div>
 
-                                Selecciona un alumno.
 
-                            </td>
+                <div
+                    id="contenidoConstancia">
 
-                        </tr>
+                    <p class="constancia-texto">
 
-                    </tbody>
+                        Por medio de la presente se hace constar que:
 
-                </table>
+                    </p>
+
+
+                    <div
+                        id="nombreConstancia"
+                        style="
+                            text-align:center;
+                            font-size:24px;
+                            font-weight:bold;
+                            margin:25px 0;
+                        ">
+
+                        --
+
+                    </div>
+
+
+                    <p class="constancia-texto">
+
+                        se encuentra registrado(a) como alumno(a)
+                        de esta institución educativa, durante el
+                        presente ciclo escolar.
+
+                    </p>
+
+
+                    <div
+                        class="stats"
+                        style="margin-top:25px;">
+
+                        <div class="stat">
+
+                            <span>
+                                Usuario / Matrícula
+                            </span>
+
+                            <strong
+                                id="usuarioConstancia"
+                                style="font-size:18px;">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <span>
+                                Grupo
+                            </span>
+
+                            <strong
+                                id="grupoConstancia"
+                                style="font-size:18px;">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <span>
+                                Promedio general
+                            </span>
+
+                            <strong
+                                id="promedioConstancia"
+                                style="font-size:18px;">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <span>
+                                Fecha de expedición
+                            </span>
+
+                            <strong
+                                id="fechaConstancia"
+                                style="font-size:18px;">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="constancia-texto">
+
+                        Para los fines que al interesado(a) convengan,
+                        se expide la presente constancia.
+
+                    </p>
+
+
+                    <h3 style="margin-top:30px;">
+                        📊 Calificaciones
+                    </h3>
+
+
+                    <div class="tabla-container">
+
+                        <table class="constancia-tabla">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Materia
+                                    </th>
+
+                                    <th>
+                                        Parcial
+                                    </th>
+
+                                    <th>
+                                        Calificación
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody
+                                id="tablaConstancia">
+
+                                <tr>
+
+                                    <td
+                                        colspan="3"
+                                        class="empty-state">
+
+                                        Selecciona un alumno.
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="firma-constancia">
+
+                        <div class="firma-linea"></div>
+
+                        <strong>
+                            Dirección Escolar
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            CEPM
+                        </span>
+
+                    </div>
+
+
+                    <div class="constancia-pie">
+
+                        Documento generado por la Plataforma Escolar CEPM.
+
+                    </div>
+
+
+                </div>
 
             </div>
 
@@ -1620,24 +1880,23 @@ body{
 
 </section>
 
-</main>
 
+</main>
 
 
 <script>
 
-
-// =====================================================
-// API
-// =====================================================
+/* =====================================================
+   API
+===================================================== */
 
 const API =
 'https://cepm-v2.onrender.com';
 
 
-// =====================================================
-// TOKEN
-// =====================================================
+/* =====================================================
+   TOKEN
+===================================================== */
 
 const token =
 localStorage.getItem('token');
@@ -1645,43 +1904,10 @@ localStorage.getItem('token');
 const rol =
 localStorage.getItem('rol');
 
-// =====================================================
-// SALUDO AUTOMÁTICO SEGÚN LA HORA
-// =====================================================
 
-function actualizarSaludo(){
-
-    const hora = new Date().getHours();
-
-    let saludo;
-
-    if(hora >= 5 && hora < 12){
-
-        saludo = 'Buenos días';
-
-    }
-    else if(hora >= 12 && hora < 19){
-
-        saludo = 'Buenas tardes';
-
-    }
-    else{
-
-        saludo = 'Buenas noches';
-
-    }
-
-    document
-    .getElementById('saludoDirector')
-    .textContent =
-    `${saludo}, Director 👋`;
-
-}
-
-
-// =====================================================
-// PROTECCIÓN
-// =====================================================
+/* =====================================================
+   PROTECCIÓN
+===================================================== */
 
 if(
     !token ||
@@ -1698,36 +1924,78 @@ if(
 }
 
 
-// =====================================================
-// RESUMEN
-// =====================================================
+/* =====================================================
+   SALUDO AUTOMÁTICO
+===================================================== */
+
+function actualizarSaludo(){
+
+    const hora =
+        new Date().getHours();
+
+    let saludo;
+
+    if(
+        hora >= 5 &&
+        hora < 12
+    ){
+
+        saludo =
+            'Buenos días';
+
+    }
+    else if(
+        hora >= 12 &&
+        hora < 19
+    ){
+
+        saludo =
+            'Buenas tardes';
+
+    }
+    else{
+
+        saludo =
+            'Buenas noches';
+
+    }
+
+    const elemento =
+        document.getElementById(
+            'saludoDirector'
+        );
+
+    if(elemento){
+
+        elemento.textContent =
+            `${saludo}, Director 👋`;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESUMEN
+===================================================== */
 
 async function cargarResumen(){
 
     try{
 
-
         const res =
-        await fetch(
-            `${API}/director/resumen`,
-            {
-
-                method:'GET',
-
-                headers:{
-
-                    'Authorization':
-                    token
-
+            await fetch(
+                `${API}/director/resumen`,
+                {
+                    method:'GET',
+                    headers:{
+                        'Authorization':token
+                    }
                 }
-
-            }
-        );
+            );
 
 
-        if(
-            res.status === 401
-        ){
+        if(res.status === 401){
 
             localStorage.clear();
 
@@ -1739,21 +2007,8 @@ async function cargarResumen(){
         }
 
 
-        if(
-            res.status === 403
-        ){
-
-            alert(
-                'No tienes permisos de director.'
-            );
-
-            return;
-
-        }
-
-
         const data =
-        await res.json();
+            await res.json();
 
 
         if(!res.ok){
@@ -1766,99 +2021,71 @@ async function cargarResumen(){
         }
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'totalAlumnos'
-        )
-        .textContent =
-        data.alumnos;
+        ).textContent =
+            data.alumnos;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'totalMaestros'
-        )
-        .textContent =
-        data.maestros;
+        ).textContent =
+            data.maestros;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'totalGrupos'
-        )
-        .textContent =
-        data.grupos;
+        ).textContent =
+            data.grupos;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'totalMaterias'
-        )
-        .textContent =
-        data.materias;
+        ).textContent =
+            data.materias;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'totalPadres'
-        )
-        .textContent =
-        data.padres;
+        ).textContent =
+            data.padres;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'promedio'
-        )
-        .textContent =
-        data.promedioGeneral;
+        ).textContent =
+            data.promedioGeneral;
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'asistencia'
-        )
-        .textContent =
-        data.porcentajeAsistencia +
-        '%';
+        ).textContent =
+            data.porcentajeAsistencia + '%';
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'porcentaje'
-        )
-        .textContent =
-        data.porcentajeAsistencia +
-        '%';
+        ).textContent =
+            data.porcentajeAsistencia + '%';
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'barraAsistencia'
-        )
-        .style.width =
-        data.porcentajeAsistencia +
-        '%';
+        ).style.width =
+            data.porcentajeAsistencia + '%';
 
 
-        document
-        .getElementById(
+        document.getElementById(
             'alumnosBajos'
-        )
-        .textContent =
-        data.alumnosBajos;
-
+        ).textContent =
+            data.alumnosBajos;
 
     }
-
     catch(error){
 
         console.error(
+            'Error resumen:',
             error
-        );
-
-        console.log(
-            'No se pudo cargar el resumen.'
         );
 
     }
@@ -1866,128 +2093,126 @@ async function cargarResumen(){
 }
 
 
+/* =====================================================
+   API GET
+===================================================== */
 
-// =====================================================
-// ALUMNOS
-// =====================================================
+async function apiGet(ruta){
+
+    const res =
+        await fetch(
+            `${API}${ruta}`,
+            {
+                headers:{
+                    'Authorization':token
+                }
+            }
+        );
+
+
+    if(res.status === 401){
+
+        localStorage.clear();
+
+        window.location.href =
+            'index.html';
+
+        throw new Error(
+            'Sesión expirada'
+        );
+
+    }
+
+
+    const data =
+        await res.json();
+
+
+    if(!res.ok){
+
+        throw new Error(
+            data.mensaje ||
+            'Error en la solicitud'
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =====================================================
+   UTILIDADES
+===================================================== */
+
+function texto(
+    v,
+    fallback='—'
+){
+
+    return (
+        v === undefined ||
+        v === null ||
+        v === ''
+    )
+    ? fallback
+    : v;
+
+}
+
+
+function esc(v){
+
+    return String(
+        texto(v,'')
+    ).replace(
+        /[&<>"']/g,
+        c => ({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#039;'
+        }[c])
+    );
+
+}
+
+
+/* =====================================================
+   ALUMNOS
+===================================================== */
 
 let listaAlumnos = [];
 
-
-// =====================================================
-// CARGAR ALUMNOS
-// =====================================================
 
 async function cargarAlumnos(){
 
     try{
 
-
-        const res =
-        await fetch(
-            `${API}/alumnos`,
-            {
-
-                method:'GET',
-
-                headers:{
-
-                    'Authorization':
-                    token
-
-                }
-
-            }
-        );
-
-
-        if(
-            res.status === 401
-        ){
-
-            localStorage.clear();
-
-            window.location.href =
-                'index.html';
-
-            return;
-
-        }
-
-
-        if(
-            res.status === 403
-        ){
-
-            alert(
-                'No tienes permisos para consultar alumnos.'
-            );
-
-            return;
-
-        }
-
-
-        const data =
-        await res.json();
-
-
-        console.log(
-            'ALUMNOS:',
-            data
-        );
-
-
-        if(!res.ok){
-
-            throw new Error(
-                data.mensaje ||
-                'Error cargando alumnos'
-            );
-
-        }
-
-
         listaAlumnos =
-        data;
-
+            await apiGet('/alumnos');
 
         mostrarListaAlumnos(
             listaAlumnos
         );
 
-
     }
-
     catch(error){
 
-        console.error(
-            error
-        );
+        console.error(error);
 
-
-        document
-        .getElementById(
+        document.getElementById(
             'tablaAlumnos'
-        )
-        .innerHTML = `
-
+        ).innerHTML = `
             <tr>
-
-                <td
-                    colspan="4"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                        color:#dc2626;
-                    ">
-
-                    Error al cargar los alumnos.
-
+                <td colspan="4"
+                    class="empty-state">
+                    ❌ Error al cargar los alumnos.
                 </td>
-
             </tr>
-
         `;
 
     }
@@ -1995,53 +2220,35 @@ async function cargarAlumnos(){
 }
 
 
-
-// =====================================================
-// MOSTRAR ALUMNOS
-// =====================================================
-
 function mostrarListaAlumnos(
     alumnos
 ){
 
     const tabla =
-    document.getElementById(
-        'tablaAlumnos'
-    );
+        document.getElementById(
+            'tablaAlumnos'
+        );
 
 
     const contador =
-    document.getElementById(
-        'contadorAlumnos'
-    );
+        document.getElementById(
+            'contadorAlumnos'
+        );
 
 
     contador.textContent =
-    `${alumnos.length} alumnos`;
+        `${alumnos.length} alumnos`;
 
 
-    if(
-        alumnos.length === 0
-    ){
+    if(!alumnos.length){
 
         tabla.innerHTML = `
-
             <tr>
-
-                <td
-                    colspan="4"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                        color:#64748b;
-                    ">
-
+                <td colspan="4"
+                    class="empty-state">
                     No se encontraron alumnos.
-
                 </td>
-
             </tr>
-
         `;
 
         return;
@@ -2050,120 +2257,68 @@ function mostrarListaAlumnos(
 
 
     tabla.innerHTML =
-    alumnos.map(
-        alumno => `
+        alumnos.map(
+            alumno => `
 
-        <tr>
+                <tr>
 
-            <td class="nombre-alumno">
+                    <td class="nombre-alumno">
+                        ${esc(alumno.nombre,'Sin nombre')}
+                    </td>
 
-                ${
-                    alumno.nombre ||
-                    'Sin nombre'
-                }
+                    <td>
+                        ${esc(alumno.usuario)}
+                    </td>
 
-            </td>
+                    <td>
+                        ${esc(alumno.email,'Sin correo')}
+                    </td>
 
+                    <td>
+                        ${esc(alumno.edad)}
+                    </td>
 
-            <td>
+                </tr>
 
-                ${
-                    alumno.usuario ||
-                    '—'
-                }
-
-            </td>
-
-
-            <td>
-
-                ${
-                    alumno.email ||
-                    'Sin correo'
-                }
-
-            </td>
-
-
-            <td>
-
-                ${
-                    alumno.edad ||
-                    '—'
-                }
-
-            </td>
-
-        </tr>
-
-    `
-    ).join('');
+            `
+        ).join('');
 
 }
 
 
-
-// =====================================================
-// BUSCAR ALUMNO
-// =====================================================
-
 function filtrarAlumnos(){
 
-    const texto =
-    document
-    .getElementById(
-        'buscarAlumno'
-    )
-    .value
-    .toLowerCase()
-    .trim();
+    const textoBusqueda =
+        document
+        .getElementById('buscarAlumno')
+        .value
+        .toLowerCase()
+        .trim();
 
 
     const filtrados =
-    listaAlumnos.filter(
-        alumno => {
+        listaAlumnos.filter(
+            alumno => {
 
+                return [
 
-            const nombre =
-            (
-                alumno.nombre ||
-                ''
-            )
-            .toLowerCase();
+                    alumno.nombre,
+                    alumno.usuario,
+                    alumno.email
 
+                ].some(
+                    valor =>
+                        String(
+                            valor || ''
+                        )
+                        .toLowerCase()
+                        .includes(
+                            textoBusqueda
+                        )
+                );
 
-            const usuario =
-            (
-                alumno.usuario ||
-                ''
-            )
-            .toLowerCase();
-
-
-            const email =
-            (
-                alumno.email ||
-                ''
-            )
-            .toLowerCase();
-
-
-            return (
-
-                nombre.includes(texto)
-
-                ||
-
-                usuario.includes(texto)
-
-                ||
-
-                email.includes(texto)
-
-            );
-
-        }
-    );
+            }
+        );
 
 
     mostrarListaAlumnos(
@@ -2173,120 +2328,824 @@ function filtrarAlumnos(){
 }
 
 
-
-// =====================================================
-// NAVEGACIÓN
-// =====================================================
-
-const seccionesDirector = [
-    'Inicio',
-    'Alumnos',
-    'Maestros',
-    'Grupos',
-    'Calificaciones',
-    'Asistencia',
-    'Reportes',
-    'Avisos',
-    'Constancias'
-];
-
-function ocultarSecciones(){
-    seccionesDirector.forEach(nombre => {
-        const el = document.getElementById('seccion' + nombre);
-        if(el) el.style.display = 'none';
-    });
-    document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
-}
-
-function activarBoton(nombre){
-    const btn = document.getElementById('btn' + nombre);
-    if(btn) btn.classList.add('active');
-}
-
-function mostrarInicio(){
-    ocultarSecciones();
-    document.getElementById('seccionInicio').style.display = 'block';
-    activarBoton('Inicio');
-    cargarResumen();
-}
-
-function mostrarAlumnos(){
-    ocultarSecciones();
-    document.getElementById('seccionAlumnos').style.display = 'block';
-    activarBoton('Alumnos');
-    cargarAlumnos();
-}
-
-function mostrarSeccion(nombre){
-    ocultarSecciones();
-    const id = 'seccion' + nombre.charAt(0).toUpperCase() + nombre.slice(1);
-    const seccion = document.getElementById(id);
-    if(!seccion) return;
-    seccion.style.display = 'block';
-    activarBoton(nombre.charAt(0).toUpperCase() + nombre.slice(1));
-
-    if(nombre === 'maestros') cargarMaestros();
-    if(nombre === 'grupos') cargarGrupos();
-    if(nombre === 'calificaciones') cargarCalificaciones();
-    if(nombre === 'asistencia') cargarAsistencias();
-    if(nombre === 'reportes') cargarReporte();
-    if(nombre === 'avisos') cargarAvisos();
-    if(nombre === 'constancias') cargarAlumnos();
-}
-
-// =====================================================
-// CERRAR SESIÓN
-// =====================================================
-
-function cerrarSesion(){
-
-    localStorage.removeItem(
-        'token'
-    );
-
-    localStorage.removeItem(
-        'rol'
-    );
-
-
-    window.location.href =
-        'index.html';
-
-}
-
-
-
-// =====================================================
-// DATOS AUXILIARES
-// =====================================================
+/* =====================================================
+   MAESTROS
+===================================================== */
 
 let listaMaestros = [];
-let listaGrupos = [];
-let listaCalificaciones = [];
-let listaAsistencias = [];
-
-let alumnoConstanciaSeleccionado = null;
 
 
-// =====================================================
-// BUSCAR ALUMNO PARA CONSTANCIA
-// =====================================================
+async function cargarMaestros(){
 
-function buscarAlumnoConstancia(){
+    try{
 
-    const texto =
+        listaMaestros =
+            await apiGet('/maestros');
+
+        mostrarListaMaestros(
+            listaMaestros
+        );
+
+    }
+    catch(error){
+
+        document.getElementById(
+            'tablaMaestros'
+        ).innerHTML = `
+            <tr>
+                <td colspan="3"
+                    class="empty-state">
+                    No se pudieron cargar los maestros.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+function mostrarListaMaestros(lista){
+
+    document.getElementById(
+        'tablaMaestros'
+    ).innerHTML =
+
+        lista.length
+
+        ?
+
+        lista.map(
+            m => `
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${esc(m.nombre)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${esc(m.usuario)}
+                    </td>
+
+                    <td>
+                        ${esc(m.email,'Sin correo')}
+                    </td>
+
+                </tr>
+            `
+        ).join('')
+
+        :
+
+        `
+            <tr>
+                <td colspan="3"
+                    class="empty-state">
+                    No hay maestros registrados.
+                </td>
+            </tr>
+        `;
+
+}
+
+
+function filtrarMaestros(){
+
+    const q =
         document
-        .getElementById('buscarConstancia')
+        .getElementById(
+            'buscarMaestro'
+        )
         .value
         .toLowerCase()
         .trim();
 
-    const contenedor =
+
+    mostrarListaMaestros(
+
+        listaMaestros.filter(
+            m =>
+                [
+                    m.nombre,
+                    m.usuario,
+                    m.email
+                ].some(
+                    v =>
+                        String(v || '')
+                        .toLowerCase()
+                        .includes(q)
+                )
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   CATÁLOGOS
+===================================================== */
+
+async function cargarCatalogos(){
+
+    const [
+        alumnos,
+        maestros,
+        materias,
+        clases
+    ] = await Promise.all([
+
+        apiGet('/alumnos'),
+        apiGet('/maestros'),
+        apiGet('/materias'),
+        apiGet('/clases')
+
+    ]);
+
+
+    return {
+        alumnos,
+        maestros,
+        materias,
+        clases
+    };
+
+}
+
+
+/* =====================================================
+   GRUPOS
+===================================================== */
+
+let listaGrupos = [];
+
+
+async function cargarGrupos(){
+
+    try{
+
+        const {
+            maestros,
+            materias,
+            clases
+        } =
+            await cargarCatalogos();
+
+
+        listaGrupos =
+            clases;
+
+
+        document.getElementById(
+            'tablaGrupos'
+        ).innerHTML =
+
+            clases.length
+
+            ?
+
+            clases.map(
+                c => {
+
+                    const maestro =
+                        maestros.find(
+                            x =>
+                                String(x._id) ===
+                                String(c.maestroId)
+                        );
+
+
+                    const materia =
+                        materias.find(
+                            x =>
+                                String(x._id) ===
+                                String(c.materiaId)
+                        );
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                <span class="badge">
+                                    ${esc(c.grupo)}
+                                </span>
+                            </td>
+
+                            <td>
+                                ${esc(materia?.nombre)}
+                            </td>
+
+                            <td>
+                                ${esc(maestro?.nombre)}
+                            </td>
+
+                            <td>
+                                ${esc(c.horario)}
+                            </td>
+
+                            <td>
+                                ${esc(c.aula)}
+                            </td>
+
+                            <td>
+                                ${c.alumnos?.length || 0}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            ).join('')
+
+            :
+
+            `
+                <tr>
+                    <td colspan="6"
+                        class="empty-state">
+                        No hay grupos registrados.
+                    </td>
+                </tr>
+            `;
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   CALIFICACIONES
+===================================================== */
+
+let listaCalificaciones = [];
+
+
+async function cargarCalificaciones(){
+
+    try{
+
+        const {
+            alumnos,
+            materias,
+            clases
+        } =
+            await cargarCatalogos();
+
+
+        const calificaciones =
+            await apiGet(
+                '/calificaciones'
+            );
+
+
+        listaCalificaciones =
+            calificaciones.map(
+                c => {
+
+                    const clase =
+                        clases.find(
+                            x =>
+                                String(x._id) ===
+                                String(c.claseId)
+                        );
+
+
+                    const alumno =
+                        alumnos.find(
+                            x =>
+                                String(x._id) ===
+                                String(c.alumnoId)
+                        );
+
+
+                    const materia =
+                        materias.find(
+                            x =>
+                                String(x._id) ===
+                                String(clase?.materiaId)
+                        );
+
+
+                    return {
+
+                        ...c,
+
+                        alumnoNombre:
+                            alumno?.nombre,
+
+                        grupo:
+                            clase?.grupo,
+
+                        materia:
+                            materia?.nombre
+
+                    };
+
+                }
+            );
+
+
+        mostrarCalificaciones(
+            listaCalificaciones
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+function mostrarCalificaciones(
+    lista
+){
+
+    document.getElementById(
+        'tablaCalificaciones'
+    ).innerHTML =
+
+        lista.length
+
+        ?
+
+        lista.map(
+            c => `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${esc(c.alumnoNombre)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${esc(c.grupo)}
+                    </td>
+
+                    <td>
+                        ${esc(c.materia)}
+                    </td>
+
+                    <td>
+                        Parcial ${esc(c.parcial)}
+                    </td>
+
+                    <td>
+                        <span class="badge">
+                            ${esc(c.calificacion)}
+                        </span>
+                    </td>
+
+                </tr>
+
+            `
+        ).join('')
+
+        :
+
+        `
+            <tr>
+                <td colspan="5"
+                    class="empty-state">
+                    No hay calificaciones registradas.
+                </td>
+            </tr>
+        `;
+
+}
+
+
+function filtrarCalificaciones(){
+
+    const q =
         document
-        .getElementById('resultadosConstancia');
+        .getElementById(
+            'buscarCalificacion'
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
 
-    if(!texto){
+    mostrarCalificaciones(
+
+        listaCalificaciones.filter(
+            c =>
+                [
+                    c.alumnoNombre,
+                    c.grupo,
+                    c.materia,
+                    c.calificacion
+                ].some(
+                    v =>
+                        String(v || '')
+                        .toLowerCase()
+                        .includes(q)
+                )
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   ASISTENCIA
+===================================================== */
+
+let listaAsistencias = [];
+
+
+async function cargarAsistencias(){
+
+    try{
+
+        const {
+            alumnos,
+            materias,
+            clases
+        } =
+            await cargarCatalogos();
+
+
+        const respuestas =
+            await Promise.all(
+
+                clases.map(
+                    async clase => ({
+
+                        clase,
+
+                        asistencias:
+                            await apiGet(
+                                `/asistencia/${clase._id}`
+                            )
+
+                    })
+                )
+
+            );
+
+
+        listaAsistencias = [];
+
+
+        respuestas.forEach(
+            ({
+                clase,
+                asistencias
+            }) => {
+
+                asistencias.forEach(
+                    asistencia => {
+
+                        const alumno =
+                            alumnos.find(
+                                x =>
+                                    String(x._id) ===
+                                    String(
+                                        asistencia.alumnoId
+                                    )
+                            );
+
+
+                        const materia =
+                            materias.find(
+                                x =>
+                                    String(x._id) ===
+                                    String(
+                                        clase.materiaId
+                                    )
+                            );
+
+
+                        listaAsistencias.push({
+
+                            ...asistencia,
+
+                            alumnoNombre:
+                                alumno?.nombre,
+
+                            grupo:
+                                clase.grupo,
+
+                            materia:
+                                materia?.nombre
+
+                        });
+
+                    }
+                );
+
+            }
+        );
+
+
+        mostrarAsistencias(
+            listaAsistencias
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+function mostrarAsistencias(lista){
+
+    document.getElementById(
+        'tablaAsistencia'
+    ).innerHTML =
+
+        lista.length
+
+        ?
+
+        lista
+        .sort(
+            (a,b) =>
+                String(b.fecha)
+                .localeCompare(
+                    String(a.fecha)
+                )
+        )
+        .map(
+            a => `
+
+                <tr>
+
+                    <td>
+                        ${esc(a.fecha)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${esc(a.alumnoNombre)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${esc(a.grupo)}
+                    </td>
+
+                    <td>
+                        ${esc(a.materia)}
+                    </td>
+
+                    <td>
+                        <span class="badge">
+                            ${esc(a.estado)}
+                        </span>
+                    </td>
+
+                </tr>
+
+            `
+        ).join('')
+
+        :
+
+        `
+            <tr>
+                <td colspan="5"
+                    class="empty-state">
+                    No hay registros de asistencia.
+                </td>
+            </tr>
+        `;
+
+}
+
+
+function filtrarAsistencias(){
+
+    const q =
+        document
+        .getElementById(
+            'buscarAsistencia'
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    mostrarAsistencias(
+
+        listaAsistencias.filter(
+            a =>
+                [
+                    a.fecha,
+                    a.alumnoNombre,
+                    a.grupo,
+                    a.materia,
+                    a.estado
+                ].some(
+                    v =>
+                        String(v || '')
+                        .toLowerCase()
+                        .includes(q)
+                )
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   REPORTES
+===================================================== */
+
+async function cargarReporte(){
+
+    try{
+
+        const d =
+            await apiGet(
+                '/director/resumen'
+            );
+
+
+        document.getElementById(
+            'reporteAlumnos'
+        ).textContent =
+            d.alumnos;
+
+
+        document.getElementById(
+            'reporteMaestros'
+        ).textContent =
+            d.maestros;
+
+
+        document.getElementById(
+            'reporteGrupos'
+        ).textContent =
+            d.grupos;
+
+
+        document.getElementById(
+            'reportePromedio'
+        ).textContent =
+            d.promedioGeneral;
+
+
+        document.getElementById(
+            'reporteAsistencia'
+        ).textContent =
+            d.porcentajeAsistencia + '%';
+
+
+        document.getElementById(
+            'reporteBajos'
+        ).textContent =
+            d.alumnosBajos;
+
+
+        document.getElementById(
+            'reporteMaterias'
+        ).textContent =
+            d.materias;
+
+
+        document.getElementById(
+            'reportePadres'
+        ).textContent =
+            d.padres;
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   AVISOS
+===================================================== */
+
+async function cargarAvisos(){
+
+    try{
+
+        const avisos =
+            await apiGet('/avisos');
+
+
+        document.getElementById(
+            'listaAvisos'
+        ).innerHTML =
+
+            avisos.length
+
+            ?
+
+            avisos.map(
+                a => `
+
+                    <article class="aviso-item">
+
+                        <h4>
+                            📢 ${esc(a.titulo)}
+                        </h4>
+
+                        <p>
+                            ${esc(a.mensaje)}
+                        </p>
+
+                        <div class="aviso-meta">
+
+                            Publicado:
+
+                            ${
+                                a.fecha
+                                ?
+                                new Date(
+                                    a.fecha
+                                ).toLocaleString(
+                                    'es-MX'
+                                )
+                                :
+                                'Sin fecha'
+                            }
+
+                        </div>
+
+                    </article>
+
+                `
+            ).join('')
+
+            :
+
+            `
+                <div class="empty-state">
+                    No hay avisos publicados.
+                </div>
+            `;
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   CONSTANCIAS
+===================================================== */
+
+let alumnoConstanciaSeleccionado =
+    null;
+
+
+/* =====================================================
+   BUSCAR ALUMNO CONSTANCIA
+===================================================== */
+
+function buscarAlumnoConstancia(){
+
+    const textoBusqueda =
+        document
+        .getElementById(
+            'buscarConstancia'
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const contenedor =
+        document.getElementById(
+            'resultadosConstancia'
+        );
+
+
+    if(!textoBusqueda){
 
         contenedor.innerHTML =
             'Escribe el nombre del alumno para comenzar.';
@@ -2297,28 +3156,52 @@ function buscarAlumnoConstancia(){
 
 
     const resultados =
-        listaAlumnos.filter(alumno => {
+        listaAlumnos.filter(
+            alumno => {
 
-            const nombre =
-                String(alumno.nombre || '')
-                .toLowerCase();
-
-            const usuario =
-                String(alumno.usuario || '')
-                .toLowerCase();
-
-            const email =
-                String(alumno.email || '')
-                .toLowerCase();
+                const nombre =
+                    String(
+                        alumno.nombre || ''
+                    )
+                    .toLowerCase();
 
 
-            return (
-                nombre.includes(texto) ||
-                usuario.includes(texto) ||
-                email.includes(texto)
-            );
+                const usuario =
+                    String(
+                        alumno.usuario || ''
+                    )
+                    .toLowerCase();
 
-        });
+
+                const email =
+                    String(
+                        alumno.email || ''
+                    )
+                    .toLowerCase();
+
+
+                return (
+
+                    nombre.includes(
+                        textoBusqueda
+                    )
+
+                    ||
+
+                    usuario.includes(
+                        textoBusqueda
+                    )
+
+                    ||
+
+                    email.includes(
+                        textoBusqueda
+                    )
+
+                );
+
+            }
+        );
 
 
     if(!resultados.length){
@@ -2334,59 +3217,71 @@ function buscarAlumnoConstancia(){
     contenedor.innerHTML =
         resultados
         .slice(0,10)
-        .map(alumno => `
+        .map(
+            alumno => `
 
-            <div
-                onclick="seleccionarAlumnoConstancia('${alumno._id}')"
-                style="
-                    padding:15px;
-                    border:1px solid #e2e8f0;
-                    border-radius:12px;
-                    margin-bottom:10px;
-                    cursor:pointer;
-                    background:#f8fafc;
-                "
-            >
+                <div
+                    onclick="seleccionarAlumnoConstancia('${alumno._id}')"
+                    style="
+                        padding:15px;
+                        border:1px solid #e2e8f0;
+                        border-radius:12px;
+                        margin-bottom:10px;
+                        cursor:pointer;
+                        background:#f8fafc;
+                    "
+                >
 
-                <strong>
-                    ${esc(alumno.nombre)}
-                </strong>
+                    <strong>
+                        ${esc(alumno.nombre)}
+                    </strong>
 
-                <br>
+                    <br>
 
-                <small>
-                    Usuario:
-                    ${esc(alumno.usuario)}
-                </small>
+                    <small>
+                        Usuario:
+                        ${esc(alumno.usuario)}
+                    </small>
 
-                <br>
+                    <br>
 
-                <small>
-                    ${esc(alumno.email,'Sin correo')}
-                </small>
+                    <small>
+                        ${esc(
+                            alumno.email,
+                            'Sin correo'
+                        )}
+                    </small>
 
-            </div>
+                </div>
 
-        `)
+            `
+        )
         .join('');
 
 }
 
-// =====================================================
-// SELECCIONAR ALUMNO PARA CONSTANCIA
-// =====================================================
 
-async function seleccionarAlumnoConstancia(id){
+/* =====================================================
+   SELECCIONAR ALUMNO
+===================================================== */
+
+async function seleccionarAlumnoConstancia(
+    id
+){
 
     const alumno =
         listaAlumnos.find(
-            a => String(a._id) === String(id)
+            a =>
+                String(a._id) ===
+                String(id)
         );
 
 
     if(!alumno){
 
-        alert('No se encontró el alumno.');
+        alert(
+            'No se encontró el alumno.'
+        );
 
         return;
 
@@ -2397,15 +3292,57 @@ async function seleccionarAlumnoConstancia(id){
         alumno;
 
 
-    document
-    .getElementById('vistaConstancia')
-    .style.display = 'block';
+    document.getElementById(
+        'vistaConstancia'
+    ).style.display =
+        'block';
 
 
-    // Mostrar datos básicos mientras cargamos
-    document
-    .getElementById('datosAlumnoConstancia')
-    .innerHTML = `
+    document.getElementById(
+        'nombreConstancia'
+    ).textContent =
+        texto(
+            alumno.nombre,
+            'Sin nombre'
+        );
+
+
+    document.getElementById(
+        'usuarioConstancia'
+    ).textContent =
+        texto(
+            alumno.usuario
+        );
+
+
+    document.getElementById(
+        'grupoConstancia'
+    ).textContent =
+        '🔄 Cargando...';
+
+
+    document.getElementById(
+        'promedioConstancia'
+    ).textContent =
+        '🔄 Calculando...';
+
+
+    document.getElementById(
+        'fechaConstancia'
+    ).textContent =
+        new Date().toLocaleDateString(
+            'es-MX',
+            {
+                day:'numeric',
+                month:'long',
+                year:'numeric'
+            }
+        );
+
+
+    document.getElementById(
+        'datosAlumnoConstancia'
+    ).innerHTML = `
 
         <div class="stat">
 
@@ -2436,30 +3373,14 @@ async function seleccionarAlumnoConstancia(id){
         <div class="stat">
 
             <span>
-                Grupo
+                Correo
             </span>
 
-            <strong
-                id="grupoConstancia"
-                style="font-size:20px;"
-            >
-                🔄 Cargando...
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Promedio general
-            </span>
-
-            <strong
-                id="promedioConstancia"
-                style="font-size:20px;"
-            >
-                🔄 Calculando...
+            <strong style="font-size:18px;">
+                ${esc(
+                    alumno.email,
+                    'Sin correo'
+                )}
             </strong>
 
         </div>
@@ -2473,111 +3394,14 @@ async function seleccionarAlumnoConstancia(id){
 
 }
 
-    const alumno =
-        listaAlumnos.find(
-            a => String(a._id) === String(id)
-        );
 
+/* =====================================================
+   CALIFICACIONES DEL ALUMNO
+===================================================== */
 
-    if(!alumno){
-
-        alert('No se encontró el alumno.');
-
-        return;
-
-    }
-
-
-    alumnoConstanciaSeleccionado =
-        alumno;
-
-
-    document
-    .getElementById(
-        'vistaConstancia'
-    )
-    .style.display =
-    'block';
-
-
-    document
-    .getElementById(
-        'datosAlumnoConstancia'
-    )
-    .innerHTML = `
-
-        <div class="stat">
-
-            <span>
-                Nombre completo
-            </span>
-
-            <strong
-                style="font-size:20px;"
-            >
-                ${esc(alumno.nombre)}
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Usuario
-            </span>
-
-            <strong
-                style="font-size:20px;"
-            >
-                ${esc(alumno.usuario)}
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Correo
-            </span>
-
-            <strong
-                style="font-size:18px;"
-            >
-                ${esc(alumno.email,'Sin correo')}
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Edad
-            </span>
-
-            <strong
-                style="font-size:20px;"
-            >
-                ${esc(alumno.edad)}
-            </strong>
-
-        </div>
-
-    `;
-
-
-    await cargarCalificacionesAlumnoConstancia(
-        alumno._id
-    );
-
-
-// =====================================================
-// CARGAR CALIFICACIONES PARA CONSTANCIA
-// =====================================================
-
-async function cargarCalificacionesAlumnoConstancia(alumnoId){
+async function cargarCalificacionesAlumnoConstancia(
+    alumnoId
+){
 
     const tabla =
         document.getElementById(
@@ -2586,18 +3410,34 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
 
 
     tabla.innerHTML = `
+
         <tr>
-            <td colspan="3" class="empty-state">
+
+            <td colspan="3"
+                class="empty-state">
+
                 🔄 Cargando calificaciones...
+
             </td>
+
         </tr>
+
     `;
 
 
     try{
 
-        const calificaciones =
-            await apiGet('/calificaciones');
+        const [
+            calificaciones,
+            materias,
+            clases
+        ] = await Promise.all([
+
+            apiGet('/calificaciones'),
+            apiGet('/materias'),
+            apiGet('/clases')
+
+        ]);
 
 
         const delAlumno =
@@ -2608,34 +3448,31 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
             );
 
 
-        const materias =
-            await apiGet('/materias');
-
-
-        const clases =
-            await apiGet('/clases');
-
-
-        // =============================================
-        // OBTENER CLASES DEL ALUMNO
-        // =============================================
-
         const clasesAlumno =
-            clases.filter(clase =>
-                Array.isArray(clase.alumnos) &&
-                clase.alumnos.some(
-                    id =>
-                        String(id) ===
-                        String(alumnoId)
-                )
+            clases.filter(
+                clase =>
+
+                    Array.isArray(
+                        clase.alumnos
+                    )
+
+                    &&
+
+                    clase.alumnos.some(
+                        id =>
+                            String(id) ===
+                            String(alumnoId)
+                    )
+
             );
 
 
-        // =============================================
-        // GRUPO
-        // =============================================
+        /* =========================
+           GRUPO
+        ========================= */
 
-        let grupo = 'No asignado';
+        let grupo =
+            'No asignado';
 
 
         if(clasesAlumno.length){
@@ -2647,51 +3484,39 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
         }
 
 
-        const grupoElemento =
-            document.getElementById(
-                'grupoConstancia'
-            );
+        document.getElementById(
+            'grupoConstancia'
+        ).textContent =
+            grupo;
 
 
-        if(grupoElemento){
-
-            grupoElemento.textContent =
-                grupo;
-
-        }
-
-
-        // =============================================
-        // SIN CALIFICACIONES
-        // =============================================
+        /* =========================
+           SIN CALIFICACIONES
+        ========================= */
 
         if(!delAlumno.length){
 
             tabla.innerHTML = `
+
                 <tr>
-                    <td
-                        colspan="3"
-                        class="empty-state"
-                    >
+
+                    <td colspan="3"
+                        class="empty-state">
+
                         📚 Este alumno todavía no tiene
                         calificaciones registradas.
+
                     </td>
+
                 </tr>
+
             `;
 
 
-            const promedioElemento =
-                document.getElementById(
-                    'promedioConstancia'
-                );
-
-
-            if(promedioElemento){
-
-                promedioElemento.textContent =
-                    'Sin calificaciones';
-
-            }
+            document.getElementById(
+                'promedioConstancia'
+            ).textContent =
+                'Sin calificaciones';
 
 
             return;
@@ -2699,129 +3524,118 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
         }
 
 
-        // =============================================
-        // MOSTRAR CALIFICACIONES
-        // =============================================
+        /* =========================
+           CALIFICACIONES
+        ========================= */
 
         let suma = 0;
+
         let cantidad = 0;
 
 
         tabla.innerHTML =
-            delAlumno
-            .map(c => {
+            delAlumno.map(
+                c => {
 
-                const clase =
-                    clases.find(
-                        x =>
-                            String(x._id) ===
-                            String(c.claseId)
-                    );
-
-
-                const materia =
-                    materias.find(
-                        x =>
-                            String(x._id) ===
-                            String(clase?.materiaId)
-                    );
+                    const clase =
+                        clases.find(
+                            x =>
+                                String(x._id) ===
+                                String(c.claseId)
+                        );
 
 
-                const numero =
-                    Number(c.calificacion);
+                    const materia =
+                        materias.find(
+                            x =>
+                                String(x._id) ===
+                                String(
+                                    clase?.materiaId
+                                )
+                        );
 
 
-                if(!isNaN(numero)){
+                    const numero =
+                        Number(
+                            c.calificacion
+                        );
 
-                    suma += numero;
 
-                    cantidad++;
+                    if(!isNaN(numero)){
+
+                        suma += numero;
+
+                        cantidad++;
+
+                    }
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    ${esc(
+                                        materia?.nombre,
+                                        'Materia no encontrada'
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                Parcial
+                                ${esc(c.parcial)}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge">
+
+                                    ${esc(
+                                        c.calificacion,
+                                        '—'
+                                    )}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    `;
 
                 }
+            ).join('');
 
 
-                return `
-
-                    <tr>
-
-                        <td>
-
-                            <strong>
-
-                                ${esc(
-                                    materia?.nombre,
-                                    'Materia no encontrada'
-                                )}
-
-                            </strong>
-
-                        </td>
-
-
-                        <td>
-
-                            Parcial
-                            ${esc(c.parcial)}
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="badge">
-
-                                ${esc(
-                                    c.calificacion,
-                                    '—'
-                                )}
-
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            })
-            .join('');
-
-
-        // =============================================
-        // PROMEDIO
-        // =============================================
+        /* =========================
+           PROMEDIO
+        ========================= */
 
         const promedio =
             cantidad > 0
-            ? (suma / cantidad).toFixed(1)
-            : '—';
+            ?
+            (
+                suma /
+                cantidad
+            ).toFixed(1)
+            :
+            '—';
 
 
-        const promedioElemento =
-            document.getElementById(
-                'promedioConstancia'
-            );
-
-
-        if(promedioElemento){
-
-            promedioElemento.textContent =
-                promedio;
-
-        }
-
-
-        console.log(
-            'CONSTANCIA:',
-            {
-                alumno:
-                    alumnoConstanciaSeleccionado,
-                grupo,
-                calificaciones:
-                    delAlumno,
-                promedio
-            }
-        );
+        document.getElementById(
+            'promedioConstancia'
+        ).textContent =
+            promedio;
 
 
     }
@@ -2834,127 +3648,302 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
 
 
         tabla.innerHTML = `
+
             <tr>
-                <td
-                    colspan="3"
-                    class="empty-state"
-                >
+
+                <td colspan="3"
+                    class="empty-state">
+
                     ❌ No se pudieron cargar
                     las calificaciones.
+
                 </td>
+
             </tr>
+
         `;
 
     }
 
 }
 
-async function apiGet(ruta){
-    const res = await fetch(`${API}${ruta}`, { headers:{'Authorization':token} });
-    if(res.status === 401){ localStorage.clear(); window.location.href='index.html'; throw new Error('Sesión expirada'); }
-    const data = await res.json();
-    if(!res.ok) throw new Error(data.mensaje || 'Error en la solicitud');
-    return data;
+
+/* =====================================================
+   IMPRIMIR CONSTANCIA
+===================================================== */
+
+function imprimirConstancia(){
+
+    if(!alumnoConstanciaSeleccionado){
+
+        alert(
+            'Primero selecciona un alumno.'
+        );
+
+        return;
+
+    }
+
+
+    window.print();
+
 }
 
-function texto(v, fallback='—'){ return v === undefined || v === null || v === '' ? fallback : v; }
-function esc(v){ return String(texto(v,'')).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
 
-async function cargarMaestros(){
-    try{ listaMaestros = await apiGet('/maestros'); mostrarListaMaestros(listaMaestros); }
-    catch(e){ document.getElementById('tablaMaestros').innerHTML=`<tr><td colspan="3" class="empty-state">No se pudieron cargar los maestros.</td></tr>`; }
-}
-function mostrarListaMaestros(lista){
-    const tabla=document.getElementById('tablaMaestros');
-    tabla.innerHTML=lista.length ? lista.map(m=>`<tr><td><strong>${esc(m.nombre)}</strong></td><td>${esc(m.usuario)}</td><td>${esc(m.email,'Sin correo')}</td></tr>`).join('') : '<tr><td colspan="3" class="empty-state">No hay maestros registrados.</td></tr>';
-}
-function filtrarMaestros(){ const q=document.getElementById('buscarMaestro').value.toLowerCase().trim(); mostrarListaMaestros(listaMaestros.filter(m=>[m.nombre,m.usuario,m.email].some(v=>String(v||'').toLowerCase().includes(q)))); }
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
 
-async function cargarCatalogos(){
-    const [alumnos, maestros, materias, clases] = await Promise.all([apiGet('/alumnos'),apiGet('/maestros'),apiGet('/materias'),apiGet('/clases')]);
-    return {alumnos, maestros, materias, clases};
-}
+const seccionesDirector = [
 
-async function cargarGrupos(){
-    try{
-        const {maestros,materias,clases}=await cargarCatalogos();
-        listaGrupos=clases;
-        const tbody=document.getElementById('tablaGrupos');
-        tbody.innerHTML=clases.length ? clases.map(c=>{
-            const m=maestros.find(x=>String(x._id)===String(c.maestroId));
-            const mat=materias.find(x=>String(x._id)===String(c.materiaId));
-            return `<tr><td><span class="badge">${esc(c.grupo)}</span></td><td>${esc(mat?.nombre)}</td><td>${esc(m?.nombre)}</td><td>${esc(c.horario)}</td><td>${esc(c.aula)}</td><td>${c.alumnos?.length||0}</td></tr>`;
-        }).join('') : '<tr><td colspan="6" class="empty-state">No hay grupos registrados.</td></tr>';
-    }catch(e){document.getElementById('tablaGrupos').innerHTML='<tr><td colspan="6" class="empty-state">No se pudieron cargar los grupos.</td></tr>';}
-}
+    'Inicio',
+    'Alumnos',
+    'Maestros',
+    'Grupos',
+    'Calificaciones',
+    'Asistencia',
+    'Reportes',
+    'Avisos',
+    'Constancias'
 
-async function cargarCalificaciones(){
-    try{
-        const {alumnos,maestros,materias,clases}=await cargarCatalogos();
-        const califs=await apiGet('/calificaciones');
-        listaCalificaciones=califs.map(c=>{
-            const cl=clases.find(x=>String(x._id)===String(c.claseId));
-            const a=alumnos.find(x=>String(x._id)===String(c.alumnoId));
-            const mat=materias.find(x=>String(x._id)===String(cl?.materiaId));
-            return {...c, alumnoNombre:a?.nombre, grupo:cl?.grupo, materia:mat?.nombre};
-        });
-        mostrarCalificaciones(listaCalificaciones);
-    }catch(e){document.getElementById('tablaCalificaciones').innerHTML='<tr><td colspan="5" class="empty-state">No se pudieron cargar las calificaciones.</td></tr>';}
-}
-function mostrarCalificaciones(lista){
-    document.getElementById('tablaCalificaciones').innerHTML=lista.length ? lista.map(c=>`<tr><td><strong>${esc(c.alumnoNombre)}</strong></td><td>${esc(c.grupo)}</td><td>${esc(c.materia)}</td><td>Parcial ${esc(c.parcial)}</td><td><span class="badge">${esc(c.calificacion)}</span></td></tr>`).join('') : '<tr><td colspan="5" class="empty-state">No hay calificaciones registradas.</td></tr>';
-}
-function filtrarCalificaciones(){const q=document.getElementById('buscarCalificacion').value.toLowerCase().trim();mostrarCalificaciones(listaCalificaciones.filter(c=>[c.alumnoNombre,c.grupo,c.materia,c.calificacion].some(v=>String(v||'').toLowerCase().includes(q))));}
+];
 
-async function cargarAsistencias(){
-    try{
-        const {alumnos,materias,clases}=await cargarCatalogos();
-        const respuestas=await Promise.all(clases.map(async c=>({clase:c,asistencias:await apiGet(`/asistencia/${c._id}`)})));
-        listaAsistencias=[];
-        respuestas.forEach(({clase,asistencias})=>asistencias.forEach(a=>{
-            const alumno=alumnos.find(x=>String(x._id)===String(a.alumnoId));
-            const mat=materias.find(x=>String(x._id)===String(clase.materiaId));
-            listaAsistencias.push({...a,alumnoNombre:alumno?.nombre,grupo:clase.grupo,materia:mat?.nombre});
-        }));
-        mostrarAsistencias(listaAsistencias);
-    }catch(e){document.getElementById('tablaAsistencia').innerHTML='<tr><td colspan="5" class="empty-state">No se pudo cargar la asistencia.</td></tr>';}
-}
-function mostrarAsistencias(lista){document.getElementById('tablaAsistencia').innerHTML=lista.length ? lista.sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha))).map(a=>`<tr><td>${esc(a.fecha)}</td><td><strong>${esc(a.alumnoNombre)}</strong></td><td>${esc(a.grupo)}</td><td>${esc(a.materia)}</td><td><span class="badge">${esc(a.estado)}</span></td></tr>`).join('') : '<tr><td colspan="5" class="empty-state">No hay registros de asistencia.</td></tr>';}
-function filtrarAsistencias(){const q=document.getElementById('buscarAsistencia').value.toLowerCase().trim();mostrarAsistencias(listaAsistencias.filter(a=>[a.fecha,a.alumnoNombre,a.grupo,a.materia,a.estado].some(v=>String(v||'').toLowerCase().includes(q))));}
 
-async function cargarReporte(){
-    try{
-        const d=await apiGet('/director/resumen');
-        document.getElementById('reporteAlumnos').textContent=d.alumnos;
-        document.getElementById('reporteMaestros').textContent=d.maestros;
-        document.getElementById('reporteGrupos').textContent=d.grupos;
-        document.getElementById('reportePromedio').textContent=d.promedioGeneral;
-        document.getElementById('reporteAsistencia').textContent=d.porcentajeAsistencia+'%';
-        document.getElementById('reporteBajos').textContent=d.alumnosBajos;
-        document.getElementById('reporteMaterias').textContent=d.materias;
-        document.getElementById('reportePadres').textContent=d.padres;
-    }catch(e){console.error(e);}
+function ocultarSecciones(){
+
+    seccionesDirector.forEach(
+        nombre => {
+
+            const elemento =
+                document.getElementById(
+                    'seccion' + nombre
+                );
+
+
+            if(elemento){
+
+                elemento.style.display =
+                    'none';
+
+            }
+
+        }
+    );
+
+
+    document
+    .querySelectorAll(
+        '.menu button'
+    )
+    .forEach(
+        btn =>
+            btn.classList.remove(
+                'active'
+            )
+    );
+
 }
 
-async function cargarAvisos(){
-    try{
-        const avisos=await apiGet('/avisos');
-        const lista=document.getElementById('listaAvisos');
-        lista.innerHTML=avisos.length ? avisos.map(a=>`<article class="aviso-item"><h4>📢 ${esc(a.titulo)}</h4><p>${esc(a.mensaje)}</p><div class="aviso-meta">Publicado: ${a.fecha ? new Date(a.fecha).toLocaleString('es-MX') : 'Sin fecha'}</div></article>`).join('') : '<div class="empty-state">No hay avisos publicados.</div>';
-    }catch(e){document.getElementById('listaAvisos').innerHTML='<div class="empty-state">No se pudieron cargar los avisos.</div>';}
+
+function activarBoton(nombre){
+
+    const btn =
+        document.getElementById(
+            'btn' + nombre
+        );
+
+
+    if(btn){
+
+        btn.classList.add(
+            'active'
+        );
+
+    }
+
 }
 
-// =====================================================
-// INICIAR DASHBOARD
-// =====================================================
+
+function mostrarInicio(){
+
+    ocultarSecciones();
+
+
+    document.getElementById(
+        'seccionInicio'
+    ).style.display =
+        'block';
+
+
+    activarBoton(
+        'Inicio'
+    );
+
+
+    cargarResumen();
+
+}
+
+
+function mostrarAlumnos(){
+
+    ocultarSecciones();
+
+
+    document.getElementById(
+        'seccionAlumnos'
+    ).style.display =
+        'block';
+
+
+    activarBoton(
+        'Alumnos'
+    );
+
+
+    cargarAlumnos();
+
+}
+
+
+function mostrarSeccion(nombre){
+
+    ocultarSecciones();
+
+
+    const nombreCapitalizado =
+        nombre.charAt(0).toUpperCase() +
+        nombre.slice(1);
+
+
+    const seccion =
+        document.getElementById(
+            'seccion' +
+            nombreCapitalizado
+        );
+
+
+    if(!seccion){
+
+        return;
+
+    }
+
+
+    seccion.style.display =
+        'block';
+
+
+    activarBoton(
+        nombreCapitalizado
+    );
+
+
+    if(
+        nombre === 'maestros'
+    ){
+
+        cargarMaestros();
+
+    }
+
+
+    if(
+        nombre === 'grupos'
+    ){
+
+        cargarGrupos();
+
+    }
+
+
+    if(
+        nombre === 'calificaciones'
+    ){
+
+        cargarCalificaciones();
+
+    }
+
+
+    if(
+        nombre === 'asistencia'
+    ){
+
+        cargarAsistencias();
+
+    }
+
+
+    if(
+        nombre === 'reportes'
+    ){
+
+        cargarReporte();
+
+    }
+
+
+    if(
+        nombre === 'avisos'
+    ){
+
+        cargarAvisos();
+
+    }
+
+
+    if(
+        nombre === 'constancias'
+    ){
+
+        if(!listaAlumnos.length){
+
+            cargarAlumnos();
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   CERRAR SESIÓN
+===================================================== */
+
+function cerrarSesion(){
+
+    localStorage.removeItem(
+        'token'
+    );
+
+    localStorage.removeItem(
+        'rol'
+    );
+
+
+    window.location.href =
+        'index.html';
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
 
 actualizarSaludo();
 
+/* Actualiza el saludo automáticamente cada minuto */
+setInterval(
+    actualizarSaludo,
+    60000
+);
+
 cargarResumen();
 
-
 </script>
-
 
 </body>
 
