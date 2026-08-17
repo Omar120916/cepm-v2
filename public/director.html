@@ -615,6 +615,79 @@ body{
 
 
 /* =========================
+   SECCIONES DEL DIRECTOR
+========================= */
+
+.seccion-director{display:none;}
+
+.director-toolbar{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.director-search{
+    flex:1;
+    min-width:240px;
+    padding:14px 16px;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+.director-search:focus{border-color:#2563eb;}
+
+.tabla-director{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tabla-director th{
+    text-align:left;
+    padding:13px 12px;
+    border-bottom:1px solid #e2e8f0;
+    color:#475569;
+    font-size:13px;
+}
+
+.tabla-director td{
+    padding:13px 12px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.tabla-director tbody tr:hover{background:#f8fafc;}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:999px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.empty-state{
+    text-align:center;
+    padding:35px;
+    color:#64748b;
+}
+
+.aviso-item{
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:12px;
+    background:#fff;
+}
+
+.aviso-item h4{margin-bottom:7px;}
+.aviso-item p{color:#475569;line-height:1.5;}
+.aviso-meta{font-size:12px;color:#94a3b8;margin-top:10px;}
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -784,42 +857,42 @@ body{
         </button>
 
 
-        <button>
+        <button id="btnMaestros" onclick="mostrarSeccion('maestros')">
 
             👨‍🏫 Maestros
 
         </button>
 
 
-        <button>
+        <button id="btnGrupos" onclick="mostrarSeccion('grupos')">
 
             📚 Grupos
 
         </button>
 
 
-        <button>
+        <button id="btnCalificaciones" onclick="mostrarSeccion('calificaciones')">
 
             📊 Calificaciones
 
         </button>
 
 
-        <button>
+        <button id="btnAsistencia" onclick="mostrarSeccion('asistencia')">
 
             📅 Asistencia
 
         </button>
 
 
-        <button>
+        <button id="btnReportes" onclick="mostrarSeccion('reportes')">
 
             📄 Reportes
 
         </button>
 
 
-        <button>
+        <button id="btnAvisos" onclick="mostrarSeccion('avisos')">
 
             📢 Avisos
 
@@ -1354,6 +1427,47 @@ body{
 
 
 
+
+<!-- MAESTROS -->
+<section id="seccionMaestros" class="seccion-director">
+    <header class="header"><div><h2>👨‍🏫 Maestros</h2><p>Consulta del personal docente</p></div><div class="user">👨‍🏫 Maestros</div></header>
+    <div class="panel"><div class="director-toolbar"><input id="buscarMaestro" class="director-search" placeholder="🔎 Buscar maestro..." oninput="filtrarMaestros()"></div>
+    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Nombre</th><th>Usuario</th><th>Correo</th></tr></thead><tbody id="tablaMaestros"><tr><td colspan="3" class="empty-state">Cargando maestros...</td></tr></tbody></table></div></div>
+</section>
+
+<!-- GRUPOS -->
+<section id="seccionGrupos" class="seccion-director">
+    <header class="header"><div><h2>📚 Grupos</h2><p>Grupos, materias y maestros asignados</p></div><div class="user">📚 Grupos</div></header>
+    <div class="panel"><div class="tabla-container"><table class="tabla-director"><thead><tr><th>Grupo</th><th>Materia</th><th>Maestro</th><th>Horario</th><th>Aula</th><th>Alumnos</th></tr></thead><tbody id="tablaGrupos"><tr><td colspan="6" class="empty-state">Cargando grupos...</td></tr></tbody></table></div></div>
+</section>
+
+<!-- CALIFICACIONES -->
+<section id="seccionCalificaciones" class="seccion-director">
+    <header class="header"><div><h2>📊 Calificaciones</h2><p>Consulta general de rendimiento académico</p></div><div class="user">📊 Calificaciones</div></header>
+    <div class="panel"><div class="director-toolbar"><input id="buscarCalificacion" class="director-search" placeholder="🔎 Buscar alumno, grupo o materia..." oninput="filtrarCalificaciones()"></div>
+    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Alumno</th><th>Grupo</th><th>Materia</th><th>Parcial</th><th>Calificación</th></tr></thead><tbody id="tablaCalificaciones"><tr><td colspan="5" class="empty-state">Cargando calificaciones...</td></tr></tbody></table></div></div>
+</section>
+
+<!-- ASISTENCIA -->
+<section id="seccionAsistencia" class="seccion-director">
+    <header class="header"><div><h2>📅 Asistencia</h2><p>Consulta de asistencia por grupo y alumno</p></div><div class="user">📅 Asistencia</div></header>
+    <div class="panel"><div class="director-toolbar"><input id="buscarAsistencia" class="director-search" placeholder="🔎 Buscar alumno, grupo o estado..." oninput="filtrarAsistencias()"></div>
+    <div class="tabla-container"><table class="tabla-director"><thead><tr><th>Fecha</th><th>Alumno</th><th>Grupo</th><th>Materia</th><th>Estado</th></tr></thead><tbody id="tablaAsistencia"><tr><td colspan="5" class="empty-state">Cargando asistencia...</td></tr></tbody></table></div></div>
+</section>
+
+<!-- REPORTES -->
+<section id="seccionReportes" class="seccion-director">
+    <header class="header"><div><h2>📄 Reportes</h2><p>Resumen administrativo de la institución</p></div><div class="user">📄 Reportes</div></header>
+    <section class="cards" style="margin-bottom:20px"><div class="card"><p>Alumnos</p><h3 id="reporteAlumnos">--</h3></div><div class="card"><p>Maestros</p><h3 id="reporteMaestros">--</h3></div><div class="card"><p>Grupos</p><h3 id="reporteGrupos">--</h3></div><div class="card"><p>Promedio</p><h3 id="reportePromedio">--</h3></div></section>
+    <div class="panel"><h3>📌 Indicadores</h3><div class="stats"><div class="stat"><span>Asistencia general</span><strong id="reporteAsistencia">--</strong></div><div class="stat"><span>Alumnos con promedio menor a 6</span><strong id="reporteBajos">--</strong></div><div class="stat"><span>Materias</span><strong id="reporteMaterias">--</strong></div><div class="stat"><span>Padres registrados</span><strong id="reportePadres">--</strong></div></div></div>
+</section>
+
+<!-- AVISOS -->
+<section id="seccionAvisos" class="seccion-director">
+    <header class="header"><div><h2>📢 Avisos</h2><p>Comunicados publicados en la plataforma</p></div><div class="user">📢 Avisos</div></header>
+    <div class="panel"><div id="listaAvisos"><div class="empty-state">Cargando avisos...</div></div></div>
+</section>
+
 </main>
 
 
@@ -1876,97 +1990,55 @@ function filtrarAlumnos(){
 
 
 // =====================================================
-// INICIO
+// NAVEGACIÓN
 // =====================================================
+
+const seccionesDirector = [
+    'Inicio','Alumnos','Maestros','Grupos','Calificaciones','Asistencia','Reportes','Avisos'
+];
+
+function ocultarSecciones(){
+    seccionesDirector.forEach(nombre => {
+        const el = document.getElementById('seccion' + nombre);
+        if(el) el.style.display = 'none';
+    });
+    document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+}
+
+function activarBoton(nombre){
+    const btn = document.getElementById('btn' + nombre);
+    if(btn) btn.classList.add('active');
+}
 
 function mostrarInicio(){
-
-    document
-    .getElementById(
-        'seccionInicio'
-    )
-    .style.display =
-    'block';
-
-
-    document
-    .getElementById(
-        'seccionAlumnos'
-    )
-    .style.display =
-    'none';
-
-
-    document
-    .getElementById(
-        'btnInicio'
-    )
-    .classList
-    .add(
-        'active'
-    );
-
-
-    document
-    .getElementById(
-        'btnAlumnos'
-    )
-    .classList
-    .remove(
-        'active'
-    );
-
+    ocultarSecciones();
+    document.getElementById('seccionInicio').style.display = 'block';
+    activarBoton('Inicio');
+    cargarResumen();
 }
-
-
-
-// =====================================================
-// ALUMNOS
-// =====================================================
 
 function mostrarAlumnos(){
-
-    document
-    .getElementById(
-        'seccionInicio'
-    )
-    .style.display =
-    'none';
-
-
-    document
-    .getElementById(
-        'seccionAlumnos'
-    )
-    .style.display =
-    'block';
-
-
-    document
-    .getElementById(
-        'btnInicio'
-    )
-    .classList
-    .remove(
-        'active'
-    );
-
-
-    document
-    .getElementById(
-        'btnAlumnos'
-    )
-    .classList
-    .add(
-        'active'
-    );
-
-
+    ocultarSecciones();
+    document.getElementById('seccionAlumnos').style.display = 'block';
+    activarBoton('Alumnos');
     cargarAlumnos();
-
 }
 
+function mostrarSeccion(nombre){
+    ocultarSecciones();
+    const id = 'seccion' + nombre.charAt(0).toUpperCase() + nombre.slice(1);
+    const seccion = document.getElementById(id);
+    if(!seccion) return;
+    seccion.style.display = 'block';
+    activarBoton(nombre.charAt(0).toUpperCase() + nombre.slice(1));
 
+    if(nombre === 'maestros') cargarMaestros();
+    if(nombre === 'grupos') cargarGrupos();
+    if(nombre === 'calificaciones') cargarCalificaciones();
+    if(nombre === 'asistencia') cargarAsistencias();
+    if(nombre === 'reportes') cargarReporte();
+    if(nombre === 'avisos') cargarAvisos();
+}
 
 // =====================================================
 // CERRAR SESIÓN
@@ -1989,6 +2061,110 @@ function cerrarSesion(){
 }
 
 
+
+// =====================================================
+// DATOS AUXILIARES
+// =====================================================
+
+let listaMaestros = [];
+let listaGrupos = [];
+let listaCalificaciones = [];
+let listaAsistencias = [];
+
+async function apiGet(ruta){
+    const res = await fetch(`${API}${ruta}`, { headers:{'Authorization':token} });
+    if(res.status === 401){ localStorage.clear(); window.location.href='index.html'; throw new Error('Sesión expirada'); }
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.mensaje || 'Error en la solicitud');
+    return data;
+}
+
+function texto(v, fallback='—'){ return v === undefined || v === null || v === '' ? fallback : v; }
+function esc(v){ return String(texto(v,'')).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
+
+async function cargarMaestros(){
+    try{ listaMaestros = await apiGet('/maestros'); mostrarListaMaestros(listaMaestros); }
+    catch(e){ document.getElementById('tablaMaestros').innerHTML=`<tr><td colspan="3" class="empty-state">No se pudieron cargar los maestros.</td></tr>`; }
+}
+function mostrarListaMaestros(lista){
+    const tabla=document.getElementById('tablaMaestros');
+    tabla.innerHTML=lista.length ? lista.map(m=>`<tr><td><strong>${esc(m.nombre)}</strong></td><td>${esc(m.usuario)}</td><td>${esc(m.email,'Sin correo')}</td></tr>`).join('') : '<tr><td colspan="3" class="empty-state">No hay maestros registrados.</td></tr>';
+}
+function filtrarMaestros(){ const q=document.getElementById('buscarMaestro').value.toLowerCase().trim(); mostrarListaMaestros(listaMaestros.filter(m=>[m.nombre,m.usuario,m.email].some(v=>String(v||'').toLowerCase().includes(q)))); }
+
+async function cargarCatalogos(){
+    const [alumnos, maestros, materias, clases] = await Promise.all([apiGet('/alumnos'),apiGet('/maestros'),apiGet('/materias'),apiGet('/clases')]);
+    return {alumnos, maestros, materias, clases};
+}
+
+async function cargarGrupos(){
+    try{
+        const {maestros,materias,clases}=await cargarCatalogos();
+        listaGrupos=clases;
+        const tbody=document.getElementById('tablaGrupos');
+        tbody.innerHTML=clases.length ? clases.map(c=>{
+            const m=maestros.find(x=>String(x._id)===String(c.maestroId));
+            const mat=materias.find(x=>String(x._id)===String(c.materiaId));
+            return `<tr><td><span class="badge">${esc(c.grupo)}</span></td><td>${esc(mat?.nombre)}</td><td>${esc(m?.nombre)}</td><td>${esc(c.horario)}</td><td>${esc(c.aula)}</td><td>${c.alumnos?.length||0}</td></tr>`;
+        }).join('') : '<tr><td colspan="6" class="empty-state">No hay grupos registrados.</td></tr>';
+    }catch(e){document.getElementById('tablaGrupos').innerHTML='<tr><td colspan="6" class="empty-state">No se pudieron cargar los grupos.</td></tr>';}
+}
+
+async function cargarCalificaciones(){
+    try{
+        const {alumnos,maestros,materias,clases}=await cargarCatalogos();
+        const califs=await apiGet('/calificaciones');
+        listaCalificaciones=califs.map(c=>{
+            const cl=clases.find(x=>String(x._id)===String(c.claseId));
+            const a=alumnos.find(x=>String(x._id)===String(c.alumnoId));
+            const mat=materias.find(x=>String(x._id)===String(cl?.materiaId));
+            return {...c, alumnoNombre:a?.nombre, grupo:cl?.grupo, materia:mat?.nombre};
+        });
+        mostrarCalificaciones(listaCalificaciones);
+    }catch(e){document.getElementById('tablaCalificaciones').innerHTML='<tr><td colspan="5" class="empty-state">No se pudieron cargar las calificaciones.</td></tr>';}
+}
+function mostrarCalificaciones(lista){
+    document.getElementById('tablaCalificaciones').innerHTML=lista.length ? lista.map(c=>`<tr><td><strong>${esc(c.alumnoNombre)}</strong></td><td>${esc(c.grupo)}</td><td>${esc(c.materia)}</td><td>Parcial ${esc(c.parcial)}</td><td><span class="badge">${esc(c.calificacion)}</span></td></tr>`).join('') : '<tr><td colspan="5" class="empty-state">No hay calificaciones registradas.</td></tr>';
+}
+function filtrarCalificaciones(){const q=document.getElementById('buscarCalificacion').value.toLowerCase().trim();mostrarCalificaciones(listaCalificaciones.filter(c=>[c.alumnoNombre,c.grupo,c.materia,c.calificacion].some(v=>String(v||'').toLowerCase().includes(q))));}
+
+async function cargarAsistencias(){
+    try{
+        const {alumnos,materias,clases}=await cargarCatalogos();
+        const respuestas=await Promise.all(clases.map(async c=>({clase:c,asistencias:await apiGet(`/asistencia/${c._id}`)})));
+        listaAsistencias=[];
+        respuestas.forEach(({clase,asistencias})=>asistencias.forEach(a=>{
+            const alumno=alumnos.find(x=>String(x._id)===String(a.alumnoId));
+            const mat=materias.find(x=>String(x._id)===String(clase.materiaId));
+            listaAsistencias.push({...a,alumnoNombre:alumno?.nombre,grupo:clase.grupo,materia:mat?.nombre});
+        }));
+        mostrarAsistencias(listaAsistencias);
+    }catch(e){document.getElementById('tablaAsistencia').innerHTML='<tr><td colspan="5" class="empty-state">No se pudo cargar la asistencia.</td></tr>';}
+}
+function mostrarAsistencias(lista){document.getElementById('tablaAsistencia').innerHTML=lista.length ? lista.sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha))).map(a=>`<tr><td>${esc(a.fecha)}</td><td><strong>${esc(a.alumnoNombre)}</strong></td><td>${esc(a.grupo)}</td><td>${esc(a.materia)}</td><td><span class="badge">${esc(a.estado)}</span></td></tr>`).join('') : '<tr><td colspan="5" class="empty-state">No hay registros de asistencia.</td></tr>';}
+function filtrarAsistencias(){const q=document.getElementById('buscarAsistencia').value.toLowerCase().trim();mostrarAsistencias(listaAsistencias.filter(a=>[a.fecha,a.alumnoNombre,a.grupo,a.materia,a.estado].some(v=>String(v||'').toLowerCase().includes(q))));}
+
+async function cargarReporte(){
+    try{
+        const d=await apiGet('/director/resumen');
+        document.getElementById('reporteAlumnos').textContent=d.alumnos;
+        document.getElementById('reporteMaestros').textContent=d.maestros;
+        document.getElementById('reporteGrupos').textContent=d.grupos;
+        document.getElementById('reportePromedio').textContent=d.promedioGeneral;
+        document.getElementById('reporteAsistencia').textContent=d.porcentajeAsistencia+'%';
+        document.getElementById('reporteBajos').textContent=d.alumnosBajos;
+        document.getElementById('reporteMaterias').textContent=d.materias;
+        document.getElementById('reportePadres').textContent=d.padres;
+    }catch(e){console.error(e);}
+}
+
+async function cargarAvisos(){
+    try{
+        const avisos=await apiGet('/avisos');
+        const lista=document.getElementById('listaAvisos');
+        lista.innerHTML=avisos.length ? avisos.map(a=>`<article class="aviso-item"><h4>📢 ${esc(a.titulo)}</h4><p>${esc(a.mensaje)}</p><div class="aviso-meta">Publicado: ${a.fecha ? new Date(a.fecha).toLocaleString('es-MX') : 'Sin fecha'}</div></article>`).join('') : '<div class="empty-state">No hay avisos publicados.</div>';
+    }catch(e){document.getElementById('listaAvisos').innerHTML='<div class="empty-state">No se pudieron cargar los avisos.</div>';}
+}
 
 // =====================================================
 // INICIAR DASHBOARD
