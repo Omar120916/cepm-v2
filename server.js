@@ -268,6 +268,25 @@ const Mensaje = mongoose.model('Mensaje',{
     }
 })
 
+const Aviso = mongoose.model('Aviso', {
+    claseId:
+    mongoose.Schema.Types.ObjectId,
+
+    maestroId:
+    mongoose.Schema.Types.ObjectId,
+
+    titulo: String,
+
+    mensaje: String,
+
+    fecha:{
+        type:Date,
+        default:Date.now
+    }
+
+
+})
+
 // =====================
 // 🔐 TOKEN
 // =====================
@@ -306,6 +325,21 @@ function verificarToken(req,res,next){
             mensaje:'Token inválido'
         })
     }
+}
+
+function verificarDirector(req,res,next){
+
+    if(req.usuario.rol !== 'director'){
+
+        return res.status(403).json({
+
+            mensaje:'Acceso exclusivo para directores'
+
+        })
+
+    }
+
+    next()
 }
 
 // =====================
@@ -1378,6 +1412,309 @@ mensaje:'Suscripción guardada 🔥'
 })
 
 })
+
+// =====================
+// 📢 CREAR AVISO
+// =====================
+
+app.post(
+
+'/avisos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const aviso =
+    new Aviso({
+
+        claseId:req.body.claseId,
+
+        maestroId:req.usuario.id,
+
+        titulo:req.body.titulo,
+
+        mensaje:req.body.mensaje
+
+    })
+
+    await aviso.save()
+
+    res.json({
+
+        mensaje:'Aviso publicado 🔥'
+
+    })
+
+})
+
+// =====================
+// 📢 VER AVISOS
+// =====================
+
+app.get(
+
+'/avisos',
+
+verificarToken,
+
+async(req,res)=>{
+
+    const avisos =
+    await Aviso.find()
+
+    .sort({
+
+        fecha:-1
+
+    })
+
+    res.json(
+
+        avisos
+
+    )
+
+})
+
+// =====================
+// 🗑 ELIMINAR AVISO
+// =====================
+
+app.delete(
+
+'/avisos/:id',
+
+verificarToken,
+
+async(req,res)=>{
+
+    await Aviso.findByIdAndDelete(
+
+        req.params.id
+
+    )
+
+    res.json({
+
+        mensaje:'Aviso eliminado'
+
+    })
+
+})
+
+// =====================
+// 🏫 DASHBOARD DIRECTOR
+// =====================
+
+app.get(
+
+    '/director/resumen',
+
+    verificarToken,
+
+    verificarDirector,
+
+    async(req,res)=>{
+
+        try{
+
+            const alumnos =
+            await Usuario.countDocuments({
+                rol:'alumno'
+            })
+
+            const maestros =
+            await Usuario.countDocuments({
+                rol:'maestro'
+            })
+
+            const padres =
+            await Usuario.countDocuments({
+                rol:'padre'
+            })
+
+            const materias =
+            await Materia.countDocuments()
+
+            const grupos =
+            await Clase.distinct('grupo')
+
+            const promedio =
+            await Calificacion.aggregate([
+
+                {
+                    $group:{
+
+                        _id:null,
+
+                        promedio:{
+                            $avg:'$calificacion'
+                        }
+
+                    }
+                }
+
+            ])
+
+            const asistencias =
+            await Asistencia.aggregate([
+
+                {
+                    $group:{
+
+                        _id:null,
+
+                        total:{
+                            $sum:1
+                        },
+
+                        presentes:{
+
+                            $sum:{
+
+                                $cond:[
+
+                                    {
+                                        $in:[
+
+                                            '$estado',
+
+                                            [
+                                                'presente',
+                                                'Presente',
+                                                'P',
+                                                'asistio'
+                                            ]
+
+                                        ]
+                                    },
+
+                                    1,
+                                    0
+
+                                ]
+                            }
+                        }
+                    }
+                }
+
+            ])
+
+            const alumnosBajos =
+            await Calificacion.aggregate([
+
+                {
+                    $group:{
+
+                        _id:'$alumnoId',
+
+                        promedio:{
+                            $avg:'$calificacion'
+                        }
+
+                    }
+                },
+
+                {
+                    $match:{
+
+                        promedio:{
+                            $lt:6
+                        }
+
+                    }
+                },
+
+                {
+                    $count:'total'
+                }
+
+            ])
+
+            const promedioGeneral =
+
+                promedio.length
+
+                ?
+
+                Number(
+                    promedio[0].promedio.toFixed(2)
+                )
+
+                : 0
+
+
+            let porcentajeAsistencia = 0
+
+
+            if(
+
+                asistencias.length &&
+                asistencias[0].total > 0
+
+            ){
+
+                porcentajeAsistencia =
+
+                    Number(
+
+                        (
+                            asistencias[0].presentes /
+                            asistencias[0].total
+                        ) * 100
+
+                    ).toFixed(1)
+
+            }
+
+
+            res.json({
+
+                alumnos,
+
+                maestros,
+
+                padres,
+
+                materias,
+
+                grupos:grupos.length,
+
+                promedioGeneral,
+
+                porcentajeAsistencia,
+
+                alumnosBajos:
+
+                    alumnosBajos.length
+
+                    ?
+
+                    alumnosBajos[0].total
+
+                    :
+
+                    0
+
+            })
+
+        }catch(err){
+
+            console.log(err)
+
+            res.status(500).json({
+
+                mensaje:
+                'Error obteniendo resumen del director'
+
+            })
+
+        }
+
+    }
+
+)
 
 // =====================
 // 🚀 SERVER
