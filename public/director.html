@@ -898,6 +898,12 @@ body{
 
         </button>
 
+        <button id="btnConstancias" onclick="mostrarSeccion('constancias')">
+
+    📄 Constancias
+
+</button>
+
 
     </div>
 
@@ -1468,6 +1474,152 @@ body{
     <div class="panel"><div id="listaAvisos"><div class="empty-state">Cargando avisos...</div></div></div>
 </section>
 
+<!-- CONSTANCIAS -->
+<section id="seccionConstancias" class="seccion-director">
+
+    <header class="header">
+
+        <div>
+
+            <h2>
+                📄 Constancias de estudio
+            </h2>
+
+            <p>
+                Generación de constancias con calificaciones
+            </p>
+
+        </div>
+
+        <div class="user">
+
+            📄 Constancias
+
+        </div>
+
+    </header>
+
+
+    <div class="panel">
+
+        <h3>
+            🔎 Buscar alumno
+        </h3>
+
+        <input
+            type="text"
+            id="buscarConstancia"
+            class="director-search"
+            placeholder="Buscar alumno por nombre, usuario o correo..."
+            oninput="buscarAlumnoConstancia()"
+        >
+
+    </div>
+
+
+    <div
+        class="panel"
+        style="margin-top:20px;"
+    >
+
+        <h3>
+            👨‍🎓 Seleccionar alumno
+        </h3>
+
+        <div
+            id="resultadosConstancia"
+            class="empty-state"
+        >
+
+            Escribe el nombre del alumno para comenzar.
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="vistaConstancia"
+        style="display:none; margin-top:20px;"
+    >
+
+        <div class="panel">
+
+            <h3>
+                📋 Datos del alumno
+            </h3>
+
+            <div
+                id="datosAlumnoConstancia"
+                class="stats"
+            >
+            </div>
+
+        </div>
+
+
+        <div
+            class="panel"
+            style="margin-top:20px;"
+        >
+
+            <h3>
+                📊 Calificaciones
+            </h3>
+
+            <div class="tabla-container">
+
+                <table class="tabla-director">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Materia
+                            </th>
+
+                            <th>
+                                Parcial
+                            </th>
+
+                            <th>
+                                Calificación
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="tablaConstancia"
+                    >
+
+                        <tr>
+
+                            <td
+                                colspan="3"
+                                class="empty-state"
+                            >
+
+                                Selecciona un alumno.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 </main>
 
 
@@ -2027,7 +2179,15 @@ function filtrarAlumnos(){
 // =====================================================
 
 const seccionesDirector = [
-    'Inicio','Alumnos','Maestros','Grupos','Calificaciones','Asistencia','Reportes','Avisos'
+    'Inicio',
+    'Alumnos',
+    'Maestros',
+    'Grupos',
+    'Calificaciones',
+    'Asistencia',
+    'Reportes',
+    'Avisos',
+    'Constancias'
 ];
 
 function ocultarSecciones(){
@@ -2103,6 +2263,220 @@ let listaMaestros = [];
 let listaGrupos = [];
 let listaCalificaciones = [];
 let listaAsistencias = [];
+
+let alumnoConstanciaSeleccionado = null;
+
+
+// =====================================================
+// BUSCAR ALUMNO PARA CONSTANCIA
+// =====================================================
+
+function buscarAlumnoConstancia(){
+
+    const texto =
+        document
+        .getElementById('buscarConstancia')
+        .value
+        .toLowerCase()
+        .trim();
+
+    const contenedor =
+        document
+        .getElementById('resultadosConstancia');
+
+
+    if(!texto){
+
+        contenedor.innerHTML =
+            'Escribe el nombre del alumno para comenzar.';
+
+        return;
+
+    }
+
+
+    const resultados =
+        listaAlumnos.filter(alumno => {
+
+            const nombre =
+                String(alumno.nombre || '')
+                .toLowerCase();
+
+            const usuario =
+                String(alumno.usuario || '')
+                .toLowerCase();
+
+            const email =
+                String(alumno.email || '')
+                .toLowerCase();
+
+
+            return (
+                nombre.includes(texto) ||
+                usuario.includes(texto) ||
+                email.includes(texto)
+            );
+
+        });
+
+
+    if(!resultados.length){
+
+        contenedor.innerHTML =
+            '❌ No se encontraron alumnos.';
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        resultados
+        .slice(0,10)
+        .map(alumno => `
+
+            <div
+                onclick="seleccionarAlumnoConstancia('${alumno._id}')"
+                style="
+                    padding:15px;
+                    border:1px solid #e2e8f0;
+                    border-radius:12px;
+                    margin-bottom:10px;
+                    cursor:pointer;
+                    background:#f8fafc;
+                "
+            >
+
+                <strong>
+                    ${esc(alumno.nombre)}
+                </strong>
+
+                <br>
+
+                <small>
+                    Usuario:
+                    ${esc(alumno.usuario)}
+                </small>
+
+                <br>
+
+                <small>
+                    ${esc(alumno.email,'Sin correo')}
+                </small>
+
+            </div>
+
+        `)
+        .join('');
+
+}
+
+// =====================================================
+// SELECCIONAR ALUMNO
+// =====================================================
+
+async function seleccionarAlumnoConstancia(id){
+
+    const alumno =
+        listaAlumnos.find(
+            a => String(a._id) === String(id)
+        );
+
+
+    if(!alumno){
+
+        alert('No se encontró el alumno.');
+
+        return;
+
+    }
+
+
+    alumnoConstanciaSeleccionado =
+        alumno;
+
+
+    document
+    .getElementById(
+        'vistaConstancia'
+    )
+    .style.display =
+    'block';
+
+
+    document
+    .getElementById(
+        'datosAlumnoConstancia'
+    )
+    .innerHTML = `
+
+        <div class="stat">
+
+            <span>
+                Nombre completo
+            </span>
+
+            <strong
+                style="font-size:20px;"
+            >
+                ${esc(alumno.nombre)}
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Usuario
+            </span>
+
+            <strong
+                style="font-size:20px;"
+            >
+                ${esc(alumno.usuario)}
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Correo
+            </span>
+
+            <strong
+                style="font-size:18px;"
+            >
+                ${esc(alumno.email,'Sin correo')}
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Edad
+            </span>
+
+            <strong
+                style="font-size:20px;"
+            >
+                ${esc(alumno.edad)}
+            </strong>
+
+        </div>
+
+    `;
+
+
+    await cargarCalificacionesAlumnoConstancia(
+        alumno._id
+    );
+
+}
 
 async function apiGet(ruta){
     const res = await fetch(`${API}${ruta}`, { headers:{'Authorization':token} });
