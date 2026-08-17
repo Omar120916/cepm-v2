@@ -707,9 +707,112 @@ body{
      SECCIÓN ALUMNOS
 ========================= -->
 
-<section
-    id="seccionAlumnos"
-    style="display:none;">
+<section id="seccionAlumnos" style="display:none;">
+
+    <div class="header">
+
+        <div>
+            <h2>👨‍🎓 Alumnos</h2>
+
+            <p>
+                Consulta de alumnos registrados
+            </p>
+        </div>
+
+    </div>
+
+    <div class="panel" style="margin-bottom:20px;">
+
+        <input
+            type="text"
+            id="buscarAlumno"
+            placeholder="🔎 Buscar por nombre o usuario..."
+            oninput="filtrarAlumnos()"
+            style="
+                width:100%;
+                padding:15px;
+                border:1px solid #e2e8f0;
+                border-radius:12px;
+                font-size:15px;
+                outline:none;
+            "
+        >
+
+    </div>
+
+    <div class="panel">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        ">
+
+            <h3>Lista de alumnos</h3>
+
+            <strong id="contadorAlumnos">
+                0 alumnos
+            </strong>
+
+        </div>
+
+        <div style="overflow-x:auto;">
+
+            <table style="
+                width:100%;
+                border-collapse:collapse;
+            ">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="text-align:left;padding:12px;">
+                            Nombre
+                        </th>
+
+                        <th style="text-align:left;padding:12px;">
+                            Usuario
+                        </th>
+
+                        <th style="text-align:left;padding:12px;">
+                            Correo
+                        </th>
+
+                        <th style="text-align:left;padding:12px;">
+                            Edad
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaAlumnos">
+
+                    <tr>
+
+                        <td colspan="4"
+                            style="
+                                text-align:center;
+                                padding:30px;
+                            ">
+
+                            Cargando alumnos...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
 
     <div class="header">
 
@@ -1481,9 +1584,14 @@ async function cargarAlumnos(){
 
         listaAlumnos = data
 
-        mostrarListaAlumnos(
-            listaAlumnos
-        )
+console.log(
+    'Alumnos recibidos:',
+    listaAlumnos
+)
+
+mostrarListaAlumnos(
+    listaAlumnos
+)
 
 
     }catch(error){
@@ -1693,18 +1801,31 @@ function mostrarInicio(){
 
 function mostrarAlumnos(){
 
-    document
-    .getElementById(
-        'seccionInicio'
-    )
-    .style.display = 'none'
+    const inicio =
+        document.getElementById(
+            'seccionInicio'
+        )
+
+    const alumnos =
+        document.getElementById(
+            'seccionAlumnos'
+        )
 
 
-    document
-    .getElementById(
-        'seccionAlumnos'
-    )
-    .style.display = 'block'
+    if(!inicio || !alumnos){
+
+        console.error(
+            'No se encontraron las secciones'
+        )
+
+        return
+
+    }
+
+
+    inicio.style.display = 'none'
+
+    alumnos.style.display = 'block'
 
 
     cargarAlumnos()
