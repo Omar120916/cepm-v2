@@ -2373,10 +2373,105 @@ function buscarAlumnoConstancia(){
 }
 
 // =====================================================
-// SELECCIONAR ALUMNO
+// SELECCIONAR ALUMNO PARA CONSTANCIA
 // =====================================================
 
 async function seleccionarAlumnoConstancia(id){
+
+    const alumno =
+        listaAlumnos.find(
+            a => String(a._id) === String(id)
+        );
+
+
+    if(!alumno){
+
+        alert('No se encontró el alumno.');
+
+        return;
+
+    }
+
+
+    alumnoConstanciaSeleccionado =
+        alumno;
+
+
+    document
+    .getElementById('vistaConstancia')
+    .style.display = 'block';
+
+
+    // Mostrar datos básicos mientras cargamos
+    document
+    .getElementById('datosAlumnoConstancia')
+    .innerHTML = `
+
+        <div class="stat">
+
+            <span>
+                Nombre completo
+            </span>
+
+            <strong style="font-size:20px;">
+                ${esc(alumno.nombre)}
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Usuario / Matrícula
+            </span>
+
+            <strong style="font-size:20px;">
+                ${esc(alumno.usuario)}
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Grupo
+            </span>
+
+            <strong
+                id="grupoConstancia"
+                style="font-size:20px;"
+            >
+                🔄 Cargando...
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Promedio general
+            </span>
+
+            <strong
+                id="promedioConstancia"
+                style="font-size:20px;"
+            >
+                🔄 Calculando...
+            </strong>
+
+        </div>
+
+    `;
+
+
+    await cargarCalificacionesAlumnoConstancia(
+        alumno._id
+    );
+
+}
 
     const alumno =
         listaAlumnos.find(
@@ -2477,10 +2572,9 @@ async function seleccionarAlumnoConstancia(id){
         alumno._id
     );
 
-}
 
 // =====================================================
-// CARGAR CALIFICACIONES DEL ALUMNO PARA CONSTANCIA
+// CARGAR CALIFICACIONES PARA CONSTANCIA
 // =====================================================
 
 async function cargarCalificacionesAlumnoConstancia(alumnoId){
@@ -2490,6 +2584,7 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
             'tablaConstancia'
         );
 
+
     tabla.innerHTML = `
         <tr>
             <td colspan="3" class="empty-state">
@@ -2498,16 +2593,11 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
         </tr>
     `;
 
+
     try{
 
         const calificaciones =
             await apiGet('/calificaciones');
-
-
-        console.log(
-            'CALIFICACIONES DEL ALUMNO:',
-            calificaciones
-        );
 
 
         const delAlumno =
@@ -2517,6 +2607,63 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
                     String(alumnoId)
             );
 
+
+        const materias =
+            await apiGet('/materias');
+
+
+        const clases =
+            await apiGet('/clases');
+
+
+        // =============================================
+        // OBTENER CLASES DEL ALUMNO
+        // =============================================
+
+        const clasesAlumno =
+            clases.filter(clase =>
+                Array.isArray(clase.alumnos) &&
+                clase.alumnos.some(
+                    id =>
+                        String(id) ===
+                        String(alumnoId)
+                )
+            );
+
+
+        // =============================================
+        // GRUPO
+        // =============================================
+
+        let grupo = 'No asignado';
+
+
+        if(clasesAlumno.length){
+
+            grupo =
+                clasesAlumno[0].grupo ||
+                'No asignado';
+
+        }
+
+
+        const grupoElemento =
+            document.getElementById(
+                'grupoConstancia'
+            );
+
+
+        if(grupoElemento){
+
+            grupoElemento.textContent =
+                grupo;
+
+        }
+
+
+        // =============================================
+        // SIN CALIFICACIONES
+        // =============================================
 
         if(!delAlumno.length){
 
@@ -2532,18 +2679,32 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
                 </tr>
             `;
 
+
+            const promedioElemento =
+                document.getElementById(
+                    'promedioConstancia'
+                );
+
+
+            if(promedioElemento){
+
+                promedioElemento.textContent =
+                    'Sin calificaciones';
+
+            }
+
+
             return;
 
         }
 
 
-        // Buscar materias y clases
+        // =============================================
+        // MOSTRAR CALIFICACIONES
+        // =============================================
 
-        const materias =
-            await apiGet('/materias');
-
-        const clases =
-            await apiGet('/clases');
+        let suma = 0;
+        let cantidad = 0;
 
 
         tabla.innerHTML =
@@ -2566,23 +2727,42 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
                     );
 
 
+                const numero =
+                    Number(c.calificacion);
+
+
+                if(!isNaN(numero)){
+
+                    suma += numero;
+
+                    cantidad++;
+
+                }
+
+
                 return `
 
                     <tr>
 
                         <td>
+
                             <strong>
+
                                 ${esc(
                                     materia?.nombre,
                                     'Materia no encontrada'
                                 )}
+
                             </strong>
+
                         </td>
 
 
                         <td>
+
                             Parcial
                             ${esc(c.parcial)}
+
                         </td>
 
 
@@ -2607,11 +2787,48 @@ async function cargarCalificacionesAlumnoConstancia(alumnoId){
             .join('');
 
 
+        // =============================================
+        // PROMEDIO
+        // =============================================
+
+        const promedio =
+            cantidad > 0
+            ? (suma / cantidad).toFixed(1)
+            : '—';
+
+
+        const promedioElemento =
+            document.getElementById(
+                'promedioConstancia'
+            );
+
+
+        if(promedioElemento){
+
+            promedioElemento.textContent =
+                promedio;
+
+        }
+
+
+        console.log(
+            'CONSTANCIA:',
+            {
+                alumno:
+                    alumnoConstanciaSeleccionado,
+                grupo,
+                calificaciones:
+                    delAlumno,
+                promedio
+            }
+        );
+
+
     }
     catch(error){
 
         console.error(
-            'Error cargando calificaciones:',
+            'Error cargando constancia:',
             error
         );
 
