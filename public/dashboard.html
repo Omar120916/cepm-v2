@@ -714,6 +714,73 @@ async function crearMaestro(){
     cargarUsuarios()
 }
 
+async function crearDirector(){
+
+    const nombre =
+        document.getElementById('nombreDirector').value.trim();
+
+    const usuario =
+        document.getElementById('usuarioDirector').value.trim();
+
+    const email =
+        document.getElementById('emailDirector').value.trim();
+
+    const password =
+        document.getElementById('passwordDirector').value;
+
+    if(!nombre || !usuario || !password){
+
+        alert('Completa nombre, usuario y contraseña');
+
+        return;
+    }
+
+    try{
+
+        const res = await fetch(
+            `${API}/crear-director`,
+            {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+
+                body: JSON.stringify({
+                    nombre,
+                    usuario,
+                    email,
+                    password
+                })
+            }
+        );
+
+        const data = await res.json();
+
+        if(!res.ok){
+
+            alert(data.mensaje || 'Error creando director');
+
+            return;
+        }
+
+        alert(data.mensaje || 'Director creado correctamente');
+
+        document.getElementById('nombreDirector').value = '';
+        document.getElementById('usuarioDirector').value = '';
+        document.getElementById('emailDirector').value = '';
+        document.getElementById('passwordDirector').value = '';
+
+    }catch(error){
+
+        console.error(error);
+
+        alert('Error de conexión con el servidor');
+
+    }
+}
+
 // =====================
 // 📚 CREAR MATERIA
 // =====================
