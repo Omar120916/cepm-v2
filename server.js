@@ -904,6 +904,101 @@ async(req,res)=>{
 })
 
 // =====================
+// 🗑️ ELIMINAR CLASE
+// =====================
+
+app.delete(
+
+    '/clases/:id',
+
+    verificarToken,
+
+    async(req,res)=>{
+
+        try{
+
+            const claseId =
+                req.params.id
+
+            const clase =
+                await Clase.findById(claseId)
+
+            if(!clase){
+
+                return res.status(404).json({
+
+                    mensaje:
+                    'Clase no encontrada'
+
+                })
+
+            }
+
+            // Eliminar la clase
+            await Clase.findByIdAndDelete(
+                claseId
+            )
+
+            // Eliminar tareas relacionadas
+            await Tarea.deleteMany({
+
+                claseId:
+                claseId
+
+            })
+
+            // Eliminar calificaciones relacionadas
+            await Calificacion.deleteMany({
+
+                claseId:
+                claseId
+
+            })
+
+            // Eliminar asistencias relacionadas
+            await Asistencia.deleteMany({
+
+                claseId:
+                claseId
+
+            })
+
+            // Eliminar avisos relacionados
+            await Aviso.deleteMany({
+
+                claseId:
+                claseId
+
+            })
+
+            res.json({
+
+                mensaje:
+                'Clase eliminada correctamente 🔥'
+
+            })
+
+        }catch(err){
+
+            console.log(
+                'Error eliminando clase:',
+                err
+            )
+
+            res.status(500).json({
+
+                mensaje:
+                'Error eliminando la clase'
+
+            })
+
+        }
+
+    }
+
+)
+
+// =====================
 // 👨‍🎓 AGREGAR ALUMNOS
 // =====================
 

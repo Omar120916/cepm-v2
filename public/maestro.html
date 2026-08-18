@@ -1156,6 +1156,14 @@ textarea{
         align-items:flex-start;
     }
 
+    .btn-eliminar{
+    background:#ef4444 !important;
+}
+
+.btn-eliminar:hover{
+    background:#dc2626 !important;
+}
+
 }
 
 </style>
@@ -2138,6 +2146,18 @@ function mostrarListaClases(){
 
                         </button>
 
+                        <button
+                        class="action btn-eliminar"
+                        onclick="
+                            eliminarClase(
+                                '${clase._id}'
+                            )
+                        "
+                    >
+                        🗑️ Eliminar clase
+                    </button>
+
+                        
 
                         <button
                             class="btn btn-tareas"
@@ -3727,6 +3747,65 @@ async function publicarAviso(){
 
         alert(
             error.message
+        );
+
+    }
+
+}
+
+async function eliminarClase(claseId){
+
+    const confirmar = confirm(
+        '⚠️ ¿Seguro que quieres eliminar esta clase?\n\n' +
+        'Se eliminará la clase y dejará de aparecer en tu panel.\n\n' +
+        'Esta acción no se puede deshacer.'
+    );
+
+    if(!confirmar){
+        return;
+    }
+
+    try{
+
+        const res = await fetch(
+            `${API}/clases/${claseId}`,
+            {
+                method:'DELETE',
+
+                headers:{
+                    Authorization:token
+                }
+            }
+        );
+
+        const data = await res.json();
+
+        if(!res.ok){
+
+            throw new Error(
+                data.mensaje ||
+                'No se pudo eliminar la clase.'
+            );
+
+        }
+
+        alert(
+            '✅ Clase eliminada correctamente.'
+        );
+
+        // Recargar las clases
+        cargarClases();
+
+    }
+    catch(error){
+
+        console.error(
+            'Error eliminando clase:',
+            error
+        );
+
+        alert(
+            '❌ ' + error.message
         );
 
     }
