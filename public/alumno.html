@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,123 +13,1198 @@ content="width=device-width, initial-scale=1.0">
 
 <meta name="theme-color" content="#0f172a">
 
-<title>Panel Alumno</title>
+<title>Panel Alumno | CEPM</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+:root{
+    --bg:#0f172a;
+    --sidebar:#111827;
+    --card:#172033;
+    --card2:#1e293b;
+    --border:rgba(255,255,255,.08);
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --blue:#3b82f6;
+    --blue2:#2563eb;
+    --green:#22c55e;
+    --yellow:#facc15;
+    --red:#ef4444;
+    --purple:#8b5cf6;
 }
 
 body{
-    background:#0f172a;
-    color:white;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(37,99,235,.12),
+            transparent 30%
+        ),
+        var(--bg);
+
+    color:var(--text);
+    min-height:100vh;
     display:flex;
 }
 
+/* =========================
+   SIDEBAR
+========================= */
+
 .sidebar{
 
-    width:250px;
+    width:270px;
     min-height:100vh;
-    background:#111827;
-    padding:20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #111827 0%,
+            #0b1220 100%
+        );
+
+    border-right:1px solid var(--border);
+
+    padding:24px 18px;
+
+    display:flex;
+    flex-direction:column;
+
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:10;
 }
 
-.sidebar h1{
+/* Logo */
 
-    margin-bottom:30px;
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:5px 10px 25px;
+
+    border-bottom:1px solid var(--border);
+
+    margin-bottom:22px;
+}
+
+.logo-icon{
+
+    width:45px;
+    height:45px;
+
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #6366f1
+        );
+
+    font-size:23px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(59,130,246,.25);
+}
+
+.logo-text h1{
+
+    font-size:18px;
+    font-weight:800;
+}
+
+.logo-text p{
+
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* Navegación */
+
+.menu-title{
+
+    color:#64748b;
+
+    font-size:11px;
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    padding:0 12px;
+
+    margin-bottom:10px;
 }
 
 .sidebar button{
 
     width:100%;
-    margin-bottom:15px;
-    padding:15px;
+
     border:none;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    padding:13px 14px;
+
     border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
+
+    margin-bottom:6px;
+
+    font-size:14px;
+
+    font-weight:600;
+
     cursor:pointer;
-    transition:.3s;
+
+    text-align:left;
+
+    transition:.25s;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .sidebar button:hover{
 
-    background:#1d4ed8;
+    background:rgba(59,130,246,.12);
+
+    color:white;
+
+    transform:translateX(3px);
 }
+
+.sidebar button.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    color:white;
+
+    box-shadow:
+        0 8px 25px
+        rgba(37,99,235,.25);
+}
+
+.sidebar button span.icon{
+
+    width:25px;
+    text-align:center;
+
+    font-size:17px;
+}
+
+/* Usuario */
+
+.sidebar-bottom{
+
+    margin-top:auto;
+
+    border-top:1px solid var(--border);
+
+    padding-top:18px;
+}
+
+.user-mini{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:12px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:10px;
+}
+
+.avatar{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:19px;
+}
+
+.user-mini strong{
+
+    display:block;
+
+    font-size:13px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    max-width:155px;
+}
+
+.user-mini small{
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+/* Logout */
+
+.logout{
+
+    color:#fca5a5 !important;
+}
+
+.logout:hover{
+
+    background:rgba(239,68,68,.1) !important;
+
+    color:#f87171 !important;
+}
+
+/* =========================
+   MAIN
+========================= */
 
 .main{
 
-    flex:1;
+    margin-left:270px;
+
+    width:calc(100% - 270px);
+
     padding:30px;
+
+    max-width:1500px;
 }
+
+/* Header */
+
+.topbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:25px;
+}
+
+.topbar-left h2{
+
+    font-size:27px;
+
+    font-weight:800;
+
+    letter-spacing:-.5px;
+}
+
+.topbar-left p{
+
+    color:var(--muted);
+
+    margin-top:6px;
+
+    font-size:14px;
+}
+
+.clock{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:10px 15px;
+
+    color:#cbd5e1;
+
+    font-size:13px;
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+.section{
+
+    animation:
+        aparecer .35s ease;
+}
+
+@keyframes aparecer{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb 55%,
+            #4f46e5
+        );
+
+    border-radius:22px;
+
+    padding:30px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(37,99,235,.18);
+}
+
+.welcome::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    right:-60px;
+    top:-100px;
+}
+
+.welcome::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    right:120px;
+    bottom:-100px;
+}
+
+.welcome-content{
+
+    position:relative;
+    z-index:2;
+}
+
+.welcome h1{
+
+    font-size:30px;
+
+    margin-bottom:8px;
+}
+
+.welcome p{
+
+    color:#dbeafe;
+
+    font-size:14px;
+}
+
+.welcome-date{
+
+    margin-top:20px;
+
+    display:inline-flex;
+
+    padding:8px 12px;
+
+    background:rgba(255,255,255,.12);
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    color:#e0e7ff;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+
+    margin-bottom:22px;
+}
+
+.stat-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,.95),
+            rgba(23,32,51,.95)
+        );
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(59,130,246,.25);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.18);
+}
+
+.stat-icon{
+
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(59,130,246,.12);
+
+    font-size:20px;
+
+    margin-bottom:14px;
+}
+
+.stat-label{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+.stat-value{
+
+    font-size:27px;
+
+    font-weight:800;
+}
+
+.stat-extra{
+
+    color:#64748b;
+
+    font-size:11px;
+
+    margin-top:5px;
+}
+
+/* =========================
+   CARDS
+========================= */
 
 .card{
 
-    background:#1e293b;
-    padding:20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,.92),
+            rgba(15,23,42,.92)
+        );
+
+    border:1px solid var(--border);
+
     border-radius:20px;
+
+    padding:22px;
+
     margin-bottom:20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.08);
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.card-header h2{
+
+    font-size:18px;
+}
+
+.card-header p{
+
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+/* =========================
+   PROMEDIO
+========================= */
+
+.average-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        180px 1fr;
+
+    gap:25px;
+
+    align-items:center;
+}
+
+.average-circle{
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            var(--green) 0deg,
+            var(--green) var(--progress),
+            #263449 var(--progress),
+            #263449 360deg
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    margin:auto;
+}
+
+.average-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:#111c2e;
+}
+
+.average-number{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:36px;
+
+    font-weight:900;
+}
+
+.average-info h3{
+
+    font-size:20px;
+
+    margin-bottom:7px;
+}
+
+.average-info p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+.progress-bar{
+
+    height:8px;
+
+    background:#263449;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-top:15px;
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #22c55e,
+            #4ade80
+        );
+
+    transition:
+        width .8s ease;
+}
+
+/* =========================
+   MATERIAS
+========================= */
+
+.materias-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:15px;
 }
 
 .materia{
 
-    background:#334155;
-    padding:15px;
+    background:#172236;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:18px;
+
+    transition:.25s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.materia:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(59,130,246,.3);
+}
+
+.materia-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+}
+
+.materia-icon{
+
+    width:42px;
+    height:42px;
+
     border-radius:12px;
-    margin-top:15px;
+
+    background:
+        rgba(59,130,246,.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
 }
 
-.promedio{
+.materia h3{
 
-    font-size:50px;
-    font-weight:bold;
-    margin-top:15px;
+    margin-top:14px;
+
+    font-size:16px;
 }
 
-.verde{
+.materia p{
 
-    color:#22c55e;
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:7px;
 }
 
-.amarillo{
+.grade{
 
-    color:#eab308;
+    padding:7px 11px;
+
+    border-radius:9px;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    background:
+        rgba(34,197,94,.1);
+
+    color:#4ade80;
 }
 
-.rojo{
+.grade.pending{
 
-    color:#ef4444;
+    background:
+        rgba(250,204,21,.1);
+
+    color:#facc15;
+}
+
+/* =========================
+   TAREAS
+========================= */
+
+.task-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
 }
 
 .tarea{
 
-    background:#334155;
-    padding:15px;
-    border-radius:12px;
-    margin-top:10px;
+    background:#172236;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    align-items:center;
+
+    transition:.25s;
 }
 
-.asistencia{
+.tarea:hover{
 
-    background:#334155;
-    padding:15px;
-    border-radius:12px;
-    margin-top:10px;
+    border-color:
+        rgba(59,130,246,.25);
+
+    transform:translateX(3px);
+}
+
+.task-info{
+
+    min-width:0;
+}
+
+.task-title{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.task-description{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    margin-bottom:8px;
+}
+
+.task-date{
+
+    color:#64748b;
+
+    font-size:11px;
+}
+
+.task-actions{
+
+    flex-shrink:0;
+}
+
+.file-input{
+
+    display:block;
+
+    max-width:220px;
+
+    font-size:11px;
+
+    color:var(--muted);
+
+    margin-bottom:8px;
 }
 
 .action{
 
-    background:#22c55e;
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
+
     color:white;
+
     border:none;
-    padding:12px;
+
+    padding:10px 15px;
+
     border-radius:10px;
+
     cursor:pointer;
+
+    font-weight:700;
+
+    font-size:12px;
+
+    transition:.25s;
+}
+
+.action:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(34,197,94,.2);
+}
+
+.status{
+
+    display:inline-flex;
+
+    padding:7px 10px;
+
+    border-radius:9px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.status-success{
+
+    color:#4ade80;
+
+    background:
+        rgba(34,197,94,.1);
+}
+
+.status-pending{
+
+    color:#facc15;
+
+    background:
+        rgba(250,204,21,.1);
+}
+
+/* =========================
+   ASISTENCIAS
+========================= */
+
+.asistencia{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:#172236;
+
+    border:1px solid var(--border);
+
+    padding:15px;
+
+    border-radius:14px;
+
+    margin-bottom:10px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    color:var(--muted);
+}
+
+.empty-icon{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+}
+
+.empty p{
+
+    font-size:13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+
+        width:75px;
+
+        padding:18px 10px;
+    }
+
+    .logo-text,
+    .menu-title,
+    .sidebar button .text,
+    .user-mini .user-info{
+
+        display:none;
+    }
+
+    .logo{
+
+        justify-content:center;
+    }
+
+    .sidebar button{
+
+        justify-content:center;
+
+        padding:13px 5px;
+    }
+
+    .sidebar-bottom{
+
+        display:block;
+    }
+
+    .user-mini{
+
+        justify-content:center;
+
+        padding:7px;
+    }
+
+    .main{
+
+        margin-left:75px;
+
+        width:calc(100% - 75px);
+
+        padding:20px;
+    }
+
+    .materias-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .average-layout{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .main{
+
+        padding:14px;
+    }
+
+    .topbar{
+
+        align-items:flex-start;
+    }
+
+    .clock{
+
+        display:none;
+    }
+
+    .topbar-left h2{
+
+        font-size:22px;
+    }
+
+    .stats{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+    }
+
+    .stat-card{
+
+        padding:15px;
+    }
+
+    .stat-value{
+
+        font-size:22px;
+    }
+
+    .welcome{
+
+        padding:22px;
+    }
+
+    .welcome h1{
+
+        font-size:23px;
+    }
+
+    .tarea{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .task-actions{
+
+        width:100%;
+    }
+
+    .file-input{
+
+        max-width:100%;
+    }
+
 }
 
 </style>
@@ -137,869 +1213,2081 @@ body{
 
 <body>
 
-<div class="sidebar">
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-    <h1>
-        👨‍🎓 Alumno
-    </h1>
+<aside class="sidebar">
 
-    <button onclick="mostrar('inicio')">
-        🏠 Inicio
-    </button>
+    <div class="logo">
 
-    <button onclick="mostrar('materias')">
-        📚 Materias
-    </button>
+        <div class="logo-icon">
+            🎓
+        </div>
 
-    <button onclick="mostrar('tareas')">
-        📝 Tareas
-    </button>
+        <div class="logo-text">
 
-    <button onclick="mostrar('asistencias')">
-        📅 Asistencias
+            <h1>CEPM</h1>
+
+            <p>Portal del Alumno</p>
+
+        </div>
+
+    </div>
+
+    <div class="menu-title">
+        Menú principal
+    </div>
+
+    <button
+        id="btn-inicio"
+        class="active"
+        onclick="mostrar('inicio')"
+    >
+
+        <span class="icon">🏠</span>
+
+        <span class="text">
+            Inicio
+        </span>
+
     </button>
 
     <button
-onclick="
-location.href='chat.html'
-"
->
-💬 Chat
-</button>
+        id="btn-materias"
+        onclick="mostrar('materias')"
+    >
 
-    <button onclick="logout()">
-        🚪 Salir
+        <span class="icon">📚</span>
+
+        <span class="text">
+            Mis materias
+        </span>
+
     </button>
 
-</div>
+    <button
+        id="btn-tareas"
+        onclick="mostrar('tareas')"
+    >
 
-<div class="main">
+        <span class="icon">📝</span>
 
-    <!-- INICIO -->
+        <span class="text">
+            Mis tareas
+        </span>
 
-    <div id="inicio" class="card">
+    </button>
 
-        <h2 id="bienvenida">
-            Bienvenido
-        </h2>
+    <button
+        id="btn-asistencias"
+        onclick="mostrar('asistencias')"
+    >
 
-        <div
-            id="promedio"
-            class="promedio"
-        >
-            0
+        <span class="icon">📅</span>
+
+        <span class="text">
+            Asistencias
+        </span>
+
+    </button>
+
+    <button onclick="location.href='chat.html'">
+
+        <span class="icon">💬</span>
+
+        <span class="text">
+            Chat
+        </span>
+
+    </button>
+
+    <div class="sidebar-bottom">
+
+        <div class="user-mini">
+
+            <div class="avatar">
+                👨‍🎓
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nombreMini">
+                    Alumno
+                </strong>
+
+                <small>
+                    Estudiante
+                </small>
+
+            </div>
+
         </div>
 
-        <br>
-
         <button
-        class="action"
-        onclick="generarBoleta()"
+            class="logout"
+            onclick="logout()"
         >
-        Descargar boleta
-    
+
+            <span class="icon">🚪</span>
+
+            <span class="text">
+                Cerrar sesión
+            </span>
+
         </button>
 
     </div>
 
-    <!-- MATERIAS -->
+</aside>
 
-    <div
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div class="topbar-left">
+
+            <h2>
+                Panel del alumno
+            </h2>
+
+            <p>
+                Consulta tu información académica.
+            </p>
+
+        </div>
+
+        <div
+            id="reloj"
+            class="clock"
+        >
+            🕐 --:--
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INICIO
+    ========================= -->
+
+    <section
+        id="inicio"
+        class="section"
+    >
+
+        <div class="welcome">
+
+            <div class="welcome-content">
+
+                <h1 id="bienvenida">
+                    Bienvenido 👋
+                </h1>
+
+                <p>
+                    Qué bueno verte por aquí.
+                    Revisa tu progreso académico.
+                </p>
+
+                <div
+                    class="welcome-date"
+                    id="fechaActual"
+                >
+                    📅 Cargando fecha...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <div class="stat-label">
+                    Materias
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statMaterias"
+                >
+                    0
+                </div>
+
+                <div class="stat-extra">
+                    Materias inscritas
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div class="stat-label">
+                    Promedio
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statPromedio"
+                >
+                    0
+                </div>
+
+                <div class="stat-extra">
+                    Promedio general
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div class="stat-label">
+                    Tareas
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statTareas"
+                >
+                    0
+                </div>
+
+                <div class="stat-extra">
+                    Tareas asignadas
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-label">
+                    Entregadas
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statEntregadas"
+                >
+                    0
+                </div>
+
+                <div class="stat-extra">
+                    Tareas entregadas
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROMEDIO -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        📊 Rendimiento académico
+                    </h2>
+
+                    <p>
+                        Tu promedio actual
+                    </p>
+
+                </div>
+
+                <button
+                    class="action"
+                    onclick="generarBoleta()"
+                >
+                    📄 Descargar boleta
+                </button>
+
+            </div>
+
+
+            <div class="average-layout">
+
+                <div
+                    class="average-circle"
+                    id="averageCircle"
+                    style="--progress:0deg;"
+                >
+
+                    <div
+                        class="average-number"
+                        id="promedio"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="average-info">
+
+                    <h3 id="mensajePromedio">
+                        Calculando...
+                    </h3>
+
+                    <p>
+                        Este promedio se calcula
+                        utilizando las calificaciones
+                        registradas actualmente.
+                    </p>
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            id="progressFill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MATERIAS RESUMEN -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        📚 Mis materias
+                    </h2>
+
+                    <p>
+                        Resumen de tus clases
+                    </p>
+
+                </div>
+
+                <button
+                    class="action"
+                    onclick="mostrar('materias')"
+                >
+                    Ver todas
+                </button>
+
+            </div>
+
+            <div
+                id="resumenMaterias"
+                class="materias-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- TAREAS RESUMEN -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        📝 Tareas recientes
+                    </h2>
+
+                    <p>
+                        Revisa tus actividades
+                    </p>
+
+                </div>
+
+                <button
+                    class="action"
+                    onclick="mostrar('tareas')"
+                >
+                    Ver tareas
+                </button>
+
+            </div>
+
+            <div
+                id="resumenTareas"
+                class="task-list"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MATERIAS
+    ========================= -->
+
+    <section
         id="materias"
-        class="card"
+        class="section"
         style="display:none;"
     >
 
-        <h2>
-            📚 Mis materias
-        </h2>
+        <div class="card">
 
-        <div id="listaMaterias"></div>
+            <div class="card-header">
 
-    </div>
+                <div>
 
-    <!-- TAREAS -->
+                    <h2>
+                        📚 Mis materias
+                    </h2>
 
-    <div
+                    <p>
+                        Todas tus clases y calificaciones
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                id="listaMaterias"
+                class="materias-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TAREAS
+    ========================= -->
+
+    <section
         id="tareas"
-        class="card"
+        class="section"
         style="display:none;"
     >
 
-        <h2>
-            📝 Mis tareas
-        </h2>
+        <div class="card">
 
-        <div id="listaTareas"></div>
+            <div class="card-header">
 
-    </div>
+                <div>
 
-    <!-- ASISTENCIAS -->
+                    <h2>
+                        📝 Mis tareas
+                    </h2>
 
-    <div
+                    <p>
+                        Actividades asignadas por tus profesores
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                id="listaTareas"
+                class="task-list"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ASISTENCIAS
+    ========================= -->
+
+    <section
         id="asistencias"
-        class="card"
+        class="section"
         style="display:none;"
     >
 
-        <h2>
-            📅 Mis asistencias
-        </h2>
+        <div class="card">
 
-        <div id="listaAsistencias"></div>
+            <div class="card-header">
 
-    </div>
+                <div>
 
-</div>
+                    <h2>
+                        📅 Mis asistencias
+                    </h2>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+                    <p>
+                        Consulta tu historial de asistencia
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                id="listaAsistencias"
+            ></div>
+
+        </div>
+
+    </section>
+
+</main>
+
 
 <script>
 
+/* =========================
+   CONFIGURACIÓN
+========================= */
+
 const API =
-'https://cepm-v2.onrender.com'
+'https://cepm-v2.onrender.com';
 
 const token =
-localStorage.getItem('token')
+localStorage.getItem('token');
+
+
+/* =========================
+   VALIDAR SESIÓN
+========================= */
+
+if(!token){
+
+    location.href='index.html';
+
+}
+
+
+/* =========================
+   CAMBIAR SECCIÓN
+========================= */
 
 function mostrar(id){
 
     const secciones = [
-
         'inicio',
-
         'materias',
-
         'tareas',
-
         'asistencias'
-    ]
+    ];
 
     secciones.forEach(sec=>{
 
-        document
-        .getElementById(sec)
-        .style.display='none'
-    })
+        const elemento =
+            document.getElementById(sec);
+
+        if(elemento){
+
+            elemento.style.display =
+                'none';
+
+        }
+
+    });
+
+    const seleccion =
+        document.getElementById(id);
+
+    if(seleccion){
+
+        seleccion.style.display =
+            'block';
+
+    }
+
+
+    /* BOTONES ACTIVOS */
 
     document
-    .getElementById(id)
-    .style.display='block'
+        .querySelectorAll('.sidebar button')
+        .forEach(btn=>{
+
+            btn.classList.remove('active');
+
+        });
+
+    const boton =
+        document.getElementById(
+            `btn-${id}`
+        );
+
+    if(boton){
+
+        boton.classList.add('active');
+
+    }
+
 }
+
+
+/* =========================
+   RELOJ
+========================= */
+
+function actualizarReloj(){
+
+    const ahora =
+        new Date();
+
+    const hora =
+        ahora.toLocaleTimeString(
+            'es-MX',
+            {
+                hour:'2-digit',
+                minute:'2-digit'
+            }
+        );
+
+    document
+        .getElementById('reloj')
+        .innerHTML =
+        `🕐 ${hora}`;
+
+}
+
+setInterval(
+    actualizarReloj,
+    1000
+);
+
+actualizarReloj();
+
+
+/* =========================
+   FECHA
+========================= */
+
+function actualizarFecha(){
+
+    const fecha =
+        new Date();
+
+    document
+        .getElementById('fechaActual')
+        .innerHTML =
+        `📅 ${
+            fecha.toLocaleDateString(
+                'es-MX',
+                {
+                    weekday:'long',
+                    year:'numeric',
+                    month:'long',
+                    day:'numeric'
+                }
+            )
+        }`;
+
+}
+
+actualizarFecha();
+
+
+/* =========================
+   CARGAR ALUMNO
+========================= */
 
 async function cargarAlumno(){
 
-    const usuario =
-    JSON.parse(
+    try{
 
-        atob(
+        const usuario =
+            JSON.parse(
+                atob(
+                    token.split('.')[1]
+                )
+            );
 
-            token.split('.')[1]
-        )
-    )
 
-    // 🔥 USUARIOS
+        /* =========================
+           USUARIOS
+        ========================= */
 
-    const usuarios =
-    await fetch(
+        const usuarios =
+            await fetch(
+                `${API}/usuarios`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
 
-        `${API}/usuarios`,
 
-        {
+        const alumnoUser =
+            usuarios.find(
+                u=>u._id===usuario.id
+            );
 
-            headers:{
-                Authorization:token
-            }
+
+        console.log(
+            'Usuario:',
+            alumnoUser
+        );
+
+
+        /* =========================
+           ALUMNOS
+        ========================= */
+
+        const alumnos =
+            await fetch(
+                `${API}/alumnos`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        const alumno =
+            alumnos.find(
+                a=>a._id===usuario.id
+            );
+
+
+        if(!alumno){
+
+            throw new Error(
+                'No se encontró el alumno.'
+            );
+
         }
 
-    ).then(r=>r.json())
 
-    const alumnoUser =
-    usuarios.find(u=>
+        /* NOMBRE */
 
-        u._id===usuario.id
-    )
-    console.log(alumnoUser)
-
-    // 🔥 ALUMNOS
-
-    const alumnos =
-    await fetch(
-
-        `${API}/alumnos`,
-
-        {
-
-            headers:{
-                Authorization:token
-            }
-        }
-
-    ).then(r=>r.json())
-
-    const alumno =
-    alumnos.find(a=>
-
-        a._id === usuario.id
-    )
-
-    document
-    .getElementById('bienvenida')
-    .innerHTML = `
-
-    Bienvenido,
-    ${alumno.nombre}
-    😎🔥
-    `
-
-    // 🔥 CLASES
-
-    const clases =
-    await fetch(
-
-        `${API}/clases`,
-
-        {
-
-            headers:{
-                Authorization:token
-            }
-        }
-
-    ).then(r=>r.json())
-
-    const misClases =
-    clases.filter(c=>
-
-        c.alumnos.includes(
-            alumno._id
-        )
-    )
-
-    // 🔥 MATERIAS
-
-const materias =
-await fetch(
-
-    `${API}/materias`,
-
-    {
-
-        headers:{
-            Authorization:token
-        }
-    }
-
-).then(r=>r.json())
-
-    // 🔥 CALIFICACIONES
-
-    const calificaciones =
-    await fetch(
-
-        `${API}/calificaciones`,
-
-        {
-
-            headers:{
-                Authorization:token
-            }
-        }
-
-    ).then(r=>r.json())
-
-    const materiasDiv =
-    document.getElementById(
-        'listaMaterias'
-    )
-
-    materiasDiv.innerHTML=''
-
-    let suma = 0
-    let total = 0
-
-    for(const clase of misClases){
-
-        const calificacion =
-        calificaciones.find(c=>
-
-            c.claseId===clase._id &&
-
-            c.alumnoId===alumno._id
-        )
-
-        let textoCalificacion =
-        '⏳ Pendiente'
-
-        if(calificacion){
-
-            textoCalificacion =
-            `✅ ${calificacion.calificacion}`
-
-            suma += Number(
-                calificacion.calificacion
+        document
+            .getElementById(
+                'bienvenida'
             )
+            .innerHTML =
+            `Bienvenido, ${
+                alumno.nombre
+            } 👋`;
 
-            total++
-        }
+        document
+            .getElementById(
+                'nombreMini'
+            )
+            .textContent =
+            alumno.nombre;
 
-        materiasDiv.innerHTML += `
 
-        <div class="materia">
+        /* =========================
+           CLASES
+        ========================= */
 
-            <h3>
+        const clases =
+            await fetch(
+                `${API}/clases`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
 
-                📘 ${
-                    materias.find(m=>
 
-                        m._id===clase.materiaId
-                    )?.nombre || 'Materia'
+        const misClases =
+            clases.filter(
+                c=>
+                    c.alumnos &&
+                    c.alumnos.includes(
+                        alumno._id
+                    )
+            );
+
+
+        /* =========================
+           MATERIAS
+        ========================= */
+
+        const materias =
+            await fetch(
+                `${API}/materias`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        /* =========================
+           CALIFICACIONES
+        ========================= */
+
+        const calificaciones =
+            await fetch(
+                `${API}/calificaciones`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        /* =========================
+           MATERIAS
+        ========================= */
+
+        const materiasDiv =
+            document.getElementById(
+                'listaMaterias'
+            );
+
+        const resumenMaterias =
+            document.getElementById(
+                'resumenMaterias'
+            );
+
+
+        materiasDiv.innerHTML='';
+
+        resumenMaterias.innerHTML='';
+
+
+        let suma=0;
+        let total=0;
+
+
+        misClases.forEach(
+            (clase,index)=>{
+
+                const materia =
+                    materias.find(
+                        m=>
+                            m._id===
+                            clase.materiaId
+                    );
+
+
+                const calificacion =
+                    calificaciones.find(
+                        c=>
+                            c.claseId===
+                            clase._id &&
+                            c.alumnoId===
+                            alumno._id
+                    );
+
+
+                let calif =
+                    null;
+
+
+                if(calificacion){
+
+                    calif =
+                        Number(
+                            calificacion.calificacion
+                        );
+
+                    suma += calif;
+
+                    total++;
+
                 }
 
-            </h3>
 
-            <p style="margin-top:10px;">
+                const nombreMateria =
+                    materia?.nombre ||
+                    'Materia';
 
-                👥 Grupo:
-                ${clase.grupo}
 
-            </p>
+                const html = `
 
-            <p style="margin-top:10px;">
+                <div class="materia">
 
-                ${textoCalificacion}
+                    <div class="materia-top">
 
-            </p>
+                        <div class="materia-icon">
+                            📘
+                        </div>
 
-        </div>
-        `
-    }
+                        ${
+                            calif !== null
 
-    // 🔥 PROMEDIO
+                            ?
 
-    let promedio = 0
+                            `<div class="grade">
+                                ${calif.toFixed(1)}
+                            </div>`
 
-    if(total>0){
+                            :
 
-        promedio = (
-            suma / total
-        ).toFixed(1)
-    }
+                            `<div class="grade pending">
+                                Pendiente
+                            </div>`
+                        }
 
-    const promedioDiv =
-    document.getElementById(
-        'promedio'
-    )
+                    </div>
 
-    promedioDiv.innerHTML =
-    promedio
+                    <h3>
+                        ${nombreMateria}
+                    </h3>
 
-    if(promedio>=9){
+                    <p>
+                        👥 Grupo:
+                        ${clase.grupo || 'Sin grupo'}
+                    </p>
 
-        promedioDiv.classList.add(
-            'verde'
-        )
+                </div>
 
-    }else if(promedio>=7){
+                `;
 
-        promedioDiv.classList.add(
-            'amarillo'
-        )
 
-    }else{
+                materiasDiv.innerHTML +=
+                    html;
 
-        promedioDiv.classList.add(
-            'rojo'
-        )
-    }
 
-    // 🔥 TAREAS
+                if(index < 4){
 
-    const resTareas =
-await fetch(
+                    resumenMaterias.innerHTML +=
+                        html;
 
-    `${API}/tareas`,
+                }
 
-    {
-
-        headers:{
-            Authorization:token
-        }
-    }
-)
-
-console.log(resTareas)
-
-const tareas =
-await resTareas.json()
-
-console.log(tareas)
-
-    const tareasDiv =
-    document.getElementById(
-        'listaTareas'
-    )
-
-    tareasDiv.innerHTML=''
-
-    const misTareas =
-    tareas.filter(t=>
-
-        misClases.some(c=>
-
-            c._id===t.claseId
-        )
-    )
-
-misTareas.forEach(async t=>{
-
-    const entregas =
-    await fetch(
-
-        `${API}/entregas/${t._id}`,
-
-        {
-
-            headers:{
-                Authorization:token
             }
+        );
+
+
+        if(!misClases.length){
+
+            const empty = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <p>
+                        No tienes materias registradas.
+                    </p>
+
+                </div>
+
+            `;
+
+            materiasDiv.innerHTML =
+                empty;
+
+            resumenMaterias.innerHTML =
+                empty;
+
         }
 
-    ).then(r=>r.json())
 
-    const miEntrega =
-    entregas.find(e=>
+        /* =========================
+           PROMEDIO
+        ========================= */
 
-        e.alumnoId===usuario.id
-    )
+        let promedio=0;
 
-    tareasDiv.innerHTML += `
 
-    <div class="tarea">
+        if(total>0){
 
-        <h3>
-            📝 ${t.titulo}
-        </h3>
+            promedio =
+                Number(
+                    (
+                        suma/total
+                    ).toFixed(1)
+                );
 
-        <p style="margin-top:10px;">
-            ${t.descripcion}
-        </p>
-
-        <p style="margin-top:10px;">
-            📅 ${t.fechaEntrega}
-        </p>
-
-        ${
-miEntrega
-
-?
-
-`
-
-<p style="margin-top:15px;color:#22c55e;">
-
-    ✅ Tu tarea ya fue entregada
-
-</p>
-
-${
-miEntrega.revisada
-
-?
-
-`
-
-<p style="margin-top:10px;">
-
-    📝 Calificación:
-    <b>
-        ${miEntrega.calificacion}
-    </b>
-
-</p>
-
-`
-
-:
-
-`
-
-<p style="margin-top:10px;color:#facc15;">
-
-    ⏳ Pendiente de revisar
-
-</p>
-
-`
-}
-
-`
-
-:
-
-`
-
-<input
-    type="file"
-    id="archivo-${t._id}"
-    style="
-        margin-top:15px;
-    "
->
-
-<button
-
-    class="action"
-
-    style="
-        margin-top:10px;
-    "
-
-    onclick="
-    subirTarea(
-        '${t._id}'
-    )
-    "
->
-
-    📤 Subir tarea
-
-</button>
-
-`
-}
-
-    </div>
-    `
-})
-
-    /*
-
-   // 🔥 ASISTENCIAS
-
-    const asistencias =
-    await fetch(
-
-        `${API}/asistencia`,
-
-        {
-
-            headers:{
-                Authorization:token
-            }
         }
 
-    ).then(r=>r.json())
 
-    const misAsistencias =
-    asistencias.filter(a=>
+        document
+            .getElementById(
+                'promedio'
+            )
+            .textContent =
+            promedio;
 
-        a.alumnoId===alumno._id
-    )
 
-    const asistenciaDiv =
-    document.getElementById(
-        'listaAsistencias'
-    )
+        document
+            .getElementById(
+                'statPromedio'
+            )
+            .textContent =
+            promedio;
 
-    asistenciaDiv.innerHTML=''
 
-    misAsistencias.forEach(a=>{
+        /* PORCENTAJE */
 
-        asistenciaDiv.innerHTML += `
+        const porcentaje =
+            Math.min(
+                promedio * 10,
+                100
+            );
 
-        <div class="asistencia">
 
-            <p>
-                📅 ${a.fecha}
-            </p>
+        document
+            .getElementById(
+                'progressFill'
+            )
+            .style.width =
+            `${porcentaje}%`;
 
-            <p style="margin-top:10px;">
 
-                ${a.estado}
+        const grados =
+            porcentaje * 3.6;
 
-            </p>
 
-        </div>
-        `
-    })
+        document
+            .getElementById(
+                'averageCircle'
+            )
+            .style
+            .setProperty(
+                '--progress',
+                `${grados}deg`
+            );
+
+
+        const mensaje =
+            document
+                .getElementById(
+                    'mensajePromedio'
+                );
+
+
+        if(promedio>=9){
+
+            mensaje.textContent =
+                '🌟 ¡Excelente trabajo!';
+
+        }
+
+        else if(promedio>=8){
+
+            mensaje.textContent =
+                '🔥 ¡Vas muy bien!';
+
+        }
+
+        else if(promedio>=7){
+
+            mensaje.textContent =
+                '👍 Buen trabajo, sigue así.';
+
+        }
+
+        else if(promedio>0){
+
+            mensaje.textContent =
+                '💪 Puedes mejorar. ¡Tú puedes!';
+
+        }
+
+        else{
+
+            mensaje.textContent =
+                '⏳ Aún no hay calificaciones.';
+
+        }
+
+
+        /* =========================
+           TAREAS
+        ========================= */
+
+        const resTareas =
+            await fetch(
+                `${API}/tareas`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            );
+
+
+        const tareas =
+            await resTareas.json();
+
+
+        const misTareas =
+            tareas.filter(
+                t=>
+                    misClases.some(
+                        c=>
+                            c._id===
+                            t.claseId
+                    )
+            );
+
+
+        document
+            .getElementById(
+                'statMaterias'
+            )
+            .textContent =
+            misClases.length;
+
+
+        document
+            .getElementById(
+                'statTareas'
+            )
+            .textContent =
+            misTareas.length;
+
+
+        const tareasDiv =
+            document.getElementById(
+                'listaTareas'
+            );
+
+
+        const resumenTareas =
+            document.getElementById(
+                'resumenTareas'
+            );
+
+
+        tareasDiv.innerHTML='';
+        resumenTareas.innerHTML='';
+
+
+        let entregadas=0;
+
+
+        /*
+           Cargamos las entregas primero
+           para evitar el problema de
+           forEach(async...)
         */
-}  
+
+        const tareasConEntrega =
+            await Promise.all(
+
+                misTareas.map(
+                    async t=>{
+
+                        try{
+
+                            const entregas =
+                                await fetch(
+                                    `${API}/entregas/${t._id}`,
+                                    {
+                                        headers:{
+                                            Authorization:token
+                                        }
+                                    }
+                                ).then(
+                                    r=>r.json()
+                                );
+
+
+                            const miEntrega =
+                                entregas.find(
+                                    e=>
+                                        e.alumnoId===
+                                        usuario.id
+                                );
+
+
+                            return {
+                                tarea:t,
+                                entrega:miEntrega
+                            };
+
+                        }
+
+                        catch(error){
+
+                            return {
+                                tarea:t,
+                                entrega:null
+                            };
+
+                        }
+
+                    }
+                )
+
+            );
+
+
+        tareasConEntrega.forEach(
+            item=>{
+
+                const t =
+                    item.tarea;
+
+                const miEntrega =
+                    item.entrega;
+
+
+                if(miEntrega){
+
+                    entregadas++;
+
+                }
+
+
+                const html = `
+
+                <div class="tarea">
+
+                    <div class="task-info">
+
+                        <div class="task-title">
+
+                            📝 ${t.titulo}
+
+                        </div>
+
+                        <div class="task-description">
+
+                            ${
+                                t.descripcion ||
+                                'Sin descripción'
+                            }
+
+                        </div>
+
+                        <div class="task-date">
+
+                            📅 ${
+                                t.fechaEntrega ||
+                                'Sin fecha'
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="task-actions">
+
+                        ${
+                            miEntrega
+
+                            ?
+
+                            `
+
+                            <div class="status status-success">
+
+                                ✅ Tarea entregada
+
+                            </div>
+
+                            ${
+                                miEntrega.revisada
+
+                                ?
+
+                                `<div
+                                    style="
+                                        margin-top:8px;
+                                        color:#cbd5e1;
+                                        font-size:11px;
+                                    "
+                                >
+
+                                    📝 Calificación:
+                                    <b>
+                                        ${miEntrega.calificacion}
+                                    </b>
+
+                                </div>`
+
+                                :
+
+                                `<div
+                                    style="
+                                        margin-top:8px;
+                                        color:#facc15;
+                                        font-size:11px;
+                                    "
+                                >
+
+                                    ⏳ Pendiente de revisar
+
+                                </div>`
+                            }
+
+                            `
+
+                            :
+
+                            `
+
+                            <input
+                                class="file-input"
+                                type="file"
+                                id="archivo-${t._id}"
+                            >
+
+                            <button
+                                class="action"
+                                onclick="subirTarea('${t._id}')"
+                            >
+
+                                📤 Subir tarea
+
+                            </button>
+
+                            `
+
+                        }
+
+                    </div>
+
+                </div>
+
+                `;
+
+
+                tareasDiv.innerHTML +=
+                    html;
+
+
+            }
+        );
+
+
+        /* RESUMEN */
+
+        tareasConEntrega
+            .slice(0,3)
+            .forEach(
+                item=>{
+
+                    const t =
+                        item.tarea;
+
+                    const entrega =
+                        item.entrega;
+
+
+                    resumenTareas.innerHTML += `
+
+                    <div class="tarea">
+
+                        <div class="task-info">
+
+                            <div class="task-title">
+
+                                📝 ${t.titulo}
+
+                            </div>
+
+                            <div class="task-date">
+
+                                📅 ${
+                                    t.fechaEntrega ||
+                                    'Sin fecha'
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            ${
+                                entrega
+
+                                ?
+
+                                `<span
+                                    class="status status-success"
+                                >
+                                    ✅ Entregada
+                                </span>`
+
+                                :
+
+                                `<span
+                                    class="status status-pending"
+                                >
+                                    ⏳ Pendiente
+                                </span>`
+                            }
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            );
+
+
+        if(!misTareas.length){
+
+            const empty = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🎉
+                    </div>
+
+                    <p>
+                        No tienes tareas pendientes.
+                    </p>
+
+                </div>
+
+            `;
+
+            tareasDiv.innerHTML =
+                empty;
+
+            resumenTareas.innerHTML =
+                empty;
+
+        }
+
+
+        document
+            .getElementById(
+                'statEntregadas'
+            )
+            .textContent =
+            entregadas;
+
+
+        /* =========================
+           ASISTENCIAS
+        ========================= */
+
+        try{
+
+            const asistencias =
+                await fetch(
+                    `${API}/asistencia`,
+                    {
+                        headers:{
+                            Authorization:token
+                        }
+                    }
+                ).then(
+                    r=>r.json()
+                );
+
+
+            const misAsistencias =
+                asistencias.filter(
+                    a=>
+                        a.alumnoId===
+                        alumno._id
+                );
+
+
+            const asistenciaDiv =
+                document.getElementById(
+                    'listaAsistencias'
+                );
+
+
+            asistenciaDiv.innerHTML='';
+
+
+            if(!misAsistencias.length){
+
+                asistenciaDiv.innerHTML = `
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            📅
+                        </div>
+
+                        <p>
+                            Aún no hay registros de asistencia.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+            else{
+
+                misAsistencias.forEach(
+                    a=>{
+
+                        asistenciaDiv.innerHTML += `
+
+                        <div class="asistencia">
+
+                            <div>
+
+                                <strong>
+                                    📅 ${a.fecha}
+                                </strong>
+
+                            </div>
+
+                            <div>
+
+                                ${
+                                    a.estado
+                                }
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                );
+
+            }
+
+        }
+
+        catch(error){
+
+            document
+                .getElementById(
+                    'listaAsistencias'
+                )
+                .innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        📅
+                    </div>
+
+                    <p>
+                        No hay información de asistencia disponible.
+                    </p>
+
+                </div>
+
+                `;
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        document
+            .getElementById(
+                'bienvenida'
+            )
+            .textContent =
+            'No se pudo cargar tu información 😕';
+
+    }
+
+}
+
+
+/* =========================
+   SUBIR TAREA
+========================= */
 
 async function subirTarea(
-
     tareaId
-
 ){
 
     const usuario =
-    JSON.parse(
+        JSON.parse(
+            atob(
+                token.split('.')[1]
+            )
+        );
 
-        atob(
-
-            token.split('.')[1]
-        )
-    )
 
     const archivo =
-    document.getElementById(
+        document
+            .getElementById(
+                `archivo-${tareaId}`
+            )
+            .files[0];
 
-        `archivo-${tareaId}`
-
-    ).files[0]
 
     if(!archivo){
 
         alert(
-            'Selecciona un archivo 😭'
-        )
+            'Selecciona un archivo primero 📎'
+        );
 
-        return
+        return;
+
     }
 
+
     const formData =
-    new FormData()
+        new FormData();
+
 
     formData.append(
         'archivo',
         archivo
-    )
+    );
+
 
     formData.append(
         'tareaId',
         tareaId
-    )
+    );
+
 
     formData.append(
         'alumnoId',
         usuario.id
-    )
+    );
 
-    const res =
-    await fetch(
 
-        `${API}/entregas`,
+    try{
 
-        {
+        const res =
+            await fetch(
+                `${API}/entregas`,
+                {
+                    method:'POST',
 
-            method:'POST',
+                    headers:{
+                        Authorization:token
+                    },
 
-            headers:{
-                Authorization:token
-            },
+                    body:formData
+                }
+            );
 
-            body:formData
-        }
-    )
 
-    const data =
-    await res.json()
+        const data =
+            await res.json();
 
-    alert(data.mensaje)
+
+        alert(
+            data.mensaje ||
+            'Tarea entregada correctamente ✅'
+        );
+
+
+        await cargarAlumno();
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        alert(
+            'No se pudo subir la tarea 😕'
+        );
+
+    }
+
 }
 
+
+/* =========================
+   GENERAR BOLETA
+========================= */
 
 async function generarBoleta(){
 
-    const usuario =
-    JSON.parse(
+    try{
 
-        atob(
-            token.split('.')[1]
-        )
-    )
+        const usuario =
+            JSON.parse(
+                atob(
+                    token.split('.')[1]
+                )
+            );
 
-    const alumnos =
-    await fetch(
 
-        `${API}/alumnos`,
+        const alumnos =
+            await fetch(
+                `${API}/alumnos`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
 
-    ).then(r=>r.json())
+        const alumno =
+            alumnos.find(
+                a=>
+                    a._id===
+                    usuario.id
+            );
 
-    const alumno =
-    alumnos.find(a=>
 
-        a._id===usuario.id
-    )
+        const clases =
+            await fetch(
+                `${API}/clases`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
 
-    const clases =
-    await fetch(
 
-        `${API}/clases`,
+        const materias =
+            await fetch(
+                `${API}/materias`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
 
-    ).then(r=>r.json())
+        const calificaciones =
+            await fetch(
+                `${API}/calificaciones`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
 
-    const materias =
-    await fetch(
 
-        `${API}/materias`,
+        const misClases =
+            clases.filter(
+                c=>
+                    c.alumnos.includes(
+                        alumno._id
+                    )
+            );
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
 
-    ).then(r=>r.json())
+        const {
+            jsPDF
+        } =
+            window.jspdf;
 
-    const calificaciones =
-    await fetch(
 
-        `${API}/calificaciones`,
+        const pdf =
+            new jsPDF();
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
 
-    ).then(r=>r.json())
+        /* ENCABEZADO */
 
-    const misClases =
-    clases.filter(c=>
+        pdf.setFillColor(
+            37,
+            99,
+            235
+        );
 
-        c.alumnos.includes(
-            alumno._id
-        )
-    )
 
-    const { jsPDF } =
-    window.jspdf
+        pdf.rect(
+            0,
+            0,
+            210,
+            35,
+            'F'
+        );
 
-    const pdf =
-    new jsPDF()
 
-    pdf.setFontSize(18)
+        pdf.setTextColor(
+            255,
+            255,
+            255
+        );
 
-    pdf.text(
-        'BOLETA CEPM',
-        20,
-        20
-    )
 
-    pdf.setFontSize(12)
+        pdf.setFontSize(
+            20
+        );
 
-    pdf.text(
-        `Alumno: ${alumno.nombre}`,
-        20,
-        35
-    )
-
-    let y = 55
-
-    let suma = 0
-    let total = 0
-
-    misClases.forEach(clase=>{
-
-        const materia =
-        materias.find(m=>
-
-            m._id===clase.materiaId
-        )
-
-        const calificacion =
-        calificaciones.find(c=>
-
-            c.claseId===clase._id &&
-
-            c.alumnoId===alumno._id
-        )
-
-        const calif =
-        calificacion
-        ?
-        calificacion.calificacion
-        :
-        'Pendiente'
-
-        if(calificacion){
-
-            suma += Number(calif)
-            total++
-        }
 
         pdf.text(
-
-            `${materia?.nombre || 'Materia'} : ${calif}`,
-
+            'CEPM',
             20,
+            16
+        );
 
+
+        pdf.setFontSize(
+            11
+        );
+
+
+        pdf.text(
+            'BOLETA DE CALIFICACIONES',
+            20,
+            26
+        );
+
+
+        pdf.setTextColor(
+            30,
+            41,
+            59
+        );
+
+
+        pdf.setFontSize(
+            13
+        );
+
+
+        pdf.text(
+            `Alumno: ${alumno.nombre}`,
+            20,
+            50
+        );
+
+
+        let y=68;
+
+        let suma=0;
+
+        let total=0;
+
+
+        /* TABLA SIMPLE */
+
+        pdf.setFontSize(
+            11
+        );
+
+
+        misClases.forEach(
+            clase=>{
+
+                const materia =
+                    materias.find(
+                        m=>
+                            m._id===
+                            clase.materiaId
+                    );
+
+
+                const calificacion =
+                    calificaciones.find(
+                        c=>
+                            c.claseId===
+                            clase._id &&
+                            c.alumnoId===
+                            alumno._id
+                    );
+
+
+                const calif =
+                    calificacion
+                    ?
+                    Number(
+                        calificacion.calificacion
+                    )
+                    :
+                    'Pendiente';
+
+
+                if(calificacion){
+
+                    suma += calif;
+
+                    total++;
+
+                }
+
+
+                pdf.text(
+                    `${
+                        materia?.nombre ||
+                        'Materia'
+                    }`,
+                    20,
+                    y
+                );
+
+
+                pdf.text(
+                    `${calif}`,
+                    160,
+                    y
+                );
+
+
+                pdf.line(
+                    20,
+                    y+3,
+                    190,
+                    y+3
+                );
+
+
+                y+=12;
+
+            }
+        );
+
+
+        const promedio =
+            total>0
+            ?
+            (
+                suma/total
+            ).toFixed(1)
+            :
+            '0';
+
+
+        y+=12;
+
+
+        pdf.setFontSize(
+            14
+        );
+
+
+        pdf.text(
+            `Promedio General: ${promedio}`,
+            20,
             y
-        )
+        );
 
-        y += 10
-    })
 
-    const promedio =
-    total>0
-    ?
-    (suma/total).toFixed(1)
-    :
-    0
+        y+=12;
 
-    y += 10
 
-    pdf.text(
+        pdf.setFontSize(
+            10
+        );
 
-        `Promedio General: ${promedio}`,
 
-        20,
+        pdf.text(
+            `Fecha: ${
+                new Date()
+                    .toLocaleDateString(
+                        'es-MX'
+                    )
+            }`,
+            20,
+            y
+        );
 
-        y
-    )
 
-    y += 10
+        pdf.save(
+            'Boleta_CEPM.pdf'
+        );
 
-    pdf.text(
+    }
 
-        `Fecha: ${
-            new Date()
-            .toLocaleDateString()
-        }`,
+    catch(error){
 
-        20,
+        console.error(
+            error
+        );
 
-        y
-    )
+        alert(
+            'No se pudo generar la boleta 😕'
+        );
 
-    pdf.save(
-        'Boleta_CEPM.pdf'
-    )
+    }
+
 }
+
+
+/* =========================
+   LOGOUT
+========================= */
 
 function logout(){
 
-    localStorage.clear()
+    localStorage.clear();
 
-    location.href='index.html'
+    location.href=
+        'index.html';
+
 }
 
-cargarAlumno()
+
+/* =========================
+   INICIAR
+========================= */
+
+cargarAlumno();
+
 
 </script>
+
+
 <script>
 
-if('serviceWorker' in navigator){
+/* =========================
+   SERVICE WORKER
+========================= */
 
-navigator.serviceWorker.register(
-'/service-worker.js'
-)
+if(
+    'serviceWorker'
+    in navigator
+){
+
+    navigator.serviceWorker.register(
+        '/service-worker.js'
+    );
 
 }
 
 </script>
+
 </body>
+
 </html>
+```
