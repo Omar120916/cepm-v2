@@ -3940,30 +3940,22 @@ async function crearAlumno(){
 
     const nombre =
         document
-        .getElementById(
-            'nombreAlumno'
-        )
+        .getElementById('nombreAlumno')
         .value.trim();
 
     const usuario =
         document
-        .getElementById(
-            'usuarioAlumno'
-        )
+        .getElementById('usuarioAlumno')
         .value.trim();
 
     const password =
         document
-        .getElementById(
-            'passwordAlumno'
-        )
+        .getElementById('passwordAlumno')
         .value;
 
     const email =
         document
-        .getElementById(
-            'emailAlumno'
-        )
+        .getElementById('emailAlumno')
         .value.trim();
 
 
@@ -4003,6 +3995,7 @@ async function crearAlumno(){
                             nombre,
                             usuario,
                             password,
+                            email,
                             edad:18
 
                         })
@@ -4011,37 +4004,8 @@ async function crearAlumno(){
             );
 
 
-        const data =
-            await apiFetch(
-                `${API}/registro`,
-                {
-
-                    method:'POST',
-
-                    headers:{
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            nombre,
-                            usuario,
-                            password,
-                            email,
-                            rol:'alumno',
-                            alumnoId:
-                                alumno._id
-
-                        })
-
-                }
-            );
-
-
         toast(
-            data.mensaje ||
+            alumno.mensaje ||
             'Alumno creado correctamente.'
         );
 
