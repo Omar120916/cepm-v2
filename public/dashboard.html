@@ -3473,16 +3473,13 @@ body{
    CONFIG
 ===================================================== */
 
-const API =
-'https://cepm-v2.onrender.com';
+const API = 'https://cepm-v2.onrender.com';
 
-const token =
-localStorage.getItem('token');
-
+const token = localStorage.getItem('token');
 
 if(!token){
 
-    location.href='/';
+    location.href = '/';
 
 }
 
@@ -3506,8 +3503,8 @@ let clasesData = [];
 
 function toast(
     mensaje,
-    tipo='success',
-    titulo=''
+    tipo = 'success',
+    titulo = ''
 ){
 
     const container =
@@ -3564,9 +3561,9 @@ function toast(
 
     setTimeout(()=>{
 
-        div.style.opacity='0';
+        div.style.opacity = '0';
 
-        div.style.transform=
+        div.style.transform =
             'translateX(25px)';
 
         setTimeout(
@@ -3585,7 +3582,7 @@ function toast(
 
 function mostrar(
     id,
-    boton=null
+    boton = null
 ){
 
     document
@@ -3720,15 +3717,10 @@ function abrirModal(tipo){
     const mapa = {
 
         alumno:'modalAlumno',
-
         maestro:'modalMaestro',
-
         padre:'modalPadre',
-
         director:'modalDirector',
-
         materia:'modalMateria',
-
         clase:'modalClase'
 
     };
@@ -3869,6 +3861,11 @@ setInterval(
     1000
 );
 
+setInterval(
+    actualizarSaludo,
+    60000
+);
+
 
 /* =====================================================
    API HELPER
@@ -3881,6 +3878,20 @@ async function apiFetch(
 
     try{
 
+        /*
+         * IMPORTANTE:
+         *
+         * Las funciones deben enviar solamente:
+         *
+         * '/usuarios'
+         * '/alumnos'
+         * '/materias'
+         *
+         * etc.
+         *
+         * Aquí se agrega automáticamente API.
+         */
+
         const res =
             await fetch(
                 `${API}${ruta}`,
@@ -3888,11 +3899,14 @@ async function apiFetch(
                     ...opciones,
 
                     headers:{
+
                         ...(opciones.headers || {}),
 
                         Authorization:
                             token
+
                     }
+
                 }
             );
 
@@ -3912,16 +3926,13 @@ async function apiFetch(
         }
 
 
-        // =====================
-        // SESIÓN EXPIRADA
-        // =====================
+        /* SESIÓN EXPIRADA */
 
         if(res.status === 401){
 
             localStorage.clear();
 
-            location.href =
-                'index.html';
+            location.href = '/';
 
             throw new Error(
                 'Tu sesión expiró.'
@@ -3930,9 +3941,7 @@ async function apiFetch(
         }
 
 
-        // =====================
-        // ERROR DEL SERVIDOR
-        // =====================
+        /* ERROR DEL SERVIDOR */
 
         if(!res.ok){
 
@@ -3942,7 +3951,6 @@ async function apiFetch(
                 res.status,
                 data
             );
-
 
             throw new Error(
 
@@ -3973,6 +3981,7 @@ async function apiFetch(
     }
 
 }
+
 
 /* =====================================================
    CREAR ALUMNO
@@ -4029,7 +4038,7 @@ async function crearAlumno(){
 
         const alumno =
             await apiFetch(
-                `${API}/alumnos`,
+                '/alumnos',
                 {
 
                     method:'POST',
@@ -4053,7 +4062,7 @@ async function crearAlumno(){
 
         const data =
             await apiFetch(
-                `${API}/registro`,
+                '/registro',
                 {
 
                     method:'POST',
@@ -4164,7 +4173,7 @@ async function crearMaestro(){
 
         const data =
             await apiFetch(
-                `${API}/registro`,
+                '/registro',
                 {
 
                     method:'POST',
@@ -4285,7 +4294,7 @@ async function crearPadre(){
 
         const data =
             await apiFetch(
-                `${API}/registro`,
+                '/registro',
                 {
 
                     method:'POST',
@@ -4395,7 +4404,7 @@ async function crearDirector(){
 
         const data =
             await apiFetch(
-                `${API}/crear-director`,
+                '/crear-director',
                 {
 
                     method:'POST',
@@ -4478,7 +4487,7 @@ async function crearMateria(){
 
         const data =
             await apiFetch(
-                `${API}/materias`,
+                '/materias',
                 {
 
                     method:'POST',
@@ -4609,7 +4618,7 @@ async function crearClase(){
 
         const data =
             await apiFetch(
-                `${API}/clases`,
+                '/clases',
                 {
 
                     method:'POST',
@@ -4674,15 +4683,19 @@ async function cargarTodo(){
 
     try{
 
-        await Promise.all([
+        /*
+         * Primero materias y clases.
+         * Después usuarios.
+         *
+         * Así cargarUsuarios() ya tiene
+         * disponible clasesData.
+         */
 
-            cargarUsuarios(),
+        await cargarMaterias();
 
-            cargarMaterias(),
+        await cargarClases();
 
-            cargarClases()
-
-        ]);
+        await cargarUsuarios();
 
     }
     catch(error){
@@ -4707,13 +4720,13 @@ async function cargarUsuarios(){
 
     const usuarios =
         await apiFetch(
-            `${API}/usuarios`
+            '/usuarios'
         );
 
 
     const alumnos =
         await apiFetch(
-            `${API}/alumnos`
+            '/alumnos'
         );
 
 
@@ -4726,20 +4739,19 @@ async function cargarUsuarios(){
 
     const maestros =
         usuarios.filter(
-            u=>u.rol==='maestro'
+            u=>u.rol === 'maestro'
         );
 
 
     const padres =
         usuarios.filter(
-            u=>u.rol==='padre'
+            u=>u.rol === 'padre'
         );
 
 
     const directores =
         usuarios.filter(
-            u=>
-                u.rol==='director'
+            u=>u.rol === 'director'
         );
 
 
@@ -4751,7 +4763,7 @@ async function cargarUsuarios(){
     )
     .textContent =
         usuarios.filter(
-            u=>u.rol==='alumno'
+            u=>u.rol === 'alumno'
         ).length;
 
 
@@ -4821,7 +4833,7 @@ async function cargarUsuarios(){
 
     renderAlumnos(
         usuarios.filter(
-            u=>u.rol==='alumno'
+            u=>u.rol === 'alumno'
         )
     );
 
@@ -4855,11 +4867,12 @@ function renderAlumnos(lista){
 
     if(!lista.length){
 
-        contenedor.innerHTML = emptyHTML(
-            '👨‍🎓',
-            'No hay alumnos',
-            'Todavía no hay estudiantes registrados.'
-        );
+        contenedor.innerHTML =
+            emptyHTML(
+                '👨‍🎓',
+                'No hay alumnos',
+                'Todavía no hay estudiantes registrados.'
+            );
 
         return;
 
@@ -4885,7 +4898,8 @@ function renderAlumnos(lista){
                         </h3>
 
                         <p>
-                            Usuario: ${escapeHTML(u.usuario || '—')}
+                            Usuario:
+                            ${escapeHTML(u.usuario || '—')}
                         </p>
 
                     </div>
@@ -4893,7 +4907,8 @@ function renderAlumnos(lista){
                 </div>
 
                 <div class="item-line">
-                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                    ✉️
+                    ${escapeHTML(u.email || 'Sin correo')}
                 </div>
 
                 <div class="item-actions">
@@ -4962,7 +4977,8 @@ function renderMaestros(lista){
                         </h3>
 
                         <p>
-                            Usuario: ${escapeHTML(u.usuario || '—')}
+                            Usuario:
+                            ${escapeHTML(u.usuario || '—')}
                         </p>
 
                     </div>
@@ -4970,7 +4986,8 @@ function renderMaestros(lista){
                 </div>
 
                 <div class="item-line">
-                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                    ✉️
+                    ${escapeHTML(u.email || 'Sin correo')}
                 </div>
 
             </div>
@@ -5028,7 +5045,8 @@ function renderPadres(lista){
                         </h3>
 
                         <p>
-                            Usuario: ${escapeHTML(u.usuario || '—')}
+                            Usuario:
+                            ${escapeHTML(u.usuario || '—')}
                         </p>
 
                     </div>
@@ -5036,7 +5054,8 @@ function renderPadres(lista){
                 </div>
 
                 <div class="item-line">
-                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                    ✉️
+                    ${escapeHTML(u.email || 'Sin correo')}
                 </div>
 
             </div>
@@ -5094,7 +5113,8 @@ function renderDirectores(lista){
                         </h3>
 
                         <p>
-                            Usuario: ${escapeHTML(u.usuario || '—')}
+                            Usuario:
+                            ${escapeHTML(u.usuario || '—')}
                         </p>
 
                     </div>
@@ -5102,7 +5122,8 @@ function renderDirectores(lista){
                 </div>
 
                 <div class="item-line">
-                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                    ✉️
+                    ${escapeHTML(u.email || 'Sin correo')}
                 </div>
 
             </div>
@@ -5122,7 +5143,7 @@ async function cargarMaterias(){
 
     const materias =
         await apiFetch(
-            `${API}/materias`
+            '/materias'
         );
 
 
@@ -5205,7 +5226,7 @@ async function cargarClases(){
 
     const clases =
         await apiFetch(
-            `${API}/clases`
+            '/clases'
         );
 
 
@@ -5275,7 +5296,8 @@ async function cargarClases(){
                             </h3>
 
                             <p>
-                                Grupo ${escapeHTML(
+                                Grupo
+                                ${escapeHTML(
                                     c.grupo || '—'
                                 )}
                             </p>
@@ -5286,14 +5308,18 @@ async function cargarClases(){
 
 
                     <div class="item-line">
-                        ⏰ ${escapeHTML(
-                            c.horario || 'Sin horario'
+                        ⏰
+                        ${escapeHTML(
+                            c.horario ||
+                            'Sin horario'
                         )}
                     </div>
 
                     <div class="item-line">
-                        🚪 ${escapeHTML(
-                            c.aula || 'Sin aula'
+                        🚪
+                        ${escapeHTML(
+                            c.aula ||
+                            'Sin aula'
                         )}
                     </div>
 
@@ -5331,7 +5357,8 @@ async function abrirClase(id){
         const clase =
             clasesData.find(
                 c=>
-                    c._id === id
+                    String(c._id) ===
+                    String(id)
             );
 
 
@@ -5349,7 +5376,7 @@ async function abrirClase(id){
 
         const alumnos =
             await apiFetch(
-                `${API}/alumnos`
+                '/alumnos'
             );
 
 
@@ -5357,7 +5384,8 @@ async function abrirClase(id){
             alumnos.filter(
                 a=>
                     (clase.alumnos || [])
-                    .includes(a._id)
+                    .map(String)
+                    .includes(String(a._id))
             );
 
 
@@ -5365,7 +5393,8 @@ async function abrirClase(id){
             alumnos.filter(
                 a=>
                     !(clase.alumnos || [])
-                    .includes(a._id)
+                    .map(String)
+                    .includes(String(a._id))
             );
 
 
@@ -5448,7 +5477,12 @@ async function abrirClase(id){
             </div>
 
 
-            <h3 style="font-size:13px;margin-bottom:10px;">
+            <h3
+                style="
+                    font-size:13px;
+                    margin-bottom:10px;
+                "
+            >
                 👨‍🎓 Alumnos inscritos
                 (${inscritos.length})
             </h3>
@@ -5464,7 +5498,10 @@ async function abrirClase(id){
 
                     <div
                         class="item-card"
-                        style="margin-bottom:7px;padding:12px;"
+                        style="
+                            margin-bottom:7px;
+                            padding:12px;
+                        "
                     >
 
                         👨‍🎓
@@ -5478,6 +5515,7 @@ async function abrirClase(id){
                 :
 
                 `
+
                 <div
                     style="
                         color:#64748b;
@@ -5487,6 +5525,7 @@ async function abrirClase(id){
                 >
                     No hay alumnos inscritos todavía.
                 </div>
+
                 `
             }
 
@@ -5520,9 +5559,11 @@ async function abrirClase(id){
                         :
 
                         `
-                        <option>
+
+                        <option value="">
                             Todos los alumnos están inscritos
                         </option>
+
                         `
                     }
 
@@ -5607,7 +5648,7 @@ async function agregarAlumnoClase(id){
 
         const data =
             await apiFetch(
-                `${API}/clases/${id}/alumnos`,
+                `/clases/${id}/alumnos`,
                 {
 
                     method:'PUT',
@@ -5662,46 +5703,61 @@ async function agregarAlumnoClase(id){
 function filtrar(tipo){
 
     let inputId;
+
     let lista;
+
     let render;
 
 
-    if(tipo==='alumnos'){
+    if(tipo === 'alumnos'){
 
-        inputId='buscarAlumnos';
+        inputId =
+            'buscarAlumnos';
 
         lista =
             usuariosData.filter(
-                u=>u.rol==='alumno'
+                u=>u.rol === 'alumno'
             );
 
-        render=renderAlumnos;
+        render =
+            renderAlumnos;
 
     }
 
-    else if(tipo==='maestros'){
+    else if(tipo === 'maestros'){
 
-        inputId='buscarMaestros';
+        inputId =
+            'buscarMaestros';
 
         lista =
             usuariosData.filter(
-                u=>u.rol==='maestro'
+                u=>u.rol === 'maestro'
             );
 
-        render=renderMaestros;
+        render =
+            renderMaestros;
 
     }
 
-    else if(tipo==='padres'){
+    else if(tipo === 'padres'){
 
-        inputId='buscarPadres';
+        inputId =
+            'buscarPadres';
 
         lista =
             usuariosData.filter(
-                u=>u.rol==='padre'
+                u=>u.rol === 'padre'
             );
 
-        render=renderPadres;
+        render =
+            renderPadres;
+
+    }
+
+
+    if(!inputId || !render){
+
+        return;
 
     }
 
@@ -5721,6 +5777,7 @@ function filtrar(tipo){
         lista =
             lista.filter(
                 u=>
+
                     String(
                         u.nombre || ''
                     )
@@ -5742,6 +5799,7 @@ function filtrar(tipo){
                     )
                     .toLowerCase()
                     .includes(texto)
+
             );
 
     }
@@ -5760,7 +5818,9 @@ function verUsuario(id){
 
     const usuario =
         usuariosData.find(
-            u=>u._id===id
+            u=>
+                String(u._id) ===
+                String(id)
         );
 
 
@@ -5865,7 +5925,9 @@ function limpiarFormulario(
     )
     .forEach(
         input=>{
-            input.value='';
+
+            input.value = '';
+
         }
     );
 
@@ -5876,7 +5938,9 @@ function limpiarFormulario(
     )
     .forEach(
         select=>{
-            select.selectedIndex=-1;
+
+            select.selectedIndex = -1;
+
         }
     );
 
@@ -5893,7 +5957,7 @@ function logout(){
         'token'
     );
 
-    location.href='/';
+    location.href = '/';
 
 }
 
