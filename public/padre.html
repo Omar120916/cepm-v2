@@ -1,479 +1,2419 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="manifest" href="/manifest.json">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#0f172a">
+<link rel="manifest"
+href="/manifest.json">
 
-<title>Panel Padre</title>
+<meta name="theme-color"
+content="#07111f">
+
+<title>CEPM | Panel Padre</title>
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 }
+
+:root{
+
+    --bg:#07111f;
+    --bg2:#0f172a;
+
+    --card:rgba(15,23,42,.72);
+
+    --card2:#172337;
+
+    --blue:#3b82f6;
+    --blue2:#2563eb;
+
+    --green:#22c55e;
+    --yellow:#eab308;
+    --red:#ef4444;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --border:
+        rgba(255,255,255,.08);
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
 
 body{
-background:#0f172a;
-color:white;
-padding:30px;
+
+    min-height:100vh;
+
+    color:var(--text);
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(59,130,246,.16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(124,58,237,.14),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f172a,
+            #111827
+        );
+
 }
 
-.card{
-background:#1e293b;
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
+
+/* =====================================================
+   DECORATION
+===================================================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:-1;
+
+}
+
+.orb{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(5px);
+
+    opacity:.4;
+
+    animation:
+        flotar 9s ease-in-out infinite;
+
+}
+
+.orb1{
+
+    width:300px;
+    height:300px;
+
+    background:
+        rgba(37,99,235,.16);
+
+    top:-120px;
+    left:-100px;
+
+}
+
+.orb2{
+
+    width:260px;
+    height:260px;
+
+    background:
+        rgba(124,58,237,.15);
+
+    bottom:-100px;
+    right:-80px;
+
+    animation-delay:2s;
+
+}
+
+@keyframes flotar{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-20px);
+
+    }
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:260px;
+
+    padding:25px 18px;
+
+    background:
+        rgba(2,6,23,.78);
+
+    border-right:
+        1px solid
+        var(--border);
+
+    backdrop-filter:
+        blur(20px);
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* logo */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:
+        8px 10px 25px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    margin-bottom:25px;
+
+}
+
+.logo-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(37,99,235,.25);
+
+}
+
+.logo h1{
+
+    font-size:22px;
+
+    font-weight:900;
+
+}
+
+.logo p{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:2px;
+
+}
+
+
+/* navigation */
+
+.nav-title{
+
+    color:#64748b;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    padding:
+        0 10px 10px;
+
+}
+
+.nav-button{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    text-align:left;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    margin-bottom:7px;
+
+    transition:.25s;
+
+}
+
+.nav-button:hover{
+
+    background:
+        rgba(59,130,246,.10);
+
+    color:white;
+
+    transform:
+        translateX(3px);
+
+}
+
+.nav-button.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.25),
+            rgba(79,70,229,.18)
+        );
+
+    color:white;
+
+    border:
+        1px solid
+        rgba(59,130,246,.15);
+
+}
+
+.sidebar-bottom{
+
+    margin-top:auto;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:260px;
+
+    min-height:100vh;
+
+    padding:35px;
+
+    max-width:1500px;
+
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.welcome h2{
+
+    font-size:29px;
+
+    letter-spacing:-.8px;
+
+}
+
+.welcome p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:6px;
+
+}
+
+.top-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.top-button{
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:white;
+
+    padding:11px 15px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.top-button:hover{
+
+    background:
+        rgba(255,255,255,.08);
+
+    transform:
+        translateY(-2px);
+
+}
+
+.top-button.chat{
+
+    background:
+        rgba(37,99,235,.16);
+
+    border-color:
+        rgba(59,130,246,.20);
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+
+}
+
+.stat{
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    backdrop-filter:
+        blur(15px);
+
+    transition:.25s;
+
+}
+
+.stat:hover{
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(59,130,246,.20);
+
+}
+
+.stat-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.stat-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:13px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(59,130,246,.12);
+
+    font-size:20px;
+
+}
+
+.stat-label{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+.stat-number{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    margin-top:12px;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.section{
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:23px;
+
+    padding:25px;
+
+    backdrop-filter:
+        blur(15px);
+
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.section-header h2{
+
+    font-size:19px;
+
+}
+
+.section-header p{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+
+/* =====================================================
+   CHILDREN
+===================================================== */
+
+.hijos{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(310px,1fr)
+        );
+
+    gap:18px;
+
 }
 
 .hijo{
-background:#334155;
-padding:15px;
-border-radius:15px;
-margin-top:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,.90),
+            rgba(15,23,42,.90)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    transition:.25s;
+
 }
 
-button{
-background:#ef4444;
-color:white;
-border:none;
-padding:12px;
-border-radius:10px;
-cursor:pointer;
+.hijo:hover{
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(59,130,246,.22);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.18);
+
+}
+
+
+/* child header */
+
+.hijo-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:18px;
+
+}
+
+.avatar{
+
+    width:53px;
+
+    height:53px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+}
+
+.hijo-info h3{
+
+    font-size:17px;
+
+}
+
+.hijo-info p{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+
+/* =====================================================
+   AVERAGE
+===================================================== */
+
+.promedio-box{
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    margin-bottom:15px;
+
+}
+
+.promedio-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.promedio-label{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+.promedio{
+
+    font-size:25px;
+
+    font-weight:900;
+
+}
+
+.barra{
+
+    height:7px;
+
+    width:100%;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+.barra-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    transition:
+        width 1s ease;
+
+}
+
+
+/* colors */
+
+.verde{
+
+    color:#4ade80;
+
+}
+
+.amarillo{
+
+    color:#facc15;
+
+}
+
+.rojo{
+
+    color:#f87171;
+
+}
+
+.fill-verde{
+
+    background:#22c55e;
+
+}
+
+.fill-amarillo{
+
+    background:#eab308;
+
+}
+
+.fill-rojo{
+
+    background:#ef4444;
+
+}
+
+
+/* =====================================================
+   GRADES
+===================================================== */
+
+.calificaciones-title{
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+.calificaciones{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.calificacion{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:11px 13px;
+
+    border-radius:11px;
+
+    background:
+        rgba(71,85,105,.35);
+
+}
+
+.materia{
+
+    font-size:11px;
+
+    color:#cbd5e1;
+
+}
+
+.nota{
+
+    font-size:13px;
+
+    font-weight:900;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.child-actions{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+    margin-top:15px;
+
+}
+
+.action{
+
+    border:none;
+
+    padding:11px;
+
+    border-radius:11px;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    transition:.2s;
+
+}
+
+.action:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+.boleta{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+}
+
+.ver{
+
+    color:white;
+
+    background:
+        rgba(59,130,246,.14);
+
+    border:
+        1px solid
+        rgba(59,130,246,.15);
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    color:#64748b;
+
+}
+
+.empty-icon{
+
+    font-size:40px;
+
+    margin-bottom:12px;
+
+}
+
+.empty h3{
+
+    color:#cbd5e1;
+
+    font-size:16px;
+
+}
+
+.empty p{
+
+    font-size:12px;
+
+    margin-top:6px;
+
+}
+
+
+/* =====================================================
+   MOBILE BUTTON
+===================================================== */
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .sidebar{
+
+        width:220px;
+
+    }
+
+    .main{
+
+        margin-left:220px;
+
+        padding:25px;
+
+    }
+
+    .stats{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        min-height:auto;
+
+        border-right:none;
+
+        border-bottom:
+            1px solid
+            var(--border);
+
+        padding:15px;
+
+    }
+
+    .sidebar .logo{
+
+        margin-bottom:10px;
+
+    }
+
+    .nav-title{
+
+        display:none;
+
+    }
+
+    .nav-button{
+
+        width:auto;
+
+        display:inline-block;
+
+        margin-right:5px;
+
+        margin-bottom:0;
+
+        padding:10px 12px;
+
+    }
+
+    .sidebar-bottom{
+
+        display:inline;
+
+    }
+
+    .main{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .topbar{
+
+        align-items:flex-start;
+
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .main{
+
+        padding:14px;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+    }
+
+    .top-actions{
+
+        width:100%;
+
+    }
+
+    .top-button{
+
+        flex:1;
+
+    }
+
+    .welcome h2{
+
+        font-size:23px;
+
+    }
+
+    .section{
+
+        padding:17px;
+
+        border-radius:18px;
+
+    }
+
+    .hijos{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .hijo{
+
+        padding:16px;
+
+    }
+
+    .child-actions{
+
+        grid-template-columns:1fr;
+
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<h1>👨‍👩‍👧 Panel Padre</h1>
 
-<div
-style="
-display:flex;
-gap:10px;
-margin-top:20px;
-margin-bottom:20px;
-"
->
+<!-- BACKGROUND -->
 
-<button
-onclick="
-location.href='chat.html'
-"
-style="
-background:#2563eb;
-"
->
-💬 Chat
-</button>
+<div class="background">
 
-<button
-onclick="logout()"
->
-🚪 Cerrar sesión
-</button>
+    <div class="orb orb1"></div>
+
+    <div class="orb orb2"></div>
 
 </div>
 
-<div id="contenido"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-<script>
+<aside class="sidebar">
 
-const API =
-'https://cepm-v2.onrender.com'
+    <div class="logo">
 
-const token =
-localStorage.getItem('token')
+        <div class="logo-icon">
+            👨‍👩‍👧
+        </div>
 
-async function cargar(){
+        <div>
 
-const usuarios =
-await fetch(
+            <h1>CEPM</h1>
 
-`${API}/usuarios`,
+            <p>Portal de Padres</p>
 
-{
-headers:{
-Authorization:token
-}
-}
-
-).then(r=>r.json())
-
-const padre =
-JSON.parse(
-
-atob(
-token.split('.')[1]
-)
-
-)
-
-const datosPadre =
-usuarios.find(u=>
-
-u._id===padre.id
-)
-
-const hijos =
-usuarios.filter(u=>
-
-datosPadre.hijos.includes(
-u._id
-)
-
-)
-
-document.getElementById(
-'contenido'
-).innerHTML =
-
-`
-
-<div class="card">
-
-<h2>
-👨‍🎓 Mis hijos
-</h2>
-
-${hijos.map(h=>`
-
-<div class="hijo">
-
-    <b>${h.nombre}</b>
-
-    <br>
-
-    Usuario: ${h.usuario}
-
-    <div
-id="calificaciones-${h._id}"
-style="margin-top:15px;"
->
-</div>
-
-<button
-onclick="generarBoleta('${h._id}')"
-style="
-margin-top:15px;
-background:#22c55e;
-color:white;
-border:none;
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-"
->
-
-📄 Descargar Boleta
-
-</button>
-
-</div>
-
-`).join('')}
-
-</div>
-
-`
-
-const calificaciones =
-await fetch(
-
-`${API}/calificaciones`,
-
-{
-headers:{
-Authorization:token
-}
-}
-
-).then(r=>r.json())
-
-const clases =
-await fetch(
-
-`${API}/clases`,
-
-{
-headers:{
-Authorization:token
-}
-}
-
-).then(r=>r.json())
-
-const materias =
-await fetch(
-
-`${API}/materias`,
-
-{
-headers:{
-Authorization:token
-}
-}
-
-).then(r=>r.json())
-
-hijos.forEach(h=>{
-
-    const calHijo =
-    calificaciones.filter(c=>
-
-        c.alumnoId===h._id
-    )
-
-    document.getElementById(
-
-        `calificaciones-${h._id}`
-
-    ).innerHTML =
-
-    `
-    <h4>
-        📝 Calificaciones
-    </h4>
-
-    ${calHijo.length===0 ?
-
-    'Sin calificaciones'
-
-    :
-
-calHijo.map(c=>{
-
-    const clase =
-    clases.find(cl=>
-
-        cl._id===c.claseId
-    )
-
-    const materia =
-    materias.find(m=>
-
-        m._id===clase?.materiaId
-    )
-
-    return `
-
-    <div
-    style="
-    background:#475569;
-    padding:10px;
-    border-radius:10px;
-    margin-top:8px;
-    "
-    >
-
-        📚 ${materia?.nombre || 'Materia'}
-
-        <br>
-
-        ⭐ ${c.calificacion}
+        </div>
 
     </div>
 
-    `
 
-}).join('')}
+    <div class="nav-title">
+        MENÚ PRINCIPAL
+    </div>
 
-    `
-})
 
-}
+    <button
+        class="nav-button active"
+        onclick="irInicio()"
+    >
+        🏠 Inicio
+    </button>
 
-async function generarBoleta(alumnoId){
 
-    const { jsPDF } = window.jspdf
+    <button
+        class="nav-button"
+        onclick="location.href='chat.html'"
+    >
+        💬 Chat escolar
+    </button>
 
-    const doc = new jsPDF()
 
-    const usuarios =
-    await fetch(
+    <div class="sidebar-bottom">
 
-        `${API}/usuarios`,
+        <button
+            class="nav-button"
+            onclick="cargar()"
+        >
+            🔄 Actualizar
+        </button>
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
+        <button
+            class="nav-button"
+            onclick="logout()"
+        >
+            🚪 Cerrar sesión
+        </button>
 
-    ).then(r=>r.json())
+    </div>
 
-    const alumno =
-    usuarios.find(u=>
+</aside>
 
-        u._id===alumnoId
-    )
 
-    const clases =
-    await fetch(
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-        `${API}/clases`,
+<main class="main">
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
 
-    ).then(r=>r.json())
+    <!-- TOP -->
 
-    const materias =
-    await fetch(
+    <div class="topbar">
 
-        `${API}/materias`,
+        <div class="welcome">
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
+            <h2 id="saludo">
+                Buenos días 👋
+            </h2>
 
-    ).then(r=>r.json())
+            <p>
+                Consulta el progreso académico
+                de tus hijos.
+            </p>
 
-    const calificaciones =
-    await fetch(
+        </div>
 
-        `${API}/calificaciones`,
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
+        <div class="top-actions">
 
-    ).then(r=>r.json())
+            <button
+                class="top-button chat"
+                onclick="location.href='chat.html'"
+            >
+                💬 Chat
+            </button>
 
-    doc.setFontSize(22)
+            <button
+                class="top-button"
+                onclick="cargar()"
+            >
+                🔄 Actualizar
+            </button>
 
-    doc.text(
-        'BOLETA CEPM',
-        20,
-        20
-    )
+        </div>
 
-    doc.setFontSize(14)
+    </div>
 
-    doc.text(
-        `Alumno: ${alumno.nombre}`,
-        20,
-        40
-    )
 
-    let y = 60
+    <!-- STATS -->
 
-    let suma = 0
-    let total = 0
+    <div class="stats">
 
-    calificaciones
-    .filter(c=>c.alumnoId===alumnoId)
-    .forEach(c=>{
+        <div class="stat">
 
-        const clase =
-        clases.find(cl=>
+            <div class="stat-top">
 
-            cl._id===c.claseId
-        )
+                <div>
 
-        const materia =
-        materias.find(m=>
+                    <div class="stat-label">
+                        HIJOS REGISTRADOS
+                    </div>
 
-            m._id===clase?.materiaId
-        )
+                    <div
+                        class="stat-number"
+                        id="totalHijos"
+                    >
+                        0
+                    </div>
 
-        doc.text(
+                </div>
 
-            `${materia?.nombre || 'Materia'} : ${c.calificacion}`,
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
 
-            20,
+            </div>
 
-            y
-        )
+        </div>
 
-        suma += Number(
-            c.calificacion
-        )
 
-        total++
+        <div class="stat">
 
-        y += 10
-    })
+            <div class="stat-top">
 
-    const promedio =
-    total>0
+                <div>
 
-    ?
+                    <div class="stat-label">
+                        PROMEDIO FAMILIAR
+                    </div>
 
-    (suma/total).toFixed(1)
+                    <div
+                        class="stat-number"
+                        id="promedioFamilia"
+                    >
+                        0
+                    </div>
 
-    :
+                </div>
 
-    '0'
+                <div class="stat-icon">
+                    📊
+                </div>
 
-    y += 15
+            </div>
 
-    doc.text(
+        </div>
 
-        `Promedio General: ${promedio}`,
 
-        20,
+        <div class="stat">
 
-        y
-    )
+            <div class="stat-top">
 
-    y += 15
+                <div>
 
-    doc.text(
+                    <div class="stat-label">
+                        CALIFICACIONES
+                    </div>
 
-        `Fecha: ${new Date().toLocaleDateString()}`,
+                    <div
+                        class="stat-number"
+                        id="totalCalificaciones"
+                    >
+                        0
+                    </div>
 
-        20,
+                </div>
 
-        y
-    )
+                <div class="stat-icon">
+                    ⭐
+                </div>
 
-    doc.save(
+            </div>
 
-        `Boleta_${alumno.nombre}.pdf`
-    )
-}
+        </div>
 
-function logout(){
+    </div>
 
-localStorage.clear()
 
-location.href='index.html'
-}
+    <!-- CHILDREN -->
 
-cargar()
+    <section class="section">
 
-</script>
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    👨‍🎓 Mis hijos
+                </h2>
+
+                <p>
+                    Información académica
+                    de tus hijos
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="contenido"
+            class="hijos"
+        >
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⏳
+                </div>
+
+                <h3>
+                    Cargando información...
+                </h3>
+
+                <p>
+                    Espera un momento.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 <script>
 
-if('serviceWorker' in navigator){
+/* =====================================================
+   API
+===================================================== */
 
-navigator.serviceWorker.register(
-'/service-worker.js'
-)
+const API =
+'https://cepm-v2.onrender.com';
+
+const token =
+localStorage.getItem('token');
+
+
+/* =====================================================
+   VALIDAR TOKEN
+===================================================== */
+
+if(!token){
+
+    location.href =
+        'index.html';
 
 }
+
+
+/* =====================================================
+   SALUDO
+===================================================== */
+
+function actualizarSaludo(){
+
+    const hora =
+        new Date()
+        .getHours();
+
+    let saludo;
+
+    if(hora < 12){
+
+        saludo =
+            'Buenos días 👋';
+
+    }
+
+    else if(hora < 19){
+
+        saludo =
+            'Buenas tardes ☀️';
+
+    }
+
+    else{
+
+        saludo =
+            'Buenas noches 🌙';
+
+    }
+
+    document
+        .getElementById('saludo')
+        .innerHTML =
+            saludo;
+
+}
+
+actualizarSaludo();
+
+
+/* =====================================================
+   CARGAR INFORMACIÓN
+===================================================== */
+
+async function cargar(){
+
+    try{
+
+        const payload =
+            JSON.parse(
+                atob(
+                    token.split('.')[1]
+                )
+            );
+
+
+        /* USUARIOS */
+
+        const usuarios =
+            await fetch(
+                `${API}/usuarios`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        const datosPadre =
+            usuarios.find(
+                u =>
+                    u._id ===
+                    payload.id
+            );
+
+
+        if(!datosPadre){
+
+            throw new Error(
+                'Padre no encontrado'
+            );
+
+        }
+
+
+        const hijos =
+            usuarios.filter(
+                u =>
+                    datosPadre.hijos &&
+                    datosPadre.hijos.includes(
+                        u._id
+                    )
+            );
+
+
+        /* STATS */
+
+        document
+            .getElementById(
+                'totalHijos'
+            )
+            .innerText =
+                hijos.length;
+
+
+        /* CALIFICACIONES */
+
+        const calificaciones =
+            await fetch(
+                `${API}/calificaciones`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        const clases =
+            await fetch(
+                `${API}/clases`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        const materias =
+            await fetch(
+                `${API}/materias`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(r=>r.json());
+
+
+        /* CONTADORES */
+
+        let sumaFamilia = 0;
+
+        let totalFamilia = 0;
+
+        let calificacionesFamilia = 0;
+
+
+        hijos.forEach(
+            hijo=>{
+
+                const calHijo =
+                    calificaciones.filter(
+                        c =>
+                            c.alumnoId ===
+                            hijo._id
+                    );
+
+                calificacionesFamilia +=
+                    calHijo.length;
+
+
+                calHijo.forEach(
+                    c=>{
+
+                        const valor =
+                            Number(
+                                c.calificacion
+                            );
+
+                        if(!isNaN(valor)){
+
+                            sumaFamilia +=
+                                valor;
+
+                            totalFamilia++;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        document
+            .getElementById(
+                'totalCalificaciones'
+            )
+            .innerText =
+                calificacionesFamilia;
+
+
+        const promedioFamilia =
+            totalFamilia > 0
+
+            ?
+
+            (
+                sumaFamilia /
+                totalFamilia
+            ).toFixed(1)
+
+            :
+
+            '0';
+
+
+        document
+            .getElementById(
+                'promedioFamilia'
+            )
+            .innerText =
+                promedioFamilia;
+
+
+        /* SIN HIJOS */
+
+        const contenido =
+            document
+                .getElementById(
+                    'contenido'
+                );
+
+
+        if(hijos.length === 0){
+
+            contenido.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        👨‍🎓
+                    </div>
+
+                    <h3>
+                        No hay hijos registrados
+                    </h3>
+
+                    <p>
+                        Cuando se registre
+                        un alumno aparecerá aquí.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* CREAR TARJETAS */
+
+        contenido.innerHTML =
+            hijos.map(
+                hijo=>{
+
+                    const calHijo =
+                        calificaciones.filter(
+                            c =>
+                                c.alumnoId ===
+                                hijo._id
+                        );
+
+
+                    let suma = 0;
+
+                    let total = 0;
+
+
+                    calHijo.forEach(
+                        c=>{
+
+                            const valor =
+                                Number(
+                                    c.calificacion
+                                );
+
+                            if(!isNaN(valor)){
+
+                                suma +=
+                                    valor;
+
+                                total++;
+
+                            }
+
+                        }
+                    );
+
+
+                    const promedio =
+                        total > 0
+
+                        ?
+
+                        (
+                            suma /
+                            total
+                        ).toFixed(1)
+
+                        :
+
+                        '0';
+
+
+                    let claseColor =
+                        'rojo';
+
+                    let fillColor =
+                        'fill-rojo';
+
+
+                    if(
+                        Number(promedio) >= 9
+                    ){
+
+                        claseColor =
+                            'verde';
+
+                        fillColor =
+                            'fill-verde';
+
+                    }
+
+                    else if(
+                        Number(promedio) >= 7
+                    ){
+
+                        claseColor =
+                            'amarillo';
+
+                        fillColor =
+                            'fill-amarillo';
+
+                    }
+
+
+                    const porcentaje =
+                        Math.min(
+                            Number(promedio) * 10,
+                            100
+                        );
+
+
+                    return `
+
+                    <article
+                        class="hijo"
+                    >
+
+                        <div
+                            class="hijo-header"
+                        >
+
+                            <div
+                                class="avatar"
+                            >
+                                👨‍🎓
+                            </div>
+
+                            <div
+                                class="hijo-info"
+                            >
+
+                                <h3>
+                                    ${hijo.nombre}
+                                </h3>
+
+                                <p>
+                                    👤 Usuario:
+                                    ${hijo.usuario}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="promedio-box"
+                        >
+
+                            <div
+                                class="promedio-row"
+                            >
+
+                                <span
+                                    class="promedio-label"
+                                >
+                                    PROMEDIO GENERAL
+                                </span>
+
+                                <span
+                                    class="promedio ${claseColor}"
+                                >
+                                    ${promedio}
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="barra"
+                            >
+
+                                <div
+                                    class="barra-fill ${fillColor}"
+                                    style="
+                                        width:${porcentaje}%;
+                                    "
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="calificaciones-title"
+                        >
+
+                            📝 Calificaciones
+
+                        </div>
+
+
+                        <div
+                            class="calificaciones"
+                        >
+
+                            ${
+                                calHijo.length === 0
+
+                                ?
+
+                                `
+
+                                <div
+                                    class="calificacion"
+                                >
+
+                                    <span
+                                        class="materia"
+                                    >
+                                        Sin calificaciones
+                                    </span>
+
+                                    <span>
+                                        ⏳
+                                    </span>
+
+                                </div>
+
+                                `
+
+                                :
+
+                                calHijo
+                                .map(
+                                    c=>{
+
+                                        const clase =
+                                            clases.find(
+                                                cl =>
+                                                    cl._id ===
+                                                    c.claseId
+                                            );
+
+
+                                        const materia =
+                                            materias.find(
+                                                m =>
+                                                    m._id ===
+                                                    clase?.materiaId
+                                            );
+
+
+                                        const nota =
+                                            Number(
+                                                c.calificacion
+                                            );
+
+
+                                        let color =
+                                            'rojo';
+
+
+                                        if(
+                                            nota >= 9
+                                        ){
+
+                                            color =
+                                                'verde';
+
+                                        }
+
+                                        else if(
+                                            nota >= 7
+                                        ){
+
+                                            color =
+                                                'amarillo';
+
+                                        }
+
+
+                                        return `
+
+                                        <div
+                                            class="calificacion"
+                                        >
+
+                                            <span
+                                                class="materia"
+                                            >
+
+                                                📚
+                                                ${
+                                                    materia?.nombre ||
+                                                    'Materia'
+                                                }
+
+                                            </span>
+
+                                            <span
+                                                class="nota ${color}"
+                                            >
+
+                                                ⭐
+                                                ${c.calificacion}
+
+                                            </span>
+
+                                        </div>
+
+                                        `;
+
+                                    }
+                                )
+                                .join('')
+
+                            }
+
+                        </div>
+
+
+                        <div
+                            class="child-actions"
+                        >
+
+                            <button
+                                class="action boleta"
+                                onclick="
+                                    generarBoleta(
+                                        '${hijo._id}'
+                                    )
+                                "
+                            >
+
+                                📄 Descargar boleta
+
+                            </button>
+
+
+                            <button
+                                class="action ver"
+                                onclick="
+                                    mostrarDetalle(
+                                        '${hijo._id}'
+                                    )
+                                "
+                            >
+
+                                👁️ Ver detalle
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                    `;
+
+                }
+            )
+            .join('');
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        document
+            .getElementById(
+                'contenido'
+            )
+            .innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    No se pudo cargar
+                    la información
+                </h3>
+
+                <p>
+                    Revisa tu conexión
+                    e intenta actualizar.
+                </p>
+
+            </div>
+
+            `;
+
+    }
+
+}
+
+
+/* =====================================================
+   DETALLE
+===================================================== */
+
+function mostrarDetalle(
+    alumnoId
+){
+
+    alert(
+        'Aquí podemos poner después un perfil completo del alumno 👨‍🎓🔥'
+    );
+
+}
+
+
+/* =====================================================
+   BOLETA
+===================================================== */
+
+async function generarBoleta(
+    alumnoId
+){
+
+    try{
+
+        const {
+            jsPDF
+        } =
+            window.jspdf;
+
+
+        const doc =
+            new jsPDF();
+
+
+        /* USUARIOS */
+
+        const usuarios =
+            await fetch(
+                `${API}/usuarios`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
+
+
+        const alumno =
+            usuarios.find(
+                u =>
+                    u._id ===
+                    alumnoId
+            );
+
+
+        /* CLASES */
+
+        const clases =
+            await fetch(
+                `${API}/clases`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
+
+
+        /* MATERIAS */
+
+        const materias =
+            await fetch(
+                `${API}/materias`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
+
+
+        /* CALIFICACIONES */
+
+        const calificaciones =
+            await fetch(
+                `${API}/calificaciones`,
+                {
+                    headers:{
+                        Authorization:token
+                    }
+                }
+            ).then(
+                r=>r.json()
+            );
+
+
+        /* ENCABEZADO */
+
+        doc.setFontSize(22);
+
+        doc.text(
+            'BOLETA CEPM',
+            20,
+            20
+        );
+
+
+        doc.setFontSize(14);
+
+        doc.text(
+            `Alumno: ${alumno.nombre}`,
+            20,
+            40
+        );
+
+
+        let y = 60;
+
+        let suma = 0;
+
+        let total = 0;
+
+
+        calificaciones
+        .filter(
+            c =>
+                c.alumnoId ===
+                alumnoId
+        )
+        .forEach(
+            c=>{
+
+                const clase =
+                    clases.find(
+                        cl =>
+                            cl._id ===
+                            c.claseId
+                    );
+
+
+                const materia =
+                    materias.find(
+                        m =>
+                            m._id ===
+                            clase?.materiaId
+                    );
+
+
+                const texto =
+
+                    `${materia?.nombre || 'Materia'} : ${c.calificacion}`;
+
+
+                doc.text(
+                    texto,
+                    20,
+                    y
+                );
+
+
+                suma +=
+                    Number(
+                        c.calificacion
+                    );
+
+
+                total++;
+
+
+                y += 10;
+
+            }
+        );
+
+
+        const promedio =
+            total > 0
+
+            ?
+
+            (
+                suma /
+                total
+            ).toFixed(1)
+
+            :
+
+            '0';
+
+
+        y += 15;
+
+
+        doc.setFontSize(15);
+
+        doc.text(
+            `Promedio General: ${promedio}`,
+            20,
+            y
+        );
+
+
+        y += 15;
+
+
+        doc.setFontSize(11);
+
+        doc.text(
+            `Fecha: ${
+                new Date()
+                .toLocaleDateString()
+            }`,
+            20,
+            y
+        );
+
+
+        doc.save(
+            `Boleta_${alumno.nombre}.pdf`
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        alert(
+            '❌ No se pudo generar la boleta.'
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+function irInicio(){
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    localStorage.clear();
+
+    location.href =
+        'index.html';
+
+}
+
+
+/* =====================================================
+   SERVICE WORKER
+===================================================== */
+
+if(
+    'serviceWorker'
+    in navigator
+){
+
+    navigator
+        .serviceWorker
+        .register(
+            '/service-worker.js'
+        );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+cargar();
 
 </script>
 
 </body>
+
 </html>
