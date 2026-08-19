@@ -1,1422 +1,5894 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="manifest" href="/manifest.json">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#0f172a">
+<link rel="manifest"
+href="/manifest.json">
 
-<title>Dashboard CEPM</title>
+<meta name="theme-color"
+content="#070b14">
+
+<title>CEPM | Administración</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+:root{
+
+    --bg:#070b14;
+    --bg2:#0b1220;
+
+    --sidebar:#0a101c;
+
+    --card:rgba(17,25,40,.78);
+    --card2:#111827;
+
+    --blue:#3b82f6;
+    --blue2:#2563eb;
+
+    --green:#22c55e;
+    --red:#ef4444;
+    --yellow:#f59e0b;
+    --purple:#8b5cf6;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --muted2:#64748b;
+
+    --border:rgba(255,255,255,.08);
+
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#0f172a;
-    color:white;
-    display:flex;
+
     min-height:100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(59,130,246,.13),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(139,92,246,.12),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020617,
+            #0b1120,
+            #111827
+        );
+
+    color:var(--text);
+
 }
 
-.sidebar{
-    width:250px;
-    background:#111827;
-    padding:20px;
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background{
+
     position:fixed;
-    height:100vh;
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:-1;
+
 }
 
-.sidebar h2{
-    margin-bottom:30px;
-    text-align:center;
+.orb{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(40px);
+
+    opacity:.25;
+
+    animation:flotar 10s ease-in-out infinite;
+
 }
 
-.sidebar button{
-    width:100%;
-    margin-bottom:15px;
-    padding:14px;
-    border:none;
-    border-radius:12px;
+.orb1{
+
+    width:350px;
+    height:350px;
+
     background:#2563eb;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
+
+    top:-180px;
+    left:-150px;
+
 }
 
-.sidebar button:hover{
-    background:#1d4ed8;
+.orb2{
+
+    width:300px;
+    height:300px;
+
+    background:#7c3aed;
+
+    right:-150px;
+    bottom:-150px;
+
+    animation-delay:2s;
+
 }
 
-.main{
-    margin-left:250px;
-    padding:30px;
-    width:100%;
-}
+@keyframes flotar{
 
-.card{
-    background:#1e293b;
-    padding:25px;
-    border-radius:20px;
-    margin-bottom:20px;
-}
-
-input,select{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    margin-top:10px;
-    margin-bottom:15px;
-    background:#334155;
-    color:white;
-}
-
-input::placeholder{
-    color:#cbd5e1;
-}
-
-button.action{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:#22c55e;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button.action:hover{
-    background:#16a34a;
-}
-
-.usuario{
-    background:#334155;
-    padding:15px;
-    border-radius:15px;
-    margin-top:10px;
-}
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.logout{
-    background:#ef4444;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
-}
-
-@media(max-width:768px){
-
-    body{
-        flex-direction:column;
+    0%,100%{
+        transform:translateY(0);
     }
 
+    50%{
+        transform:translateY(-25px);
+    }
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    bottom:0;
+
+    width:260px;
+
+    padding:22px 16px;
+
+    background:
+        rgba(7,12,23,.88);
+
+    border-right:
+        1px solid
+        var(--border);
+
+    backdrop-filter:
+        blur(20px);
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow-y:auto;
+
+}
+
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:
+        6px 10px 22px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    margin-bottom:22px;
+
+}
+
+.logo-icon{
+
+    width:46px;
+    height:46px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(37,99,235,.25);
+
+}
+
+.logo h1{
+
+    font-size:21px;
+
+    font-weight:900;
+
+    letter-spacing:-.5px;
+
+}
+
+.logo p{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:3px;
+
+}
+
+
+/* NAV */
+
+.nav-label{
+
+    color:
+        var(--muted2);
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.2px;
+
+    padding:
+        0 11px 10px;
+
+}
+
+.nav-button{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    border:none;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    padding:12px 13px;
+
+    border-radius:12px;
+
+    margin-bottom:5px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-align:left;
+
+    transition:.22s;
+
+}
+
+.nav-button .nav-icon{
+
+    width:25px;
+
+    font-size:17px;
+
+    text-align:center;
+
+}
+
+.nav-button:hover{
+
+    color:white;
+
+    background:
+        rgba(59,130,246,.08);
+
+    transform:
+        translateX(2px);
+
+}
+
+.nav-button.active{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.25),
+            rgba(79,70,229,.16)
+        );
+
+    border:
+        1px solid
+        rgba(59,130,246,.16);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.10);
+
+}
+
+
+/* SIDEBAR BOTTOM */
+
+.sidebar-bottom{
+
+    margin-top:auto;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+.logout-side{
+
+    color:#fca5a5;
+
+}
+
+.logout-side:hover{
+
+    background:
+        rgba(239,68,68,.10);
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:260px;
+
+    min-height:100vh;
+
+    padding:28px;
+
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-bottom:28px;
+
+}
+
+.top-left h1{
+
+    font-size:28px;
+
+    letter-spacing:-.8px;
+
+}
+
+.top-left p{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:5px;
+
+}
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.clock{
+
+    padding:10px 14px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        var(--border);
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.admin-badge{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:7px 12px 7px 7px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+.admin-avatar{
+
+    width:32px;
+    height:32px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+}
+
+.admin-badge span{
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   VISTAS
+===================================================== */
+
+.view{
+
+    display:none;
+
+    animation:
+        vista .25s ease;
+
+}
+
+.view.active{
+
+    display:block;
+
+}
+
+@keyframes vista{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.welcome-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.20),
+            rgba(124,58,237,.13)
+        );
+
+    border:
+        1px solid
+        rgba(59,130,246,.14);
+
+    border-radius:22px;
+
+    padding:27px;
+
+    margin-bottom:20px;
+
+}
+
+.welcome-card h2{
+
+    font-size:22px;
+
+}
+
+.welcome-card p{
+
+    color:#a9b7cb;
+
+    font-size:12px;
+
+    margin-top:7px;
+
+}
+
+.welcome-decoration{
+
+    position:absolute;
+
+    right:25px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size:65px;
+
+    opacity:.15;
+
+}
+
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.stat{
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:18px;
+
+    padding:19px;
+
+    backdrop-filter:
+        blur(15px);
+
+    transition:.22s;
+
+}
+
+.stat:hover{
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(59,130,246,.18);
+
+}
+
+.stat-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.stat-label{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    font-weight:800;
+
+}
+
+.stat-icon{
+
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(59,130,246,.11);
+
+    font-size:18px;
+
+}
+
+.stat-number{
+
+    font-size:28px;
+
+    font-weight:900;
+
+    margin-top:12px;
+
+}
+
+.stat-description{
+
+    color:var(--muted2);
+
+    font-size:9px;
+
+    margin-top:4px;
+
+}
+
+
+/* DASHBOARD GRID */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.3fr .7fr;
+
+    gap:18px;
+
+}
+
+.panel{
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    backdrop-filter:
+        blur(15px);
+
+}
+
+.panel-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.panel-title h3{
+
+    font-size:15px;
+
+}
+
+.panel-title span{
+
+    color:var(--muted2);
+
+    font-size:10px;
+
+}
+
+
+/* QUICK ACTIONS */
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+}
+
+.quick{
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-radius:14px;
+
+    padding:15px;
+
+    color:white;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+.quick:hover{
+
+    background:
+        rgba(59,130,246,.10);
+
+    border-color:
+        rgba(59,130,246,.18);
+
+    transform:
+        translateY(-2px);
+
+}
+
+.quick-icon{
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+}
+
+.quick strong{
+
+    display:block;
+
+    font-size:11px;
+
+}
+
+.quick small{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.section-title h2{
+
+    font-size:19px;
+
+}
+
+.section-title p{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn{
+
+    border:none;
+
+    padding:11px 15px;
+
+    border-radius:11px;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:white;
+
+    transition:.2s;
+
+}
+
+.btn:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+.btn-primary{
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+}
+
+.btn-success{
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+}
+
+.btn-danger{
+
+    background:
+        rgba(239,68,68,.13);
+
+    color:#fca5a5;
+
+}
+
+.btn-secondary{
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+
+/* =====================================================
+   TOOLBAR
+===================================================== */
+
+.toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:15px;
+
+}
+
+.search{
+
+    flex:1;
+
+    position:relative;
+
+}
+
+.search input{
+
+    width:100%;
+
+    padding:12px 14px 12px 40px;
+
+    margin:0;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    color:white;
+
+    outline:none;
+
+}
+
+.search input:focus{
+
+    border-color:
+        rgba(59,130,246,.45);
+
+}
+
+.search-icon{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:var(--muted);
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.items-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(270px,1fr)
+        );
+
+    gap:13px;
+
+}
+
+.item-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,.82),
+            rgba(15,23,42,.82)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:17px;
+
+    padding:17px;
+
+    transition:.2s;
+
+}
+
+.item-card:hover{
+
+    border-color:
+        rgba(59,130,246,.22);
+
+    transform:
+        translateY(-2px);
+
+}
+
+.item-head{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    margin-bottom:13px;
+
+}
+
+.item-avatar{
+
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    font-size:20px;
+
+}
+
+.item-info h3{
+
+    font-size:13px;
+
+}
+
+.item-info p{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:3px;
+
+}
+
+.item-line{
+
+    color:#cbd5e1;
+
+    font-size:10px;
+
+    margin-top:6px;
+
+}
+
+.item-actions{
+
+    display:flex;
+
+    gap:7px;
+
+    margin-top:13px;
+
+}
+
+.item-actions .btn{
+
+    flex:1;
+
+    padding:9px;
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    color:var(--muted);
+
+}
+
+.empty-icon{
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+.empty h3{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+.empty p{
+
+    font-size:10px;
+
+    margin-top:5px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(2,6,23,.78);
+
+    backdrop-filter:
+        blur(10px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:9999;
+
+}
+
+.modal-overlay.show{
+
+    display:flex;
+
+}
+
+.modal{
+
+    width:100%;
+
+    max-width:560px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111c2e,
+            #09111f
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:23px;
+
+    padding:23px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.55);
+
+    animation:
+        modalIn .25s ease;
+
+}
+
+@keyframes modalIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.modal-header h2{
+
+    font-size:18px;
+
+}
+
+.modal-close{
+
+    width:35px;
+    height:35px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.modal-close:hover{
+
+    background:
+        rgba(239,68,68,.15);
+
+}
+
+.form-group{
+
+    margin-bottom:13px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    color:#cbd5e1;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    margin:0;
+
+    padding:12px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:11px;
+
+    color:white;
+
+    outline:none;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:
+        rgba(59,130,246,.4);
+
+}
+
+.form-group select{
+
+    color:white;
+
+}
+
+.form-group select option{
+
+    background:#111827;
+
+}
+
+.modal-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:20px;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast-container{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    z-index:20000;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.toast{
+
+    min-width:290px;
+
+    max-width:380px;
+
+    padding:14px 16px;
+
+    border-radius:14px;
+
+    background:
+        rgba(15,23,42,.94);
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.35);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    animation:
+        toastIn .3s ease;
+
+}
+
+.toast-icon{
+
+    width:34px;
+    height:34px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+}
+
+.toast.success .toast-icon{
+
+    background:
+        rgba(34,197,94,.13);
+
+}
+
+.toast.error .toast-icon{
+
+    background:
+        rgba(239,68,68,.13);
+
+}
+
+.toast.info .toast-icon{
+
+    background:
+        rgba(59,130,246,.13);
+
+}
+
+.toast-text strong{
+
+    display:block;
+
+    font-size:11px;
+
+}
+
+.toast-text span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:3px;
+
+}
+
+@keyframes toastIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateX(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateX(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   CLASE
+===================================================== */
+
+.class-details{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+
+    margin-bottom:15px;
+
+}
+
+.class-info{
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+.class-info span{
+
+    display:block;
+
+    color:var(--muted2);
+
+    font-size:9px;
+
+    margin-bottom:4px;
+
+}
+
+.class-info strong{
+
+    font-size:11px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+.mobile-top{
+
+    display:none;
+
+}
+
+@media(max-width:1050px){
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:800px){
+
     .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
+
+        width:76px;
+
+        padding:15px 9px;
+
+    }
+
+    .logo{
+
+        justify-content:center;
+
+        padding-left:0;
+        padding-right:0;
+
+    }
+
+    .logo-icon{
+
+        width:43px;
+        height:43px;
+
+    }
+
+    .logo > div:last-child,
+    .nav-button span:last-child,
+    .nav-label{
+
+        display:none;
+
+    }
+
+    .nav-button{
+
+        justify-content:center;
+
+        padding:12px;
+
+    }
+
+    .nav-button .nav-icon{
+
+        width:auto;
+
     }
 
     .main{
-        margin-left:0;
+
+        margin-left:76px;
+
+        padding:20px;
+
     }
+
+}
+
+@media(max-width:600px){
+
+    .main{
+
+        margin-left:0;
+
+        padding:14px;
+
+    }
+
+    .sidebar{
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:auto;
+
+        width:100%;
+
+        height:65px;
+
+        padding:7px;
+
+        flex-direction:row;
+
+        align-items:center;
+
+        overflow-x:auto;
+
+        border-right:none;
+
+        border-bottom:
+            1px solid
+            var(--border);
+
+    }
+
+    .logo{
+
+        border:none;
+
+        margin:0;
+
+        padding:0 5px;
+
+    }
+
+    .sidebar .nav-label,
+    .sidebar-bottom{
+
+        display:none;
+
+    }
+
+    .nav-button{
+
+        width:auto;
+
+        min-width:52px;
+
+        margin:0;
+
+        padding:9px;
+
+    }
+
+    .nav-button span:last-child{
+
+        display:none;
+
+    }
+
+    .main{
+
+        padding-top:85px;
+
+    }
+
+    .topbar{
+
+        align-items:flex-start;
+
+    }
+
+    .top-right .clock{
+
+        display:none;
+
+    }
+
+    .top-left h1{
+
+        font-size:22px;
+
+    }
+
+    .stats{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .stat{
+
+        padding:15px;
+
+    }
+
+    .stat-number{
+
+        font-size:23px;
+
+    }
+
+    .section-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+    .header-actions{
+
+        width:100%;
+
+    }
+
+    .header-actions .btn{
+
+        flex:1;
+
+    }
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .quick-actions{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .modal-overlay{
+
+        padding:10px;
+
+        align-items:flex-end;
+
+    }
+
+    .modal{
+
+        max-height:92vh;
+
+        border-radius:
+            22px 22px 0 0;
+
+    }
+
+}
+
+@media(max-width:400px){
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+    width:7px;
+    height:7px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+        #334155;
+
+    border-radius:20px;
+
 }
 
 </style>
+
 </head>
+
+
 <body>
 
-<div class="sidebar">
 
-    <h2>🎓 CEPM</h2>
+<div class="background">
 
-    <button onclick="mostrar('inicio')">
-        🏠 Inicio
-    </button>
-
-    <button onclick="mostrar('alumnos')">
-        👨‍🎓 Alumnos
-    </button>
-
-    <button onclick="mostrar('maestros')">
-        👨‍🏫 Maestros
-    </button>
-
-    <button onclick="mostrar('materias')">
-    📚 Materias
-    </button>
-
-    <button onclick="mostrar('clases')">
-        🏫 Clases
-    </button>
-
-    <button onclick="mostrar('padres')">
-👨‍👩‍👧 Padres
-</button>
-
-<button onclick="mostrar('directores')">
-    👔 Directores
-</button>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
 
 </div>
 
-<div class="main">
 
-    <div class="top">
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-        <h1>Dashboard</h1>
+<aside class="sidebar">
 
-        <button class="logout" onclick="logout()">
-            Cerrar sesión
+    <div class="logo">
+
+        <div class="logo-icon">
+            🎓
+        </div>
+
+        <div>
+
+            <h1>CEPM</h1>
+
+            <p>Panel Administrativo</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-label">
+        PRINCIPAL
+    </div>
+
+
+    <button
+        class="nav-button active"
+        onclick="mostrar('inicio',this)"
+    >
+
+        <span class="nav-icon">🏠</span>
+        <span>Inicio</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('alumnos',this)"
+    >
+
+        <span class="nav-icon">👨‍🎓</span>
+        <span>Alumnos</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('maestros',this)"
+    >
+
+        <span class="nav-icon">👨‍🏫</span>
+        <span>Maestros</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('padres',this)"
+    >
+
+        <span class="nav-icon">👨‍👩‍👧</span>
+        <span>Padres</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('directores',this)"
+    >
+
+        <span class="nav-icon">👔</span>
+        <span>Directores</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('materias',this)"
+    >
+
+        <span class="nav-icon">📚</span>
+        <span>Materias</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        onclick="mostrar('clases',this)"
+    >
+
+        <span class="nav-icon">🏫</span>
+        <span>Clases</span>
+
+    </button>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            class="nav-button logout-side"
+            onclick="logout()"
+        >
+
+            <span class="nav-icon">🚪</span>
+            <span>Cerrar sesión</span>
+
         </button>
 
     </div>
 
-    <!-- INICIO -->
+</aside>
 
-    <div id="inicio" class="card">
 
-    <h2>
-        Bienvenido 😎🔥
-    </h2>
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-    <p style="margin-top:15px;">
-        Plataforma Escolar CEPM v2
-    </p>
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="top-left">
+
+            <h1 id="tituloPagina">
+                Dashboard
+            </h1>
+
+            <p id="subtituloPagina">
+                Administración general de CEPM
+            </p>
+
+        </div>
+
+
+        <div class="top-right">
+
+            <div
+                class="clock"
+                id="reloj"
+            >
+                00:00:00
+            </div>
+
+
+            <div class="admin-badge">
+
+                <div class="admin-avatar">
+                    👤
+                </div>
+
+                <span>
+                    Administrador
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         INICIO
+    ================================================= -->
+
+    <section
+        id="inicio"
+        class="view active"
+    >
+
+        <div class="welcome-card">
+
+            <div>
+
+                <h2 id="saludo">
+                    Bienvenido 👋
+                </h2>
+
+                <p>
+                    Aquí tienes el resumen
+                    general de tu plataforma escolar.
+                </p>
+
+            </div>
+
+            <div class="welcome-decoration">
+                🎓
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-head">
+
+                    <div class="stat-label">
+                        ALUMNOS
+                    </div>
+
+                    <div class="stat-icon">
+                        👨‍🎓
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statAlumnos"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Usuarios registrados
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-head">
+
+                    <div class="stat-label">
+                        MAESTROS
+                    </div>
+
+                    <div class="stat-icon">
+                        👨‍🏫
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statMaestros"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Personal docente
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-head">
+
+                    <div class="stat-label">
+                        PADRES
+                    </div>
+
+                    <div class="stat-icon">
+                        👨‍👩‍👧
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statPadres"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Tutores registrados
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-head">
+
+                    <div class="stat-label">
+                        CLASES
+                    </div>
+
+                    <div class="stat-icon">
+                        🏫
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statClases"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Clases creadas
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+
+                    <h3>
+                        ⚡ Acciones rápidas
+                    </h3>
+
+                    <span>
+                        Acceso rápido
+                    </span>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <button
+                        class="quick"
+                        onclick="abrirModal('alumno')"
+                    >
+
+                        <div class="quick-icon">
+                            👨‍🎓
+                        </div>
+
+                        <strong>
+                            Nuevo alumno
+                        </strong>
+
+                        <small>
+                            Registrar estudiante
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="quick"
+                        onclick="abrirModal('maestro')"
+                    >
+
+                        <div class="quick-icon">
+                            👨‍🏫
+                        </div>
+
+                        <strong>
+                            Nuevo maestro
+                        </strong>
+
+                        <small>
+                            Registrar docente
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="quick"
+                        onclick="abrirModal('padre')"
+                    >
+
+                        <div class="quick-icon">
+                            👨‍👩‍👧
+                        </div>
+
+                        <strong>
+                            Nuevo padre
+                        </strong>
+
+                        <small>
+                            Crear tutor
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="quick"
+                        onclick="abrirModal('materia')"
+                    >
+
+                        <div class="quick-icon">
+                            📚
+                        </div>
+
+                        <strong>
+                            Nueva materia
+                        </strong>
+
+                        <small>
+                            Agregar asignatura
+                        </small>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+
+                    <h3>
+                        📊 Sistema
+                    </h3>
+
+                    <span>
+                        CEPM v2
+                    </span>
+
+                </div>
+
+
+                <div class="item-line">
+                    🟢 Sistema conectado
+                </div>
+
+                <div class="item-line">
+                    🔐 Sesión protegida
+                </div>
+
+                <div class="item-line">
+                    ☁️ API funcionando
+                </div>
+
+                <div class="item-line">
+                    📱 Diseño responsive
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ALUMNOS
+    ================================================= -->
+
+    <section
+        id="alumnos"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    👨‍🎓 Alumnos
+                </h2>
+
+                <p>
+                    Administra los estudiantes
+                    registrados.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('alumno')"
+                >
+                    ＋ Nuevo alumno
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="toolbar">
+
+                <div class="search">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        id="buscarAlumnos"
+                        type="text"
+                        placeholder="Buscar alumno..."
+                        oninput="filtrar('alumnos')"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="listaAlumnos"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MAESTROS
+    ================================================= -->
+
+    <section
+        id="maestros"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    👨‍🏫 Maestros
+                </h2>
+
+                <p>
+                    Personal docente de la institución.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('maestro')"
+                >
+                    ＋ Nuevo maestro
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="toolbar">
+
+                <div class="search">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        id="buscarMaestros"
+                        type="text"
+                        placeholder="Buscar maestro..."
+                        oninput="filtrar('maestros')"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="listaMaestros"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PADRES
+    ================================================= -->
+
+    <section
+        id="padres"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    👨‍👩‍👧 Padres
+                </h2>
+
+                <p>
+                    Tutores y padres registrados.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('padre')"
+                >
+                    ＋ Nuevo padre
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="toolbar">
+
+                <div class="search">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        id="buscarPadres"
+                        type="text"
+                        placeholder="Buscar padre..."
+                        oninput="filtrar('padres')"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="listaPadres"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         DIRECTORES
+    ================================================= -->
+
+    <section
+        id="directores"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    👔 Directores
+                </h2>
+
+                <p>
+                    Administradores y directores escolares.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('director')"
+                >
+                    ＋ Nuevo director
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div
+                id="listaDirectores"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MATERIAS
+    ================================================= -->
+
+    <section
+        id="materias"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    📚 Materias
+                </h2>
+
+                <p>
+                    Asignaturas disponibles.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('materia')"
+                >
+                    ＋ Nueva materia
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div
+                id="listaMaterias"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CLASES
+    ================================================= -->
+
+    <section
+        id="clases"
+        class="view"
+    >
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    🏫 Clases
+                </h2>
+
+                <p>
+                    Grupos y clases escolares.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="abrirModal('clase')"
+                >
+                    ＋ Nueva clase
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div
+                id="listaClases"
+                class="items-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     MODAL ALUMNO
+===================================================== -->
+
+<div
+    id="modalAlumno"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                👨‍🎓 Nuevo alumno
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Nombre completo
+            </label>
+
+            <input
+                id="nombreAlumno"
+                placeholder="Ej. Juan Pérez"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Usuario
+            </label>
+
+            <input
+                id="usuarioAlumno"
+                placeholder="Ej. juanperez"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Correo electrónico
+            </label>
+
+            <input
+                id="emailAlumno"
+                type="email"
+                placeholder="correo@ejemplo.com"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Contraseña
+            </label>
+
+            <input
+                id="passwordAlumno"
+                type="password"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearAlumno()"
+            >
+                Crear alumno
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<!-- ALUMNOS -->
 
-<div id="alumnos"
-class="card"
-style="display:none;">
+<!-- =====================================================
+     MODAL MAESTRO
+===================================================== -->
 
-    <h2>
-        👨‍🎓 Agregar Alumno
-    </h2>
+<div
+    id="modalMaestro"
+    class="modal-overlay"
+>
 
-    <input
-        type="text"
-        id="nombreAlumno"
-        placeholder="Nombre alumno"
-    >
+    <div class="modal">
 
-    <input
-        type="text"
-        id="usuarioAlumno"
-        placeholder="Usuario"
-    >
+        <div class="modal-header">
 
-    <input
-        type="email"
-        id="emailAlumno"
-        placeholder="Correo electrónico"
-    >
+            <h2>
+                👨‍🏫 Nuevo maestro
+            </h2>
 
-    <input
-        type="password"
-        id="passwordAlumno"
-        placeholder="Contraseña"
-    >
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
 
-    <button
-        class="action"
-        onclick="crearAlumno()"
-    >
-        Crear Alumno
-    </button>
+        </div>
 
-    <div id="listaAlumnos"></div>
 
-</div>
+        <div class="form-group">
 
-<!-- MAESTROS -->
+            <label>
+                Nombre completo
+            </label>
 
-<div id="maestros"
-class="card"
-style="display:none;">
+            <input
+                id="nombreMaestro"
+                placeholder="Nombre del maestro"
+            >
 
-    <h2>
-        👨‍🏫 Agregar Maestro
-    </h2>
+        </div>
 
-    <input
-        type="text"
-        id="nombreMaestro"
-        placeholder="Nombre maestro"
-    >
 
-    <input
-        type="text"
-        id="usuarioMaestro"
-        placeholder="Usuario"
-    >
+        <div class="form-group">
 
-    <input
-        type="email"
-        id="emailMaestro"
-        placeholder="Correo electrónico"
-    >
+            <label>
+                Usuario
+            </label>
 
-    <input
-        type="password"
-        id="passwordMaestro"
-        placeholder="Contraseña"
-    >
+            <input
+                id="usuarioMaestro"
+                placeholder="Usuario"
+            >
 
-    <button
-        class="action"
-        onclick="crearMaestro()"
-    >
-        Crear Maestro
-    </button>
+        </div>
 
-    <div id="listaMaestros"></div>
 
-</div>
+        <div class="form-group">
 
-<!-- PADRES -->
+            <label>
+                Correo electrónico
+            </label>
 
-<div id="padres"
-class="card"
-style="display:none;">
+            <input
+                id="emailMaestro"
+                type="email"
+                placeholder="correo@ejemplo.com"
+            >
 
-    <h2>
-        👨‍👩‍👧 Crear Padre
-    </h2>
+        </div>
 
-    <input
-        
-        id="nombrePadre"
-        placeholder="Nombre"
-    >
 
-    <input
-        id="emailPadre"
-        placeholder="Correo"
-    >
+        <div class="form-group">
 
-    <input
-        id="usuarioPadre"
-        placeholder="Usuario"
-    >
+            <label>
+                Contraseña
+            </label>
 
-    <input
-        type="password"
-        id="passwordPadre"
-        placeholder="Contraseña"
-    >
+            <input
+                id="passwordMaestro"
+                type="password"
+                placeholder="Contraseña"
+            >
 
-    <select
-        id="hijosPadre"
-        multiple
-    >
-    </select>
+        </div>
 
-    <button
-        class="action"
-        onclick="crearPadre()"
-    >
-        Crear Padre
-    </button>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearMaestro()"
+            >
+                Crear maestro
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<!-- DIRECTORES --> 
- 
-<div id="directores" 
-class="card" 
-style="display:none;"> 
- 
-    <h2> 
-        👔 Crear Director 
-    </h2> 
- 
-    <input 
-        type="text" 
-        id="nombreDirector" 
-        placeholder="Nombre completo" 
-    > 
- 
-    <input 
-        type="text" 
-        id="usuarioDirector" 
-        placeholder="Usuario" 
-    > 
- 
-    <input 
-        type="email" 
-        id="emailDirector" 
-        placeholder="Correo electrónico" 
-    > 
- 
-    <input 
-        type="password" 
-        id="passwordDirector" 
-        placeholder="Contraseña" 
-    > 
- 
-    <button 
-        class="action" 
-        onclick="crearDirector()" 
-    > 
-        Crear Director 
-    </button> 
- 
-    <div id="listaDirectores"></div> 
- 
+
+<!-- =====================================================
+     MODAL PADRE
+===================================================== -->
+
+<div
+    id="modalPadre"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                👨‍👩‍👧 Nuevo padre
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Nombre completo
+            </label>
+
+            <input
+                id="nombrePadre"
+                placeholder="Nombre del padre"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Correo
+            </label>
+
+            <input
+                id="emailPadre"
+                type="email"
+                placeholder="correo@ejemplo.com"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Usuario
+            </label>
+
+            <input
+                id="usuarioPadre"
+                placeholder="Usuario"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Contraseña
+            </label>
+
+            <input
+                id="passwordPadre"
+                type="password"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Hijos
+            </label>
+
+            <select
+                id="hijosPadre"
+                multiple
+                style="min-height:120px;"
+            ></select>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearPadre()"
+            >
+                Crear padre
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- MATERIAS -->
 
-<div id="materias"
-class="card"
-style="display:none;">
+<!-- =====================================================
+     MODAL DIRECTOR
+===================================================== -->
 
-    <h2>
-        📚 Crear Materia
-    </h2>
+<div
+    id="modalDirector"
+    class="modal-overlay"
+>
 
-    <input
-        type="text"
-        id="nombreMateria"
-        placeholder="Nombre materia"
-    >
+    <div class="modal">
 
-    <button
-        class="action"
-        onclick="crearMateria()"
-    >
-        Crear Materia
-    </button>
+        <div class="modal-header">
 
-    <div id="listaMaterias"></div>
+            <h2>
+                👔 Nuevo director
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Nombre completo
+            </label>
+
+            <input
+                id="nombreDirector"
+                placeholder="Nombre completo"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Usuario
+            </label>
+
+            <input
+                id="usuarioDirector"
+                placeholder="Usuario"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Correo electrónico
+            </label>
+
+            <input
+                id="emailDirector"
+                type="email"
+                placeholder="correo@ejemplo.com"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Contraseña
+            </label>
+
+            <input
+                id="passwordDirector"
+                type="password"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearDirector()"
+            >
+                Crear director
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<!-- CLASES -->
 
-<div id="clases"
-class="card"
-style="display:none;">
+<!-- =====================================================
+     MODAL MATERIA
+===================================================== -->
 
-    <h2>
-        🏫 Crear Clase
-    </h2>
+<div
+    id="modalMateria"
+    class="modal-overlay"
+>
 
-    <select id="materiaClase"></select>
+    <div class="modal">
 
-    <select id="maestroClase"></select>
+        <div class="modal-header">
 
-    <input
-        type="text"
-        id="grupoClase"
-        placeholder="Grupo"
-    >
+            <h2>
+                📚 Nueva materia
+            </h2>
 
-    <input
-        type="text"
-        id="horarioClase"
-        placeholder="Horario"
-    >
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
 
-    <input
-        type="text"
-        id="aulaClase"
-        placeholder="Aula"
-    >
+        </div>
 
-    <input
-        type="date"
-        id="fechaInicioClase"
-    >
 
-    <input
-        type="number"
-        id="duracionClase"
-        placeholder="Duración en semanas"
-    >
+        <div class="form-group">
 
-    <input
-        type="date"
-        id="fechaFinClase"
-    >
+            <label>
+                Nombre de la materia
+            </label>
 
-    <button
-        class="action"
-        onclick="crearClase()"
-    >
-        Crear Clase
-    </button>
+            <input
+                id="nombreMateria"
+                placeholder="Ej. Matemáticas"
+            >
 
-    <div id="listaClases"></div>
-    <div
-id="listaEntregas"
-style="margin-top:20px;"
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearMateria()"
+            >
+                Crear materia
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL CLASE
+===================================================== -->
+
+<div
+    id="modalClase"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                🏫 Nueva clase
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Materia
+            </label>
+
+            <select id="materiaClase"></select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Maestro
+            </label>
+
+            <select id="maestroClase"></select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Grupo
+            </label>
+
+            <input
+                id="grupoClase"
+                placeholder="Ej. 3A"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Horario
+            </label>
+
+            <input
+                id="horarioClase"
+                placeholder="Ej. 08:00 - 09:00"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Aula
+            </label>
+
+            <input
+                id="aulaClase"
+                placeholder="Ej. Aula 4"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Fecha de inicio
+            </label>
+
+            <input
+                type="date"
+                id="fechaInicioClase"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Duración en semanas
+            </label>
+
+            <input
+                type="number"
+                id="duracionClase"
+                placeholder="Ej. 16"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Fecha de fin
+            </label>
+
+            <input
+                type="date"
+                id="fechaFinClase"
+            >
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="cerrarModales()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="crearClase()"
+            >
+                Crear clase
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL VER CLASE
+===================================================== -->
+
+<div
+    id="modalVerClase"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                🏫 Detalle de clase
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="cerrarModales()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="detalleClase"></div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toastContainer"
+    class="toast-container"
 ></div>
 
-</div>
 
 <script>
 
+/* =====================================================
+   CONFIG
+===================================================== */
+
 const API =
-'https://cepm-v2.onrender.com'
+'https://cepm-v2.onrender.com';
 
 const token =
-localStorage.getItem('token')
+localStorage.getItem('token');
+
 
 if(!token){
 
-    location.href='/'
+    location.href='/';
+
 }
 
-// 🔥 CAMBIAR VISTAS
 
-// 🔥 CAMBIAR VISTAS
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-function mostrar(id){
+let usuariosData = [];
 
-    // 🔥 TODAS LAS SECCIONES
-    const secciones = [
+let alumnosData = [];
 
-        'inicio',
+let materiasData = [];
 
-        'alumnos',
+let clasesData = [];
 
-        'maestros',
 
-        'materias',
+/* =====================================================
+   TOAST
+===================================================== */
 
-        'clases',
+function toast(
+    mensaje,
+    tipo='success',
+    titulo=''
+){
 
-        'padres'
-    ]
+    const container =
+        document.getElementById(
+            'toastContainer'
+        );
 
-    // 🔥 OCULTAR TODAS
-    secciones.forEach(seccion=>{
+    const div =
+        document.createElement('div');
 
-        const div =
-        document.getElementById(seccion)
+    const iconos = {
 
-        if(div){
+        success:'✅',
+        error:'❌',
+        info:'ℹ️'
 
-            div.style.display='none'
-        }
-    })
+    };
 
-    // 🔥 MOSTRAR LA SELECCIONADA
-    const activa =
-    document.getElementById(id)
+    if(!titulo){
 
-    if(activa){
+        titulo =
+            tipo === 'success'
+            ? 'Operación exitosa'
+            : tipo === 'error'
+            ? 'Ocurrió un error'
+            : 'Información';
 
-        activa.style.display='block'
     }
+
+    div.className =
+        `toast ${tipo}`;
+
+    div.innerHTML = `
+
+        <div class="toast-icon">
+            ${iconos[tipo] || '🔔'}
+        </div>
+
+        <div class="toast-text">
+
+            <strong>
+                ${titulo}
+            </strong>
+
+            <span>
+                ${mensaje}
+            </span>
+
+        </div>
+
+    `;
+
+    container.appendChild(div);
+
+    setTimeout(()=>{
+
+        div.style.opacity='0';
+
+        div.style.transform=
+            'translateX(25px)';
+
+        setTimeout(
+            ()=>div.remove(),
+            300
+        );
+
+    },3500);
+
 }
 
-// 🔥 ABRIR INICIO AUTOMÁTICAMENTE
-mostrar('inicio')
 
-// 🔥 LOGOUT
+/* =====================================================
+   VISTAS
+===================================================== */
 
-function logout(){
+function mostrar(
+    id,
+    boton=null
+){
 
-    localStorage.removeItem('token')
+    document
+    .querySelectorAll('.view')
+    .forEach(v=>{
 
-    location.href='/'
+        v.classList.remove('active');
+
+    });
+
+
+    const vista =
+        document.getElementById(id);
+
+    if(vista){
+
+        vista.classList.add('active');
+
+    }
+
+
+    document
+    .querySelectorAll('.nav-button')
+    .forEach(b=>{
+
+        b.classList.remove('active');
+
+    });
+
+
+    if(boton){
+
+        boton.classList.add('active');
+
+    }
+    else{
+
+        const botones =
+            document.querySelectorAll(
+                '.nav-button'
+            );
+
+        botones.forEach(b=>{
+
+            if(
+                b.getAttribute(
+                    'onclick'
+                )?.includes(
+                    `'${id}'`
+                )
+            ){
+
+                b.classList.add('active');
+
+            }
+
+        });
+
+    }
+
+
+    const nombres = {
+
+        inicio:[
+            'Dashboard',
+            'Administración general de CEPM'
+        ],
+
+        alumnos:[
+            'Alumnos',
+            'Administración de estudiantes'
+        ],
+
+        maestros:[
+            'Maestros',
+            'Administración del personal docente'
+        ],
+
+        padres:[
+            'Padres',
+            'Administración de tutores'
+        ],
+
+        directores:[
+            'Directores',
+            'Administración escolar'
+        ],
+
+        materias:[
+            'Materias',
+            'Asignaturas disponibles'
+        ],
+
+        clases:[
+            'Clases',
+            'Grupos y clases escolares'
+        ]
+
+    };
+
+
+    if(nombres[id]){
+
+        document
+        .getElementById(
+            'tituloPagina'
+        )
+        .textContent =
+            nombres[id][0];
+
+        document
+        .getElementById(
+            'subtituloPagina'
+        )
+        .textContent =
+            nombres[id][1];
+
+    }
+
 }
 
-// =====================
-// 👨‍🎓 CREAR ALUMNO
-// =====================
+
+/* =====================================================
+   MODALES
+===================================================== */
+
+function abrirModal(tipo){
+
+    cerrarModales();
+
+
+    const mapa = {
+
+        alumno:'modalAlumno',
+
+        maestro:'modalMaestro',
+
+        padre:'modalPadre',
+
+        director:'modalDirector',
+
+        materia:'modalMateria',
+
+        clase:'modalClase'
+
+    };
+
+
+    const modal =
+        document.getElementById(
+            mapa[tipo]
+        );
+
+
+    if(modal){
+
+        modal.classList.add('show');
+
+    }
+
+}
+
+
+function cerrarModales(){
+
+    document
+    .querySelectorAll('.modal-overlay')
+    .forEach(modal=>{
+
+        modal.classList.remove('show');
+
+    });
+
+}
+
+
+document
+.querySelectorAll('.modal-overlay')
+.forEach(overlay=>{
+
+    overlay.addEventListener(
+        'click',
+        e=>{
+
+            if(
+                e.target === overlay
+            ){
+
+                cerrarModales();
+
+            }
+
+        }
+    );
+
+});
+
+
+document.addEventListener(
+    'keydown',
+    e=>{
+
+        if(e.key === 'Escape'){
+
+            cerrarModales();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   RELOJ
+===================================================== */
+
+function actualizarReloj(){
+
+    const ahora =
+        new Date();
+
+    const hora =
+        ahora.toLocaleTimeString(
+            'es-MX',
+            {
+                hour:'2-digit',
+                minute:'2-digit',
+                second:'2-digit'
+            }
+        );
+
+    document
+    .getElementById('reloj')
+    .textContent =
+        hora;
+
+}
+
+
+function actualizarSaludo(){
+
+    const hora =
+        new Date().getHours();
+
+    let saludo;
+
+    if(hora < 12){
+
+        saludo =
+            'Buenos días 👋';
+
+    }
+    else if(hora < 19){
+
+        saludo =
+            'Buenas tardes ☀️';
+
+    }
+    else{
+
+        saludo =
+            'Buenas noches 🌙';
+
+    }
+
+
+    document
+    .getElementById('saludo')
+    .textContent =
+        saludo;
+
+}
+
+
+actualizarReloj();
+
+actualizarSaludo();
+
+setInterval(
+    actualizarReloj,
+    1000
+);
+
+
+/* =====================================================
+   API HELPER
+===================================================== */
+
+async function apiFetch(
+    url,
+    opciones={}
+){
+
+    const config = {
+
+        ...opciones,
+
+        headers:{
+
+            ...(opciones.headers || {}),
+
+            Authorization:token
+
+        }
+
+    };
+
+
+    const res =
+        await fetch(
+            url,
+            config
+        );
+
+
+    let data;
+
+    try{
+
+        data =
+            await res.json();
+
+    }
+    catch{
+
+        data = {};
+
+    }
+
+
+    if(!res.ok){
+
+        throw new Error(
+            data.mensaje ||
+            data.message ||
+            'Error en el servidor'
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =====================================================
+   CREAR ALUMNO
+===================================================== */
 
 async function crearAlumno(){
 
     const nombre =
-    document.getElementById(
-        'nombreAlumno'
-    ).value
-
-    const edad = 18
+        document
+        .getElementById(
+            'nombreAlumno'
+        )
+        .value.trim();
 
     const usuario =
-    document.getElementById(
-        'usuarioAlumno'
-    ).value
+        document
+        .getElementById(
+            'usuarioAlumno'
+        )
+        .value.trim();
 
     const password =
-    document.getElementById(
-        'passwordAlumno'
-    ).value
+        document
+        .getElementById(
+            'passwordAlumno'
+        )
+        .value;
 
     const email =
-    document.getElementById(
-        'emailAlumno'
-    ).value
+        document
+        .getElementById(
+            'emailAlumno'
+        )
+        .value.trim();
 
-    // 🔥 CREAR ALUMNO
 
-    const alumnoRes =
-    await fetch(
+    if(
+        !nombre ||
+        !usuario ||
+        !password
+    ){
 
-        `${API}/alumnos`,
+        toast(
+            'Completa nombre, usuario y contraseña.',
+            'error'
+        );
 
-        {
+        return;
 
-            method:'POST',
+    }
 
-            headers:{
 
-                'Content-Type':
-                'application/json',
+    try{
 
-                Authorization:
-                token
-            },
+        const alumno =
+            await apiFetch(
+                `${API}/alumnos`,
+                {
 
-            body:JSON.stringify({
+                    method:'POST',
 
-                nombre,
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
 
-                edad
-            })
-        }
-    )
+                    body:
+                        JSON.stringify({
 
-    const alumno =
-    await alumnoRes.json()
+                            nombre,
+                            edad:18
 
-    // 🔥 CREAR USUARIO
+                        })
 
-    const userRes =
-    await fetch(
+                }
+            );
 
-        `${API}/registro`,
 
-        {
+        const data =
+            await apiFetch(
+                `${API}/registro`,
+                {
 
-            method:'POST',
+                    method:'POST',
 
-            headers:{
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
 
-                'Content-Type':
-                'application/json',
+                    body:
+                        JSON.stringify({
 
-                Authorization:
-                token
-            },
+                            nombre,
+                            usuario,
+                            password,
+                            email,
+                            rol:'alumno',
+                            alumnoId:
+                                alumno._id
 
-            body:JSON.stringify({
+                        })
 
-                nombre,
+                }
+            );
 
-                usuario,
 
-                password,
+        toast(
+            data.mensaje ||
+            'Alumno creado correctamente.'
+        );
 
-                email,
 
-                rol:'alumno',
+        limpiarFormulario(
+            'modalAlumno'
+        );
 
-                alumnoId:
-                alumno._id
-            })
-        }
-    )
+        cerrarModales();
 
-    const data =
-    await userRes.json()
+        await cargarTodo();
 
-    alert(data.mensaje)
+    }
+    catch(error){
 
-    cargarUsuarios()
+        console.error(error);
+
+        toast(
+            error.message,
+            'error'
+        );
+
+    }
+
 }
-// =====================
-// 👨‍🏫 CREAR MAESTRO
-// =====================
+
+
+/* =====================================================
+   CREAR MAESTRO
+===================================================== */
 
 async function crearMaestro(){
 
     const nombre =
-    document.getElementById(
-        'nombreMaestro'
-    ).value
+        document
+        .getElementById(
+            'nombreMaestro'
+        )
+        .value.trim();
 
     const usuario =
-    document.getElementById(
-        'usuarioMaestro'
-    ).value
+        document
+        .getElementById(
+            'usuarioMaestro'
+        )
+        .value.trim();
 
     const email =
-    document.getElementById(
-        'emailMaestro'
-    ).value
+        document
+        .getElementById(
+            'emailMaestro'
+        )
+        .value.trim();
 
     const password =
-    document.getElementById(
-        'passwordMaestro'
-    ).value
+        document
+        .getElementById(
+            'passwordMaestro'
+        )
+        .value;
 
-    const res = await fetch(
 
-        `${API}/registro`,
+    if(
+        !nombre ||
+        !usuario ||
+        !password
+    ){
 
-        {
+        toast(
+            'Completa nombre, usuario y contraseña.',
+            'error'
+        );
 
-            method:'POST',
+        return;
 
-            headers:{
+    }
 
-                'Content-Type':
-                'application/json',
 
-                Authorization:
-                token
-            },
+    try{
 
-            body:JSON.stringify({
+        const data =
+            await apiFetch(
+                `${API}/registro`,
+                {
 
-                nombre,
+                    method:'POST',
 
-                usuario,
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
 
-                email,
+                    body:
+                        JSON.stringify({
 
-                password,
+                            nombre,
+                            usuario,
+                            email,
+                            password,
+                            rol:'maestro'
 
-                rol:'maestro'
-            })
-        }
-    )
+                        })
 
-    const data =
-    await res.json()
+                }
+            );
 
-    alert(data.mensaje)
 
-    cargarUsuarios()
+        toast(
+            data.mensaje ||
+            'Maestro creado correctamente.'
+        );
+
+
+        limpiarFormulario(
+            'modalMaestro'
+        );
+
+        cerrarModales();
+
+        await cargarTodo();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            'error'
+        );
+
+    }
+
 }
+
+
+/* =====================================================
+   CREAR PADRE
+===================================================== */
+
+async function crearPadre(){
+
+    const nombre =
+        document
+        .getElementById(
+            'nombrePadre'
+        )
+        .value.trim();
+
+    const email =
+        document
+        .getElementById(
+            'emailPadre'
+        )
+        .value.trim();
+
+    const usuario =
+        document
+        .getElementById(
+            'usuarioPadre'
+        )
+        .value.trim();
+
+    const password =
+        document
+        .getElementById(
+            'passwordPadre'
+        )
+        .value;
+
+    const hijos =
+        Array.from(
+            document
+            .getElementById(
+                'hijosPadre'
+            )
+            .selectedOptions
+        )
+        .map(
+            o=>o.value
+        );
+
+
+    if(
+        !nombre ||
+        !usuario ||
+        !password
+    ){
+
+        toast(
+            'Completa nombre, usuario y contraseña.',
+            'error'
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                `${API}/registro`,
+                {
+
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            nombre,
+                            email,
+                            usuario,
+                            password,
+                            hijos,
+                            rol:'padre'
+
+                        })
+
+                }
+            );
+
+
+        toast(
+            data.mensaje ||
+            'Padre creado correctamente.'
+        );
+
+
+        limpiarFormulario(
+            'modalPadre'
+        );
+
+        cerrarModales();
+
+        await cargarTodo();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            'error'
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CREAR DIRECTOR
+===================================================== */
 
 async function crearDirector(){
 
     const nombre =
-        document.getElementById('nombreDirector').value.trim();
+        document
+        .getElementById(
+            'nombreDirector'
+        )
+        .value.trim();
 
     const usuario =
-        document.getElementById('usuarioDirector').value.trim();
+        document
+        .getElementById(
+            'usuarioDirector'
+        )
+        .value.trim();
 
     const email =
-        document.getElementById('emailDirector').value.trim();
+        document
+        .getElementById(
+            'emailDirector'
+        )
+        .value.trim();
 
     const password =
-        document.getElementById('passwordDirector').value;
+        document
+        .getElementById(
+            'passwordDirector'
+        )
+        .value;
 
-    if(!nombre || !usuario || !password){
 
-        alert('Completa nombre, usuario y contraseña');
+    if(
+        !nombre ||
+        !usuario ||
+        !password
+    ){
+
+        toast(
+            'Completa nombre, usuario y contraseña.',
+            'error'
+        );
 
         return;
+
     }
+
 
     try{
 
-        const res = await fetch(
-            `${API}/crear-director`,
-            {
-                method: 'POST',
+        const data =
+            await apiFetch(
+                `${API}/crear-director`,
+                {
 
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token
-                },
+                    method:'POST',
 
-                body: JSON.stringify({
-                    nombre,
-                    usuario,
-                    email,
-                    password
-                })
-            }
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            nombre,
+                            usuario,
+                            email,
+                            password
+
+                        })
+
+                }
+            );
+
+
+        toast(
+            data.mensaje ||
+            'Director creado correctamente.'
         );
 
-        const data = await res.json();
 
-        if(!res.ok){
+        limpiarFormulario(
+            'modalDirector'
+        );
 
-            alert(data.mensaje || 'Error creando director');
+        cerrarModales();
 
-            return;
-        }
+        await cargarTodo();
 
-        alert(data.mensaje || 'Director creado correctamente');
-
-        document.getElementById('nombreDirector').value = '';
-        document.getElementById('usuarioDirector').value = '';
-        document.getElementById('emailDirector').value = '';
-        document.getElementById('passwordDirector').value = '';
-
-    }catch(error){
+    }
+    catch(error){
 
         console.error(error);
 
-        alert('Error de conexión con el servidor');
+        toast(
+            error.message,
+            'error'
+        );
 
     }
+
 }
 
-// =====================
-// 📚 CREAR MATERIA
-// =====================
+
+/* =====================================================
+   CREAR MATERIA
+===================================================== */
 
 async function crearMateria(){
 
     const nombre =
-    document.getElementById(
-        'nombreMateria'
-    ).value
+        document
+        .getElementById(
+            'nombreMateria'
+        )
+        .value.trim();
 
-    const res =
-    await fetch(
 
-        `${API}/materias`,
+    if(!nombre){
 
-        {
+        toast(
+            'Escribe el nombre de la materia.',
+            'error'
+        );
 
-            method:'POST',
+        return;
 
-            headers:{
+    }
 
-                'Content-Type':
-                'application/json',
 
-                Authorization:
-                token
-            },
+    try{
 
-            body:JSON.stringify({
+        const data =
+            await apiFetch(
+                `${API}/materias`,
+                {
 
-                nombre
-            })
-        }
-    )
+                    method:'POST',
 
-    const data =
-    await res.json()
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
 
-    alert(data.mensaje)
+                    body:
+                        JSON.stringify({
+                            nombre
+                        })
 
-    cargarMaterias()
+                }
+            );
+
+
+        toast(
+            data.mensaje ||
+            'Materia creada correctamente.'
+        );
+
+
+        limpiarFormulario(
+            'modalMateria'
+        );
+
+        cerrarModales();
+
+        await cargarTodo();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            'error'
+        );
+
+    }
+
 }
 
-// =====================
-// 📚 CARGAR MATERIAS
-// =====================
+
+/* =====================================================
+   CREAR CLASE
+===================================================== */
+
+async function crearClase(){
+
+    const materiaId =
+        document
+        .getElementById(
+            'materiaClase'
+        )
+        .value;
+
+    const maestroId =
+        document
+        .getElementById(
+            'maestroClase'
+        )
+        .value;
+
+    const grupo =
+        document
+        .getElementById(
+            'grupoClase'
+        )
+        .value.trim();
+
+    const horario =
+        document
+        .getElementById(
+            'horarioClase'
+        )
+        .value.trim();
+
+    const aula =
+        document
+        .getElementById(
+            'aulaClase'
+        )
+        .value.trim();
+
+    const fechaInicio =
+        document
+        .getElementById(
+            'fechaInicioClase'
+        )
+        .value;
+
+    const duracion =
+        document
+        .getElementById(
+            'duracionClase'
+        )
+        .value;
+
+    const fechaFin =
+        document
+        .getElementById(
+            'fechaFinClase'
+        )
+        .value;
+
+
+    if(
+        !materiaId ||
+        !maestroId ||
+        !grupo
+    ){
+
+        toast(
+            'Completa materia, maestro y grupo.',
+            'error'
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                `${API}/clases`,
+                {
+
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            materiaId,
+                            maestroId,
+                            grupo,
+                            horario,
+                            aula,
+                            fechaInicio,
+                            duracion,
+                            fechaFin
+
+                        })
+
+                }
+            );
+
+
+        toast(
+            data.mensaje ||
+            'Clase creada correctamente.'
+        );
+
+
+        limpiarFormulario(
+            'modalClase'
+        );
+
+        cerrarModales();
+
+        await cargarTodo();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            'error'
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARGAR TODO
+===================================================== */
+
+async function cargarTodo(){
+
+    try{
+
+        await Promise.all([
+
+            cargarUsuarios(),
+
+            cargarMaterias(),
+
+            cargarClases()
+
+        ]);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            'No se pudo actualizar toda la información.',
+            'error'
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARGAR USUARIOS
+===================================================== */
+
+async function cargarUsuarios(){
+
+    const usuarios =
+        await apiFetch(
+            `${API}/usuarios`
+        );
+
+
+    const alumnos =
+        await apiFetch(
+            `${API}/alumnos`
+        );
+
+
+    usuariosData =
+        usuarios;
+
+    alumnosData =
+        alumnos;
+
+
+    const maestros =
+        usuarios.filter(
+            u=>u.rol==='maestro'
+        );
+
+
+    const padres =
+        usuarios.filter(
+            u=>u.rol==='padre'
+        );
+
+
+    const directores =
+        usuarios.filter(
+            u=>
+                u.rol==='director'
+        );
+
+
+    /* STATS */
+
+    document
+    .getElementById(
+        'statAlumnos'
+    )
+    .textContent =
+        usuarios.filter(
+            u=>u.rol==='alumno'
+        ).length;
+
+
+    document
+    .getElementById(
+        'statMaestros'
+    )
+    .textContent =
+        maestros.length;
+
+
+    document
+    .getElementById(
+        'statPadres'
+    )
+    .textContent =
+        padres.length;
+
+
+    document
+    .getElementById(
+        'statClases'
+    )
+    .textContent =
+        clasesData.length;
+
+
+    /* SELECT PADRES */
+
+    document
+    .getElementById(
+        'hijosPadre'
+    )
+    .innerHTML =
+        alumnos.map(
+            a=>`
+
+            <option value="${a._id}">
+                ${escapeHTML(a.nombre)}
+            </option>
+
+            `
+        )
+        .join('');
+
+
+    /* MAESTROS SELECT */
+
+    document
+    .getElementById(
+        'maestroClase'
+    )
+    .innerHTML =
+        maestros.map(
+            m=>`
+
+            <option value="${m._id}">
+                ${escapeHTML(m.nombre)}
+            </option>
+
+            `
+        )
+        .join('');
+
+
+    /* LISTAS */
+
+    renderAlumnos(
+        usuarios.filter(
+            u=>u.rol==='alumno'
+        )
+    );
+
+    renderMaestros(
+        maestros
+    );
+
+    renderPadres(
+        padres
+    );
+
+    renderDirectores(
+        directores
+    );
+
+}
+
+
+/* =====================================================
+   RENDER ALUMNOS
+===================================================== */
+
+function renderAlumnos(lista){
+
+    const contenedor =
+        document
+        .getElementById(
+            'listaAlumnos'
+        );
+
+
+    if(!lista.length){
+
+        contenedor.innerHTML = emptyHTML(
+            '👨‍🎓',
+            'No hay alumnos',
+            'Todavía no hay estudiantes registrados.'
+        );
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        lista.map(
+            u=>`
+
+            <div class="item-card">
+
+                <div class="item-head">
+
+                    <div class="item-avatar">
+                        👨‍🎓
+                    </div>
+
+                    <div class="item-info">
+
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+                <div class="item-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="verUsuario('${u._id}')"
+                    >
+                        👁 Ver
+                    </button>
+
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+/* =====================================================
+   RENDER MAESTROS
+===================================================== */
+
+function renderMaestros(lista){
+
+    const contenedor =
+        document
+        .getElementById(
+            'listaMaestros'
+        );
+
+
+    if(!lista.length){
+
+        contenedor.innerHTML =
+            emptyHTML(
+                '👨‍🏫',
+                'No hay maestros',
+                'Todavía no hay docentes registrados.'
+            );
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        lista.map(
+            u=>`
+
+            <div class="item-card">
+
+                <div class="item-head">
+
+                    <div class="item-avatar">
+                        👨‍🏫
+                    </div>
+
+                    <div class="item-info">
+
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+/* =====================================================
+   RENDER PADRES
+===================================================== */
+
+function renderPadres(lista){
+
+    const contenedor =
+        document
+        .getElementById(
+            'listaPadres'
+        );
+
+
+    if(!lista.length){
+
+        contenedor.innerHTML =
+            emptyHTML(
+                '👨‍👩‍👧',
+                'No hay padres',
+                'Todavía no hay tutores registrados.'
+            );
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        lista.map(
+            u=>`
+
+            <div class="item-card">
+
+                <div class="item-head">
+
+                    <div class="item-avatar">
+                        👨‍👩‍👧
+                    </div>
+
+                    <div class="item-info">
+
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+/* =====================================================
+   RENDER DIRECTORES
+===================================================== */
+
+function renderDirectores(lista){
+
+    const contenedor =
+        document
+        .getElementById(
+            'listaDirectores'
+        );
+
+
+    if(!lista.length){
+
+        contenedor.innerHTML =
+            emptyHTML(
+                '👔',
+                'No hay directores',
+                'Todavía no hay directores registrados.'
+            );
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        lista.map(
+            u=>`
+
+            <div class="item-card">
+
+                <div class="item-head">
+
+                    <div class="item-avatar">
+                        👔
+                    </div>
+
+                    <div class="item-info">
+
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+/* =====================================================
+   MATERIAS
+===================================================== */
 
 async function cargarMaterias(){
 
-    const res =
-    await fetch(
-
-        `${API}/materias`,
-
-        {
-
-            headers:{
-                Authorization:token
-            }
-        }
-    )
-
     const materias =
-    await res.json()
+        await apiFetch(
+            `${API}/materias`
+        );
+
+
+    materiasData =
+        materias;
+
 
     document
     .getElementById(
         'listaMaterias'
     )
+    .innerHTML =
+        materias.length
 
-    .innerHTML = materias.map(m=>`
+        ?
 
-        <div class="usuario">
+        materias.map(
+            m=>`
 
-            📚 ${m.nombre}
+            <div class="item-card">
 
-        </div>
+                <div class="item-head">
 
-    `).join('')
+                    <div class="item-avatar">
+                        📚
+                    </div>
+
+                    <div class="item-info">
+
+                        <h3>
+                            ${escapeHTML(m.nombre)}
+                        </h3>
+
+                        <p>
+                            Asignatura
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `
+        ).join('')
+
+        :
+
+        emptyHTML(
+            '📚',
+            'No hay materias',
+            'Crea la primera asignatura.'
+        );
+
 
     document
     .getElementById(
         'materiaClase'
     )
+    .innerHTML =
+        materias.map(
+            m=>`
 
-    .innerHTML = materias.map(m=>`
+            <option value="${m._id}">
+                ${escapeHTML(m.nombre)}
+            </option>
 
-        <option value="${m._id}">
-            ${m.nombre}
-        </option>
+            `
+        )
+        .join('');
 
-    `).join('')
 }
 
-// =====================
-// 🏫 CREAR CLASE
-// =====================
 
-async function crearClase(){
-
-    const materiaId =
-    document.getElementById(
-        'materiaClase'
-    ).value
-
-    const maestroId =
-    document.getElementById(
-        'maestroClase'
-    ).value
-
-    const grupo =
-    document.getElementById(
-        'grupoClase'
-    ).value
-
-    const horario =
-    document.getElementById(
-        'horarioClase'
-    ).value
-
-    const aula =
-    document.getElementById(
-        'aulaClase'
-    ).value
-
-    const fechaInicio =
-document.getElementById(
-'fechaInicioClase'
-).value
-
-const duracion =
-document.getElementById(
-'duracionClase'
-).value
-
-const fechaFin =
-document.getElementById(
-'fechaFinClase'
-).value
-
-    const res =
-    await fetch(
-
-        `${API}/clases`,
-
-        {
-
-            method:'POST',
-
-            headers:{
-
-                'Content-Type':
-                'application/json',
-
-                Authorization:
-                token
-            },
-
-            body:JSON.stringify({
-
-                materiaId,
-
-                maestroId,
-
-                grupo,
-
-                horario,
-
-                aula,
-
-                fechaInicio,
-
-                duracion,
-
-                fechaFin
-            })
-        }
-    )
-
-    const data =
-    await res.json()
-
-    alert(data.mensaje)
-
-    cargarClases()
-}
-
-// =====================
-// 🏫 CARGAR CLASES
-// =====================
+/* =====================================================
+   CLASES
+===================================================== */
 
 async function cargarClases(){
 
-    const resClases =
-    await fetch(
-
-        `${API}/clases`,
-
-        {
-            headers:{
-                Authorization:token
-            }
-        }
-    )
-
     const clases =
-    await resClases.json()
+        await apiFetch(
+            `${API}/clases`
+        );
 
-    const resMaterias =
-    await fetch(
 
-        `${API}/materias`,
+    clasesData =
+        clases;
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
+
+    document
+    .getElementById(
+        'statClases'
     )
+    .textContent =
+        clases.length;
 
-    const materias =
-    await resMaterias.json()
+
+    if(!clases.length){
+
+        document
+        .getElementById(
+            'listaClases'
+        )
+        .innerHTML =
+            emptyHTML(
+                '🏫',
+                'No hay clases',
+                'Crea el primer grupo escolar.'
+            );
+
+        return;
+
+    }
+
 
     document
     .getElementById(
         'listaClases'
     )
+    .innerHTML =
+        clases.map(
+            c=>{
 
-    .innerHTML = clases.map(c=>{
+                const materia =
+                    materiasData.find(
+                        m=>
+                            String(m._id) ===
+                            String(c.materiaId)
+                    );
 
-        const materia =
-        materias.find(m=>
 
-            String (m._id) === String(c.materiaId)
+                return `
+
+                <div class="item-card">
+
+                    <div class="item-head">
+
+                        <div class="item-avatar">
+                            🏫
+                        </div>
+
+                        <div class="item-info">
+
+                            <h3>
+                                ${escapeHTML(
+                                    materia?.nombre ||
+                                    'Materia'
+                                )}
+                            </h3>
+
+                            <p>
+                                Grupo ${escapeHTML(
+                                    c.grupo || '—'
+                                )}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="item-line">
+                        ⏰ ${escapeHTML(
+                            c.horario || 'Sin horario'
+                        )}
+                    </div>
+
+                    <div class="item-line">
+                        🚪 ${escapeHTML(
+                            c.aula || 'Sin aula'
+                        )}
+                    </div>
+
+
+                    <div class="item-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="abrirClase('${c._id}')"
+                        >
+                            👁 Ver clase
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
         )
+        .join('');
 
-        return `
-
-        <div class="usuario">
-
-            📚 ${materia ?
-            materia.nombre :
-            'Materia eliminada'}
-
-            <br>
-
-            👥 Grupo: ${c.grupo}
-
-            <br>
-
-            ⏰ ${c.horario}
-
-            <br>
-
-            🚪 ${c.aula}
-
-            <br><br>
-
-            <button
-            onclick="abrirClase('${c._id}')"
-            >
-                Ver Clase
-            </button>
-
-        </div>
-
-        `
-    }).join('')
 }
-// =====================
-// 👨‍🎓 VER CLASE
-// =====================
+
+
+/* =====================================================
+   VER CLASE
+===================================================== */
 
 async function abrirClase(id){
 
-    const resClases =
-    await fetch(
+    try{
 
-        `${API}/clases`,
+        const clase =
+            clasesData.find(
+                c=>
+                    c._id === id
+            );
 
-        {
 
-            headers:{
-                Authorization:token
-            }
+        if(!clase){
+
+            toast(
+                'No se encontró la clase.',
+                'error'
+            );
+
+            return;
+
         }
-    )
 
-    const clases =
-    await resClases.json()
 
-    const clase =
-    clases.find(c=>c._id===id)
+        const alumnos =
+            await apiFetch(
+                `${API}/alumnos`
+            );
 
-    const resAlumnos =
-    await fetch(
 
-        `${API}/alumnos`,
+        const inscritos =
+            alumnos.filter(
+                a=>
+                    (clase.alumnos || [])
+                    .includes(a._id)
+            );
 
-        {
 
-            headers:{
-                Authorization:token
+        const disponibles =
+            alumnos.filter(
+                a=>
+                    !(clase.alumnos || [])
+                    .includes(a._id)
+            );
+
+
+        const materia =
+            materiasData.find(
+                m=>
+                    String(m._id) ===
+                    String(clase.materiaId)
+            );
+
+
+        document
+        .getElementById(
+            'detalleClase'
+        )
+        .innerHTML = `
+
+            <div class="class-details">
+
+                <div class="class-info">
+
+                    <span>
+                        Materia
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            materia?.nombre ||
+                            'Materia'
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Grupo
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            clase.grupo || '—'
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Horario
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            clase.horario || '—'
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Aula
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            clase.aula || '—'
+                        )}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <h3 style="font-size:13px;margin-bottom:10px;">
+                👨‍🎓 Alumnos inscritos
+                (${inscritos.length})
+            </h3>
+
+
+            ${
+                inscritos.length
+
+                ?
+
+                inscritos.map(
+                    a=>`
+
+                    <div
+                        class="item-card"
+                        style="margin-bottom:7px;padding:12px;"
+                    >
+
+                        👨‍🎓
+                        ${escapeHTML(a.nombre)}
+
+                    </div>
+
+                    `
+                ).join('')
+
+                :
+
+                `
+                <div
+                    style="
+                        color:#64748b;
+                        font-size:10px;
+                        padding:10px 0;
+                    "
+                >
+                    No hay alumnos inscritos todavía.
+                </div>
+                `
             }
-        }
-    )
 
-    const alumnos =
-    await resAlumnos.json()
 
-    const disponibles =
-    alumnos.filter(a=>
+            <div
+                class="form-group"
+                style="margin-top:18px;"
+            >
 
-        !clase.alumnos.includes(a._id)
-    )
+                <label>
+                    ➕ Agregar alumno
+                </label>
 
-const inscritos =
-alumnos.filter(a=>
+                <select id="alumnoClase">
 
-    clase.alumnos.includes(a._id)
-)
+                    ${
+                        disponibles.length
 
-const html = `
+                        ?
 
-<div class="card">
+                        disponibles.map(
+                            a=>`
 
-    <h2>
-        👨‍🎓 Clase
-    </h2>
+                            <option value="${a._id}">
+                                ${escapeHTML(a.nombre)}
+                            </option>
 
-    <p>
-        👥 Inscritos:
-        ${inscritos.length}
-    </p>
+                            `
+                        ).join('')
 
-    <br>
+                        :
 
-    ${inscritos.map(a=>`
+                        `
+                        <option>
+                            Todos los alumnos están inscritos
+                        </option>
+                        `
+                    }
 
-        <div class="usuario">
+                </select>
 
-            👨‍🎓 ${a.nombre}
+            </div>
 
-        </div>
 
-    `).join('')}
+            <div class="modal-footer">
 
-    <br>
+                <button
+                    class="btn btn-success"
+                    onclick="agregarAlumnoClase('${id}')"
+                    ${disponibles.length ? '' : 'disabled'}
+                >
+                    ➕ Agregar alumno
+                </button>
 
-    <h2>
-        ➕ Agregar alumno
-    </h2>
+            </div>
 
-    <select id="alumnoClase">
+        `;
 
-        ${disponibles.map(a=>`
 
-            <option value="${a._id}">
-                ${a.nombre}
-            </option>
+        document
+        .getElementById(
+            'modalVerClase'
+        )
+        .classList.add('show');
 
-        `).join('')}
+    }
+    catch(error){
 
-    </select>
+        console.error(error);
 
-    <button
-    class="action"
+        toast(
+            error.message,
+            'error'
+        );
 
-    onclick="agregarAlumnoClase('${id}')"
-    >
+    }
 
-        Agregar Alumno
-
-    </button>
-
-</div>
-`
-
-    document
-    .getElementById(
-        'listaClases'
-    )
-
-    .innerHTML = html
 }
 
-// =====================
-// 👨‍🎓 AGREGAR ALUMNO
-// =====================
+
+/* =====================================================
+   AGREGAR ALUMNO A CLASE
+===================================================== */
 
 async function agregarAlumnoClase(id){
 
+    const select =
+        document
+        .getElementById(
+            'alumnoClase'
+        );
+
+
+    if(!select){
+
+        return;
+
+    }
+
+
     const alumnoId =
-    document.getElementById(
-        'alumnoClase'
-    ).value
-
-    const res =
-    await fetch(
-
-        `${API}/clases/${id}/alumnos`,
-
-        {
-
-            method:'PUT',
-
-            headers:{
-
-                'Content-Type':
-                'application/json',
-
-                Authorization:
-                token
-            },
-
-            body:JSON.stringify({
-
-                alumnos:[alumnoId]
-            })
-        }
-    )
-
-    const data =
-    await res.json()
-
-    alert(data.mensaje)
-
-    cargarClases()
-}
+        select.value;
 
 
-// =====================
-// 📦 CARGAR USUARIOS
-// =====================
+    if(!alumnoId){
 
-async function cargarUsuarios(){
-    
+        toast(
+            'Selecciona un alumno.',
+            'error'
+        );
 
-    // 🔥 USUARIOS
+        return;
 
-    const res =
-    await fetch(
+    }
 
-        `${API}/usuarios`,
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
-    )
+    try{
 
-    const usuarios =
-    await res.json()
+        const data =
+            await apiFetch(
+                `${API}/clases/${id}/alumnos`,
+                {
 
-    // 🔥 ALUMNOS PARA PADRES
+                    method:'PUT',
 
-    const resAlumnos =
-    await fetch(
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
 
-        `${API}/alumnos`,
+                    body:
+                        JSON.stringify({
 
-        {
-            headers:{
-                Authorization:token
-            }
-        }
-    )
+                            alumnos:[
+                                alumnoId
+                            ]
 
-    const alumnos =
-    await resAlumnos.json()
+                        })
 
-    const maestros =
-usuarios.filter(u=>
+                }
+            );
 
-    u.rol==='maestro'
-)
 
-document
-.getElementById('maestroClase')
+        toast(
+            data.mensaje ||
+            'Alumno agregado correctamente.'
+        );
 
-.innerHTML = maestros.map(m=>`
 
-<option value="${m._id}">
-    ${m.nombre}
-</option>
+        cerrarModales();
 
-`).join('')
+        await cargarClases();
 
-    document
-    .getElementById('hijosPadre')
+    }
+    catch(error){
 
-    .innerHTML = alumnos.map(a=>`
+        console.error(error);
 
-        <option value="${a._id}">
-            ${a.nombre}
-        </option>
+        toast(
+            error.message,
+            'error'
+        );
 
-    `).join('')
-
-    // 🔥 LISTA ALUMNOS
-
-    document
-    .getElementById('listaAlumnos')
-
-    .innerHTML = usuarios
-
-    .filter(u=>u.rol==='alumno')
-
-    .map(u=>`
-
-        <div class="usuario-card">
-
-            👨‍🎓 ${u.nombre}
-            <br>
-            Usuario: ${u.usuario}
-
-        </div>
-
-    `).join('')
-
-    // 🔥 LISTA MAESTROS
-
-    document
-    .getElementById('listaMaestros')
-
-    .innerHTML = usuarios
-
-    .filter(u=>u.rol==='maestro')
-
-    .map(u=>`
-
-        <div class="usuario-card">
-
-            👨‍🏫 ${u.nombre}
-            <br>
-            Usuario: ${u.usuario}
-
-        </div>
-
-    `).join('')
+    }
 
 }
 
-async function crearPadre(){
 
-    const nombre =
-    document
-    .getElementById('nombrePadre')
-    .value
+/* =====================================================
+   FILTROS
+===================================================== */
 
-    const email =
-    document
-    .getElementById('emailPadre')
-    .value
+function filtrar(tipo){
+
+    let inputId;
+    let lista;
+    let render;
+
+
+    if(tipo==='alumnos'){
+
+        inputId='buscarAlumnos';
+
+        lista =
+            usuariosData.filter(
+                u=>u.rol==='alumno'
+            );
+
+        render=renderAlumnos;
+
+    }
+
+    else if(tipo==='maestros'){
+
+        inputId='buscarMaestros';
+
+        lista =
+            usuariosData.filter(
+                u=>u.rol==='maestro'
+            );
+
+        render=renderMaestros;
+
+    }
+
+    else if(tipo==='padres'){
+
+        inputId='buscarPadres';
+
+        lista =
+            usuariosData.filter(
+                u=>u.rol==='padre'
+            );
+
+        render=renderPadres;
+
+    }
+
+
+    const texto =
+        document
+        .getElementById(
+            inputId
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    if(texto){
+
+        lista =
+            lista.filter(
+                u=>
+                    String(
+                        u.nombre || ''
+                    )
+                    .toLowerCase()
+                    .includes(texto)
+
+                    ||
+
+                    String(
+                        u.usuario || ''
+                    )
+                    .toLowerCase()
+                    .includes(texto)
+
+                    ||
+
+                    String(
+                        u.email || ''
+                    )
+                    .toLowerCase()
+                    .includes(texto)
+            );
+
+    }
+
+
+    render(lista);
+
+}
+
+
+/* =====================================================
+   VER USUARIO
+===================================================== */
+
+function verUsuario(id){
 
     const usuario =
-    document
-    .getElementById('usuarioPadre')
-    .value
+        usuariosData.find(
+            u=>u._id===id
+        );
 
-    const password =
-    document
-    .getElementById('passwordPadre')
-    .value
 
-    const hijos =
-    Array.from(
+    if(!usuario){
 
-        document
-        .getElementById('hijosPadre')
-        .selectedOptions
+        toast(
+            'No se encontró el usuario.',
+            'error'
+        );
 
-    ).map(o=>o.value)
+        return;
 
-    const res =
-    await fetch(
+    }
 
-        `${API}/registro`,
 
-        {
+    toast(
+        `${usuario.nombre} · ${usuario.usuario || 'Sin usuario'}`,
+        'info',
+        'Información del usuario'
+    );
 
-            method:'POST',
-
-            headers:{
-
-                'Content-Type':'application/json',
-
-                Authorization:token
-            },
-
-            body:JSON.stringify({
-
-                nombre,
-
-                email,
-
-                usuario,
-
-                password,
-
-                hijos,
-
-                rol:'padre'
-            })
-        }
-    )
-
-    const data =
-    await res.json()
-
-    alert(data.mensaje)
-
-    cargarUsuarios()
 }
 
 
+/* =====================================================
+   UTILIDADES
+===================================================== */
 
-cargarUsuarios()
-cargarMaterias()
-cargarClases()
+function emptyHTML(
+    icon,
+    titulo,
+    texto
+){
 
-</script>
+    return `
 
-<script>
+        <div
+            class="empty"
+            style="grid-column:1/-1;"
+        >
 
-if('serviceWorker' in navigator){
+            <div class="empty-icon">
+                ${icon}
+            </div>
 
-navigator.serviceWorker.register(
-'/service-worker.js'
-)
+            <h3>
+                ${titulo}
+            </h3>
+
+            <p>
+                ${texto}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+function escapeHTML(valor){
+
+    return String(
+        valor ?? ''
+    )
+    .replace(
+        /[&<>"']/g,
+        char=>({
+
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#039;'
+
+        })[char]
+    );
+
+}
+
+
+function limpiarFormulario(
+    modalId
+){
+
+    const modal =
+        document.getElementById(
+            modalId
+        );
+
+
+    if(!modal){
+
+        return;
+
+    }
+
+
+    modal
+    .querySelectorAll(
+        'input'
+    )
+    .forEach(
+        input=>{
+            input.value='';
+        }
+    );
+
+
+    modal
+    .querySelectorAll(
+        'select'
+    )
+    .forEach(
+        select=>{
+            select.selectedIndex=-1;
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    localStorage.removeItem(
+        'token'
+    );
+
+    location.href='/';
+
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+cargarTodo();
+
+
+/* =====================================================
+   SERVICE WORKER
+===================================================== */
+
+if(
+    'serviceWorker'
+    in navigator
+){
+
+    navigator
+    .serviceWorker
+    .register(
+        '/service-worker.js'
+    )
+    .catch(
+        error=>
+            console.log(
+                'Service Worker:',
+                error
+            )
+    );
 
 }
 
 </script>
 
 </body>
+
 </html>
