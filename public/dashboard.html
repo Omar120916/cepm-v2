@@ -2393,75 +2393,72 @@ body{
     </section>
 
 
-    <!-- =================================================
-         ALUMNOS
-    ================================================= -->
+<!-- ========================= -->
+<!-- 👨‍🎓 CREAR ALUMNO -->
+<!-- ========================= -->
 
-    <section
-        id="alumnos"
-        class="view"
+<div
+    id="alumnos"
+    class="card"
+    style="display:none;"
+>
+
+    <h2>👨‍🎓 Crear Alumno</h2>
+
+    <p style="
+        color:#94a3b8;
+        margin-bottom:20px;
+    ">
+        Registra un nuevo alumno con sus datos de acceso.
+    </p>
+
+    <input
+        type="text"
+        id="nombreAlumno"
+        placeholder="Nombre completo"
+        autocomplete="off"
     >
 
-        <div class="section-header">
+    <input
+        type="text"
+        id="usuarioAlumno"
+        placeholder="Usuario"
+        autocomplete="off"
+    >
 
-            <div class="section-title">
+    <input
+        type="password"
+        id="passwordAlumno"
+        placeholder="Contraseña"
+        autocomplete="new-password"
+    >
 
-                <h2>
-                    👨‍🎓 Alumnos
-                </h2>
+    <input
+        type="email"
+        id="emailAlumno"
+        placeholder="Correo electrónico (opcional)"
+        autocomplete="off"
+    >
 
-                <p>
-                    Administra los estudiantes
-                    registrados.
-                </p>
+    <input
+        type="number"
+        id="edadAlumno"
+        placeholder="Edad (opcional)"
+        min="1"
+        max="100"
+    >
 
-            </div>
+    <button
+        class="action"
+        onclick="crearAlumno()"
+        style="
+            margin-top:15px;
+        "
+    >
+        👨‍🎓 Crear alumno
+    </button>
 
-
-            <div class="header-actions">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="abrirModal('alumno')"
-                >
-                    ＋ Nuevo alumno
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="toolbar">
-
-                <div class="search">
-
-                    <span class="search-icon">
-                        🔎
-                    </span>
-
-                    <input
-                        id="buscarAlumnos"
-                        type="text"
-                        placeholder="Buscar alumno..."
-                        oninput="filtrar('alumnos')"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="listaAlumnos"
-                class="items-grid"
-            ></div>
-
-        </div>
-
-    </section>
+</div>
 
 
     <!-- =================================================
@@ -3989,133 +3986,199 @@ async function apiFetch(
 
 async function crearAlumno(){
 
-    const nombre =
-        document
-        .getElementById(
-            'nombreAlumno'
-        )
-        .value.trim();
-
-    const usuario =
-        document
-        .getElementById(
-            'usuarioAlumno'
-        )
-        .value.trim();
-
-    const password =
-        document
-        .getElementById(
-            'passwordAlumno'
-        )
-        .value;
-
-    const email =
-        document
-        .getElementById(
-            'emailAlumno'
-        )
-        .value.trim();
-
-
-    if(
-        !nombre ||
-        !usuario ||
-        !password
-    ){
-
-        toast(
-            'Completa nombre, usuario y contraseña.',
-            'error'
-        );
-
-        return;
-
-    }
-
-
     try{
 
-        const alumno =
+        const nombre =
+            document
+            .getElementById('nombreAlumno')
+            .value
+            .trim()
+
+        const usuario =
+            document
+            .getElementById('usuarioAlumno')
+            .value
+            .trim()
+
+        const password =
+            document
+            .getElementById('passwordAlumno')
+            .value
+
+        const email =
+            document
+            .getElementById('emailAlumno')
+            .value
+            .trim()
+
+        const edad =
+            document
+            .getElementById('edadAlumno')
+            .value
+
+
+        // =========================
+        // VALIDACIONES
+        // =========================
+
+        if(!nombre){
+
+            alert(
+                '⚠️ Escribe el nombre completo del alumno'
+            )
+
+            return
+        }
+
+
+        if(!usuario){
+
+            alert(
+                '⚠️ Escribe un usuario para el alumno'
+            )
+
+            return
+        }
+
+
+        if(!password){
+
+            alert(
+                '⚠️ Escribe una contraseña para el alumno'
+            )
+
+            return
+        }
+
+
+        // =========================
+        // DATOS
+        // =========================
+
+        const datos = {
+
+            nombre: nombre,
+
+            usuario: usuario,
+
+            password: password,
+
+            email: email || undefined,
+
+            edad: edad
+                ? Number(edad)
+                : undefined
+
+        }
+
+
+        console.log(
+            '👨‍🎓 Creando alumno:',
+            {
+                ...datos,
+                password:'********'
+            }
+        )
+
+
+        // =========================
+        // API
+        // =========================
+
+        const respuesta =
             await apiFetch(
                 '/alumnos',
                 {
-
                     method:'POST',
 
                     headers:{
                         'Content-Type':
-                            'application/json'
+                        'application/json'
                     },
 
                     body:
-                        JSON.stringify({
-
-                            nombre,
-                            edad:18
-
-                        })
-
+                        JSON.stringify(datos)
                 }
-            );
+            )
 
 
-        const data =
-            await apiFetch(
-                '/registro',
-                {
-
-                    method:'POST',
-
-                    headers:{
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            nombre,
-                            usuario,
-                            password,
-                            email,
-                            rol:'alumno',
-                            alumnoId:
-                                alumno._id
-
-                        })
-
-                }
-            );
+        console.log(
+            '✅ Alumno creado:',
+            respuesta
+        )
 
 
-        toast(
-            data.mensaje ||
-            'Alumno creado correctamente.'
-        );
+        alert(
+            '🎉 Alumno creado correctamente'
+        )
 
 
-        limpiarFormulario(
-            'modalAlumno'
-        );
+        // =========================
+        // LIMPIAR FORMULARIO
+        // =========================
 
-        cerrarModales();
+        document
+        .getElementById('nombreAlumno')
+        .value = ''
 
-        await cargarTodo();
+        document
+        .getElementById('usuarioAlumno')
+        .value = ''
+
+        document
+        .getElementById('passwordAlumno')
+        .value = ''
+
+        document
+        .getElementById('emailAlumno')
+        .value = ''
+
+        document
+        .getElementById('edadAlumno')
+        .value = ''
+
+
+        // =========================
+        // ACTUALIZAR LISTA
+        // =========================
+
+        if(
+            typeof cargarUsuarios === 'function'
+        ){
+
+            await cargarUsuarios()
+
+        }
+
+        if(
+            typeof cargarTodo === 'function'
+        ){
+
+            await cargarTodo()
+
+        }
 
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            '❌ Error creando alumno:',
+            error
+        )
 
-        toast(
-            error.message,
-            'error'
-        );
+        alert(
+            '❌ ' +
+            (
+                error.message ||
+                'No se pudo crear el alumno'
+            )
+        )
 
     }
 
 }
+
+
 
 
 /* =====================================================
