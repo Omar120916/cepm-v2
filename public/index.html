@@ -1,276 +1,1736 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<link rel="manifest" href="/manifest.json">
+<meta charset="UTF-8">
 
-<meta name="theme-color" content="#0f172a">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>CEPM index</title>
+<link rel="manifest"
+href="/manifest.json">
+
+<meta name="theme-color"
+content="#07111f">
+
+<title>CEPM | Plataforma Escolar</title>
 
 <style>
+
+/* =========================================
+   RESET
+========================================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 }
+
+:root{
+
+    --bg:#07111f;
+    --bg2:#0f172a;
+
+    --blue:#3b82f6;
+    --blue2:#2563eb;
+
+    --purple:#7c3aed;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --border:rgba(255,255,255,.10);
+
+}
+
+
+/* =========================================
+   BODY
+========================================= */
 
 body{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+
     min-height:100vh;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    padding:20px;
+
+    padding:25px;
+
+    color:var(--text);
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(59,130,246,.22),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(124,58,237,.20),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f172a,
+            #111827
+        );
+
+    overflow:hidden;
+
 }
 
-.card{
+
+/* =========================================
+   BACKGROUND DECORATION
+========================================= */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+.orb{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(2px);
+
+    opacity:.45;
+
+    animation:
+        float 8s ease-in-out infinite;
+}
+
+.orb.one{
+
+    width:320px;
+    height:320px;
+
+    background:
+        rgba(37,99,235,.18);
+
+    top:-120px;
+    left:-100px;
+}
+
+.orb.two{
+
+    width:280px;
+    height:280px;
+
+    background:
+        rgba(124,58,237,.16);
+
+    right:-100px;
+    bottom:-100px;
+
+    animation-delay:2s;
+}
+
+.orb.three{
+
+    width:150px;
+    height:150px;
+
+    background:
+        rgba(14,165,233,.10);
+
+    right:20%;
+    top:10%;
+
+    animation-delay:4s;
+}
+
+@keyframes float{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-20px)
+            scale(1.05);
+
+    }
+
+}
+
+
+/* =========================================
+   LOGIN CONTAINER
+========================================= */
+
+.login-wrapper{
+
     width:100%;
-    max-width:400px;
-    background:white;
-    border-radius:25px;
-    padding:35px;
-    box-shadow:0 10px 40px rgba(0,0,0,.3);
-    animation:fade .5s ease;
+
+    max-width:1050px;
+
+    min-height:650px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 430px;
+
+    background:
+        rgba(15,23,42,.68);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,.45),
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.05);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    animation:
+        loginAppear .7s ease;
+
 }
 
-@keyframes fade{
+@keyframes loginAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(25px)
+            scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   LEFT PANEL
+========================================= */
+
+.brand-panel{
+
+    position:relative;
+
+    padding:60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(37,99,235,.18),
+            rgba(124,58,237,.10),
+            rgba(15,23,42,.15)
+        );
+
+    border-right:
+        1px solid
+        var(--border);
+
+}
+
+
+/* logo */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:35px;
+
+}
+
+.logo-icon{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:31px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+
+        0 15px 35px
+        rgba(37,99,235,.30);
+
+}
+
+.logo-text h1{
+
+    font-size:32px;
+
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+}
+
+.logo-text p{
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    margin-top:3px;
+
+}
+
+
+/* title */
+
+.brand-panel h2{
+
+    font-size:44px;
+
+    line-height:1.1;
+
+    letter-spacing:-1.5px;
+
+    max-width:480px;
+
+}
+
+.brand-panel h2 span{
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #60a5fa,
+            #a78bfa
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+.brand-panel > p{
+
+    color:#94a3b8;
+
+    max-width:430px;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+    margin-top:20px;
+
+}
+
+
+/* features */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+
+    margin-top:35px;
+
+}
+
+.feature{
+
+    padding:14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.feature-icon{
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:10px;
+
+    background:
+        rgba(59,130,246,.12);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.feature span:last-child{
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================
+   LOGIN PANEL
+========================================= */
+
+.login-panel{
+
+    padding:55px 45px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    background:
+        rgba(2,6,23,.30);
+
+}
+
+.login-title{
+
+    margin-bottom:30px;
+
+}
+
+.login-title h2{
+
+    font-size:27px;
+
+    font-weight:800;
+
+}
+
+.login-title p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:7px;
+
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.input{
+
+    margin-bottom:18px;
+
+}
+
+.input label{
+
+    display:block;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.input-box{
+
+    position:relative;
+
+}
+
+.input-box .icon{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:#64748b;
+
+    font-size:17px;
+
+    pointer-events:none;
+
+}
+
+.input input{
+
+    width:100%;
+
+    height:52px;
+
+    border:
+
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:13px;
+
+    padding:
+        0 45px;
+
+    outline:none;
+
+    color:white;
+
+    background:
+        rgba(255,255,255,.045);
+
+    font-size:14px;
+
+    transition:.25s;
+
+}
+
+.input input::placeholder{
+
+    color:#64748b;
+
+}
+
+.input input:focus{
+
+    border-color:
+        rgba(59,130,246,.65);
+
+    background:
+        rgba(59,130,246,.06);
+
+    box-shadow:
+
+        0 0 0 4px
+        rgba(59,130,246,.08);
+
+}
+
+
+/* show password */
+
+.password-toggle{
+
+    position:absolute;
+
+    right:13px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    border:none;
+
+    background:none;
+
+    color:#64748b;
+
+    cursor:pointer;
+
+    width:auto;
+
+    padding:4px;
+
+    font-size:17px;
+
+}
+
+.password-toggle:hover{
+
+    color:#cbd5e1;
+
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-button{
+
+    width:100%;
+
+    height:53px;
+
+    margin-top:5px;
+
+    border:none;
+
+    border-radius:13px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(37,99,235,.25);
+
+    transition:.25s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.login-button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.15),
+            transparent
+        );
+
+    transition:.5s;
+
+}
+
+.login-button:hover::before{
+
+    left:100%;
+
+}
+
+.login-button:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+
+        0 15px 35px
+        rgba(37,99,235,.35);
+
+}
+
+.login-button:active{
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* loading */
+
+.login-button.loading{
+
+    pointer-events:none;
+
+    opacity:.75;
+
+}
+
+.spinner{
+
+    display:inline-block;
+
+    width:16px;
+
+    height:16px;
+
+    border:
+
+        2px solid
+        rgba(255,255,255,.4);
+
+    border-top-color:white;
+
+    border-radius:50%;
+
+    animation:
+        spin .7s linear infinite;
+
+    vertical-align:middle;
+
+    margin-right:7px;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+#mensaje{
+
+    min-height:20px;
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+.forgot{
+
+    text-align:center;
+
+    margin-top:22px;
+
+}
+
+.forgot button{
+
+    width:auto;
+
+    padding:0;
+
+    background:none;
+
+    border:none;
+
+    color:#60a5fa;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+.forgot button:hover{
+
+    color:#93c5fd;
+
+    text-decoration:underline;
+
+}
+
+
+/* footer */
+
+.footer{
+
+    text-align:center;
+
+    color:#475569;
+
+    font-size:10px;
+
+    margin-top:35px;
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(2,6,23,.75);
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    z-index:1000;
+
+}
+
+.modal.show{
+
+    display:flex;
+
+    animation:
+        modalFade .25s ease;
+
+}
+
+@keyframes modalFade{
+
     from{
         opacity:0;
-        transform:translateY(20px);
     }
 
     to{
         opacity:1;
-        transform:translateY(0);
     }
-}
 
-.logo{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.logo h1{
-    color:#0f172a;
-    font-size:40px;
-}
-
-.logo p{
-    color:gray;
-    margin-top:5px;
-}
-
-.input{
-    margin-bottom:18px;
-}
-
-.input label{
-    display:block;
-    margin-bottom:7px;
-    color:#111827;
-    font-weight:bold;
-}
-
-.input input{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#f1f5f9;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
-}
-
-.input input:focus{
-    background:#e2e8f0;
-}
-
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:14px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-button:hover{
-    background:#1d4ed8;
-}
-
-.extra{
-    text-align:center;
-    margin-top:20px;
-}
-
-.extra a{
-    color:#2563eb;
-    text-decoration:none;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.extra a:hover{
-    text-decoration:underline;
-}
-
-#mensaje{
-    margin-top:15px;
-    text-align:center;
-    font-weight:bold;
-}
-
-.modal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.5);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
 }
 
 .modal-content{
+
     width:100%;
-    max-width:400px;
-    background:white;
-    padding:30px;
-    border-radius:20px;
+
+    max-width:440px;
+
+    background:
+        #111c2e;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.5);
+
+    animation:
+        modalUp .3s ease;
+
 }
 
-.modal-content h2{
-    margin-bottom:20px;
-    color:#0f172a;
+@keyframes modalUp{
+
+    from{
+
+        transform:
+            translateY(20px)
+            scale(.97);
+
+    }
+
+    to{
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:25px;
+
+}
+
+.modal-header h2{
+
+    font-size:20px;
+
+}
+
+.modal-header p{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:5px;
+
+    line-height:1.5;
+
 }
 
 .close{
-    float:right;
-    cursor:pointer;
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#94a3b8;
+
     font-size:22px;
-    font-weight:bold;
+
+    cursor:pointer;
+
 }
+
+.close:hover{
+
+    background:
+        rgba(239,68,68,.10);
+
+    color:#f87171;
+
+}
+
+.modal-button{
+
+    width:100%;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+.modal-button:hover{
+
+    background:#1d4ed8;
+
+}
+
+.divider{
+
+    height:1px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    margin:24px 0;
+
+}
+
+#mensajeReset{
+
+    min-height:20px;
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================
+   SPLASH
+========================================= */
 
 #splash{
+
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#0f172a;
+
+    inset:0;
+
+    background:
+        #020617;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     z-index:99999;
+
+    transition:
+        opacity .5s ease,
+        visibility .5s ease;
+
 }
 
-#splash img{
-    width:280px;
-    max-width:80%;
+#splash.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}
+
+.splash-logo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    animation:
+        splashPulse 1.4s ease-in-out infinite;
+
+}
+
+.splash-icon{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:27px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:43px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+
+        0 20px 50px
+        rgba(37,99,235,.30);
+
+}
+
+.splash-logo h1{
+
+    margin-top:18px;
+
+    font-size:31px;
+
+    letter-spacing:3px;
+
+}
+
+.splash-logo p{
+
+    color:#64748b;
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+@keyframes splashPulse{
+
+    0%,
+    100%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.04);
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:850px){
+
+    body{
+
+        overflow:auto;
+
+    }
+
+    .login-wrapper{
+
+        grid-template-columns:1fr;
+
+        max-width:480px;
+
+        min-height:auto;
+
+    }
+
+    .brand-panel{
+
+        padding:35px;
+
+        text-align:center;
+
+        border-right:none;
+
+        border-bottom:
+            1px solid
+            var(--border);
+
+        align-items:center;
+
+    }
+
+    .brand-panel h2{
+
+        font-size:32px;
+
+    }
+
+    .brand-panel > p{
+
+        font-size:13px;
+
+    }
+
+    .logo{
+
+        margin-bottom:25px;
+
+    }
+
+    .features{
+
+        width:100%;
+
+    }
+
+    .login-panel{
+
+        padding:35px;
+
+    }
+
 }
 
 @media(max-width:500px){
 
-    .card{
-        padding:25px;
+    body{
+
+        padding:12px;
+
     }
 
-    .logo h1{
-        font-size:32px;
+    .login-wrapper{
+
+        border-radius:22px;
+
+    }
+
+    .brand-panel{
+
+        padding:28px 22px;
+
+    }
+
+    .brand-panel h2{
+
+        font-size:27px;
+
+    }
+
+    .features{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .login-panel{
+
+        padding:28px 22px;
+
+    }
+
+    .login-title h2{
+
+        font-size:23px;
+
     }
 
 }
 
 </style>
+
 </head>
+
 <body>
+
+
+<!-- =========================================
+     BACKGROUND
+========================================= -->
+
+<div class="background">
+
+    <div class="orb one"></div>
+
+    <div class="orb two"></div>
+
+    <div class="orb three"></div>
+
+</div>
+
+
+<!-- =========================================
+     SPLASH
+========================================= -->
+
 <div id="splash">
 
-    <img
-    src="splash.jpeg"
-    alt="CEPM"
+    <div class="splash-logo">
+
+        <div class="splash-icon">
+            🎓
+        </div>
+
+        <h1>
+            CEPM
+        </h1>
+
+        <p>
+            PLATAFORMA ESCOLAR
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     LOGIN
+========================================= -->
+
+<div class="login-wrapper">
+
+
+    <!-- LEFT -->
+
+    <section class="brand-panel">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🎓
+            </div>
+
+            <div class="logo-text">
+
+                <h1>
+                    CEPM
+                </h1>
+
+                <p>
+                    Plataforma Escolar
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2>
+
+            Todo tu mundo
+            <span>
+                escolar
+            </span>
+            en un solo lugar.
+
+        </h2>
+
+
+        <p>
+
+            Accede a tus materias,
+            calificaciones, tareas,
+            asistencias y comunicación
+            escolar desde cualquier lugar.
+
+        </p>
+
+
+        <div class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📚
+                </div>
+
+                <span>
+                    Materias
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <span>
+                    Calificaciones
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📝
+                </div>
+
+                <span>
+                    Tareas
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    💬
+                </div>
+
+                <span>
+                    Comunicación
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <section class="login-panel">
+
+        <div class="login-title">
+
+            <h2>
+                ¡Bienvenido de nuevo! 👋
+            </h2>
+
+            <p>
+                Inicia sesión para continuar
+                con tu cuenta.
+            </p>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="input">
+
+            <label>
+                Usuario
+            </label>
+
+            <div class="input-box">
+
+                <span class="icon">
+                    👤
+                </span>
+
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="Ingresa tu usuario"
+                    autocomplete="username"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input">
+
+            <label>
+                Contraseña
+            </label>
+
+            <div class="input-box">
+
+                <span class="icon">
+                    🔒
+                </span>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="mostrarPassword()"
+                    id="togglePassword"
+                >
+                    👁️
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <button
+            class="login-button"
+            id="loginButton"
+            onclick="index()"
+        >
+
+            Iniciar sesión 🚀
+
+        </button>
+
+
+        <div id="mensaje"></div>
+
+
+        <!-- FORGOT -->
+
+        <div class="forgot">
+
+            <button
+                onclick="abrirModal()"
+            >
+
+                ¿Olvidaste tu contraseña?
+
+            </button>
+
+        </div>
+
+
+        <div class="footer">
+
+            CEPM © 2026 · Plataforma Escolar
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================
+     MODAL RECUPERACIÓN
+========================================= -->
+
+<div
+    class="modal"
+    id="modal"
+    onclick="cerrarModalFondo(event)"
+>
+
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
     >
 
-</div>
-<div class="card">
+        <div class="modal-header">
 
-    <div class="logo">
-        <h1>CEPM</h1>
-        <p>Plataforma Escolar</p>
-    </div>
+            <div>
 
-    <div class="input">
-        <label>Usuario</label>
-        <input type="text" id="usuario" placeholder="Ingresa usuario">
-    </div>
+                <h2>
+                    🔐 Recuperar contraseña
+                </h2>
 
-    <div class="input">
-        <label>Contraseña</label>
-        <input type="password" id="password" placeholder="Ingresa contraseña">
-    </div>
+                <p>
+                    Te enviaremos un código
+                    para recuperar tu cuenta.
+                </p>
 
-    <button onclick="index()">
-        Iniciar Sesión
-    </button>
+            </div>
 
-    <div id="mensaje"></div>
+            <button
+                class="close"
+                onclick="cerrarModal()"
+            >
+                ×
+            </button>
 
-    <div class="extra">
-        <a onclick="abrirModal()">
-            ¿Olvidaste tu contraseña?
-        </a>
-    </div>
-
-</div>
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-    <div class="modal-content">
-
-        <span class="close" onclick="cerrarModal()">
-            ×
-        </span>
-
-        <h2>Recuperar contraseña</h2>
-
-        <div class="input">
-            <label>Correo</label>
-            <input type="email" id="correoReset">
         </div>
 
-        <button onclick="enviarCodigo()">
-            Enviar código
+
+        <!-- EMAIL -->
+
+        <div class="input">
+
+            <label>
+                Correo electrónico
+            </label>
+
+            <div class="input-box">
+
+                <span class="icon">
+                    ✉️
+                </span>
+
+                <input
+                    type="email"
+                    id="correoReset"
+                    placeholder="correo@ejemplo.com"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="modal-button"
+            onclick="enviarCodigo()"
+        >
+
+            📩 Enviar código
+
         </button>
 
-        <br><br>
+
+        <div class="divider"></div>
+
+
+        <!-- CODE -->
 
         <div class="input">
-            <label>Código</label>
-            <input type="text" id="codigo">
+
+            <label>
+                Código de recuperación
+            </label>
+
+            <div class="input-box">
+
+                <span class="icon">
+                    🔢
+                </span>
+
+                <input
+                    type="text"
+                    id="codigo"
+                    placeholder="Ingresa el código"
+                >
+
+            </div>
+
         </div>
+
+
+        <!-- NEW PASSWORD -->
 
         <div class="input">
-            <label>Nueva contraseña</label>
-            <input type="password" id="nuevaPassword">
+
+            <label>
+                Nueva contraseña
+            </label>
+
+            <div class="input-box">
+
+                <span class="icon">
+                    🔑
+                </span>
+
+                <input
+                    type="password"
+                    id="nuevaPassword"
+                    placeholder="Nueva contraseña"
+                >
+
+            </div>
+
         </div>
 
-        <button onclick="resetPassword()">
-            Cambiar contraseña
+
+        <button
+            class="modal-button"
+            onclick="resetPassword()"
+        >
+
+            🔄 Cambiar contraseña
+
         </button>
+
 
         <div id="mensajeReset"></div>
 
@@ -278,243 +1738,733 @@ button:hover{
 
 </div>
 
+
 <script>
 
-const API = 'https://cepm-v2.onrender.com'
+/* =========================================
+   API
+========================================= */
+
+const API =
+'https://cepm-v2.onrender.com';
+
+
+/* =========================================
+   LOGIN
+========================================= */
 
 async function index(){
 
     const usuario =
-        document.getElementById('usuario').value
+        document
+            .getElementById('usuario')
+            .value
+            .trim();
 
     const password =
-        document.getElementById('password').value
+        document
+            .getElementById('password')
+            .value;
 
-    const res = await fetch(`${API}/index`,{
 
-        method:'POST',
+    const mensaje =
+        document
+            .getElementById('mensaje');
 
-        headers:{
-            'Content-Type':'application/json'
-        },
 
-        body:JSON.stringify({
-            usuario,
-            password
-        })
-    })
+    const button =
+        document
+            .getElementById('loginButton');
 
-    const data = await res.json()
 
-if(data.token){
+    if(!usuario || !password){
 
-    localStorage.setItem(
+        mensaje.style.color =
+            '#f87171';
 
-        'token',
+        mensaje.innerHTML =
+            '⚠️ Completa todos los campos.';
 
-        data.token
-    )
-
-    localStorage.setItem(
-
-        'rol',
-
-        data.rol
-    )
-
-    document.getElementById('mensaje')
-    .innerHTML = 'index correcto 🔥'
-
-    setTimeout(()=>{
-
-        if(data.rol==='admin'){
-
-            location.href='dashboard.html'
-        }
-
-        else if (data.rol === "director") {
-            location.href = "director.html";
-        }
-
-        else if(data.rol==='maestro'){
-
-            location.href='maestro.html'
-        }
-
-        else if(data.rol==='padre'){
-
-            location.href='padre.html'
-        }
-
-        else if(data.rol==='alumno'){
-
-            location.href='alumno.html'
-        }
-
-    },1000)
-
-}else{
-
-        document.getElementById('mensaje')
-        .innerHTML = data.mensaje || 'Error'
+        return;
 
     }
+
+
+    button.classList.add(
+        'loading'
+    );
+
+    button.innerHTML = `
+
+        <span class="spinner"></span>
+
+        Iniciando sesión...
+
+    `;
+
+
+    mensaje.innerHTML='';
+
+
+    try{
+
+        const res =
+            await fetch(
+                `${API}/index`,
+                {
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:JSON.stringify({
+                        usuario,
+                        password
+                    })
+                }
+            );
+
+
+        const data =
+            await res.json();
+
+
+        if(data.token){
+
+            localStorage.setItem(
+                'token',
+                data.token
+            );
+
+
+            localStorage.setItem(
+                'rol',
+                data.rol
+            );
+
+
+            mensaje.style.color =
+                '#4ade80';
+
+            mensaje.innerHTML =
+                '✅ ¡Bienvenido de nuevo!';
+
+
+            setTimeout(()=>{
+
+                if(data.rol==='admin'){
+
+                    location.href =
+                        'dashboard.html';
+
+                }
+
+                else if(
+                    data.rol==='director'
+                ){
+
+                    location.href =
+                        'director.html';
+
+                }
+
+                else if(
+                    data.rol==='maestro'
+                ){
+
+                    location.href =
+                        'maestro.html';
+
+                }
+
+                else if(
+                    data.rol==='padre'
+                ){
+
+                    location.href =
+                        'padre.html';
+
+                }
+
+                else if(
+                    data.rol==='alumno'
+                ){
+
+                    location.href =
+                        'alumno.html';
+
+                }
+
+                else{
+
+                    mensaje.style.color =
+                        '#f87171';
+
+                    mensaje.innerHTML =
+                        '❌ Rol de usuario no reconocido.';
+
+                    resetLoginButton();
+
+                }
+
+            },700);
+
+        }
+
+        else{
+
+            mensaje.style.color =
+                '#f87171';
+
+            mensaje.innerHTML =
+                `❌ ${
+                    data.mensaje ||
+                    'Usuario o contraseña incorrectos.'
+                }`;
+
+            resetLoginButton();
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        mensaje.style.color =
+            '#f87171';
+
+        mensaje.innerHTML =
+            '❌ No se pudo conectar con el servidor.';
+
+        resetLoginButton();
+
+    }
+
 }
+
+
+/* =========================================
+   RESET BUTTON
+========================================= */
+
+function resetLoginButton(){
+
+    const button =
+        document
+            .getElementById(
+                'loginButton'
+            );
+
+
+    button.classList.remove(
+        'loading'
+    );
+
+
+    button.innerHTML =
+        'Iniciar sesión 🚀';
+
+}
+
+
+/* =========================================
+   SHOW PASSWORD
+========================================= */
+
+function mostrarPassword(){
+
+    const password =
+        document
+            .getElementById(
+                'password'
+            );
+
+    const toggle =
+        document
+            .getElementById(
+                'togglePassword'
+            );
+
+
+    if(
+        password.type ===
+        'password'
+    ){
+
+        password.type =
+            'text';
+
+        toggle.innerHTML =
+            '🙈';
+
+    }
+
+    else{
+
+        password.type =
+            'password';
+
+        toggle.innerHTML =
+            '👁️';
+
+    }
+
+}
+
+
+/* =========================================
+   ENTER LOGIN
+========================================= */
+
+document
+    .getElementById('password')
+    .addEventListener(
+        'keydown',
+        event=>{
+
+            if(
+                event.key ===
+                'Enter'
+            ){
+
+                index();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById('usuario')
+    .addEventListener(
+        'keydown',
+        event=>{
+
+            if(
+                event.key ===
+                'Enter'
+            ){
+
+                index();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   MODAL
+========================================= */
 
 function abrirModal(){
 
-    document.getElementById('modal')
-    .style.display='flex'
+    document
+        .getElementById('modal')
+        .classList.add('show');
+
 }
+
 
 function cerrarModal(){
 
-    document.getElementById('modal')
-    .style.display='none'
+    document
+        .getElementById('modal')
+        .classList.remove('show');
+
 }
+
+
+function cerrarModalFondo(
+    event
+){
+
+    if(
+        event.target.id ===
+        'modal'
+    ){
+
+        cerrarModal();
+
+    }
+
+}
+
+
+/* ESC PARA CERRAR */
+
+document.addEventListener(
+    'keydown',
+    event=>{
+
+        if(
+            event.key ===
+            'Escape'
+        ){
+
+            cerrarModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ENVIAR CÓDIGO
+========================================= */
 
 async function enviarCodigo(){
 
     const email =
-        document.getElementById('correoReset').value
+        document
+            .getElementById(
+                'correoReset'
+            )
+            .value
+            .trim();
 
-    const res = await fetch(`${API}/olvide-password`,{
 
-        method:'POST',
+    const mensaje =
+        document
+            .getElementById(
+                'mensajeReset'
+            );
 
-        headers:{
-            'Content-Type':'application/json'
-        },
 
-        body:JSON.stringify({
-            email
-        })
-    })
+    if(!email){
 
-    const data = await res.json()
+        mensaje.style.color =
+            '#f87171';
 
-    document.getElementById('mensajeReset')
-    .innerHTML = data.mensaje
+        mensaje.innerHTML =
+            '⚠️ Ingresa tu correo.';
+
+        return;
+
+    }
+
+
+    mensaje.style.color =
+        '#94a3b8';
+
+    mensaje.innerHTML =
+        '📩 Enviando código...';
+
+
+    try{
+
+        const res =
+            await fetch(
+                `${API}/olvide-password`,
+                {
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:JSON.stringify({
+                        email
+                    })
+                }
+            );
+
+
+        const data =
+            await res.json();
+
+
+        mensaje.style.color =
+            '#4ade80';
+
+        mensaje.innerHTML =
+            data.mensaje ||
+            '✅ Código enviado.';
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        mensaje.style.color =
+            '#f87171';
+
+        mensaje.innerHTML =
+            '❌ No se pudo enviar el código.';
+
+    }
+
 }
+
+
+/* =========================================
+   RESET PASSWORD
+========================================= */
 
 async function resetPassword(){
 
     const email =
-        document.getElementById('correoReset').value
+        document
+            .getElementById(
+                'correoReset'
+            )
+            .value
+            .trim();
+
 
     const codigo =
-        document.getElementById('codigo').value
+        document
+            .getElementById(
+                'codigo'
+            )
+            .value
+            .trim();
+
 
     const nuevaPassword =
-        document.getElementById('nuevaPassword').value
+        document
+            .getElementById(
+                'nuevaPassword'
+            )
+            .value;
 
-    const res = await fetch(`${API}/reset-password`,{
 
-        method:'POST',
+    const mensaje =
+        document
+            .getElementById(
+                'mensajeReset'
+            );
 
-        headers:{
-            'Content-Type':'application/json'
-        },
 
-        body:JSON.stringify({
-            email,
-            codigo,
-            nuevaPassword
-        })
-    })
+    if(
+        !email ||
+        !codigo ||
+        !nuevaPassword
+    ){
 
-    const data = await res.json()
+        mensaje.style.color =
+            '#f87171';
 
-    document.getElementById('mensajeReset')
-    .innerHTML = data.mensaje
+        mensaje.innerHTML =
+            '⚠️ Completa todos los campos.';
+
+        return;
+
+    }
+
+
+    mensaje.style.color =
+        '#94a3b8';
+
+    mensaje.innerHTML =
+        '🔄 Cambiando contraseña...';
+
+
+    try{
+
+        const res =
+            await fetch(
+                `${API}/reset-password`,
+                {
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:JSON.stringify({
+
+                        email,
+
+                        codigo,
+
+                        nuevaPassword
+
+                    })
+                }
+            );
+
+
+        const data =
+            await res.json();
+
+
+        mensaje.style.color =
+            '#4ade80';
+
+        mensaje.innerHTML =
+            data.mensaje ||
+            '✅ Contraseña actualizada.';
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        mensaje.style.color =
+            '#f87171';
+
+        mensaje.innerHTML =
+            '❌ No se pudo cambiar la contraseña.';
+
+    }
+
 }
 
+
+/* =========================================
+   SPLASH
+========================================= */
+
 window.addEventListener(
-
     'load',
-
     ()=>{
 
         setTimeout(()=>{
 
             document
-            .getElementById('splash')
-            .style.display='none'
+                .getElementById(
+                    'splash'
+                )
+                .classList.add(
+                    'hide'
+                );
 
-        },2000)
+        },1200);
 
     }
-)
+);
 
 </script>
+
 
 <script>
 
+/* =========================================
+   NOTIFICACIONES PUSH
+========================================= */
+
 async function activarNotificaciones(){
 
-    if(
+    try{
 
-        !('serviceWorker' in navigator)
+        if(
+            !('serviceWorker'
+            in navigator)
+        ){
 
-    ) return
-
-    const registro =
-    await navigator
-    .serviceWorker
-    .register(
-
-        '/service-worker.js'
-
-    )
-
-    const permiso =
-    await Notification
-    .requestPermission()
-
-    if(
-        permiso !== 'granted'
-    ) return
-
-    const suscripcion =
-    await registro.pushManager.subscribe({
-
-        userVisibleOnly:true,
-
-        applicationServerKey:
-        'BKuffqlyqJdIpTBtV5Z0LbgmbvymBDi4gCaukUtRQj2WoEr51J3NIo-7tI-CIIUgvt4Umi3D9cAO6an7DEJtLpM'
-
-    })
-
-    await fetch(
-
-        'https://cepm-v2.onrender.com/suscribirse',
-
-        {
-
-            method:'POST',
-
-            headers:{
-
-                'Content-Type':
-                'application/json'
-
-            },
-
-            body:JSON.stringify(
-
-                suscripcion
-
-            )
+            return;
 
         }
 
-    )
+
+        const registro =
+            await navigator
+                .serviceWorker
+                .register(
+                    '/service-worker.js'
+                );
+
+
+        if(
+            !('Notification'
+            in window)
+        ){
+
+            return;
+
+        }
+
+
+        const permiso =
+            await Notification
+                .requestPermission();
+
+
+        if(
+            permiso !==
+            'granted'
+        ){
+
+            return;
+
+        }
+
+
+        const suscripcion =
+            await registro
+                .pushManager
+                .subscribe({
+
+                    userVisibleOnly:true,
+
+                    applicationServerKey:
+                    'BKuffqlyqJdIpTBtV5Z0LbgmbvymBDi4gCaukUtRQj2WoEr51J3NIo-7tI-CIIUgvt4Umi3D9cAO6an7DEJtLpM'
+
+                });
+
+
+        await fetch(
+
+            `${API}/suscribirse`,
+
+            {
+
+                method:'POST',
+
+                headers:{
+
+                    'Content-Type':
+                        'application/json'
+
+                },
+
+                body:
+                    JSON.stringify(
+                        suscripcion
+                    )
+
+            }
+
+        );
+
+    }
+
+    catch(error){
+
+        console.log(
+            'Notificaciones:',
+            error
+        );
+
+    }
 
 }
 
-activarNotificaciones()
+
+activarNotificaciones();
 
 </script>
 
+
 </body>
+
 </html>
+```
