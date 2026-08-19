@@ -1178,6 +1178,524 @@ body{
         grid-template-columns:1fr;
 
     }
+    /* =====================================================
+   MODAL DETALLE ALUMNO
+===================================================== */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(2,6,23,.78);
+
+    backdrop-filter:
+        blur(10px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:9999;
+
+    animation:
+        aparecer .25s ease;
+}
+
+.modal-overlay.show{
+
+    display:flex;
+
+}
+
+@keyframes aparecer{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+.modal-detalle{
+
+    width:100%;
+
+    max-width:700px;
+
+    max-height:
+        90vh;
+
+    overflow-y:auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111c2e,
+            #0b1424
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:26px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.55);
+
+    padding:25px;
+
+    animation:
+        subir .3s ease;
+}
+
+@keyframes subir{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(25px)
+            scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+.modal-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.modal-alumno{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.modal-avatar{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(37,99,235,.25);
+
+}
+
+.modal-alumno h2{
+
+    font-size:20px;
+
+}
+
+.modal-alumno p{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+.cerrar-modal{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.cerrar-modal:hover{
+
+    background:
+        rgba(239,68,68,.20);
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* PROMEDIO */
+
+.detalle-promedio{
+
+    text-align:center;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.12),
+            rgba(124,58,237,.08)
+        );
+
+    border:
+        1px solid
+        rgba(59,130,246,.10);
+
+    margin-bottom:18px;
+
+}
+
+.detalle-promedio-label{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+}
+
+.detalle-promedio-numero{
+
+    font-size:52px;
+
+    font-weight:900;
+
+    margin:8px 0 15px;
+
+}
+
+.detalle-barra{
+
+    width:100%;
+
+    height:8px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+}
+
+.detalle-barra-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    transition:
+        width 1s ease;
+
+}
+
+
+/* STATS */
+
+.detalle-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+    margin-bottom:22px;
+
+}
+
+.detalle-stat{
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    padding:16px;
+
+    border-radius:15px;
+
+}
+
+.detalle-stat span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+}
+
+.detalle-stat strong{
+
+    font-size:20px;
+
+}
+
+
+/* MATERIAS */
+
+.detalle-titulo{
+
+    font-size:14px;
+
+    margin-bottom:12px;
+
+}
+
+.detalle-materias{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:9px;
+
+}
+
+.detalle-materia{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:
+        rgba(51,65,85,.35);
+
+    border:
+        1px solid
+        rgba(255,255,255,.04);
+
+    transition:.2s;
+
+}
+
+.detalle-materia:hover{
+
+    background:
+        rgba(59,130,246,.08);
+
+    transform:
+        translateX(3px);
+
+}
+
+.detalle-materia-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.detalle-materia-icon{
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(59,130,246,.12);
+
+}
+
+.detalle-materia-nombre{
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.detalle-materia-grupo{
+
+    color:#64748b;
+
+    font-size:9px;
+
+    margin-top:3px;
+
+}
+
+.detalle-nota{
+
+    font-size:15px;
+
+    font-weight:900;
+
+}
+
+
+/* BOTON BOLETA */
+
+.detalle-boleta{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    transition:.2s;
+
+}
+
+.detalle-boleta:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(34,197,94,.20);
+
+}
+
+
+@media(max-width:500px){
+
+    .modal-overlay{
+
+        padding:10px;
+
+        align-items:flex-end;
+
+    }
+
+    .modal-detalle{
+
+        max-height:92vh;
+
+        border-radius:
+            24px 24px 0 0;
+
+        padding:20px;
+
+    }
+
+    .detalle-promedio-numero{
+
+        font-size:45px;
+
+    }
+
+}
 
 }
 
