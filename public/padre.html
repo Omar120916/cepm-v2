@@ -41,8 +41,6 @@ content="#07111f">
 
     --card:rgba(15,23,42,.72);
 
-    --card2:#172337;
-
     --blue:#3b82f6;
     --blue2:#2563eb;
 
@@ -94,7 +92,7 @@ body{
 
 
 /* =====================================================
-   DECORATION
+   BACKGROUND
 ===================================================== */
 
 .background{
@@ -158,17 +156,11 @@ body{
 
     0%,
     100%{
-
-        transform:
-            translateY(0);
-
+        transform:translateY(0);
     }
 
     50%{
-
-        transform:
-            translateY(-20px);
-
+        transform:translateY(-20px);
     }
 
 }
@@ -209,7 +201,7 @@ body{
 }
 
 
-/* logo */
+/* LOGO */
 
 .logo{
 
@@ -278,7 +270,7 @@ body{
 }
 
 
-/* navigation */
+/* NAVEGACIÓN */
 
 .nav-title{
 
@@ -670,7 +662,7 @@ body{
 }
 
 
-/* child header */
+/* HEADER HIJO */
 
 .hijo-header{
 
@@ -727,7 +719,7 @@ body{
 
 
 /* =====================================================
-   AVERAGE
+   PROMEDIO
 ===================================================== */
 
 .promedio-box{
@@ -800,7 +792,9 @@ body{
 }
 
 
-/* colors */
+/* =====================================================
+   COLORS
+===================================================== */
 
 .verde{
 
@@ -840,7 +834,7 @@ body{
 
 
 /* =====================================================
-   GRADES
+   CALIFICACIONES
 ===================================================== */
 
 .calificaciones-title{
@@ -1008,12 +1002,505 @@ body{
 
 
 /* =====================================================
-   MOBILE BUTTON
+   MODAL DETALLE
 ===================================================== */
 
-.mobile-menu{
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(2,6,23,.82);
+
+    backdrop-filter:
+        blur(12px);
 
     display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:9999;
+
+    opacity:0;
+
+    transition:
+        opacity .25s ease;
+
+}
+
+.modal-overlay.show{
+
+    display:flex;
+
+    opacity:1;
+
+}
+
+.modal-detalle{
+
+    width:100%;
+
+    max-width:720px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111c2e,
+            #0b1424
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:26px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.60);
+
+    padding:25px;
+
+    transform:
+        translateY(25px)
+        scale(.97);
+
+    transition:
+        transform .3s ease;
+
+}
+
+.modal-overlay.show
+.modal-detalle{
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.modal-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:22px;
+
+}
+
+.modal-alumno{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.modal-avatar{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(37,99,235,.25);
+
+}
+
+.modal-alumno h2{
+
+    font-size:21px;
+
+}
+
+.modal-alumno p{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    margin-top:4px;
+
+}
+
+.cerrar-modal{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:21px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.cerrar-modal:hover{
+
+    background:
+        rgba(239,68,68,.20);
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* =====================================================
+   MODAL PROMEDIO
+===================================================== */
+
+.detalle-promedio{
+
+    text-align:center;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.13),
+            rgba(124,58,237,.10)
+        );
+
+    border:
+        1px solid
+        rgba(59,130,246,.12);
+
+    margin-bottom:18px;
+
+}
+
+.detalle-promedio-label{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+}
+
+.detalle-promedio-numero{
+
+    font-size:52px;
+
+    font-weight:900;
+
+    margin:8px 0 10px;
+
+}
+
+.detalle-estado{
+
+    display:inline-flex;
+
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    margin-bottom:17px;
+
+    background:
+        rgba(255,255,255,.06);
+
+}
+
+.detalle-barra{
+
+    width:100%;
+
+    height:8px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+}
+
+.detalle-barra-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    transition:
+        width 1s ease;
+
+}
+
+
+/* =====================================================
+   MODAL STATS
+===================================================== */
+
+.detalle-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+    margin-bottom:22px;
+
+}
+
+.detalle-stat{
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    padding:16px;
+
+    border-radius:15px;
+
+}
+
+.detalle-stat span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+}
+
+.detalle-stat strong{
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   MATERIAS DEL MODAL
+===================================================== */
+
+.detalle-titulo{
+
+    font-size:14px;
+
+    margin-bottom:12px;
+
+}
+
+.detalle-materias{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:9px;
+
+}
+
+.detalle-materia{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:
+        rgba(51,65,85,.35);
+
+    border:
+        1px solid
+        rgba(255,255,255,.04);
+
+    transition:.2s;
+
+}
+
+.detalle-materia:hover{
+
+    background:
+        rgba(59,130,246,.08);
+
+    transform:
+        translateX(3px);
+
+}
+
+.detalle-materia-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.detalle-materia-icon{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(59,130,246,.12);
+
+}
+
+.detalle-materia-nombre{
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.detalle-materia-grupo{
+
+    color:#64748b;
+
+    font-size:9px;
+
+    margin-top:3px;
+
+}
+
+.detalle-nota{
+
+    font-size:16px;
+
+    font-weight:900;
+
+}
+
+
+/* =====================================================
+   MODAL BOLETA
+===================================================== */
+
+.detalle-boleta{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    transition:.2s;
+
+}
+
+.detalle-boleta:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(34,197,94,.20);
 
 }
 
@@ -1046,6 +1533,7 @@ body{
     }
 
 }
+
 
 @media(max-width:750px){
 
@@ -1115,11 +1603,13 @@ body{
 
     .stats{
 
-        grid-template-columns:1fr;
+        grid-template-columns:
+            1fr;
 
     }
 
 }
+
 
 @media(max-width:500px){
 
@@ -1178,497 +1668,6 @@ body{
         grid-template-columns:1fr;
 
     }
-    /* =====================================================
-   MODAL DETALLE ALUMNO
-===================================================== */
-
-.modal-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(2,6,23,.78);
-
-    backdrop-filter:
-        blur(10px);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:9999;
-
-    animation:
-        aparecer .25s ease;
-}
-
-.modal-overlay.show{
-
-    display:flex;
-
-}
-
-@keyframes aparecer{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-
-}
-
-.modal-detalle{
-
-    width:100%;
-
-    max-width:700px;
-
-    max-height:
-        90vh;
-
-    overflow-y:auto;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111c2e,
-            #0b1424
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    border-radius:26px;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.55);
-
-    padding:25px;
-
-    animation:
-        subir .3s ease;
-}
-
-@keyframes subir{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(25px)
-            scale(.97);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-.modal-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:25px;
-
-}
-
-.modal-alumno{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-}
-
-.modal-avatar{
-
-    width:58px;
-
-    height:58px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:27px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #7c3aed
-        );
-
-    box-shadow:
-        0 10px 25px
-        rgba(37,99,235,.25);
-
-}
-
-.modal-alumno h2{
-
-    font-size:20px;
-
-}
-
-.modal-alumno p{
-
-    color:#94a3b8;
-
-    font-size:11px;
-
-    margin-top:4px;
-
-}
-
-.cerrar-modal{
-
-    width:38px;
-
-    height:38px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.cerrar-modal:hover{
-
-    background:
-        rgba(239,68,68,.20);
-
-    transform:
-        rotate(90deg);
-
-}
-
-
-/* PROMEDIO */
-
-.detalle-promedio{
-
-    text-align:center;
-
-    padding:25px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(37,99,235,.12),
-            rgba(124,58,237,.08)
-        );
-
-    border:
-        1px solid
-        rgba(59,130,246,.10);
-
-    margin-bottom:18px;
-
-}
-
-.detalle-promedio-label{
-
-    color:#94a3b8;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-}
-
-.detalle-promedio-numero{
-
-    font-size:52px;
-
-    font-weight:900;
-
-    margin:8px 0 15px;
-
-}
-
-.detalle-barra{
-
-    width:100%;
-
-    height:8px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    overflow:hidden;
-
-}
-
-.detalle-barra-fill{
-
-    height:100%;
-
-    border-radius:20px;
-
-    transition:
-        width 1s ease;
-
-}
-
-
-/* STATS */
-
-.detalle-stats{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:12px;
-
-    margin-bottom:22px;
-
-}
-
-.detalle-stat{
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-    padding:16px;
-
-    border-radius:15px;
-
-}
-
-.detalle-stat span{
-
-    display:block;
-
-    color:#64748b;
-
-    font-size:10px;
-
-    font-weight:800;
-
-    margin-bottom:6px;
-
-}
-
-.detalle-stat strong{
-
-    font-size:20px;
-
-}
-
-
-/* MATERIAS */
-
-.detalle-titulo{
-
-    font-size:14px;
-
-    margin-bottom:12px;
-
-}
-
-.detalle-materias{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:9px;
-
-}
-
-.detalle-materia{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    padding:14px;
-
-    border-radius:14px;
-
-    background:
-        rgba(51,65,85,.35);
-
-    border:
-        1px solid
-        rgba(255,255,255,.04);
-
-    transition:.2s;
-
-}
-
-.detalle-materia:hover{
-
-    background:
-        rgba(59,130,246,.08);
-
-    transform:
-        translateX(3px);
-
-}
-
-.detalle-materia-info{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-.detalle-materia-icon{
-
-    width:36px;
-
-    height:36px;
-
-    border-radius:10px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:
-        rgba(59,130,246,.12);
-
-}
-
-.detalle-materia-nombre{
-
-    font-size:12px;
-
-    font-weight:700;
-
-}
-
-.detalle-materia-grupo{
-
-    color:#64748b;
-
-    font-size:9px;
-
-    margin-top:3px;
-
-}
-
-.detalle-nota{
-
-    font-size:15px;
-
-    font-weight:900;
-
-}
-
-
-/* BOTON BOLETA */
-
-.detalle-boleta{
-
-    width:100%;
-
-    margin-top:20px;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:14px;
-
-    color:white;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #16a34a,
-            #22c55e
-        );
-
-    transition:.2s;
-
-}
-
-.detalle-boleta:hover{
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(34,197,94,.20);
-
-}
-
-
-@media(max-width:500px){
 
     .modal-overlay{
 
@@ -1695,7 +1694,37 @@ body{
 
     }
 
+    .detalle-stats{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
 }
+
+
+/* =====================================================
+   SCROLLBAR MODAL
+===================================================== */
+
+.modal-detalle::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.modal-detalle::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.modal-detalle::-webkit-scrollbar-thumb{
+
+    background:
+        rgba(255,255,255,.15);
+
+    border-radius:20px;
 
 }
 
@@ -1707,7 +1736,9 @@ body{
 <body>
 
 
-<!-- BACKGROUND -->
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
 <div class="background">
 
@@ -1790,8 +1821,6 @@ body{
 <main class="main">
 
 
-    <!-- TOP -->
-
     <div class="topbar">
 
         <div class="welcome">
@@ -1829,7 +1858,9 @@ body{
     </div>
 
 
-    <!-- STATS -->
+    <!-- =================================================
+         STATS
+    ================================================= -->
 
     <div class="stats">
 
@@ -1919,7 +1950,9 @@ body{
     </div>
 
 
-    <!-- CHILDREN -->
+    <!-- =================================================
+         HIJOS
+    ================================================= -->
 
     <section class="section">
 
@@ -1969,6 +2002,162 @@ body{
 </main>
 
 
+<!-- =====================================================
+     MODAL DETALLE
+===================================================== -->
+
+<div
+    id="modalDetalle"
+    class="modal-overlay"
+    onclick="cerrarDetalle(event)"
+>
+
+    <div
+        class="modal-detalle"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-top">
+
+            <div class="modal-alumno">
+
+                <div
+                    class="modal-avatar"
+                    id="detalleAvatar"
+                >
+                    👨‍🎓
+                </div>
+
+                <div>
+
+                    <h2
+                        id="detalleNombre"
+                    >
+                        Alumno
+                    </h2>
+
+                    <p
+                        id="detalleUsuario"
+                    >
+                        Usuario
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="cerrar-modal"
+                onclick="cerrarDetalle()"
+                title="Cerrar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- PROMEDIO -->
+
+        <div class="detalle-promedio">
+
+            <div class="detalle-promedio-label">
+                PROMEDIO GENERAL
+            </div>
+
+            <div
+                id="detallePromedio"
+                class="detalle-promedio-numero"
+            >
+                0
+            </div>
+
+            <div
+                id="detalleEstado"
+                class="detalle-estado"
+            >
+                Sin calificaciones
+            </div>
+
+            <div class="detalle-barra">
+
+                <div
+                    id="detalleBarra"
+                    class="detalle-barra-fill"
+                    style="width:0%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="detalle-stats">
+
+            <div class="detalle-stat">
+
+                <span>
+                    MATERIAS EVALUADAS
+                </span>
+
+                <strong
+                    id="detalleMaterias"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="detalle-stat">
+
+                <span>
+                    CALIFICACIONES
+                </span>
+
+                <strong
+                    id="detalleCalificaciones"
+                >
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- MATERIAS -->
+
+        <h3 class="detalle-titulo">
+            📚 Rendimiento por materia
+        </h3>
+
+
+        <div
+            id="detalleLista"
+            class="detalle-materias"
+        >
+
+        </div>
+
+
+        <button
+            id="detalleBotonBoleta"
+            class="detalle-boleta"
+        >
+            📄 Descargar boleta
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- PDF -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
@@ -1979,10 +2168,11 @@ body{
 ===================================================== */
 
 const API =
-'https://cepm-v2.onrender.com';
+    'https://cepm-v2.onrender.com';
+
 
 const token =
-localStorage.getItem('token');
+    localStorage.getItem('token');
 
 
 /* =====================================================
@@ -2041,7 +2231,22 @@ actualizarSaludo();
 
 
 /* =====================================================
-   CARGAR INFORMACIÓN
+   VARIABLES GLOBALES
+===================================================== */
+
+let usuariosGlobal = [];
+
+let clasesGlobal = [];
+
+let materiasGlobal = [];
+
+let calificacionesGlobal = [];
+
+let hijosGlobal = [];
+
+
+/* =====================================================
+   CARGAR
 ===================================================== */
 
 async function cargar(){
@@ -2066,7 +2271,13 @@ async function cargar(){
                         Authorization:token
                     }
                 }
-            ).then(r=>r.json());
+            ).then(
+                r=>r.json()
+            );
+
+
+        usuariosGlobal =
+            usuarios;
 
 
         const datosPadre =
@@ -2096,6 +2307,10 @@ async function cargar(){
             );
 
 
+        hijosGlobal =
+            hijos;
+
+
         /* STATS */
 
         document
@@ -2116,8 +2331,16 @@ async function cargar(){
                         Authorization:token
                     }
                 }
-            ).then(r=>r.json());
+            ).then(
+                r=>r.json()
+            );
 
+
+        calificacionesGlobal =
+            calificaciones;
+
+
+        /* CLASES */
 
         const clases =
             await fetch(
@@ -2127,8 +2350,16 @@ async function cargar(){
                         Authorization:token
                     }
                 }
-            ).then(r=>r.json());
+            ).then(
+                r=>r.json()
+            );
 
+
+        clasesGlobal =
+            clases;
+
+
+        /* MATERIAS */
 
         const materias =
             await fetch(
@@ -2138,10 +2369,18 @@ async function cargar(){
                         Authorization:token
                     }
                 }
-            ).then(r=>r.json());
+            ).then(
+                r=>r.json()
+            );
 
 
-        /* CONTADORES */
+        materiasGlobal =
+            materias;
+
+
+        /* =================================================
+           ESTADÍSTICAS FAMILIA
+        ================================================= */
 
         let sumaFamilia = 0;
 
@@ -2160,6 +2399,7 @@ async function cargar(){
                             hijo._id
                     );
 
+
                 calificacionesFamilia +=
                     calHijo.length;
 
@@ -2171,6 +2411,7 @@ async function cargar(){
                             Number(
                                 c.calificacion
                             );
+
 
                         if(!isNaN(valor)){
 
@@ -2219,7 +2460,9 @@ async function cargar(){
                 promedioFamilia;
 
 
-        /* SIN HIJOS */
+        /* =================================================
+           SIN HIJOS
+        ================================================= */
 
         const contenido =
             document
@@ -2256,7 +2499,9 @@ async function cargar(){
         }
 
 
-        /* CREAR TARJETAS */
+        /* =================================================
+           CREAR TARJETAS
+        ================================================= */
 
         contenido.innerHTML =
             hijos.map(
@@ -2282,6 +2527,7 @@ async function cargar(){
                                 Number(
                                     c.calificacion
                                 );
+
 
                             if(!isNaN(valor)){
 
@@ -2426,9 +2672,7 @@ async function cargar(){
                         <div
                             class="calificaciones-title"
                         >
-
                             📝 Calificaciones
-
                         </div>
 
 
@@ -2634,22 +2878,453 @@ async function cargar(){
 
 
 /* =====================================================
-   DETALLE
+   MOSTRAR DETALLE
 ===================================================== */
 
 function mostrarDetalle(
     alumnoId
 ){
 
-    alert(
-        'Aquí podemos poner después un perfil completo del alumno 👨‍🎓🔥'
+    const alumno =
+        hijosGlobal.find(
+            h =>
+                h._id ===
+                alumnoId
+        );
+
+
+    if(!alumno){
+
+        return;
+
+    }
+
+
+    const calHijo =
+        calificacionesGlobal.filter(
+            c =>
+                c.alumnoId ===
+                alumnoId
+        );
+
+
+    /* CALCULAR PROMEDIO */
+
+    let suma = 0;
+
+    let total = 0;
+
+
+    calHijo.forEach(
+        c=>{
+
+            const valor =
+                Number(
+                    c.calificacion
+                );
+
+
+            if(!isNaN(valor)){
+
+                suma +=
+                    valor;
+
+                total++;
+
+            }
+
+        }
     );
+
+
+    const promedio =
+        total > 0
+
+        ?
+
+        (
+            suma /
+            total
+        ).toFixed(1)
+
+        :
+
+        '0';
+
+
+    /* COLOR */
+
+    let color =
+        '#f87171';
+
+    let estado =
+        '⚠️ Necesita mejorar';
+
+
+    if(Number(promedio) >= 9){
+
+        color =
+            '#4ade80';
+
+        estado =
+            '🏆 Excelente rendimiento';
+
+    }
+
+    else if(Number(promedio) >= 7){
+
+        color =
+            '#facc15';
+
+        estado =
+            '👍 Buen rendimiento';
+
+    }
+
+
+    if(total === 0){
+
+        estado =
+            '⏳ Sin calificaciones';
+
+    }
+
+
+    /* INFORMACIÓN */
+
+    document
+        .getElementById(
+            'detalleNombre'
+        )
+        .innerText =
+            alumno.nombre;
+
+
+    document
+        .getElementById(
+            'detalleUsuario'
+        )
+        .innerText =
+            `👤 Usuario: ${alumno.usuario}`;
+
+
+    document
+        .getElementById(
+            'detallePromedio'
+        )
+        .innerText =
+            promedio;
+
+
+    document
+        .getElementById(
+            'detallePromedio'
+        )
+        .style.color =
+            color;
+
+
+    document
+        .getElementById(
+            'detalleEstado'
+        )
+        .innerText =
+            estado;
+
+
+    document
+        .getElementById(
+            'detalleEstado'
+        )
+        .style.color =
+            color;
+
+
+    document
+        .getElementById(
+            'detalleBarra'
+        )
+        .style.width =
+            `${Math.min(
+                Number(promedio) * 10,
+                100
+            )}%`;
+
+
+    document
+        .getElementById(
+            'detalleBarra'
+        )
+        .style.background =
+            color;
+
+
+    document
+        .getElementById(
+            'detalleMaterias'
+        )
+        .innerText =
+            total;
+
+
+    document
+        .getElementById(
+            'detalleCalificaciones'
+        )
+        .innerText =
+            calHijo.length;
+
+
+    /* =================================================
+       LISTA DE MATERIAS
+    ================================================= */
+
+    const lista =
+        document
+            .getElementById(
+                'detalleLista'
+            );
+
+
+    if(calHijo.length === 0){
+
+        lista.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Sin calificaciones
+                </h3>
+
+                <p>
+                    Todavía no existen
+                    evaluaciones registradas.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+    else{
+
+        lista.innerHTML =
+            calHijo.map(
+                c=>{
+
+                    const clase =
+                        clasesGlobal.find(
+                            cl =>
+                                cl._id ===
+                                c.claseId
+                        );
+
+
+                    const materia =
+                        materiasGlobal.find(
+                            m =>
+                                m._id ===
+                                clase?.materiaId
+                        );
+
+
+                    const nota =
+                        Number(
+                            c.calificacion
+                        );
+
+
+                    let colorNota =
+                        '#f87171';
+
+                    let icono =
+                        '📕';
+
+
+                    if(nota >= 9){
+
+                        colorNota =
+                            '#4ade80';
+
+                        icono =
+                            '🏆';
+
+                    }
+
+                    else if(nota >= 7){
+
+                        colorNota =
+                            '#facc15';
+
+                        icono =
+                            '📘';
+
+                    }
+
+
+                    return `
+
+                    <div
+                        class="detalle-materia"
+                    >
+
+                        <div
+                            class="detalle-materia-info"
+                        >
+
+                            <div
+                                class="detalle-materia-icon"
+                            >
+                                ${icono}
+                            </div>
+
+                            <div>
+
+                                <div
+                                    class="detalle-materia-nombre"
+                                >
+                                    ${
+                                        materia?.nombre ||
+                                        'Materia'
+                                    }
+                                </div>
+
+                                <div
+                                    class="detalle-materia-grupo"
+                                >
+                                    ${
+                                        clase?.grupo ||
+                                        'Clase escolar'
+                                    }
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="detalle-nota"
+                            style="
+                                color:${colorNota};
+                            "
+                        >
+
+                            ⭐
+                            ${c.calificacion}
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            )
+            .join('');
+
+    }
+
+
+    /* BOTÓN BOLETA */
+
+    document
+        .getElementById(
+            'detalleBotonBoleta'
+        )
+        .onclick =
+            () =>
+                generarBoleta(
+                    alumnoId
+                );
+
+
+    /* ABRIR MODAL */
+
+    const modal =
+        document
+            .getElementById(
+                'modalDetalle'
+            );
+
+
+    modal.classList.add(
+        'show'
+    );
+
+
+    document.body.style.overflow =
+        'hidden';
 
 }
 
 
 /* =====================================================
-   BOLETA
+   CERRAR DETALLE
+===================================================== */
+
+function cerrarDetalle(
+    event
+){
+
+    if(
+        event &&
+        event.target &&
+        event.target.id !==
+        'modalDetalle'
+    ){
+
+        return;
+
+    }
+
+
+    const modal =
+        document
+            .getElementById(
+                'modalDetalle'
+            );
+
+
+    modal.classList.remove(
+        'show'
+    );
+
+
+    document.body.style.overflow =
+        '';
+
+}
+
+
+/* =====================================================
+   ESC PARA CERRAR
+===================================================== */
+
+document.addEventListener(
+    'keydown',
+    event=>{
+
+        if(
+            event.key ===
+            'Escape'
+        ){
+
+            cerrarDetalle();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   BOLETA PDF
 ===================================================== */
 
 async function generarBoleta(
@@ -2664,76 +3339,31 @@ async function generarBoleta(
             window.jspdf;
 
 
-        const doc =
-            new jsPDF();
-
-
-        /* USUARIOS */
-
-        const usuarios =
-            await fetch(
-                `${API}/usuarios`,
-                {
-                    headers:{
-                        Authorization:token
-                    }
-                }
-            ).then(
-                r=>r.json()
-            );
-
-
         const alumno =
-            usuarios.find(
+            usuariosGlobal.find(
                 u =>
                     u._id ===
                     alumnoId
             );
 
 
-        /* CLASES */
+        if(!alumno){
 
-        const clases =
-            await fetch(
-                `${API}/clases`,
-                {
-                    headers:{
-                        Authorization:token
-                    }
-                }
-            ).then(
-                r=>r.json()
-            );
+            return;
 
+        }
 
-        /* MATERIAS */
-
-        const materias =
-            await fetch(
-                `${API}/materias`,
-                {
-                    headers:{
-                        Authorization:token
-                    }
-                }
-            ).then(
-                r=>r.json()
-            );
-
-
-        /* CALIFICACIONES */
 
         const calificaciones =
-            await fetch(
-                `${API}/calificaciones`,
-                {
-                    headers:{
-                        Authorization:token
-                    }
-                }
-            ).then(
-                r=>r.json()
+            calificacionesGlobal.filter(
+                c =>
+                    c.alumnoId ===
+                    alumnoId
             );
+
+
+        const doc =
+            new jsPDF();
 
 
         /* ENCABEZADO */
@@ -2764,16 +3394,11 @@ async function generarBoleta(
 
 
         calificaciones
-        .filter(
-            c =>
-                c.alumnoId ===
-                alumnoId
-        )
         .forEach(
             c=>{
 
                 const clase =
-                    clases.find(
+                    clasesGlobal.find(
                         cl =>
                             cl._id ===
                             c.claseId
@@ -2781,22 +3406,21 @@ async function generarBoleta(
 
 
                 const materia =
-                    materias.find(
+                    materiasGlobal.find(
                         m =>
                             m._id ===
                             clase?.materiaId
                     );
 
 
-                const texto =
-
-                    `${materia?.nombre || 'Materia'} : ${c.calificacion}`;
-
-
                 doc.text(
-                    texto,
+
+                    `${materia?.nombre || 'Materia'} : ${c.calificacion}`,
+
                     20,
+
                     y
+
                 );
 
 
@@ -2810,6 +3434,15 @@ async function generarBoleta(
 
 
                 y += 10;
+
+
+                if(y > 270){
+
+                    doc.addPage();
+
+                    y = 20;
+
+                }
 
             }
         );
@@ -2869,11 +3502,99 @@ async function generarBoleta(
             error
         );
 
-        alert(
-            '❌ No se pudo generar la boleta.'
+        /* En lugar de alert,
+           mostramos un mensaje bonito */
+
+        mostrarMensajeError(
+            'No se pudo generar la boleta.'
         );
 
     }
+
+}
+
+
+/* =====================================================
+   MENSAJE BONITO
+===================================================== */
+
+function mostrarMensajeError(
+    mensaje
+){
+
+    const modal =
+        document.getElementById(
+            'modalDetalle'
+        );
+
+
+    const detalle =
+        modal.querySelector(
+            '.modal-detalle'
+        );
+
+
+    const existente =
+        document.getElementById(
+            'mensajeErrorCEPM'
+        );
+
+
+    if(existente){
+
+        existente.remove();
+
+    }
+
+
+    const aviso =
+        document.createElement(
+            'div'
+        );
+
+
+    aviso.id =
+        'mensajeErrorCEPM';
+
+
+    aviso.style.cssText = `
+
+        margin-top:15px;
+
+        padding:13px;
+
+        border-radius:13px;
+
+        background:
+            rgba(239,68,68,.12);
+
+        border:
+            1px solid
+            rgba(239,68,68,.20);
+
+        color:#fca5a5;
+
+        text-align:center;
+
+        font-size:11px;
+
+        font-weight:800;
+
+    `;
+
+
+    aviso.innerHTML =
+        `⚠️ ${mensaje}`;
+
+
+    detalle.appendChild(
+        aviso
+    );
+
+
+    modal.classList.add(
+        'show'
+    );
 
 }
 
@@ -2885,8 +3606,11 @@ async function generarBoleta(
 function irInicio(){
 
     window.scrollTo({
+
         top:0,
+
         behavior:'smooth'
+
     });
 
 }
