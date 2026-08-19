@@ -5,20 +5,14 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link
-    rel="manifest"
-    href="/manifest.json"
->
+<link rel="manifest"
+href="/manifest.json">
 
-<meta
-    name="theme-color"
-    content="#070b14"
->
+<meta name="theme-color"
+content="#070b14">
 
 <title>CEPM | Administración</title>
 
@@ -32,7 +26,6 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-
     font-family:
         Inter,
         "Segoe UI",
@@ -63,6 +56,7 @@
     --muted2:#64748b;
 
     --border:rgba(255,255,255,.08);
+
 }
 
 html{
@@ -95,6 +89,7 @@ body{
         );
 
     color:var(--text);
+
 }
 
 
@@ -112,6 +107,7 @@ body{
     pointer-events:none;
 
     z-index:-1;
+
 }
 
 .orb{
@@ -124,8 +120,8 @@ body{
 
     opacity:.25;
 
-    animation:
-        flotar 10s ease-in-out infinite;
+    animation:flotar 10s ease-in-out infinite;
+
 }
 
 .orb1{
@@ -137,6 +133,7 @@ body{
 
     top:-180px;
     left:-150px;
+
 }
 
 .orb2{
@@ -150,6 +147,7 @@ body{
     bottom:-150px;
 
     animation-delay:2s;
+
 }
 
 @keyframes flotar{
@@ -161,6 +159,7 @@ body{
     50%{
         transform:translateY(-25px);
     }
+
 }
 
 
@@ -197,6 +196,7 @@ body{
     flex-direction:column;
 
     overflow-y:auto;
+
 }
 
 
@@ -218,6 +218,7 @@ body{
         var(--border);
 
     margin-bottom:22px;
+
 }
 
 .logo-icon{
@@ -244,6 +245,7 @@ body{
     box-shadow:
         0 10px 30px
         rgba(37,99,235,.25);
+
 }
 
 .logo h1{
@@ -253,6 +255,7 @@ body{
     font-weight:900;
 
     letter-spacing:-.5px;
+
 }
 
 .logo p{
@@ -262,6 +265,7 @@ body{
     font-size:10px;
 
     margin-top:3px;
+
 }
 
 
@@ -269,7 +273,8 @@ body{
 
 .nav-label{
 
-    color:var(--muted2);
+    color:
+        var(--muted2);
 
     font-size:9px;
 
@@ -279,6 +284,7 @@ body{
 
     padding:
         0 11px 10px;
+
 }
 
 .nav-button{
@@ -312,6 +318,7 @@ body{
     text-align:left;
 
     transition:.22s;
+
 }
 
 .nav-button .nav-icon{
@@ -321,6 +328,7 @@ body{
     font-size:17px;
 
     text-align:center;
+
 }
 
 .nav-button:hover{
@@ -332,6 +340,7 @@ body{
 
     transform:
         translateX(2px);
+
 }
 
 .nav-button.active{
@@ -352,6 +361,7 @@ body{
     box-shadow:
         0 8px 25px
         rgba(0,0,0,.10);
+
 }
 
 
@@ -366,17 +376,20 @@ body{
     border-top:
         1px solid
         var(--border);
+
 }
 
 .logout-side{
 
     color:#fca5a5;
+
 }
 
 .logout-side:hover{
 
     background:
         rgba(239,68,68,.10);
+
 }
 
 
@@ -391,6 +404,7 @@ body{
     min-height:100vh;
 
     padding:28px;
+
 }
 
 
@@ -409,6 +423,7 @@ body{
     gap:20px;
 
     margin-bottom:28px;
+
 }
 
 .top-left h1{
@@ -416,6 +431,7 @@ body{
     font-size:28px;
 
     letter-spacing:-.8px;
+
 }
 
 .top-left p{
@@ -425,6 +441,7 @@ body{
     font-size:12px;
 
     margin-top:5px;
+
 }
 
 .top-right{
@@ -434,6 +451,7 @@ body{
     align-items:center;
 
     gap:10px;
+
 }
 
 .clock{
@@ -454,6 +472,7 @@ body{
     font-size:12px;
 
     font-weight:700;
+
 }
 
 .admin-badge{
@@ -464,8 +483,7 @@ body{
 
     gap:9px;
 
-    padding:
-        7px 12px 7px 7px;
+    padding:7px 12px 7px 7px;
 
     border-radius:14px;
 
@@ -475,6 +493,7 @@ body{
     border:
         1px solid
         var(--border);
+
 }
 
 .admin-avatar{
@@ -495,6 +514,7 @@ body{
             #2563eb,
             #7c3aed
         );
+
 }
 
 .admin-badge span{
@@ -502,6 +522,7 @@ body{
     font-size:11px;
 
     font-weight:800;
+
 }
 
 
@@ -515,11 +536,13 @@ body{
 
     animation:
         vista .25s ease;
+
 }
 
 .view.active{
 
     display:block;
+
 }
 
 @keyframes vista{
@@ -530,6 +553,7 @@ body{
 
         transform:
             translateY(8px);
+
     }
 
     to{
@@ -538,7 +562,9 @@ body{
 
         transform:
             translateY(0);
+
     }
+
 }
 
 
@@ -568,11 +594,13 @@ body{
     padding:27px;
 
     margin-bottom:20px;
+
 }
 
 .welcome-card h2{
 
     font-size:22px;
+
 }
 
 .welcome-card p{
@@ -582,6 +610,7 @@ body{
     font-size:12px;
 
     margin-top:7px;
+
 }
 
 .welcome-decoration{
@@ -598,12 +627,11 @@ body{
     font-size:65px;
 
     opacity:.15;
+
 }
 
 
-/* =====================================================
-   STATS
-===================================================== */
+/* STATS */
 
 .stats{
 
@@ -615,6 +643,7 @@ body{
     gap:15px;
 
     margin-bottom:20px;
+
 }
 
 .stat{
@@ -634,6 +663,7 @@ body{
         blur(15px);
 
     transition:.22s;
+
 }
 
 .stat:hover{
@@ -643,6 +673,7 @@ body{
 
     border-color:
         rgba(59,130,246,.18);
+
 }
 
 .stat-head{
@@ -652,6 +683,7 @@ body{
     justify-content:space-between;
 
     align-items:center;
+
 }
 
 .stat-label{
@@ -661,6 +693,7 @@ body{
     font-size:10px;
 
     font-weight:800;
+
 }
 
 .stat-icon{
@@ -679,6 +712,7 @@ body{
         rgba(59,130,246,.11);
 
     font-size:18px;
+
 }
 
 .stat-number{
@@ -688,6 +722,7 @@ body{
     font-weight:900;
 
     margin-top:12px;
+
 }
 
 .stat-description{
@@ -697,12 +732,11 @@ body{
     font-size:9px;
 
     margin-top:4px;
+
 }
 
 
-/* =====================================================
-   DASHBOARD GRID
-===================================================== */
+/* DASHBOARD GRID */
 
 .dashboard-grid{
 
@@ -712,6 +746,7 @@ body{
         1.3fr .7fr;
 
     gap:18px;
+
 }
 
 .panel{
@@ -729,6 +764,7 @@ body{
 
     backdrop-filter:
         blur(15px);
+
 }
 
 .panel-title{
@@ -740,11 +776,13 @@ body{
     align-items:center;
 
     margin-bottom:18px;
+
 }
 
 .panel-title h3{
 
     font-size:15px;
+
 }
 
 .panel-title span{
@@ -752,12 +790,11 @@ body{
     color:var(--muted2);
 
     font-size:10px;
+
 }
 
 
-/* =====================================================
-   QUICK ACTIONS
-===================================================== */
+/* QUICK ACTIONS */
 
 .quick-actions{
 
@@ -767,6 +804,7 @@ body{
         repeat(2,1fr);
 
     gap:10px;
+
 }
 
 .quick{
@@ -789,6 +827,7 @@ body{
     text-align:left;
 
     transition:.2s;
+
 }
 
 .quick:hover{
@@ -801,6 +840,7 @@ body{
 
     transform:
         translateY(-2px);
+
 }
 
 .quick-icon{
@@ -808,6 +848,7 @@ body{
     font-size:22px;
 
     margin-bottom:8px;
+
 }
 
 .quick strong{
@@ -815,6 +856,7 @@ body{
     display:block;
 
     font-size:11px;
+
 }
 
 .quick small{
@@ -822,6 +864,7 @@ body{
     color:var(--muted);
 
     font-size:9px;
+
 }
 
 
@@ -840,11 +883,13 @@ body{
     gap:15px;
 
     margin-bottom:20px;
+
 }
 
 .section-title h2{
 
     font-size:19px;
+
 }
 
 .section-title p{
@@ -854,6 +899,7 @@ body{
     font-size:11px;
 
     margin-top:4px;
+
 }
 
 .header-actions{
@@ -861,6 +907,7 @@ body{
     display:flex;
 
     gap:8px;
+
 }
 
 
@@ -885,21 +932,14 @@ body{
     color:white;
 
     transition:.2s;
+
 }
 
 .btn:hover{
 
     transform:
         translateY(-2px);
-}
 
-.btn:disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
-
-    transform:none;
 }
 
 .btn-primary{
@@ -910,6 +950,7 @@ body{
             #2563eb,
             #3b82f6
         );
+
 }
 
 .btn-success{
@@ -920,6 +961,7 @@ body{
             #16a34a,
             #22c55e
         );
+
 }
 
 .btn-danger{
@@ -928,6 +970,7 @@ body{
         rgba(239,68,68,.13);
 
     color:#fca5a5;
+
 }
 
 .btn-secondary{
@@ -938,6 +981,7 @@ body{
     border:
         1px solid
         var(--border);
+
 }
 
 
@@ -956,6 +1000,7 @@ body{
     gap:12px;
 
     margin-bottom:15px;
+
 }
 
 .search{
@@ -963,14 +1008,14 @@ body{
     flex:1;
 
     position:relative;
+
 }
 
 .search input{
 
     width:100%;
 
-    padding:
-        12px 14px 12px 40px;
+    padding:12px 14px 12px 40px;
 
     margin:0;
 
@@ -986,12 +1031,14 @@ body{
     color:white;
 
     outline:none;
+
 }
 
 .search input:focus{
 
     border-color:
         rgba(59,130,246,.45);
+
 }
 
 .search-icon{
@@ -1006,6 +1053,7 @@ body{
         translateY(-50%);
 
     color:var(--muted);
+
 }
 
 
@@ -1024,6 +1072,7 @@ body{
         );
 
     gap:13px;
+
 }
 
 .item-card{
@@ -1044,6 +1093,7 @@ body{
     padding:17px;
 
     transition:.2s;
+
 }
 
 .item-card:hover{
@@ -1053,6 +1103,7 @@ body{
 
     transform:
         translateY(-2px);
+
 }
 
 .item-head{
@@ -1064,6 +1115,7 @@ body{
     gap:11px;
 
     margin-bottom:13px;
+
 }
 
 .item-avatar{
@@ -1087,23 +1139,12 @@ body{
 
     font-size:20px;
 
-    flex-shrink:0;
-}
-
-.item-info{
-
-    min-width:0;
 }
 
 .item-info h3{
 
     font-size:13px;
 
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
 }
 
 .item-info p{
@@ -1113,6 +1154,7 @@ body{
     font-size:9px;
 
     margin-top:3px;
+
 }
 
 .item-line{
@@ -1123,7 +1165,6 @@ body{
 
     margin-top:6px;
 
-    word-break:break-word;
 }
 
 .item-actions{
@@ -1133,6 +1174,7 @@ body{
     gap:7px;
 
     margin-top:13px;
+
 }
 
 .item-actions .btn{
@@ -1140,6 +1182,7 @@ body{
     flex:1;
 
     padding:9px;
+
 }
 
 
@@ -1154,6 +1197,7 @@ body{
     padding:45px 20px;
 
     color:var(--muted);
+
 }
 
 .empty-icon{
@@ -1161,6 +1205,7 @@ body{
     font-size:38px;
 
     margin-bottom:10px;
+
 }
 
 .empty h3{
@@ -1168,6 +1213,7 @@ body{
     color:#cbd5e1;
 
     font-size:14px;
+
 }
 
 .empty p{
@@ -1175,6 +1221,7 @@ body{
     font-size:10px;
 
     margin-top:5px;
+
 }
 
 
@@ -1203,11 +1250,13 @@ body{
     padding:20px;
 
     z-index:9999;
+
 }
 
 .modal-overlay.show{
 
     display:flex;
+
 }
 
 .modal{
@@ -1241,6 +1290,7 @@ body{
 
     animation:
         modalIn .25s ease;
+
 }
 
 @keyframes modalIn{
@@ -1252,6 +1302,7 @@ body{
         transform:
             translateY(20px)
             scale(.97);
+
     }
 
     to{
@@ -1261,7 +1312,9 @@ body{
         transform:
             translateY(0)
             scale(1);
+
     }
+
 }
 
 .modal-header{
@@ -1273,11 +1326,13 @@ body{
     align-items:center;
 
     margin-bottom:20px;
+
 }
 
 .modal-header h2{
 
     font-size:18px;
+
 }
 
 .modal-close{
@@ -1297,17 +1352,20 @@ body{
     cursor:pointer;
 
     font-size:18px;
+
 }
 
 .modal-close:hover{
 
     background:
         rgba(239,68,68,.15);
+
 }
 
 .form-group{
 
     margin-bottom:13px;
+
 }
 
 .form-group label{
@@ -1321,6 +1379,7 @@ body{
     font-weight:800;
 
     margin-bottom:6px;
+
 }
 
 .form-group input,
@@ -1344,6 +1403,7 @@ body{
     color:white;
 
     outline:none;
+
 }
 
 .form-group input:focus,
@@ -1351,18 +1411,19 @@ body{
 
     border-color:
         rgba(59,130,246,.4);
+
 }
 
 .form-group select{
 
     color:white;
+
 }
 
 .form-group select option{
 
     background:#111827;
 
-    color:white;
 }
 
 .modal-footer{
@@ -1374,6 +1435,7 @@ body{
     gap:8px;
 
     margin-top:20px;
+
 }
 
 
@@ -1396,6 +1458,7 @@ body{
     flex-direction:column;
 
     gap:10px;
+
 }
 
 .toast{
@@ -1427,6 +1490,7 @@ body{
 
     animation:
         toastIn .3s ease;
+
 }
 
 .toast-icon{
@@ -1443,25 +1507,27 @@ body{
 
     font-size:17px;
 
-    flex-shrink:0;
 }
 
 .toast.success .toast-icon{
 
     background:
         rgba(34,197,94,.13);
+
 }
 
 .toast.error .toast-icon{
 
     background:
         rgba(239,68,68,.13);
+
 }
 
 .toast.info .toast-icon{
 
     background:
         rgba(59,130,246,.13);
+
 }
 
 .toast-text strong{
@@ -1469,6 +1535,7 @@ body{
     display:block;
 
     font-size:11px;
+
 }
 
 .toast-text span{
@@ -1480,6 +1547,7 @@ body{
     font-size:9px;
 
     margin-top:3px;
+
 }
 
 @keyframes toastIn{
@@ -1490,6 +1558,7 @@ body{
 
         transform:
             translateX(25px);
+
     }
 
     to{
@@ -1498,7 +1567,9 @@ body{
 
         transform:
             translateX(0);
+
     }
+
 }
 
 
@@ -1516,6 +1587,7 @@ body{
     gap:9px;
 
     margin-bottom:15px;
+
 }
 
 .class-info{
@@ -1526,6 +1598,7 @@ body{
 
     background:
         rgba(255,255,255,.035);
+
 }
 
 .class-info span{
@@ -1537,11 +1610,13 @@ body{
     font-size:9px;
 
     margin-bottom:4px;
+
 }
 
 .class-info strong{
 
     font-size:11px;
+
 }
 
 
@@ -1552,6 +1627,7 @@ body{
 .mobile-top{
 
     display:none;
+
 }
 
 @media(max-width:1050px){
@@ -1560,12 +1636,15 @@ body{
 
         grid-template-columns:
             repeat(2,1fr);
+
     }
 
     .dashboard-grid{
 
         grid-template-columns:1fr;
+
     }
+
 }
 
 @media(max-width:800px){
@@ -1575,6 +1654,7 @@ body{
         width:76px;
 
         padding:15px 9px;
+
     }
 
     .logo{
@@ -1583,12 +1663,14 @@ body{
 
         padding-left:0;
         padding-right:0;
+
     }
 
     .logo-icon{
 
         width:43px;
         height:43px;
+
     }
 
     .logo > div:last-child,
@@ -1596,6 +1678,7 @@ body{
     .nav-label{
 
         display:none;
+
     }
 
     .nav-button{
@@ -1603,11 +1686,13 @@ body{
         justify-content:center;
 
         padding:12px;
+
     }
 
     .nav-button .nav-icon{
 
         width:auto;
+
     }
 
     .main{
@@ -1615,7 +1700,9 @@ body{
         margin-left:76px;
 
         padding:20px;
+
     }
+
 }
 
 @media(max-width:600px){
@@ -1625,6 +1712,7 @@ body{
         margin-left:0;
 
         padding:14px;
+
     }
 
     .sidebar{
@@ -1652,6 +1740,7 @@ body{
         border-bottom:
             1px solid
             var(--border);
+
     }
 
     .logo{
@@ -1661,12 +1750,14 @@ body{
         margin:0;
 
         padding:0 5px;
+
     }
 
     .sidebar .nav-label,
     .sidebar-bottom{
 
         display:none;
+
     }
 
     .nav-button{
@@ -1678,46 +1769,55 @@ body{
         margin:0;
 
         padding:9px;
+
     }
 
     .nav-button span:last-child{
 
         display:none;
+
     }
 
     .main{
 
         padding-top:85px;
+
     }
 
     .topbar{
 
         align-items:flex-start;
+
     }
 
     .top-right .clock{
 
         display:none;
+
     }
 
     .top-left h1{
 
         font-size:22px;
+
     }
 
     .stats{
 
         grid-template-columns:1fr 1fr;
+
     }
 
     .stat{
 
         padding:15px;
+
     }
 
     .stat-number{
 
         font-size:23px;
+
     }
 
     .section-header{
@@ -1725,16 +1825,19 @@ body{
         align-items:flex-start;
 
         flex-direction:column;
+
     }
 
     .header-actions{
 
         width:100%;
+
     }
 
     .header-actions .btn{
 
         flex:1;
+
     }
 
     .toolbar{
@@ -1742,11 +1845,13 @@ body{
         flex-direction:column;
 
         align-items:stretch;
+
     }
 
     .quick-actions{
 
         grid-template-columns:1fr;
+
     }
 
     .modal-overlay{
@@ -1754,6 +1859,7 @@ body{
         padding:10px;
 
         align-items:flex-end;
+
     }
 
     .modal{
@@ -1762,28 +1868,9 @@ body{
 
         border-radius:
             22px 22px 0 0;
+
     }
 
-    .class-details{
-
-        grid-template-columns:1fr;
-    }
-
-    .toast-container{
-
-        left:12px;
-
-        right:12px;
-
-        bottom:12px;
-    }
-
-    .toast{
-
-        min-width:0;
-
-        width:100%;
-    }
 }
 
 @media(max-width:400px){
@@ -1791,7 +1878,9 @@ body{
     .stats{
 
         grid-template-columns:1fr;
+
     }
+
 }
 
 
@@ -1803,18 +1892,22 @@ body{
 
     width:7px;
     height:7px;
+
 }
 
 ::-webkit-scrollbar-track{
 
     background:transparent;
+
 }
 
 ::-webkit-scrollbar-thumb{
 
-    background:#334155;
+    background:
+        #334155;
 
     border-radius:20px;
+
 }
 
 </style>
@@ -1825,14 +1918,9 @@ body{
 <body>
 
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
-
 <div class="background">
 
     <div class="orb orb1"></div>
-
     <div class="orb orb2"></div>
 
 </div>
@@ -1854,9 +1942,7 @@ body{
 
             <h1>CEPM</h1>
 
-            <p>
-                Panel Administrativo
-            </p>
+            <p>Panel Administrativo</p>
 
         </div>
 
@@ -1873,13 +1959,8 @@ body{
         onclick="mostrar('inicio',this)"
     >
 
-        <span class="nav-icon">
-            🏠
-        </span>
-
-        <span>
-            Inicio
-        </span>
+        <span class="nav-icon">🏠</span>
+        <span>Inicio</span>
 
     </button>
 
@@ -1889,13 +1970,8 @@ body{
         onclick="mostrar('alumnos',this)"
     >
 
-        <span class="nav-icon">
-            👨‍🎓
-        </span>
-
-        <span>
-            Alumnos
-        </span>
+        <span class="nav-icon">👨‍🎓</span>
+        <span>Alumnos</span>
 
     </button>
 
@@ -1905,13 +1981,8 @@ body{
         onclick="mostrar('maestros',this)"
     >
 
-        <span class="nav-icon">
-            👨‍🏫
-        </span>
-
-        <span>
-            Maestros
-        </span>
+        <span class="nav-icon">👨‍🏫</span>
+        <span>Maestros</span>
 
     </button>
 
@@ -1921,13 +1992,8 @@ body{
         onclick="mostrar('padres',this)"
     >
 
-        <span class="nav-icon">
-            👨‍👩‍👧
-        </span>
-
-        <span>
-            Padres
-        </span>
+        <span class="nav-icon">👨‍👩‍👧</span>
+        <span>Padres</span>
 
     </button>
 
@@ -1937,13 +2003,8 @@ body{
         onclick="mostrar('directores',this)"
     >
 
-        <span class="nav-icon">
-            👔
-        </span>
-
-        <span>
-            Directores
-        </span>
+        <span class="nav-icon">👔</span>
+        <span>Directores</span>
 
     </button>
 
@@ -1953,13 +2014,8 @@ body{
         onclick="mostrar('materias',this)"
     >
 
-        <span class="nav-icon">
-            📚
-        </span>
-
-        <span>
-            Materias
-        </span>
+        <span class="nav-icon">📚</span>
+        <span>Materias</span>
 
     </button>
 
@@ -1969,13 +2025,8 @@ body{
         onclick="mostrar('clases',this)"
     >
 
-        <span class="nav-icon">
-            🏫
-        </span>
-
-        <span>
-            Clases
-        </span>
+        <span class="nav-icon">🏫</span>
+        <span>Clases</span>
 
     </button>
 
@@ -1987,13 +2038,8 @@ body{
             onclick="logout()"
         >
 
-            <span class="nav-icon">
-                🚪
-            </span>
-
-            <span>
-                Cerrar sesión
-            </span>
+            <span class="nav-icon">🚪</span>
+            <span>Cerrar sesión</span>
 
         </button>
 
@@ -2009,9 +2055,7 @@ body{
 <main class="main">
 
 
-    <!-- =================================================
-         TOPBAR
-    ================================================= -->
+    <!-- TOPBAR -->
 
     <div class="topbar">
 
@@ -2367,7 +2411,8 @@ body{
                 </h2>
 
                 <p>
-                    Estudiantes registrados en CEPM.
+                    Administra los estudiantes
+                    registrados.
                 </p>
 
             </div>
@@ -2747,9 +2792,7 @@ body{
 
             <input
                 id="nombreAlumno"
-                type="text"
                 placeholder="Ej. Juan Pérez"
-                autocomplete="off"
             >
 
         </div>
@@ -2763,9 +2806,7 @@ body{
 
             <input
                 id="usuarioAlumno"
-                type="text"
                 placeholder="Ej. juanperez"
-                autocomplete="off"
             >
 
         </div>
@@ -2781,7 +2822,6 @@ body{
                 id="emailAlumno"
                 type="email"
                 placeholder="correo@ejemplo.com"
-                autocomplete="off"
             >
 
         </div>
@@ -2797,24 +2837,6 @@ body{
                 id="passwordAlumno"
                 type="password"
                 placeholder="Contraseña"
-                autocomplete="new-password"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Edad
-            </label>
-
-            <input
-                id="edadAlumno"
-                type="number"
-                min="1"
-                max="100"
-                placeholder="Ej. 15"
             >
 
         </div>
@@ -2878,9 +2900,7 @@ body{
 
             <input
                 id="nombreMaestro"
-                type="text"
                 placeholder="Nombre del maestro"
-                autocomplete="off"
             >
 
         </div>
@@ -2894,9 +2914,7 @@ body{
 
             <input
                 id="usuarioMaestro"
-                type="text"
                 placeholder="Usuario"
-                autocomplete="off"
             >
 
         </div>
@@ -2912,7 +2930,6 @@ body{
                 id="emailMaestro"
                 type="email"
                 placeholder="correo@ejemplo.com"
-                autocomplete="off"
             >
 
         </div>
@@ -2928,7 +2945,6 @@ body{
                 id="passwordMaestro"
                 type="password"
                 placeholder="Contraseña"
-                autocomplete="new-password"
             >
 
         </div>
@@ -2992,9 +3008,7 @@ body{
 
             <input
                 id="nombrePadre"
-                type="text"
                 placeholder="Nombre del padre"
-                autocomplete="off"
             >
 
         </div>
@@ -3010,7 +3024,6 @@ body{
                 id="emailPadre"
                 type="email"
                 placeholder="correo@ejemplo.com"
-                autocomplete="off"
             >
 
         </div>
@@ -3024,9 +3037,7 @@ body{
 
             <input
                 id="usuarioPadre"
-                type="text"
                 placeholder="Usuario"
-                autocomplete="off"
             >
 
         </div>
@@ -3042,7 +3053,6 @@ body{
                 id="passwordPadre"
                 type="password"
                 placeholder="Contraseña"
-                autocomplete="new-password"
             >
 
         </div>
@@ -3121,9 +3131,7 @@ body{
 
             <input
                 id="nombreDirector"
-                type="text"
                 placeholder="Nombre completo"
-                autocomplete="off"
             >
 
         </div>
@@ -3137,9 +3145,7 @@ body{
 
             <input
                 id="usuarioDirector"
-                type="text"
                 placeholder="Usuario"
-                autocomplete="off"
             >
 
         </div>
@@ -3155,7 +3161,6 @@ body{
                 id="emailDirector"
                 type="email"
                 placeholder="correo@ejemplo.com"
-                autocomplete="off"
             >
 
         </div>
@@ -3171,7 +3176,6 @@ body{
                 id="passwordDirector"
                 type="password"
                 placeholder="Contraseña"
-                autocomplete="new-password"
             >
 
         </div>
@@ -3235,9 +3239,7 @@ body{
 
             <input
                 id="nombreMateria"
-                type="text"
                 placeholder="Ej. Matemáticas"
-                autocomplete="off"
             >
 
         </div>
@@ -3323,9 +3325,7 @@ body{
 
             <input
                 id="grupoClase"
-                type="text"
                 placeholder="Ej. 3A"
-                autocomplete="off"
             >
 
         </div>
@@ -3339,9 +3339,7 @@ body{
 
             <input
                 id="horarioClase"
-                type="text"
                 placeholder="Ej. 08:00 - 09:00"
-                autocomplete="off"
             >
 
         </div>
@@ -3355,9 +3353,7 @@ body{
 
             <input
                 id="aulaClase"
-                type="text"
                 placeholder="Ej. Aula 4"
-                autocomplete="off"
             >
 
         </div>
@@ -3386,7 +3382,6 @@ body{
             <input
                 type="number"
                 id="duracionClase"
-                min="1"
                 placeholder="Ej. 16"
             >
 
@@ -3464,9 +3459,7 @@ body{
 </div>
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<!-- TOAST -->
 
 <div
     id="toastContainer"
@@ -3481,16 +3474,15 @@ body{
 ===================================================== */
 
 const API =
-    'https://cepm-v2.onrender.com';
-
+'https://cepm-v2.onrender.com';
 
 const token =
-    localStorage.getItem('token');
+localStorage.getItem('token');
 
 
 if(!token){
 
-    location.href = '/';
+    location.href='/';
 
 }
 
@@ -3514,8 +3506,8 @@ let clasesData = [];
 
 function toast(
     mensaje,
-    tipo = 'success',
-    titulo = ''
+    tipo='success',
+    titulo=''
 ){
 
     const container =
@@ -3523,21 +3515,16 @@ function toast(
             'toastContainer'
         );
 
-
     const div =
         document.createElement('div');
-
 
     const iconos = {
 
         success:'✅',
-
         error:'❌',
-
         info:'ℹ️'
 
     };
-
 
     if(!titulo){
 
@@ -3550,10 +3537,8 @@ function toast(
 
     }
 
-
     div.className =
         `toast ${tipo}`;
-
 
     div.innerHTML = `
 
@@ -3564,28 +3549,25 @@ function toast(
         <div class="toast-text">
 
             <strong>
-                ${escapeHTML(titulo)}
+                ${titulo}
             </strong>
 
             <span>
-                ${escapeHTML(mensaje)}
+                ${mensaje}
             </span>
 
         </div>
 
     `;
 
-
     container.appendChild(div);
-
 
     setTimeout(()=>{
 
-        div.style.opacity = '0';
+        div.style.opacity='0';
 
-        div.style.transform =
+        div.style.transform=
             'translateX(25px)';
-
 
         setTimeout(
             ()=>div.remove(),
@@ -3603,21 +3585,20 @@ function toast(
 
 function mostrar(
     id,
-    boton = null
+    boton=null
 ){
 
     document
-        .querySelectorAll('.view')
-        .forEach(v=>{
+    .querySelectorAll('.view')
+    .forEach(v=>{
 
-            v.classList.remove('active');
+        v.classList.remove('active');
 
-        });
+    });
 
 
     const vista =
         document.getElementById(id);
-
 
     if(vista){
 
@@ -3627,12 +3608,12 @@ function mostrar(
 
 
     document
-        .querySelectorAll('.nav-button')
-        .forEach(b=>{
+    .querySelectorAll('.nav-button')
+    .forEach(b=>{
 
-            b.classList.remove('active');
+        b.classList.remove('active');
 
-        });
+    });
 
 
     if(boton){
@@ -3640,7 +3621,6 @@ function mostrar(
         boton.classList.add('active');
 
     }
-
     else{
 
         const botones =
@@ -3648,12 +3628,14 @@ function mostrar(
                 '.nav-button'
             );
 
-
         botones.forEach(b=>{
 
             if(
-                b.getAttribute('onclick')
-                ?.includes(`'${id}'`)
+                b.getAttribute(
+                    'onclick'
+                )?.includes(
+                    `'${id}'`
+                )
             ){
 
                 b.classList.add('active');
@@ -3708,19 +3690,18 @@ function mostrar(
     if(nombres[id]){
 
         document
-            .getElementById(
-                'tituloPagina'
-            )
-            .textContent =
-                nombres[id][0];
-
+        .getElementById(
+            'tituloPagina'
+        )
+        .textContent =
+            nombres[id][0];
 
         document
-            .getElementById(
-                'subtituloPagina'
-            )
-            .textContent =
-                nombres[id][1];
+        .getElementById(
+            'subtituloPagina'
+        )
+        .textContent =
+            nombres[id][1];
 
     }
 
@@ -3771,36 +3752,36 @@ function abrirModal(tipo){
 function cerrarModales(){
 
     document
-        .querySelectorAll('.modal-overlay')
-        .forEach(modal=>{
+    .querySelectorAll('.modal-overlay')
+    .forEach(modal=>{
 
-            modal.classList.remove('show');
+        modal.classList.remove('show');
 
-        });
+    });
 
 }
 
 
 document
-    .querySelectorAll('.modal-overlay')
-    .forEach(overlay=>{
+.querySelectorAll('.modal-overlay')
+.forEach(overlay=>{
 
-        overlay.addEventListener(
-            'click',
-            e=>{
+    overlay.addEventListener(
+        'click',
+        e=>{
 
-                if(
-                    e.target === overlay
-                ){
+            if(
+                e.target === overlay
+            ){
 
-                    cerrarModales();
-
-                }
+                cerrarModales();
 
             }
-        );
 
-    });
+        }
+    );
+
+});
 
 
 document.addEventListener(
@@ -3826,7 +3807,6 @@ function actualizarReloj(){
     const ahora =
         new Date();
 
-
     const hora =
         ahora.toLocaleTimeString(
             'es-MX',
@@ -3837,19 +3817,10 @@ function actualizarReloj(){
             }
         );
 
-
-    const reloj =
-        document.getElementById(
-            'reloj'
-        );
-
-
-    if(reloj){
-
-        reloj.textContent =
-            hora;
-
-    }
+    document
+    .getElementById('reloj')
+    .textContent =
+        hora;
 
 }
 
@@ -3859,9 +3830,7 @@ function actualizarSaludo(){
     const hora =
         new Date().getHours();
 
-
     let saludo;
-
 
     if(hora < 12){
 
@@ -3869,14 +3838,12 @@ function actualizarSaludo(){
             'Buenos días 👋';
 
     }
-
     else if(hora < 19){
 
         saludo =
             'Buenas tardes ☀️';
 
     }
-
     else{
 
         saludo =
@@ -3885,18 +3852,10 @@ function actualizarSaludo(){
     }
 
 
-    const elemento =
-        document.getElementById(
-            'saludo'
-        );
-
-
-    if(elemento){
-
-        elemento.textContent =
-            saludo;
-
-    }
+    document
+    .getElementById('saludo')
+    .textContent =
+        saludo;
 
 }
 
@@ -3905,16 +3864,9 @@ actualizarReloj();
 
 actualizarSaludo();
 
-
 setInterval(
     actualizarReloj,
     1000
-);
-
-
-setInterval(
-    actualizarSaludo,
-    60000
 );
 
 
@@ -3923,112 +3875,59 @@ setInterval(
 ===================================================== */
 
 async function apiFetch(
-    ruta,
-    opciones = {}
+    url,
+    opciones={}
 ){
+
+    const config = {
+
+        ...opciones,
+
+        headers:{
+
+            ...(opciones.headers || {}),
+
+            Authorization:token
+
+        }
+
+    };
+
+
+    const res =
+        await fetch(
+            url,
+            config
+        );
+
+
+    let data;
 
     try{
 
-        if(
-            typeof ruta !== 'string' ||
-            !ruta.startsWith('/')
-        ){
+        data =
+            await res.json();
 
-            throw new Error(
-                'La ruta API debe comenzar con /. Ejemplo: /usuarios'
-            );
+    }
+    catch{
 
-        }
-
-
-        const res =
-            await fetch(
-                `${API}${ruta}`,
-                {
-
-                    ...opciones,
-
-                    headers:{
-
-                        ...(opciones.headers || {}),
-
-                        Authorization:
-                            `Bearer ${token}`
-
-                    }
-
-                }
-            );
-
-
-        let data = {};
-
-
-        try{
-
-            data =
-                await res.json();
-
-        }
-
-        catch{
-
-            data = {};
-
-        }
-
-
-        if(res.status === 401){
-
-            localStorage.clear();
-
-            location.href = '/';
-
-            throw new Error(
-                'Tu sesión expiró.'
-            );
-
-        }
-
-
-        if(!res.ok){
-
-            console.error(
-                '❌ Error API:',
-                ruta,
-                res.status,
-                data
-            );
-
-
-            throw new Error(
-
-                data.mensaje ||
-
-                data.error ||
-
-                `Error HTTP ${res.status}`
-
-            );
-
-        }
-
-
-        return data;
+        data = {};
 
     }
 
-    catch(error){
 
-        console.error(
-            '❌ apiFetch:',
-            ruta,
-            error
+    if(!res.ok){
+
+        throw new Error(
+            data.mensaje ||
+            data.message ||
+            'Error en el servidor'
         );
 
-        throw error;
-
     }
+
+
+    return data;
 
 }
 
@@ -4041,128 +3940,54 @@ async function crearAlumno(){
 
     const nombre =
         document
-            .getElementById(
-                'nombreAlumno'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'nombreAlumno'
+        )
+        .value.trim();
 
     const usuario =
         document
-            .getElementById(
-                'usuarioAlumno'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'usuarioAlumno'
+        )
+        .value.trim();
 
     const password =
         document
-            .getElementById(
-                'passwordAlumno'
-            )
-            .value;
-
+        .getElementById(
+            'passwordAlumno'
+        )
+        .value;
 
     const email =
         document
-            .getElementById(
-                'emailAlumno'
-            )
-            .value
-            .trim();
+        .getElementById(
+            'emailAlumno'
+        )
+        .value.trim();
 
 
-    const edad =
-        document
-            .getElementById(
-                'edadAlumno'
-            )
-            .value;
-
-
-    if(!nombre){
+    if(
+        !nombre ||
+        !usuario ||
+        !password
+    ){
 
         toast(
-            'Escribe el nombre completo del alumno.',
+            'Completa nombre, usuario y contraseña.',
             'error'
         );
 
         return;
 
     }
-
-
-    if(!usuario){
-
-        toast(
-            'Escribe un usuario para el alumno.',
-            'error'
-        );
-
-        return;
-
-    }
-
-
-    if(!password){
-
-        toast(
-            'Escribe una contraseña para el alumno.',
-            'error'
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 4){
-
-        toast(
-            'La contraseña debe tener al menos 4 caracteres.',
-            'error'
-        );
-
-        return;
-
-    }
-
-
-    const datos = {
-
-        nombre,
-
-        usuario,
-
-        password,
-
-        email:
-            email || undefined,
-
-        edad:
-            edad
-            ? Number(edad)
-            : undefined
-
-    };
 
 
     try{
 
-        console.log(
-            '👨‍🎓 Creando alumno:',
-            {
-                ...datos,
-                password:'********'
-            }
-        );
-
-
-        const respuesta =
+        const alumno =
             await apiFetch(
-                '/alumnos',
+                `${API}/alumnos`,
                 {
 
                     method:'POST',
@@ -4173,22 +3998,48 @@ async function crearAlumno(){
                     },
 
                     body:
-                        JSON.stringify(
-                            datos
-                        )
+                        JSON.stringify({
+
+                            nombre,
+                            edad:18
+
+                        })
 
                 }
             );
 
 
-        console.log(
-            '✅ Alumno creado:',
-            respuesta
-        );
+        const data =
+            await apiFetch(
+                `${API}/registro`,
+                {
+
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json'
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            nombre,
+                            usuario,
+                            password,
+                            email,
+                            rol:'alumno',
+                            alumnoId:
+                                alumno._id
+
+                        })
+
+                }
+            );
 
 
         toast(
-            respuesta.mensaje ||
+            data.mensaje ||
             'Alumno creado correctamente.'
         );
 
@@ -4197,25 +4048,17 @@ async function crearAlumno(){
             'modalAlumno'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
-        console.error(
-            '❌ Error creando alumno:',
-            error
-        );
-
+        console.error(error);
 
         toast(
-            error.message ||
-            'No se pudo crear el alumno.',
+            error.message,
             'error'
         );
 
@@ -4232,37 +4075,31 @@ async function crearMaestro(){
 
     const nombre =
         document
-            .getElementById(
-                'nombreMaestro'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'nombreMaestro'
+        )
+        .value.trim();
 
     const usuario =
         document
-            .getElementById(
-                'usuarioMaestro'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'usuarioMaestro'
+        )
+        .value.trim();
 
     const email =
         document
-            .getElementById(
-                'emailMaestro'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'emailMaestro'
+        )
+        .value.trim();
 
     const password =
         document
-            .getElementById(
-                'passwordMaestro'
-            )
-            .value;
+        .getElementById(
+            'passwordMaestro'
+        )
+        .value;
 
 
     if(
@@ -4285,7 +4122,7 @@ async function crearMaestro(){
 
         const data =
             await apiFetch(
-                '/registro',
+                `${API}/registro`,
                 {
 
                     method:'POST',
@@ -4299,13 +4136,9 @@ async function crearMaestro(){
                         JSON.stringify({
 
                             nombre,
-
                             usuario,
-
                             email,
-
                             password,
-
                             rol:'maestro'
 
                         })
@@ -4324,14 +4157,11 @@ async function crearMaestro(){
             'modalMaestro'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -4354,46 +4184,39 @@ async function crearPadre(){
 
     const nombre =
         document
-            .getElementById(
-                'nombrePadre'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'nombrePadre'
+        )
+        .value.trim();
 
     const email =
         document
-            .getElementById(
-                'emailPadre'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'emailPadre'
+        )
+        .value.trim();
 
     const usuario =
         document
-            .getElementById(
-                'usuarioPadre'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'usuarioPadre'
+        )
+        .value.trim();
 
     const password =
         document
-            .getElementById(
-                'passwordPadre'
-            )
-            .value;
-
+        .getElementById(
+            'passwordPadre'
+        )
+        .value;
 
     const hijos =
         Array.from(
             document
-                .getElementById(
-                    'hijosPadre'
-                )
-                .selectedOptions
+            .getElementById(
+                'hijosPadre'
+            )
+            .selectedOptions
         )
         .map(
             o=>o.value
@@ -4420,7 +4243,7 @@ async function crearPadre(){
 
         const data =
             await apiFetch(
-                '/registro',
+                `${API}/registro`,
                 {
 
                     method:'POST',
@@ -4434,15 +4257,10 @@ async function crearPadre(){
                         JSON.stringify({
 
                             nombre,
-
                             email,
-
                             usuario,
-
                             password,
-
                             hijos,
-
                             rol:'padre'
 
                         })
@@ -4461,14 +4279,11 @@ async function crearPadre(){
             'modalPadre'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -4491,37 +4306,31 @@ async function crearDirector(){
 
     const nombre =
         document
-            .getElementById(
-                'nombreDirector'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'nombreDirector'
+        )
+        .value.trim();
 
     const usuario =
         document
-            .getElementById(
-                'usuarioDirector'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'usuarioDirector'
+        )
+        .value.trim();
 
     const email =
         document
-            .getElementById(
-                'emailDirector'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'emailDirector'
+        )
+        .value.trim();
 
     const password =
         document
-            .getElementById(
-                'passwordDirector'
-            )
-            .value;
+        .getElementById(
+            'passwordDirector'
+        )
+        .value;
 
 
     if(
@@ -4544,7 +4353,7 @@ async function crearDirector(){
 
         const data =
             await apiFetch(
-                '/crear-director',
+                `${API}/crear-director`,
                 {
 
                     method:'POST',
@@ -4558,11 +4367,8 @@ async function crearDirector(){
                         JSON.stringify({
 
                             nombre,
-
                             usuario,
-
                             email,
-
                             password
 
                         })
@@ -4581,14 +4387,11 @@ async function crearDirector(){
             'modalDirector'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -4611,11 +4414,10 @@ async function crearMateria(){
 
     const nombre =
         document
-            .getElementById(
-                'nombreMateria'
-            )
-            .value
-            .trim();
+        .getElementById(
+            'nombreMateria'
+        )
+        .value.trim();
 
 
     if(!nombre){
@@ -4634,7 +4436,7 @@ async function crearMateria(){
 
         const data =
             await apiFetch(
-                '/materias',
+                `${API}/materias`,
                 {
 
                     method:'POST',
@@ -4663,14 +4465,11 @@ async function crearMateria(){
             'modalMateria'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -4693,69 +4492,59 @@ async function crearClase(){
 
     const materiaId =
         document
-            .getElementById(
-                'materiaClase'
-            )
-            .value;
-
+        .getElementById(
+            'materiaClase'
+        )
+        .value;
 
     const maestroId =
         document
-            .getElementById(
-                'maestroClase'
-            )
-            .value;
-
+        .getElementById(
+            'maestroClase'
+        )
+        .value;
 
     const grupo =
         document
-            .getElementById(
-                'grupoClase'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'grupoClase'
+        )
+        .value.trim();
 
     const horario =
         document
-            .getElementById(
-                'horarioClase'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'horarioClase'
+        )
+        .value.trim();
 
     const aula =
         document
-            .getElementById(
-                'aulaClase'
-            )
-            .value
-            .trim();
-
+        .getElementById(
+            'aulaClase'
+        )
+        .value.trim();
 
     const fechaInicio =
         document
-            .getElementById(
-                'fechaInicioClase'
-            )
-            .value;
-
+        .getElementById(
+            'fechaInicioClase'
+        )
+        .value;
 
     const duracion =
         document
-            .getElementById(
-                'duracionClase'
-            )
-            .value;
-
+        .getElementById(
+            'duracionClase'
+        )
+        .value;
 
     const fechaFin =
         document
-            .getElementById(
-                'fechaFinClase'
-            )
-            .value;
+        .getElementById(
+            'fechaFinClase'
+        )
+        .value;
 
 
     if(
@@ -4778,7 +4567,7 @@ async function crearClase(){
 
         const data =
             await apiFetch(
-                '/clases',
+                `${API}/clases`,
                 {
 
                     method:'POST',
@@ -4792,19 +4581,12 @@ async function crearClase(){
                         JSON.stringify({
 
                             materiaId,
-
                             maestroId,
-
                             grupo,
-
                             horario,
-
                             aula,
-
                             fechaInicio,
-
                             duracion,
-
                             fechaFin
 
                         })
@@ -4823,14 +4605,11 @@ async function crearClase(){
             'modalClase'
         );
 
-
         cerrarModales();
-
 
         await cargarTodo();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -4853,21 +4632,20 @@ async function cargarTodo(){
 
     try{
 
-        await cargarMaterias();
+        await Promise.all([
 
-        await cargarClases();
+            cargarUsuarios(),
 
-        await cargarUsuarios();
+            cargarMaterias(),
+
+            cargarClases()
+
+        ]);
 
     }
-
     catch(error){
 
-        console.error(
-            '❌ Error cargando información:',
-            error
-        );
-
+        console.error(error);
 
         toast(
             'No se pudo actualizar toda la información.',
@@ -4887,160 +4665,131 @@ async function cargarUsuarios(){
 
     const usuarios =
         await apiFetch(
-            '/usuarios'
+            `${API}/usuarios`
         );
 
 
     const alumnos =
         await apiFetch(
-            '/alumnos'
+            `${API}/alumnos`
         );
 
 
     usuariosData =
-        Array.isArray(usuarios)
-        ? usuarios
-        : [];
-
+        usuarios;
 
     alumnosData =
-        Array.isArray(alumnos)
-        ? alumnos
-        : [];
+        alumnos;
 
 
     const maestros =
-        usuariosData.filter(
-            u=>u.rol === 'maestro'
+        usuarios.filter(
+            u=>u.rol==='maestro'
         );
 
 
     const padres =
-        usuariosData.filter(
-            u=>u.rol === 'padre'
+        usuarios.filter(
+            u=>u.rol==='padre'
         );
 
 
     const directores =
-        usuariosData.filter(
-            u=>u.rol === 'director'
+        usuarios.filter(
+            u=>
+                u.rol==='director'
         );
 
 
-    /* =================================================
-       STATS
-    ================================================= */
+    /* STATS */
 
     document
-        .getElementById(
-            'statAlumnos'
-        )
-        .textContent =
-            usuariosData.filter(
-                u=>u.rol === 'alumno'
-            ).length;
+    .getElementById(
+        'statAlumnos'
+    )
+    .textContent =
+        usuarios.filter(
+            u=>u.rol==='alumno'
+        ).length;
 
 
     document
-        .getElementById(
-            'statMaestros'
-        )
-        .textContent =
-            maestros.length;
+    .getElementById(
+        'statMaestros'
+    )
+    .textContent =
+        maestros.length;
 
 
     document
-        .getElementById(
-            'statPadres'
-        )
-        .textContent =
-            padres.length;
+    .getElementById(
+        'statPadres'
+    )
+    .textContent =
+        padres.length;
 
 
     document
-        .getElementById(
-            'statClases'
+    .getElementById(
+        'statClases'
+    )
+    .textContent =
+        clasesData.length;
+
+
+    /* SELECT PADRES */
+
+    document
+    .getElementById(
+        'hijosPadre'
+    )
+    .innerHTML =
+        alumnos.map(
+            a=>`
+
+            <option value="${a._id}">
+                ${escapeHTML(a.nombre)}
+            </option>
+
+            `
         )
-        .textContent =
-            clasesData.length;
+        .join('');
 
 
-    /* =================================================
-       SELECT PADRES
-    ================================================= */
+    /* MAESTROS SELECT */
 
-    const hijosSelect =
-        document.getElementById(
-            'hijosPadre'
-        );
+    document
+    .getElementById(
+        'maestroClase'
+    )
+    .innerHTML =
+        maestros.map(
+            m=>`
 
+            <option value="${m._id}">
+                ${escapeHTML(m.nombre)}
+            </option>
 
-    if(hijosSelect){
-
-        hijosSelect.innerHTML =
-            alumnosData
-                .map(
-                    a=>`
-
-                    <option value="${escapeHTML(a._id)}">
-                        ${escapeHTML(a.nombre)}
-                    </option>
-
-                    `
-                )
-                .join('');
-
-    }
+            `
+        )
+        .join('');
 
 
-    /* =================================================
-       SELECT MAESTROS
-    ================================================= */
-
-    const maestroSelect =
-        document.getElementById(
-            'maestroClase'
-        );
-
-
-    if(maestroSelect){
-
-        maestroSelect.innerHTML =
-            maestros
-                .map(
-                    m=>`
-
-                    <option value="${escapeHTML(m._id)}">
-                        ${escapeHTML(m.nombre)}
-                    </option>
-
-                    `
-                )
-                .join('');
-
-    }
-
-
-    /* =================================================
-       LISTAS
-    ================================================= */
+    /* LISTAS */
 
     renderAlumnos(
-        usuariosData.filter(
-            u=>u.rol === 'alumno'
+        usuarios.filter(
+            u=>u.rol==='alumno'
         )
     );
-
 
     renderMaestros(
         maestros
     );
 
-
     renderPadres(
         padres
     );
-
 
     renderDirectores(
         directores
@@ -5056,30 +4805,19 @@ async function cargarUsuarios(){
 function renderAlumnos(lista){
 
     const contenedor =
-        document.getElementById(
+        document
+        .getElementById(
             'listaAlumnos'
         );
 
 
-    if(!contenedor){
-
-        console.error(
-            '❌ No existe #listaAlumnos en el HTML.'
-        );
-
-        return;
-
-    }
-
-
     if(!lista.length){
 
-        contenedor.innerHTML =
-            emptyHTML(
-                '👨‍🎓',
-                'No hay alumnos',
-                'Todavía no hay estudiantes registrados.'
-            );
+        contenedor.innerHTML = emptyHTML(
+            '👨‍🎓',
+            'No hay alumnos',
+            'Todavía no hay estudiantes registrados.'
+        );
 
         return;
 
@@ -5087,75 +4825,51 @@ function renderAlumnos(lista){
 
 
     contenedor.innerHTML =
-        lista
-            .map(
-                u=>`
+        lista.map(
+            u=>`
 
-                <div class="item-card">
+            <div class="item-card">
 
-                    <div class="item-head">
+                <div class="item-head">
 
-                        <div class="item-avatar">
-                            👨‍🎓
-                        </div>
-
-                        <div class="item-info">
-
-                            <h3>
-                                ${escapeHTML(u.nombre)}
-                            </h3>
-
-                            <p>
-                                Usuario:
-                                ${escapeHTML(
-                                    u.usuario || '—'
-                                )}
-                            </p>
-
-                        </div>
-
+                    <div class="item-avatar">
+                        👨‍🎓
                     </div>
 
+                    <div class="item-info">
 
-                    <div class="item-line">
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
 
-                        ✉️
-                        ${escapeHTML(
-                            u.email ||
-                            'Sin correo'
-                        )}
-
-                    </div>
-
-
-                    ${
-                        u.edad
-                        ? `
-                        <div class="item-line">
-                            🎂 Edad:
-                            ${escapeHTML(u.edad)}
-                        </div>
-                        `
-                        : ''
-                    }
-
-
-                    <div class="item-actions">
-
-                        <button
-                            class="btn btn-secondary"
-                            onclick="verUsuario('${escapeHTML(u._id)}')"
-                        >
-                            👁 Ver
-                        </button>
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
 
                     </div>
 
                 </div>
 
-                `
-            )
-            .join('');
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+                <div class="item-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="verUsuario('${u._id}')"
+                    >
+                        👁 Ver
+                    </button>
+
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
 
 }
 
@@ -5167,16 +4881,10 @@ function renderAlumnos(lista){
 function renderMaestros(lista){
 
     const contenedor =
-        document.getElementById(
+        document
+        .getElementById(
             'listaMaestros'
         );
-
-
-    if(!contenedor){
-
-        return;
-
-    }
 
 
     if(!lista.length){
@@ -5194,49 +4902,40 @@ function renderMaestros(lista){
 
 
     contenedor.innerHTML =
-        lista
-            .map(
-                u=>`
+        lista.map(
+            u=>`
 
-                <div class="item-card">
+            <div class="item-card">
 
-                    <div class="item-head">
+                <div class="item-head">
 
-                        <div class="item-avatar">
-                            👨‍🏫
-                        </div>
-
-                        <div class="item-info">
-
-                            <h3>
-                                ${escapeHTML(u.nombre)}
-                            </h3>
-
-                            <p>
-                                Usuario:
-                                ${escapeHTML(
-                                    u.usuario || '—'
-                                )}
-                            </p>
-
-                        </div>
-
+                    <div class="item-avatar">
+                        👨‍🏫
                     </div>
 
+                    <div class="item-info">
 
-                    <div class="item-line">
-                        ✉️
-                        ${escapeHTML(
-                            u.email ||
-                            'Sin correo'
-                        )}
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
                     </div>
 
                 </div>
 
-                `
-            )
-            .join('');
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
 
 }
 
@@ -5248,16 +4947,10 @@ function renderMaestros(lista){
 function renderPadres(lista){
 
     const contenedor =
-        document.getElementById(
+        document
+        .getElementById(
             'listaPadres'
         );
-
-
-    if(!contenedor){
-
-        return;
-
-    }
 
 
     if(!lista.length){
@@ -5275,49 +4968,40 @@ function renderPadres(lista){
 
 
     contenedor.innerHTML =
-        lista
-            .map(
-                u=>`
+        lista.map(
+            u=>`
 
-                <div class="item-card">
+            <div class="item-card">
 
-                    <div class="item-head">
+                <div class="item-head">
 
-                        <div class="item-avatar">
-                            👨‍👩‍👧
-                        </div>
-
-                        <div class="item-info">
-
-                            <h3>
-                                ${escapeHTML(u.nombre)}
-                            </h3>
-
-                            <p>
-                                Usuario:
-                                ${escapeHTML(
-                                    u.usuario || '—'
-                                )}
-                            </p>
-
-                        </div>
-
+                    <div class="item-avatar">
+                        👨‍👩‍👧
                     </div>
 
+                    <div class="item-info">
 
-                    <div class="item-line">
-                        ✉️
-                        ${escapeHTML(
-                            u.email ||
-                            'Sin correo'
-                        )}
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
                     </div>
 
                 </div>
 
-                `
-            )
-            .join('');
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
 
 }
 
@@ -5329,16 +5013,10 @@ function renderPadres(lista){
 function renderDirectores(lista){
 
     const contenedor =
-        document.getElementById(
+        document
+        .getElementById(
             'listaDirectores'
         );
-
-
-    if(!contenedor){
-
-        return;
-
-    }
 
 
     if(!lista.length){
@@ -5356,49 +5034,40 @@ function renderDirectores(lista){
 
 
     contenedor.innerHTML =
-        lista
-            .map(
-                u=>`
+        lista.map(
+            u=>`
 
-                <div class="item-card">
+            <div class="item-card">
 
-                    <div class="item-head">
+                <div class="item-head">
 
-                        <div class="item-avatar">
-                            👔
-                        </div>
-
-                        <div class="item-info">
-
-                            <h3>
-                                ${escapeHTML(u.nombre)}
-                            </h3>
-
-                            <p>
-                                Usuario:
-                                ${escapeHTML(
-                                    u.usuario || '—'
-                                )}
-                            </p>
-
-                        </div>
-
+                    <div class="item-avatar">
+                        👔
                     </div>
 
+                    <div class="item-info">
 
-                    <div class="item-line">
-                        ✉️
-                        ${escapeHTML(
-                            u.email ||
-                            'Sin correo'
-                        )}
+                        <h3>
+                            ${escapeHTML(u.nombre)}
+                        </h3>
+
+                        <p>
+                            Usuario: ${escapeHTML(u.usuario || '—')}
+                        </p>
+
                     </div>
 
                 </div>
 
-                `
-            )
-            .join('');
+                <div class="item-line">
+                    ✉️ ${escapeHTML(u.email || 'Sin correo')}
+                </div>
+
+            </div>
+
+            `
+        )
+        .join('');
 
 }
 
@@ -5411,96 +5080,77 @@ async function cargarMaterias(){
 
     const materias =
         await apiFetch(
-            '/materias'
+            `${API}/materias`
         );
 
 
     materiasData =
-        Array.isArray(materias)
-        ? materias
-        : [];
+        materias;
 
 
-    const listaMaterias =
-        document.getElementById(
-            'listaMaterias'
-        );
+    document
+    .getElementById(
+        'listaMaterias'
+    )
+    .innerHTML =
+        materias.length
 
+        ?
 
-    if(listaMaterias){
+        materias.map(
+            m=>`
 
-        listaMaterias.innerHTML =
-            materiasData.length
+            <div class="item-card">
 
-            ?
+                <div class="item-head">
 
-            materiasData
-                .map(
-                    m=>`
+                    <div class="item-avatar">
+                        📚
+                    </div>
 
-                    <div class="item-card">
+                    <div class="item-info">
 
-                        <div class="item-head">
+                        <h3>
+                            ${escapeHTML(m.nombre)}
+                        </h3>
 
-                            <div class="item-avatar">
-                                📚
-                            </div>
-
-                            <div class="item-info">
-
-                                <h3>
-                                    ${escapeHTML(
-                                        m.nombre
-                                    )}
-                                </h3>
-
-                                <p>
-                                    Asignatura
-                                </p>
-
-                            </div>
-
-                        </div>
+                        <p>
+                            Asignatura
+                        </p>
 
                     </div>
 
-                    `
-                )
-                .join('')
+                </div>
 
-            :
+            </div>
 
-            emptyHTML(
-                '📚',
-                'No hay materias',
-                'Crea la primera asignatura.'
-            );
+            `
+        ).join('')
 
-    }
+        :
 
-
-    const materiaSelect =
-        document.getElementById(
-            'materiaClase'
+        emptyHTML(
+            '📚',
+            'No hay materias',
+            'Crea la primera asignatura.'
         );
 
 
-    if(materiaSelect){
+    document
+    .getElementById(
+        'materiaClase'
+    )
+    .innerHTML =
+        materias.map(
+            m=>`
 
-        materiaSelect.innerHTML =
-            materiasData
-                .map(
-                    m=>`
+            <option value="${m._id}">
+                ${escapeHTML(m.nombre)}
+            </option>
 
-                    <option value="${escapeHTML(m._id)}">
-                        ${escapeHTML(m.nombre)}
-                    </option>
-
-                    `
-                )
-                .join('');
-
-    }
+            `
+        )
+        .join('');
 
 }
 
@@ -5513,33 +5163,29 @@ async function cargarClases(){
 
     const clases =
         await apiFetch(
-            '/clases'
+            `${API}/clases`
         );
 
 
     clasesData =
-        Array.isArray(clases)
-        ? clases
-        : [];
+        clases;
 
 
     document
+    .getElementById(
+        'statClases'
+    )
+    .textContent =
+        clases.length;
+
+
+    if(!clases.length){
+
+        document
         .getElementById(
-            'statClases'
-        )
-        .textContent =
-            clasesData.length;
-
-
-    const contenedor =
-        document.getElementById(
             'listaClases'
-        );
-
-
-    if(!clasesData.length){
-
-        contenedor.innerHTML =
+        )
+        .innerHTML =
             emptyHTML(
                 '🏫',
                 'No hay clases',
@@ -5551,86 +5197,83 @@ async function cargarClases(){
     }
 
 
-    contenedor.innerHTML =
-        clasesData
-            .map(
-                c=>{
+    document
+    .getElementById(
+        'listaClases'
+    )
+    .innerHTML =
+        clases.map(
+            c=>{
 
-                    const materia =
-                        materiasData.find(
-                            m=>
-                                String(m._id) ===
-                                String(c.materiaId)
-                        );
+                const materia =
+                    materiasData.find(
+                        m=>
+                            String(m._id) ===
+                            String(c.materiaId)
+                    );
 
 
-                    return `
+                return `
 
-                    <div class="item-card">
+                <div class="item-card">
 
-                        <div class="item-head">
+                    <div class="item-head">
 
-                            <div class="item-avatar">
-                                🏫
-                            </div>
-
-                            <div class="item-info">
-
-                                <h3>
-                                    ${escapeHTML(
-                                        materia?.nombre ||
-                                        'Materia'
-                                    )}
-                                </h3>
-
-                                <p>
-                                    Grupo
-                                    ${escapeHTML(
-                                        c.grupo || '—'
-                                    )}
-                                </p>
-
-                            </div>
-
+                        <div class="item-avatar">
+                            🏫
                         </div>
 
+                        <div class="item-info">
 
-                        <div class="item-line">
-                            ⏰
-                            ${escapeHTML(
-                                c.horario ||
-                                'Sin horario'
-                            )}
-                        </div>
+                            <h3>
+                                ${escapeHTML(
+                                    materia?.nombre ||
+                                    'Materia'
+                                )}
+                            </h3>
 
-
-                        <div class="item-line">
-                            🚪
-                            ${escapeHTML(
-                                c.aula ||
-                                'Sin aula'
-                            )}
-                        </div>
-
-
-                        <div class="item-actions">
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="abrirClase('${escapeHTML(c._id)}')"
-                            >
-                                👁 Ver clase
-                            </button>
+                            <p>
+                                Grupo ${escapeHTML(
+                                    c.grupo || '—'
+                                )}
+                            </p>
 
                         </div>
 
                     </div>
 
-                    `;
 
-                }
-            )
-            .join('');
+                    <div class="item-line">
+                        ⏰ ${escapeHTML(
+                            c.horario || 'Sin horario'
+                        )}
+                    </div>
+
+                    <div class="item-line">
+                        🚪 ${escapeHTML(
+                            c.aula || 'Sin aula'
+                        )}
+                    </div>
+
+
+                    <div class="item-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="abrirClase('${c._id}')"
+                        >
+                            👁 Ver clase
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join('');
 
 }
 
@@ -5646,8 +5289,7 @@ async function abrirClase(id){
         const clase =
             clasesData.find(
                 c=>
-                    String(c._id) ===
-                    String(id)
+                    c._id === id
             );
 
 
@@ -5665,38 +5307,23 @@ async function abrirClase(id){
 
         const alumnos =
             await apiFetch(
-                '/alumnos'
+                `${API}/alumnos`
             );
 
 
-        const listaAlumnos =
-            Array.isArray(alumnos)
-            ? alumnos
-            : [];
-
-
-        const alumnosInscritos =
-            (clase.alumnos || [])
-                .map(String);
-
-
         const inscritos =
-            listaAlumnos.filter(
+            alumnos.filter(
                 a=>
-                    alumnosInscritos
-                        .includes(
-                            String(a._id)
-                        )
+                    (clase.alumnos || [])
+                    .includes(a._id)
             );
 
 
         const disponibles =
-            listaAlumnos.filter(
+            alumnos.filter(
                 a=>
-                    !alumnosInscritos
-                        .includes(
-                            String(a._id)
-                        )
+                    !(clase.alumnos || [])
+                    .includes(a._id)
             );
 
 
@@ -5708,13 +5335,11 @@ async function abrirClase(id){
             );
 
 
-        const detalle =
-            document.getElementById(
-                'detalleClase'
-            );
-
-
-        detalle.innerHTML = `
+        document
+        .getElementById(
+            'detalleClase'
+        )
+        .innerHTML = `
 
             <div class="class-details">
 
@@ -5742,8 +5367,7 @@ async function abrirClase(id){
 
                     <strong>
                         ${escapeHTML(
-                            clase.grupo ||
-                            '—'
+                            clase.grupo || '—'
                         )}
                     </strong>
 
@@ -5758,8 +5382,7 @@ async function abrirClase(id){
 
                     <strong>
                         ${escapeHTML(
-                            clase.horario ||
-                            '—'
+                            clase.horario || '—'
                         )}
                     </strong>
 
@@ -5774,8 +5397,7 @@ async function abrirClase(id){
 
                     <strong>
                         ${escapeHTML(
-                            clase.aula ||
-                            '—'
+                            clase.aula || '—'
                         )}
                     </strong>
 
@@ -5784,12 +5406,7 @@ async function abrirClase(id){
             </div>
 
 
-            <h3
-                style="
-                    font-size:13px;
-                    margin-bottom:10px;
-                "
-            >
+            <h3 style="font-size:13px;margin-bottom:10px;">
                 👨‍🎓 Alumnos inscritos
                 (${inscritos.length})
             </h3>
@@ -5800,33 +5417,25 @@ async function abrirClase(id){
 
                 ?
 
-                inscritos
-                    .map(
-                        a=>`
+                inscritos.map(
+                    a=>`
 
-                        <div
-                            class="item-card"
-                            style="
-                                margin-bottom:7px;
-                                padding:12px;
-                            "
-                        >
+                    <div
+                        class="item-card"
+                        style="margin-bottom:7px;padding:12px;"
+                    >
 
-                            👨‍🎓
-                            ${escapeHTML(
-                                a.nombre
-                            )}
+                        👨‍🎓
+                        ${escapeHTML(a.nombre)}
 
-                        </div>
+                    </div>
 
-                        `
-                    )
-                    .join('')
+                    `
+                ).join('')
 
                 :
 
                 `
-
                 <div
                     style="
                         color:#64748b;
@@ -5836,7 +5445,6 @@ async function abrirClase(id){
                 >
                     No hay alumnos inscritos todavía.
                 </div>
-
                 `
             }
 
@@ -5857,28 +5465,22 @@ async function abrirClase(id){
 
                         ?
 
-                        disponibles
-                            .map(
-                                a=>`
+                        disponibles.map(
+                            a=>`
 
-                                <option value="${escapeHTML(a._id)}">
-                                    ${escapeHTML(
-                                        a.nombre
-                                    )}
-                                </option>
+                            <option value="${a._id}">
+                                ${escapeHTML(a.nombre)}
+                            </option>
 
-                                `
-                            )
-                            .join('')
+                            `
+                        ).join('')
 
                         :
 
                         `
-
-                        <option value="">
+                        <option>
                             Todos los alumnos están inscritos
                         </option>
-
                         `
                     }
 
@@ -5891,7 +5493,7 @@ async function abrirClase(id){
 
                 <button
                     class="btn btn-success"
-                    onclick="agregarAlumnoClase('${escapeHTML(id)}')"
+                    onclick="agregarAlumnoClase('${id}')"
                     ${disponibles.length ? '' : 'disabled'}
                 >
                     ➕ Agregar alumno
@@ -5903,13 +5505,12 @@ async function abrirClase(id){
 
 
         document
-            .getElementById(
-                'modalVerClase'
-            )
-            .classList.add('show');
+        .getElementById(
+            'modalVerClase'
+        )
+        .classList.add('show');
 
     }
-
     catch(error){
 
         console.error(error);
@@ -5931,7 +5532,8 @@ async function abrirClase(id){
 async function agregarAlumnoClase(id){
 
     const select =
-        document.getElementById(
+        document
+        .getElementById(
             'alumnoClase'
         );
 
@@ -5963,7 +5565,7 @@ async function agregarAlumnoClase(id){
 
         const data =
             await apiFetch(
-                `/clases/${id}/alumnos`,
+                `${API}/clases/${id}/alumnos`,
                 {
 
                     method:'PUT',
@@ -5994,11 +5596,9 @@ async function agregarAlumnoClase(id){
 
         cerrarModales();
 
-
         await cargarClases();
 
     }
-
     catch(error){
 
         console.error(error);
@@ -6020,91 +5620,58 @@ async function agregarAlumnoClase(id){
 function filtrar(tipo){
 
     let inputId;
-
     let lista;
-
     let render;
 
 
-    if(tipo === 'alumnos'){
+    if(tipo==='alumnos'){
 
-        inputId =
-            'buscarAlumnos';
-
+        inputId='buscarAlumnos';
 
         lista =
             usuariosData.filter(
-                u=>u.rol === 'alumno'
+                u=>u.rol==='alumno'
             );
 
-
-        render =
-            renderAlumnos;
+        render=renderAlumnos;
 
     }
 
-    else if(tipo === 'maestros'){
+    else if(tipo==='maestros'){
 
-        inputId =
-            'buscarMaestros';
-
+        inputId='buscarMaestros';
 
         lista =
             usuariosData.filter(
-                u=>u.rol === 'maestro'
+                u=>u.rol==='maestro'
             );
 
-
-        render =
-            renderMaestros;
+        render=renderMaestros;
 
     }
 
-    else if(tipo === 'padres'){
+    else if(tipo==='padres'){
 
-        inputId =
-            'buscarPadres';
-
+        inputId='buscarPadres';
 
         lista =
             usuariosData.filter(
-                u=>u.rol === 'padre'
+                u=>u.rol==='padre'
             );
 
-
-        render =
-            renderPadres;
-
-    }
-
-
-    if(
-        !inputId ||
-        !render
-    ){
-
-        return;
-
-    }
-
-
-    const input =
-        document.getElementById(
-            inputId
-        );
-
-
-    if(!input){
-
-        return;
+        render=renderPadres;
 
     }
 
 
     const texto =
-        input.value
-            .toLowerCase()
-            .trim();
+        document
+        .getElementById(
+            inputId
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
 
     if(texto){
@@ -6112,7 +5679,6 @@ function filtrar(tipo){
         lista =
             lista.filter(
                 u=>
-
                     String(
                         u.nombre || ''
                     )
@@ -6134,7 +5700,6 @@ function filtrar(tipo){
                     )
                     .toLowerCase()
                     .includes(texto)
-
             );
 
     }
@@ -6153,9 +5718,7 @@ function verUsuario(id){
 
     const usuario =
         usuariosData.find(
-            u=>
-                String(u._id) ===
-                String(id)
+            u=>u._id===id
         );
 
 
@@ -6172,16 +5735,9 @@ function verUsuario(id){
 
 
     toast(
-
-        `${usuario.nombre} · ${
-            usuario.usuario ||
-            'Sin usuario'
-        }`,
-
+        `${usuario.nombre} · ${usuario.usuario || 'Sin usuario'}`,
         'info',
-
         'Información del usuario'
-
     );
 
 }
@@ -6209,11 +5765,11 @@ function emptyHTML(
             </div>
 
             <h3>
-                ${escapeHTML(titulo)}
+                ${titulo}
             </h3>
 
             <p>
-                ${escapeHTML(texto)}
+                ${texto}
             </p>
 
         </div>
@@ -6233,13 +5789,9 @@ function escapeHTML(valor){
         char=>({
 
             '&':'&amp;',
-
             '<':'&lt;',
-
             '>':'&gt;',
-
             '"':'&quot;',
-
             "'":'&#039;'
 
         })[char]
@@ -6266,29 +5818,25 @@ function limpiarFormulario(
 
 
     modal
-        .querySelectorAll(
-            'input'
-        )
-        .forEach(
-            input=>{
-
-                input.value = '';
-
-            }
-        );
+    .querySelectorAll(
+        'input'
+    )
+    .forEach(
+        input=>{
+            input.value='';
+        }
+    );
 
 
     modal
-        .querySelectorAll(
-            'select'
-        )
-        .forEach(
-            select=>{
-
-                select.selectedIndex = -1;
-
-            }
-        );
+    .querySelectorAll(
+        'select'
+    )
+    .forEach(
+        select=>{
+            select.selectedIndex=-1;
+        }
+    );
 
 }
 
@@ -6303,9 +5851,7 @@ function logout(){
         'token'
     );
 
-
-    location.href =
-        '/';
+    location.href='/';
 
 }
 
@@ -6314,14 +5860,7 @@ function logout(){
    INICIO
 ===================================================== */
 
-document.addEventListener(
-    'DOMContentLoaded',
-    ()=>{
-
-        cargarTodo();
-
-    }
-);
+cargarTodo();
 
 
 /* =====================================================
@@ -6334,17 +5873,17 @@ if(
 ){
 
     navigator
-        .serviceWorker
-        .register(
-            '/service-worker.js'
-        )
-        .catch(
-            error=>
-                console.log(
-                    'Service Worker:',
-                    error
-                )
-        );
+    .serviceWorker
+    .register(
+        '/service-worker.js'
+    )
+    .catch(
+        error=>
+            console.log(
+                'Service Worker:',
+                error
+            )
+    );
 
 }
 
