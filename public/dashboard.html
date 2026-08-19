@@ -3875,62 +3875,104 @@ setInterval(
 ===================================================== */
 
 async function apiFetch(
-    url,
-    opciones={}
+    ruta,
+    opciones = {}
 ){
-
-    const config = {
-
-        ...opciones,
-
-        headers:{
-
-            ...(opciones.headers || {}),
-
-            Authorization:token
-
-        }
-
-    };
-
-
-    const res =
-        await fetch(
-            url,
-            config
-        );
-
-
-    let data;
 
     try{
 
-        data =
-            await res.json();
+        const res =
+            await fetch(
+                `${API}${ruta}`,
+                {
+                    ...opciones,
+
+                    headers:{
+                        ...(opciones.headers || {}),
+
+                        Authorization:
+                            token
+                    }
+                }
+            );
+
+
+        let data = {};
+
+        try{
+
+            data =
+                await res.json();
+
+        }
+        catch{
+
+            data = {};
+
+        }
+
+
+        // =====================
+        // SESIÓN EXPIRADA
+        // =====================
+
+        if(res.status === 401){
+
+            localStorage.clear();
+
+            location.href =
+                'index.html';
+
+            throw new Error(
+                'Tu sesión expiró.'
+            );
+
+        }
+
+
+        // =====================
+        // ERROR DEL SERVIDOR
+        // =====================
+
+        if(!res.ok){
+
+            console.error(
+                '❌ Error API:',
+                ruta,
+                res.status,
+                data
+            );
+
+
+            throw new Error(
+
+                data.mensaje ||
+
+                data.error ||
+
+                `Error HTTP ${res.status}`
+
+            );
+
+        }
+
+
+        return data;
 
     }
-    catch{
+    catch(error){
 
-        data = {};
-
-    }
-
-
-    if(!res.ok){
-
-        throw new Error(
-            data.mensaje ||
-            data.message ||
-            'Error en el servidor'
+        console.error(
+            '❌ apiFetch:',
+            ruta,
+            error
         );
 
+        throw error;
+
     }
 
-
-    return data;
-
 }
-
 
 /* =====================================================
    CREAR ALUMNO

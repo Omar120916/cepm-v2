@@ -724,88 +724,230 @@ async(req,res)=>{
 // 👨‍🎓 CREAR ALUMNO
 // =====================
 
-app.post('/alumnos',
+app.post(
+    '/alumnos',
 
-verificarToken,
+    verificarToken,
 
-async(req,res)=>{
+    async(req,res)=>{
 
-    try{
+        try{
 
-        const {
+            console.log('📥 Datos recibidos para crear alumno:');
+            console.log(req.body);
 
-            nombre,
+            const {
+                nombre,
+                usuario,
+                password,
+                email,
+                edad
+            } = req.body;
 
-            usuario,
 
-            password,
+            // =====================
+            // VALIDACIONES
+            // =====================
 
-            email,
+            if(!nombre){
 
-            edad
+                return res.status(400).json({
 
-        } = req.body
+                    mensaje:'El nombre del alumno es obligatorio'
 
-        const existe =
-        await Usuario.findOne({
+                });
 
-            usuario
-        })
+            }
 
-        if(existe){
 
-            return res.status(400).json({
+            if(!usuario){
 
-                mensaje:'Usuario ya existe'
-            })
+                return res.status(400).json({
+
+                    mensaje:'El usuario del alumno es obligatorio'
+
+                });
+
+            }
+
+
+            if(!password){
+
+                return res.status(400).json({
+
+                    mensaje:'La contraseña del alumno es obligatoria'
+
+                });
+
+            }
+
+
+            if(password.length < 4){
+
+                return res.status(400).json({
+
+                    mensaje:
+                    'La contraseña debe tener al menos 4 caracteres'
+
+                });
+
+            }
+
+
+            // =====================
+            // VERIFICAR USUARIO
+            // =====================
+
+            const existe =
+                await Usuario.findOne({
+
+                    usuario:
+                    usuario.trim()
+
+                });
+
+
+            if(existe){
+
+                return res.status(400).json({
+
+                    mensaje:
+                    'El usuario ya existe'
+
+                });
+
+            }
+
+
+            // =====================
+            // ENCRIPTAR PASSWORD
+            // =====================
+
+            const hash =
+                await bcrypt.hash(
+
+                    password,
+
+                    10
+
+                );
+
+
+            // =====================
+            // CREAR ALUMNO
+            // =====================
+
+            const nuevo =
+                new Usuario({
+
+                    nombre:
+                    nombre.trim(),
+
+                    usuario:
+                    usuario.trim(),
+
+                    password:
+                    hash,
+
+                    rol:
+                    'alumno',
+
+                    email:
+                    email
+                    ?
+                    email.trim()
+                    :
+                    '',
+
+                    edad:
+                    edad
+                    ?
+                    String(edad)
+                    :
+                    ''
+
+                });
+
+
+            // =====================
+            // GUARDAR
+            // =====================
+
+            await nuevo.save();
+
+
+            // =====================
+            // ASIGNAR alumnoId
+            // =====================
+
+            nuevo.alumnoId =
+                nuevo._id;
+
+            await nuevo.save();
+
+
+            console.log(
+                '✅ Alumno creado:',
+                nuevo.nombre,
+                nuevo._id
+            );
+
+
+            res.status(201).json({
+
+                mensaje:
+                'Alumno creado 🔥',
+
+                alumno:{
+
+                    id:
+                    nuevo._id,
+
+                    nombre:
+                    nuevo.nombre,
+
+                    usuario:
+                    nuevo.usuario,
+
+                    email:
+                    nuevo.email,
+
+                    edad:
+                    nuevo.edad,
+
+                    rol:
+                    nuevo.rol
+
+                }
+
+            });
+
+
+        }
+        catch(err){
+
+            console.error(
+                '❌ ERROR CREANDO ALUMNO:'
+            );
+
+            console.error(err);
+
+
+            res.status(500).json({
+
+                mensaje:
+                'Error al crear el alumno',
+
+                error:
+                err.message
+
+            });
+
         }
 
-        const hash =
-        await bcrypt.hash(
-
-            password,
-
-            10
-        )
-
-        const nuevo =
-        new Usuario({
-
-            nombre,
-
-            usuario,
-
-            password:hash,
-
-            rol:'alumno',
-
-            email,
-
-            edad
-        })
-
-        await nuevo.save()
-
-        nuevo.alumnoId =
-        nuevo._id
-
-        await nuevo.save()
-
-        res.json({
-
-            mensaje:'Alumno creado 🔥'
-        })
-
-    }catch(err){
-
-        console.log(err)
-
-        res.status(500).json({
-
-            mensaje:'Error servidor'
-        })
     }
-})
+
+);
 
 // =====================
 // 📚 CREAR MATERIA
