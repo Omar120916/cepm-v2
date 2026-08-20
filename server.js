@@ -950,6 +950,69 @@ app.post(
 );
 
 // =====================
+// 🗑️ ELIMINAR ALUMNO
+// =====================
+
+app.delete(
+    '/alumnos/:id',
+    verificarToken,
+    async(req,res)=>{
+
+        try{
+
+            const alumno =
+                await Usuario.findById(
+                    req.params.id
+                );
+
+            if(!alumno){
+
+                return res.status(404).json({
+                    mensaje:
+                    'Alumno no encontrado'
+                });
+
+            }
+
+            if(alumno.rol !== 'alumno'){
+
+                return res.status(400).json({
+                    mensaje:
+                    'El usuario seleccionado no es un alumno'
+                });
+
+            }
+
+            await Usuario.findByIdAndDelete(
+                req.params.id
+            );
+
+            res.json({
+                mensaje:
+                'Alumno eliminado correctamente 🗑️'
+            });
+
+        }
+        catch(error){
+
+            console.error(
+                '❌ ERROR ELIMINANDO ALUMNO:',
+                error
+            );
+
+            res.status(500).json({
+                mensaje:
+                'Error al eliminar el alumno',
+                error:
+                error.message
+            });
+
+        }
+
+    }
+);
+
+// =====================
 // 📚 CREAR MATERIA
 // =====================
 

@@ -4032,6 +4032,55 @@ async function crearAlumno(){
 
 }
 
+/* =====================================================
+   ELIMINAR ALUMNO
+===================================================== */
+
+async function eliminarAlumno(id, nombre){
+
+    const confirmar = confirm(
+        `¿Seguro que quieres eliminar al alumno "${nombre}"?\n\n` +
+        `Esta acción no se puede deshacer.`
+    );
+
+    if(!confirmar){
+        return;
+    }
+
+    try{
+
+        const data = await apiFetch(
+            `${API}/alumnos/${id}`,
+            {
+                method:'DELETE'
+            }
+        );
+
+        toast(
+            data.mensaje ||
+            'Alumno eliminado correctamente.'
+        );
+
+        await cargarUsuarios();
+
+    }
+    catch(error){
+
+        console.error(
+            '❌ Error eliminando alumno:',
+            error
+        );
+
+        toast(
+            error.message ||
+            'No se pudo eliminar el alumno.',
+            'error'
+        );
+
+    }
+
+}
+
 
 /* =====================================================
    CREAR MAESTRO
@@ -4828,6 +4877,15 @@ function renderAlumnos(lista){
                     >
                         👁 Ver
                     </button>
+
+                    <button
+        class="btn btn-danger"
+        onclick="eliminarAlumno('${u._id}', '${escapeHTML(u.nombre)}')"
+    >
+        🗑️ Eliminar
+    </button>
+
+</div>
 
                 </div>
 
